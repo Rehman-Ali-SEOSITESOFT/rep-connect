@@ -130,7 +130,10 @@
 }
 
 @media screen and (max-width: 1240px) {
-  .side--bar {
+  aside.side--bar.hide {
     left: -400px;
+  }
+  .side--bar {
+    left: 0px;
   }
 }

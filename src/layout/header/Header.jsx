@@ -1,10 +1,14 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import repconnect from "../../assets/images/Rep-Connect-Logo-2021-2.svg";
 import myacount from "../../assets/images/side-bar-my-account-img.png";
 import "./Header.css";
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../../redux/slices/toggleSlice";
 const Header = () => {
+  const dispatch = useDispatch();
   return (
     <header>
       <div className="container-fluid">
@@ -22,7 +26,12 @@ const Header = () => {
           </div>
           <div className="col-md-7 col-sm-6 col-6">
             <div className="header--right">
-              <div className="header--burgur--icon desktop">
+              <div
+                className="header--burgur--icon desktop"
+                onClick={() => {
+                  dispatch(toggleMenu());
+                }}
+              >
                 <i className="fa-solid fa-bars"></i>
               </div>
               <div className="bottom--cart">
@@ -43,7 +52,12 @@ const Header = () => {
                   <div className="bottom--cart--price">$0.00</div>
                 </Link>
               </div>
-              <div className="header--burgur--icon responsive">
+              <div
+                className="header--burgur--icon responsive"
+                onClick={() => {
+                  dispatch(toggleMenu());
+                }}
+              >
                 <i className="fa-solid fa-bars"></i>
               </div>
               <div className="bottom--search">

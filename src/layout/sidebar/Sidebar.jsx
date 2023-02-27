@@ -5,9 +5,13 @@ import "./sidebar.css";
 import mircogendx from "../../assets/images/MicroGenDX-2020-logo.svg";
 import myacount from "../../assets/images/side-bar-my-account-img.png";
 import repconnect from "../../assets/images/Rep-Connect-Logo-2021-2.svg";
+import { useSelector } from "react-redux";
+
 const Sidebar = () => {
+  const { toggle } = useSelector((redux) => redux.menuReducer);
+  console.log(toggle);
   return (
-    <aside className="side--bar">
+    <aside className={toggle ? "side--bar" : "side--bar hide"}>
       <div className="sidebar--top">
         <div className="top--section--top">
           <Link href="/">
