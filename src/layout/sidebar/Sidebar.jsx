@@ -2,98 +2,127 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import "./sidebar.css";
+import mircogendx from "../../assets/images/MicroGenDX-2020-logo.svg";
+import myacount from "../../assets/images/side-bar-my-account-img.png";
+import repconnect from "../../assets/images/Rep-Connect-Logo-2021-2.svg";
 const Sidebar = () => {
   return (
-    <aside className="container">
+    <aside className="side--bar">
       <div className="sidebar--top">
         <div className="top--section--top">
           <Link href="/">
-            <Image
-              src="/assets/images/Rep-Connect-Logo-2021-2.svg"
-              alt="rep-connect"
-              fill
-            />
+            <Image src={repconnect} alt="rep-connect" className="img-fluid" />
           </Link>
         </div>
         <div className="sidebar--navigation">
           <nav>
             <ul>
               <li>
-                <Link href="/">Rep Connect Home</Link>
+                <Link href="/">
+                  <span>Rep Connect Home</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">Sales Resources </Link>
+                <Link href="/">
+                  <span>Sales Resources </span>
+                </Link>
               </li>
               <li>
-                <Link href="/">Order Kits & Supplies</Link>
+                <Link href="/">
+                  <span>Order Kits & Supplies</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">In-Service Checklist</Link>
+                <Link href="/">
+                  <span>In-Service Checklist</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">Quickbase CRM</Link>
+                <Link href="/">
+                  <span>Quickbase CRM</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">SAP Concur</Link>
+                <Link href="/">
+                  <span>SAP Concur</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">MicroGenDX University</Link>
+                <Link href="/">
+                  <span>MicroGenDX University</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">Podcasts</Link>
+                <Link href="/">
+                  <span>Podcasts</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">Caroline Fife’s BLOG</Link>
+                <Link href="/">
+                  <span>Caroline Fife’s BLOG</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">My Profile</Link>
+                <Link href="/profile">
+                  <span>My Profile</span>
+                </Link>
               </li>
               <li>
-                <Link href="/">MicroGenDX Insider</Link>
+                <Link href="/">
+                  <span>MicroGenDX Insider</span>
+                </Link>
               </li>
 
               <li>
-                <Link href="/">Compliance</Link>
+                <Link href="/">
+                  <span>Compliance</span>
+                </Link>
               </li>
 
               <li>
-                <Link href="/">Company Org Chart</Link>
+                <Link href="/">
+                  <span>Company Org Chart</span>
+                </Link>
               </li>
 
               <li>
-                <Link href="/">Company Directory</Link>
+                <Link href="/">
+                  <span>Company Directory</span>
+                </Link>
               </li>
 
               <li>
-                <Link href="/">EmployeeConnect</Link>
+                <Link href="/">
+                  <span>EmployeeConnect</span>
+                </Link>
               </li>
 
               <li>
-                <Link href="/">Logout</Link>
+                <Link href="/">
+                  <span>Logout</span>
+                </Link>
               </li>
             </ul>
           </nav>
         </div>
         <div className="top--section--bottom">
           <Link href="/">
-            <Image
-              src="/assets/images/MicroGenDX-2020-logo.svg"
-              alt="MicroGenDX"
-              fill
-            />
+            <Image src={mircogendx} alt="MicroGenDX" className="img-fluid" />
           </Link>
         </div>
       </div>
       <div className="sidebar--bottom">
         <div className="bottom--cart">
           <div className="bottom--myaccount">
-            <Image
-              src="/assets/images/side-bar-my-account-img.png"
-              alt="my-account"
-              fill
-            />
+            <Image src={myacount} alt="my-account" className="img-fluid" />
           </div>
-          <div className="bottom--cart"></div>
+          <div className="bottom--cart">
+            <div className="bottom--cart--icon">
+              <i className="fa-solid fa-basket-shopping"></i>
+              <span> 2</span>
+            </div>
+            <div className="bottom--cart--price">&0.00</div>
+          </div>
         </div>
         <div className="bottom--search">
           <input type="text" placeholder="search" />
