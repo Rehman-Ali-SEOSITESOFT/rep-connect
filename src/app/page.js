@@ -7,10 +7,10 @@ const inter = Inter({ subsets: ["latin"] })
 export default function Home() {
   return (
     <section className={styles.home_page}>
-      <div className="container-xxl">
+      <div className="container">
         <div className="row">
           <div className="col-lg-12">
-            <div className="welcome_note">
+            <div className={styles.welcome_note}>
               <p>Welcome Back</p>
             </div>
           </div>

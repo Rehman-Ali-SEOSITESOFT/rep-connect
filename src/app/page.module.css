@@ -1,2 +1,7 @@
 .home_page {
+  padding-top: 30px;
+}
+.welcome_note p {
+  font-family: "Poppins", sans-serif;
+  margin: 0px;
 }
