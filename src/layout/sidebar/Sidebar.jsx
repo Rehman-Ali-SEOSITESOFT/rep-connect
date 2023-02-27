@@ -18,7 +18,7 @@ const Sidebar = () => {
           <nav>
             <ul>
               <li>
-                <Link href="/">
+                <Link href="/" className="active">
                   <span>Rep Connect Home</span>
                 </Link>
               </li>
@@ -62,7 +62,7 @@ const Sidebar = () => {
                   <span>Caroline Fife’s BLOG</span>
                 </Link>
               </li>
-              <li>
+              <li className="profil--nav">
                 <Link href="/profile">
                   <span>My Profile</span>
                 </Link>
@@ -114,19 +114,27 @@ const Sidebar = () => {
       <div className="sidebar--bottom">
         <div className="bottom--cart">
           <div className="bottom--myaccount">
-            <Image src={myacount} alt="my-account" className="img-fluid" />
+            <Link href="/my-account">
+              <Image src={myacount} alt="my-account" className="img-fluid" />
+            </Link>
           </div>
-          <div className="bottom--cart">
+          <Link href="/cart" className="bottom--cart">
             <div className="bottom--cart--icon">
               <i className="fa-solid fa-basket-shopping"></i>
               <span> 2</span>
             </div>
-            <div className="bottom--cart--price">&0.00</div>
-          </div>
+            <div className="bottom--cart--price">$0.00</div>
+          </Link>
         </div>
         <div className="bottom--search">
-          <input type="text" placeholder="search" />
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            placeholder="Enter your search"
+            className="form-control"
+          />
+          <span>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </span>
         </div>
       </div>
     </aside>

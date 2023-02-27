@@ -6,4 +6,131 @@
   /* overflow: scroll; */
   overflow-x: hidden;
   box-shadow: 2px 0 4px 2px rgb(0 0 0 / 15%);
+  transition: 0.5s all ease-in-out;
+  background-color: white;
+}
+.sidebar--bottom,
+.sidebar--top {
+  margin: 40px 20px;
+}
+
+.sidebar--top .sidebar--navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar--navigation ul li a {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  color: #333333;
+  text-decoration: none;
+}
+.sidebar--navigation ul li a.active,
+.sidebar--navigation ul li a:hover {
+  color: #1790d0;
+}
+.top--section--top a,
+.top--section--bottom a {
+  display: block;
+  text-align: center;
+  /* padding: 0 20px; */
+}
+.top--section--top a img,
+.top--section--bottom a img {
+  max-height: 70px;
+}
+.sidebar--top .sidebar--navigation {
+  padding: 20px 0;
+}
+.sidebar--navigation .profil--nav {
+  border-top: solid 1px #eee;
+  margin: 0 -30px;
+  overflow: hidden;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+/* ///////////////// */
+/* sidebar--bottom */
+/* ///////////////// */
+
+.sidebar--bottom .bottom--cart {
+  display: flex;
+  justify-content: space-around;
+  color: #333333;
+  text-decoration: none;
+  align-items: center;
+}
+.bottom--cart .bottom--myaccount img {
+  max-height: 40px;
+  border-radius: 5rem;
+}
+
+.bottom--cart .bottom--cart--icon {
+  position: relative;
+}
+.bottom--cart .bottom--cart--icon i {
+  font-size: 22px;
+  color: #333333;
+  padding-right: 10px;
+}
+.bottom--cart--icon span {
+  background-color: #2754a4;
+  position: absolute;
+  top: -8px;
+  right: -7px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  color: white;
+  font-size: 11px;
+}
+.bottom--cart .bottom--cart--price {
+  margin: 0;
+  padding-left: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.sidebar--bottom .bottom--search {
+  position: relative;
+  margin-top: 20px;
+}
+
+.bottom--search input {
+  padding: 8px;
+  padding-left: 40px;
+  color: #777777;
+  border: 1px solid;
+  background-color: rgba(255, 255, 255, 1);
+  border-color: #cdcdcd;
+  border-radius: 0;
+  box-shadow: none;
+}
+.bottom--search input::placeholder {
+  color: #777777;
+}
+
+.bottom--search input:focus {
+  color: #333333;
+  background-color: rgba(255, 248, 220, 1);
+  border-color: #1790d0;
+  box-shadow: none;
+}
+.bottom--search span {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+@media screen and (max-width: 1240px) {
+  .side--bar {
+    left: -400px;
+  }
 }

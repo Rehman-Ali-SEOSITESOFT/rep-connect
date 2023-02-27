@@ -4,3 +4,13 @@
   width: calc(100% - 250px);
   float: right;
 }
+
+body,
+html {
+  font-family: "Poppins", sans-serif !important;
+}
+@media screen and (max-width: 1240px) {
+  .main--content--wrapper {
+    width: 100%;
+  }
+}
