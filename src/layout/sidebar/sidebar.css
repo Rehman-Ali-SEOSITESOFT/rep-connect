@@ -8,6 +8,7 @@
   box-shadow: 2px 0 4px 2px rgb(0 0 0 / 15%);
   transition: 0.5s all ease-in-out;
   background-color: white;
+  z-index: 10;
 }
 .sidebar--bottom,
 .sidebar--top {
