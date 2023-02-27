@@ -62,7 +62,7 @@ const Sidebar = () => {
             </li>
 
             <li>
-              <Link href="/">Company Org Char t</Link>
+              <Link href="/">Company Org Chart</Link>
             </li>
           </ul>
         </nav>
