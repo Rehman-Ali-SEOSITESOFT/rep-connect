@@ -78,12 +78,15 @@ header .header--logo img {
   font-size: 22px;
   line-height: 34px;
   padding-right: 20px;
+  cursor: pointer;
 }
 .header--right .header--burgur--icon.desktop {
   display: block;
+  cursor: pointer;
 }
 .header--right .header--burgur--icon.responsive {
   display: none;
+  cursor: pointer;
 }
 @media screen and (max-width: 1240px) {
   header {
