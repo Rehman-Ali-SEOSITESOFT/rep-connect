@@ -25,8 +25,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <main className="microgen_dx">
-          {/* <Sidebar /> */}
-          {children}
+          <Sidebar />
+          <div className="main--content--wrapper">{children}</div>
         </main>
       </body>
     </html>

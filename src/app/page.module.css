@@ -1,13 +1,71 @@
 .home_page {
   padding-top: 30px;
+  margin: 0px 30px;
 }
 .welcome_note p {
   font-family: "Poppins", sans-serif;
   margin: 0px;
 }
 .welcome_note h2 {
+  font-family: "Poppins", sans-serif;
   color: #3596cc;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 30px;
   line-height: 30px;
+}
+.search_home input {
+  padding-left: 35px;
+  border-radius: 0px;
+}
+.search_home {
+  position: relative;
+  /* margin-top: 15px; */
+}
+
+.search_home i {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  color: #333333;
+}
+.cancelIcon {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.3);
+  width: 25px;
+  height: 25px;
+  transition: all 0.3s ease-in-out;
+}
+.cancelIcon i:hover {
+  transition: all 0.3s ease-in-out;
+  transform: rotate(180deg);
+}
+.social_media_icon i {
+  font-size: 30px;
+  width: 30px;
+  /* height: 30px; */
+  color: #0095eb;
+  margin: 0px 8px;
+  cursor: pointer;
+}
+.social_media_icon i:hover {
+  color: red;
+}
+.homeLeftSide .banner_img {
+  width: 600px;
+  height: 67px;
+}
+.bottomPosts {
+  margin: 15px 30px;
+}
+.homeRightSide h3 {
+  font-family: "Poppins", sans-serif;
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 22px;
+  color: #1790d0;
 }

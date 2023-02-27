@@ -1,0 +1,9 @@
+.side--bar {
+  max-width: 250px;
+  position: fixed;
+  inset: 0;
+  background: border-box;
+  /* overflow: scroll; */
+  overflow-x: hidden;
+  box-shadow: 2px 0 4px 2px rgb(0 0 0 / 15%);
+}

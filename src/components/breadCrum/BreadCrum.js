@@ -10,8 +10,8 @@ const BreadCrum = (props) => {
             <div className="bread_details text-center">
               <h1>{breadHeading}</h1>
               <nav aria-label="breadcrumb">
-                <ol class="breadcrumb m-0 justify-content-center">
-                  <li class="breadcrumb-item active" aria-current="page">
+                <ol className="breadcrumb m-0 justify-content-center">
+                  <li className="breadcrumb-item active" aria-current="page">
                     {pageName}
                   </li>
                 </ol>
