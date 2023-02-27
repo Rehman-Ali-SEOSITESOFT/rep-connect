@@ -1,5 +1,4 @@
-import Header from "@/layout/header/Header";
-import Footer from "@/layout/footer/Footer";
+import Sidebar from "@/layout/sidebar/Sidebar";
 import "./globals.css";
 
 export const metadata = {
@@ -11,9 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <main className="microgen_dx">
+          <Sidebar />
+          {children}
+        </main>
       </body>
     </html>
   );
