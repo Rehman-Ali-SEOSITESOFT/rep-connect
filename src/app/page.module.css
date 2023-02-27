@@ -5,3 +5,9 @@
   font-family: "Poppins", sans-serif;
   margin: 0px;
 }
+.welcome_note h2 {
+  color: #3596cc;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 30px;
+}

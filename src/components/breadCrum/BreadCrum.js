@@ -1,0 +1,27 @@
+import React from "react"
+import "./BreadCrum.css"
+const BreadCrum = (props) => {
+  const { breadHeading, pageName } = props
+  return (
+    <section className="breadcrum_wrapper">
+      <div className="container">
+        <div className="row justify-content-center align-items-center">
+          <div className="col-lg-12 text-center">
+            <div className="bread_details text-center">
+              <h1>{breadHeading}</h1>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0 justify-content-center">
+                  <li class="breadcrumb-item active" aria-current="page">
+                    {pageName}
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default BreadCrum
