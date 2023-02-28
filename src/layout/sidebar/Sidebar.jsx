@@ -26,10 +26,71 @@ const Sidebar = () => {
                   <span>Rep Connect Home</span>
                 </Link>
               </li>
-              <li>
-                <Link href="/">
-                  <span>Sales Resources </span>
-                </Link>
+              <li className="drop-menu--side--bar">
+                <span className="sales">
+                  Sales Resources
+                  <i className="fa-solid fa-caret-right"></i>
+                </span>
+
+                <ul className="drop--down--menu">
+                  <li>
+                    <Link href="/">
+                      <span>Order Printed Sales Materials</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/downloadable-sales-material/">
+                      <span>Downloadable Sales Material</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/">
+                      <span>Order Branded Merchandise</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/">
+                      <span>Order Personalized Business Cards</span>
+                    </Link>
+                  </li>{" "}
+                  <li>
+                    <Link href="/">
+                      <span>Order Personalized Name Tag</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/">
+                      <span>Orthopedic Sales Material</span>
+                    </Link>
+                  </li>
+                  <li className="working--more--drop-down">
+                    <span className="working--more--icon">
+                      Working with Hospitals
+                    </span>
+                    <ul className="working--more--menu">
+                      <li>
+                        <Link href="/">
+                          <span>Hospital Contracting</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/">
+                          <span>How to Bill a Hospital</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/">
+                          <span>How to Set Up a VA Hospital</span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <Link href="/">
+                      <span>Conference Material</span>
+                    </Link>
+                  </li>
+                </ul>
               </li>
               <li>
                 <Link href="/">

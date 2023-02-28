@@ -1,0 +1,26 @@
+.DownloadAbleMaterialCart {
+  width: 20%;
+}
+.DownloadAbleMaterialCart a {
+  text-decoration: none;
+}
+.DownloadAbleMaterialCart .image_wrapper {
+  background: #2754a4;
+  border-radius: 1000px;
+  width: 82px;
+  height: 82px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+.DownloadAbleMaterialCart .desc_wrapper .title {
+  font-size: 21px;
+  line-height: 25px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  color: #000000;
+  text-align: center;
+  text-decoration: none;
+}

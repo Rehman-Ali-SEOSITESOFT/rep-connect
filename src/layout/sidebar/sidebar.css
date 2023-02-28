@@ -3,12 +3,34 @@
   position: fixed;
   inset: 0;
   background: border-box;
-  /* overflow: scroll; */
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   box-shadow: 2px 0 4px 2px rgb(0 0 0 / 15%);
   transition: 0.5s all ease-in-out;
   background-color: white;
   z-index: 10;
+  /* overflow: scroll; */
+}
+.side--bar--menus {
+  position: fixed;
+  inset: 0;
+  max-width: 700px;
+  background: transparent;
+  height: 100vh;
+  /* overflow: hidden; */
+  width: fit-content;
+}
+
+.side--bar::-webkit-scrollbar-thumb {
+  background-color: #1790d0 !important;
+  width: 2px;
+}
+.side--bar::-webkit-scrollbar-track {
+  background-color: white;
+  width: 2px;
+}
+.side--bar::-webkit-scrollbar {
+  background-color: thistle;
+  width: 5px;
 }
 .sidebar--bottom,
 .sidebar--top {
@@ -20,6 +42,7 @@
   padding: 0;
   margin: 0;
 }
+.drop-menu--side--bar .sales,
 .sidebar--navigation ul li a {
   font-size: 13px;
   font-weight: 400;
@@ -29,6 +52,7 @@
   line-height: 30px;
   color: #333333;
   text-decoration: none;
+  cursor: pointer;
 }
 .sidebar--navigation ul li a.active,
 .sidebar--navigation ul li a:hover {
@@ -129,7 +153,56 @@
   top: 10px;
   left: 10px;
 }
+.drop-menu--side--bar i {
+  padding-left: 10px;
+}
+.drop--down--menu {
+  display: none;
+  right: -210px;
+  position: absolute;
+  top: 0;
+  background-color: #1790d0;
+  z-index: 99999999999999;
+  width: 215px;
+}
+li.drop-menu--side--bar {
+  position: relative;
+}
+.drop-menu--side--bar:hover .drop--down--menu {
+  display: block;
+}
+.drop--down--menu li .working--more--icon,
+.drop--down--menu li a {
+  padding: 10px 20px;
+  display: inline-block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: #ffffff !important;
+  font-size: 15px !important;
+  line-height: 20px !important;
+  font-weight: normal !important;
+  text-align: left !important;
+  cursor: pointer;
+}
+.drop--down--menu li .working--more--icon:hover,
+.drop--down--menu li a:hover {
+  background-color: #0978b4;
+}
 
+.working--more--drop-down {
+  position: relative;
+}
+.working--more--drop-down .working--more--menu {
+  display: none;
+  position: absolute;
+  right: -200px;
+  top: 0;
+  width: 200px;
+  background-color: #1790d0;
+}
+
+.working--more--drop-down:hover .working--more--menu {
+  display: block;
+}
 @media screen and (max-width: 1240px) {
   aside.side--bar.hide {
     left: -400px;
