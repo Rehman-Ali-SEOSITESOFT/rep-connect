@@ -33,7 +33,7 @@ const Sidebar = () => {
 
                 <ul className="drop--down--menu">
                   <li>
-                    <Link href="/">
+                    <Link href="/product-category/sales-material/">
                       <span>Order Printed Sales Materials</span>
                     </Link>
                   </li>
@@ -43,17 +43,17 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/product-category/branded-merchandise/">
                       <span>Order Branded Merchandise</span>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/business-card-order-form/">
                       <span>Order Personalized Business Cards</span>
                     </Link>
                   </li>{" "}
                   <li>
-                    <Link href="/">
+                    <Link href="/name-tag-order-form/">
                       <span>Order Personalized Name Tag</span>
                     </Link>
                   </li>

@@ -29,6 +29,8 @@ export default function RootLayout({ children }) {
             rel="stylesheet"
           />
           {/* <title>{title}</title> */}
+          <meta property="og:image" content="/assets/images/favicon21.png" />
+
           <title>MicroGenDX Rep Connect – Connect Through Communication</title>
 
           <meta property="og:title" content="My page title" key="title" />
