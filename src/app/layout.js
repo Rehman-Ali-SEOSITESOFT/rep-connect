@@ -10,6 +10,7 @@ import Header from "@/layout/header/Header";
 // };
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import Footer from "@/layout/footer/footer";
 
 export default function RootLayout({ children }) {
   return (
@@ -34,13 +35,12 @@ export default function RootLayout({ children }) {
         </head>
         <body>
           <main className="microgen_dx">
-            {/* <div className="side--bar--menus"> */}
-            <div className="ext--clas">
-              <Sidebar />
-            </div>
-            {/* </div> */}
+            <Sidebar />
             <Header />
-            <div className="main--content--wrapper">{children}</div>
+            <div className="main--content--wrapper">
+              {children}
+              <Footer />
+            </div>
           </main>
         </body>
       </html>
