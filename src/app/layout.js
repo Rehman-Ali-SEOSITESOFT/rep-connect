@@ -11,6 +11,7 @@ import Header from "@/layout/header/Header";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import Footer from "@/layout/footer/footer";
+import img from "../app/favicon21.png";
 
 export default function RootLayout({ children }) {
   return (
@@ -32,9 +33,9 @@ export default function RootLayout({ children }) {
 
           <title>MicroGenDX Rep Connect – Connect Through Communication</title>
 
-          <meta property="og:description" content="My website description" />
+          <meta property="og:description" content="MG Descri" />
 
-          <meta property="og:image" content="../app/favicon21.png" />
+          <meta property="og:image" content={img} />
           <meta property="og:title" content="MicroGen DX" />
         </head>
         <body>
