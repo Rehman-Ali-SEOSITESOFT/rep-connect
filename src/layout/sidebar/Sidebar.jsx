@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   const { toggle } = useSelector((redux) => redux.menuReducer);
-  console.log(toggle);
   return (
     <aside className={toggle ? "side--bar" : "side--bar hide"}>
       <div className="sidebar--top">

@@ -26,76 +26,93 @@ const page = () => {
     {
       name: "ABDLabs",
       img: abdlab,
-      link: "/abdlabs-sales-material/",
+      link: "abdlabs-sales-material",
     },
     {
       name: "COVID-19",
       img: covid,
+      link: "covid-19-sales-material",
     },
     {
       name: "Dental/PerioDX",
       img: dental,
+      link: "periodx-dentistry-sales-material",
     },
     {
       name: "ENT",
       img: ent,
+      link: "ent-sales-material",
     },
 
     {
       name: "General Sales Material",
       img: general,
+      link: "general-sales-material",
     },
     {
       name: "Infectious Disease",
       img: infectious,
+      link: "id-infectious-disease-sales-material",
     },
     {
       name: "Microbiology",
       img: microbiology,
+      link: "microbiology-sales-material",
     },
     {
       name: "Nail",
       img: nail,
+      link: "nail-sales-material",
     },
     {
       name: "Orthopedics",
       img: orthopedics,
+      link: "orthopedic-sales-material-2",
     },
     {
       name: "Plastic Surgery",
       img: plastic,
+      link: "plastic-surgery-sales-material/",
     },
     {
       name: "Primary Care",
       img: primay,
+      link: "primary-care-sales-material/",
     },
     {
       name: "Pulmonary/AFB",
       img: pulmonary,
+      link: "pulmonary-afb-sales-material/",
     },
     {
       name: "RTL",
       img: rtl,
+      link: "rtl-sales-material/",
     },
     {
       name: "Sales Forms",
       img: salesform,
+      link: "sales-forms/",
     },
     {
       name: "Urology",
       img: urology,
+      link: "urology-sales-material/",
     },
     {
       name: "Women's Health",
       img: womenhealth,
+      link: "womens-health-sales-material/",
     },
     {
       name: "Working with Hospitals Material",
       img: workingwithhospital,
+      link: "working-with-hospitals-material/",
     },
     {
       name: "Wound Care",
       img: woundcare,
+      link: "wound-care-sales-material/",
     },
   ]);
   return (
@@ -107,7 +124,13 @@ const page = () => {
             <div className="col">
               <div className={style.download_able_material__wrapper}>
                 {downloadAbleMaterial.map((elem, index) => {
-                  return <DownloadAbleMaterialCart item={elem} key={index} />;
+                  return (
+                    <DownloadAbleMaterialCart
+                      item={elem}
+                      key={index}
+                      index={index}
+                    />
+                  );
                 })}
               </div>
             </div>

@@ -1,20 +1,65 @@
 .DownloadAbleMaterialCart {
   width: 19%;
-  /* border-left: 0.5px solid #e2e0e0; */
   padding: 2rem 1rem;
-  /* border-bottom: 0.5px solid #e2e0e0; */
   border: 0.5px solid #e2e0e0;
   margin-right: 1%;
   margin-bottom: 1%;
 }
+.DownloadAbleMaterialCart .cart1:hover {
+  background: #3596cc;
+}
+.DownloadAbleMaterialCart .cart2:hover {
+  background: #c23727;
+}
+.DownloadAbleMaterialCart .cart3:hover {
+  background: #e38126;
+}
+.DownloadAbleMaterialCart .cart4:hover {
+  background: #e16a5b;
+}
+.DownloadAbleMaterialCart .cart5:hover {
+  background: #3596cc;
+}
+.DownloadAbleMaterialCart .cart6:hover {
+  background: #808080;
+}
+.DownloadAbleMaterialCart .cart7:hover {
+  background: #004a2c;
+}
+.DownloadAbleMaterialCart .cart8:hover {
+  background: #709c72;
+}
+.DownloadAbleMaterialCart .cart9:hover {
+  background: #006671;
+}
+.DownloadAbleMaterialCart .cart10:hover {
+  background: #d25c93;
+}
+.DownloadAbleMaterialCart .cart11:hover {
+  background: #d2a22a;
+}
+.DownloadAbleMaterialCart .cart12:hover {
+  background: #62682e;
+}
+.DownloadAbleMaterialCart .cart13:hover {
+  background: #3596cc;
+}
+.DownloadAbleMaterialCart .cart14:hover {
+  background: #3596cc;
+}
+.DownloadAbleMaterialCart .cart15:hover {
+  background: #4584c4;
+}
+.DownloadAbleMaterialCart .cart16:hover {
+  background: #6b68a4;
+}
+.DownloadAbleMaterialCart .cart17:hover {
+  background: #2754a4;
+}
+.DownloadAbleMaterialCart .cart18:hover {
+  background: #7e491e;
+}
 
-/* .DownloadAbleMaterialCart:last-child,
-.DownloadAbleMaterialCart:nth-child(5),
-.DownloadAbleMaterialCart:nth-child(10),
-.DownloadAbleMaterialCart:nth-child(15),
-.DownloadAbleMaterialCart:nth-child(20) {
-  border-right: 0.5px solid #e2e0e0;
-} */
 .DownloadAbleMaterialCart a {
   text-decoration: none;
 }
