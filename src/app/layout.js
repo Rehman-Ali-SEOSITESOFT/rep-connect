@@ -11,7 +11,8 @@ import Header from "@/layout/header/Header";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import Footer from "@/layout/footer/footer";
-import img from "../app/favicon21.png";
+import img from "./favicon21.png";
+import Image from "next/image";
 
 export default function RootLayout({ children }) {
   return (
