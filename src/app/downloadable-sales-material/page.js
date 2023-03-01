@@ -20,6 +20,7 @@ import urology from "../../assets/images/download//uro-124.png";
 import womenhealth from "../../assets/images/download/gyne-124.png";
 import workingwithhospital from "../../assets/images/download/hospitals-124.png";
 import woundcare from "../../assets/images/download/wound-124.png";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
 const page = () => {
   const [downloadAbleMaterial, setDownloadAbleMaterial] = useState([
     {
@@ -98,19 +99,22 @@ const page = () => {
     },
   ]);
   return (
-    <section className="download-able-material">
-      <div className="container-xxl">
-        <div className="row">
-          <div className="col">
-            <div className={style.download_able_material__wrapper}>
-              {downloadAbleMaterial.map((elem, index) => {
-                return <DownloadAbleMaterialCart item={elem} key={index} />;
-              })}
+    <>
+      <BreadCrum breadHeading="Downloadable Sales Material" pageName="Home" />
+      <section className={style.download_able_material}>
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col">
+              <div className={style.download_able_material__wrapper}>
+                {downloadAbleMaterial.map((elem, index) => {
+                  return <DownloadAbleMaterialCart item={elem} key={index} />;
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
