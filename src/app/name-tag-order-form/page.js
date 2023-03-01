@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import style from "./nametag.module.css";
 const page = () => {
   const [errorResponse, setErrorResponse] = useState(false);
+  const [trueResponse, setTrueResponse] = useState(false);
   const [tagOrderField, setTagOrderField] = useState({
     full_name: "",
     title: "",
@@ -40,9 +41,14 @@ const page = () => {
     } else {
       console.log(tagOrderField);
       setErrorResponse(false);
+      setTrueResponse(true);
     }
   };
 
+  setTimeout(() => {
+    setErrorResponse(false);
+    setTrueResponse(false);
+  }, 1500);
   return (
     <>
       <BreadCrum
@@ -53,18 +59,20 @@ const page = () => {
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              {errorResponse ? (
+              {errorResponse && (
                 <div className={style.error__response}>
                   <p>
                     There was a problem with your submission. Please review the
                     fields below.
                   </p>
                 </div>
-              ) : (
+              )}
+              {trueResponse && (
                 <div className={style.success__response}>
-                  <p> thank you Send Your response</p>
+                  <p> Thank You</p>
                 </div>
               )}
+
               <form
                 onSubmit={hanldeSubmit}
                 method="POST"

@@ -29,11 +29,12 @@ export default function RootLayout({ children }) {
             rel="stylesheet"
           />
           {/* <title>{title}</title> */}
-          <meta property="og:image" content="/assets/images/favicon21.png" />
 
           <title>MicroGenDX Rep Connect – Connect Through Communication</title>
 
-          <meta property="og:title" content="My page title" key="title" />
+          <meta property="og:description" content="My website description" />
+
+          <meta property="og:image" content="../app/favicon21.png" />
         </head>
         <body>
           <main className="microgen_dx">
