@@ -35,6 +35,7 @@ export default function RootLayout({ children }) {
           <meta property="og:description" content="My website description" />
 
           <meta property="og:image" content="../app/favicon21.png" />
+          <meta property="og:title" content="MicroGen DX" />
         </head>
         <body>
           <main className="microgen_dx">
