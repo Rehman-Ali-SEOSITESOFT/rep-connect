@@ -8,7 +8,18 @@ const HomePagePosts = (props) => {
     <>
       <div className="post_wrapper">
         <div className="post_wrapper_inner">
-          <Image src={postImage} alt="post image" className="img-fluid " />
+          <div className="image_wrapper">
+            <div class="overlay"></div>
+            <Image src={postImage} alt="post image" className="img-fluid " />
+            <div className="image_links double">
+              <a href="#">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </a>
+              <a href="#">
+                <i className="fa-solid fa-link"></i>
+              </a>
+            </div>
+          </div>
           <div className="post_details_section">
             <h2>
               <a href="#"> {postHeading}</a>
