@@ -61,8 +61,8 @@ const page = () => {
   return (
     <>
       <BreadCrum
-        breadHeading={"Name Tag Order Form"}
-        pageName={"Name Tag Order Form"}
+        breadHeading={"Business Card Order Form"}
+        pageName={"Business Card Order Form"}
       />
       <section className={style.name_tag_order_form}>
         <div className="container-xxl">
