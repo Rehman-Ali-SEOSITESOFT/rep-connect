@@ -17,6 +17,11 @@
   padding-left: 35px;
   border-radius: 0px;
 }
+.search_home input:focus {
+  outline: 0;
+  box-shadow: none;
+  background-color: rgba(255, 248, 220, 1);
+}
 .search_home {
   position: relative;
   /* margin-top: 15px; */

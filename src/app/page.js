@@ -38,6 +38,7 @@ export default function Home() {
       likes: "+15",
       postcomment: "3",
       readmore: "Read More",
+      link: "candida-auris-sales-piece/",
     },
     {
       postImage: micro,
@@ -47,6 +48,7 @@ export default function Home() {
       likes: "17",
       postcomment: "1",
       readmore: "Read More",
+      link: "do-not-use-anything-with-old-branding/",
     },
     {
       postImage: newAccount,
@@ -56,6 +58,7 @@ export default function Home() {
       likes: "19",
       postcomment: "5",
       readmore: "Read More",
+      link: "reminder-new-account-sign-up-procedure/",
     },
     {
       postImage: map,
@@ -65,6 +68,7 @@ export default function Home() {
       likes: "19",
       postcomment: "5",
       readmore: "Read More",
+      link: "candida-auris-an-inroads-into-hospitals/",
     },
     {
       postImage: newSalep,
@@ -74,6 +78,7 @@ export default function Home() {
       likes: "21",
       postcomment: "2",
       readmore: "Read More",
+      link: "osteodiscitis-intro-to-a-new-id-opportunity/",
     },
     {
       postImage: mba,
@@ -83,6 +88,7 @@ export default function Home() {
       likes: "17",
       postcomment: "2",
       readmore: "Read moore",
+      link: "dr-clifford-martin-consulting-requests/",
     },
   ])
   const [annList, setAnnList] = useState([
@@ -117,18 +123,10 @@ export default function Home() {
       Link: "https://repconnect.blaksheepdev.com/osteodiscitis-intro-to-a-new-id-opportunity/",
     },
   ])
+  const [searh, setSearch] = useState("")
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(0.7)
-  // const url =
-  //   "https://www.youtube.com/embed/LbtlYK3mDgA?controls=0&rel=0&disablekb=1&showinfo=0&modestbranding=0&html5=1&iv_load_policy=3&autoplay=0&end=0&loop=0&playsinline=0&start=0&nocookie=false&enablejsapi=1&origin=https%3A%2F%2Frepconnect.blaksheepdev.com&widgetid=1"
-  // const controls = true
-  // const width = "100%"
-  // const height = "170px"
-  // const config = {
-  //   youtube: {
-  //     playerVars: { modestbranding: 1 },
-  //   },
-  // }
+
   const handlePlay = () => {
     setIsPlaying(true)
   }
@@ -161,6 +159,8 @@ export default function Home() {
                     className="form-control "
                     id="exampleFormControlInput1"
                     placeholder="Enter Your Search"
+                    value={searh}
+                    onChange={(e) => setSearch(e.target.value)}
                   />
 
                   <i className="fa-solid fa-magnifying-glass gleass"></i>
@@ -204,17 +204,7 @@ export default function Home() {
               </div>
               <div>
                 {postData.map((e, idx) => {
-                  return (
-                    <HomePagePosts
-                      key={idx}
-                      postImage={e.postImage}
-                      postHeading={e.postHeading}
-                      postDetail={e.postDetail}
-                      likes={e.likes}
-                      postcomment={e.postcomment}
-                      readmore={e.readmore}
-                    />
-                  )
+                  return <HomePagePosts key={idx} item={e} id={idx + 1} />
                 })}
               </div>
             </div>
@@ -292,13 +282,15 @@ export default function Home() {
                     <ul>
                       {annList.map((e, idx) => {
                         return (
-                          <HomeAnnouncementList
-                            key={idx}
-                            image={e.image}
-                            annTitle={e.annTitle}
-                            date={e.date}
-                            Link={e.Link}
-                          />
+                          <>
+                            <HomeAnnouncementList
+                              key={idx}
+                              image={e.image}
+                              annTitle={e.annTitle}
+                              date={e.date}
+                              Link={e.Link}
+                            />
+                          </>
                         )
                       })}
                     </ul>

@@ -1,0 +1,20 @@
+footer {
+  background-color: #1790d0;
+  padding: 30px 0;
+}
+footer .copyright p {
+  font-weight: 400;
+  font-size: 16px;
+  color: #333333;
+  line-height: 21px;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  footer {
+    padding: 20px 15px;
+  }
+  footer .copyright p {
+    font-size: 15px;
+  }
+}

@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   const { toggle } = useSelector((redux) => redux.menuReducer);
-  console.log(toggle);
   return (
     <aside className={toggle ? "side--bar" : "side--bar hide"}>
       <div className="sidebar--top">
@@ -34,7 +33,7 @@ const Sidebar = () => {
 
                 <ul className="drop--down--menu">
                   <li>
-                    <Link href="/">
+                    <Link href="/product-category/sales-material/">
                       <span>Order Printed Sales Materials</span>
                     </Link>
                   </li>
@@ -44,17 +43,17 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/product-category/branded-merchandise/">
                       <span>Order Branded Merchandise</span>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/business-card-order-form/">
                       <span>Order Personalized Business Cards</span>
                     </Link>
                   </li>{" "}
                   <li>
-                    <Link href="/">
+                    <Link href="/name-tag-order-form/">
                       <span>Order Personalized Name Tag</span>
                     </Link>
                   </li>

@@ -1,16 +1,21 @@
 import React from "react"
 import Image from "next/image"
 import "./HomePagePosts.css"
-const HomePagePosts = (props) => {
-  const { postImage, postHeading, postDetail, likes, postcomment, readmore } =
-    props
+import Link from "next/link"
+const HomePagePosts = ({ item }) => {
   return (
     <>
       <div className="post_wrapper">
         <div className="post_wrapper_inner">
           <div className="image_wrapper">
-            <div class="overlay"></div>
-            <Image src={postImage} alt="post image" className="img-fluid " />
+            <div className="overlay"></div>
+            <Link href={{ pathname: `/${item.link}` }}>
+              <Image
+                src={item.postImage}
+                alt="post image"
+                className="img-fluid "
+              />
+            </Link>
             <div className="image_links double">
               <a href="#">
                 <i className="fa-solid fa-magnifying-glass"></i>
@@ -22,23 +27,25 @@ const HomePagePosts = (props) => {
           </div>
           <div className="post_details_section">
             <h2>
-              <a href="#"> {postHeading}</a>
+              <Link href={{ pathname: `/blog/${item.link}` }}>
+                {item.postHeading}
+              </Link>
             </h2>
-            <p>{postDetail}</p>
+            <p>{item.postDetail}</p>
           </div>
         </div>
         <div className="post_footer">
           <div className="like">
             <i className="fa-regular fa-thumbs-up"></i>
-            <a href="#">{likes}</a>
+            <a href="#">{item.likes}</a>
           </div>
           <div className="comment">
             <i className="fa-regular fa-comment"></i>
-            <a href="#">{postcomment}</a>
+            <a href="#">{item.postcomment}</a>
           </div>
           <div className="read_more">
             <i className="fa-solid fa-book"></i>
-            <a href="#">{readmore}</a>
+            <a href="#">{item.readmore}</a>
           </div>
         </div>
       </div>

@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import "./DownloadAbleMaterialCart.css";
-const DownloadAbleMaterialCart = ({ item }) => {
+const DownloadAbleMaterialCart = ({ item, index }) => {
   return (
     <div className="DownloadAbleMaterialCart">
-      <Link href="/">
-        <div className="image_wrapper">
+      <Link href={`/downloadable-sales-material/${item.link}`}>
+        <div className={`image_wrapper cart${index + 1}`}>
           <Image src={item.img} alt={item.name} className="img-fluid" />
         </div>
         <div className="desc_wrapper">
