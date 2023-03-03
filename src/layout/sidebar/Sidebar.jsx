@@ -100,7 +100,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/setting-up-an-office-in-service">
                   <span>In-Service Checklist</span>
                 </Link>
               </li>

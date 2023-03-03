@@ -1,33 +1,33 @@
-"use client" // this is a client component 👈🏽
-import Image from "next/image"
-import Link from "next/link"
-import { Inter } from "next/font/google"
-import styles from "./page.module.css"
-import BreadCrum from "@/components/breadCrum/BreadCrum"
-import { useState } from "react"
-import mdx from "../assets/images/mdxhomepagepost.jpg"
-import salepiece from "../assets/images/newSaleImage.png"
-import HomePagePosts from "@/components/homePagePosts/HomePagePosts"
-import micro from "../assets/images/microgenmicro.png"
-import newAccount from "../assets/images/newaccount.png"
-import map from "../assets/images/map.png"
-import newSalep from "../assets/images/newsalepiece.png"
-import mba from "../assets/images/mba.png"
-import hammer from "../assets/images/rulehamer.png"
-import HomePageInsiderBtn from "@/components/homePageInsiderButton/HomePageInsiderBtn"
-import VideoPlayer from "react-video-player-extended"
-import HomeAnnouncementList from "@/components/homePageAnnouncementList/HomeAnnouncementList"
-import ann1 from "../assets/images/ann1.png"
-import ann2 from "../assets/images/ann2.png"
-import ann3 from "../assets/images/ann3.png"
-import ann4 from "../assets/images/ann4.png"
-import ann5 from "../assets/images/ann5.png"
-import Pagination from "@/components/pagination/Pagination"
+"use client"; // this is a client component 👈🏽
+import Image from "next/image";
+import Link from "next/link";
+import { Inter } from "next/font/google";
+import styles from "./page.module.css";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
+import { useState } from "react";
+import mdx from "../assets/images/mdxhomepagepost.jpg";
+import salepiece from "../assets/images/newSaleImage.png";
+import HomePagePosts from "@/components/homePagePosts/HomePagePosts";
+import micro from "../assets/images/microgenmicro.png";
+import newAccount from "../assets/images/newaccount.png";
+import localtion from "../assets/images/map.png";
+import newSalep from "../assets/images/newsalepiece.png";
+import mba from "../assets/images/mba.png";
+import hammer from "../assets/images/rulehamer.png";
+import HomePageInsiderBtn from "@/components/homePageInsiderButton/HomePageInsiderBtn";
+// import VideoPlayer from "react-video-player-extended";
+import HomeAnnouncementList from "@/components/homePageAnnouncementList/HomeAnnouncementList";
+import ann1 from "../assets/images/ann1.png";
+import ann2 from "../assets/images/ann2.png";
+import ann3 from "../assets/images/ann3.png";
+import ann4 from "../assets/images/ann4.png";
+import ann5 from "../assets/images/ann5.png";
+import Pagination from "@/components/pagination/Pagination";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 const _handleSubmitForm = (e) => {
-  e.preventDefault()
-}
+  e.preventDefault();
+};
 export default function Home() {
   const [postData, setPostData] = useState([
     {
@@ -61,7 +61,7 @@ export default function Home() {
       link: "reminder-new-account-sign-up-procedure/",
     },
     {
-      postImage: map,
+      postImage: localtion,
       postHeading: "Candida Auris: An Inroads into Hospitals",
       postDetail:
         "Hi Sales Team, Candida auris causes serious infections, and cases are rising across the U.S. The CDC has put out an alert on this.  MicroGenDX provides [...]",
@@ -90,7 +90,7 @@ export default function Home() {
       readmore: "Read moore",
       link: "dr-clifford-martin-consulting-requests/",
     },
-  ])
+  ]);
   const [annList, setAnnList] = useState([
     {
       image: ann1,
@@ -122,21 +122,21 @@ export default function Home() {
       date: "June 3, 2022",
       Link: "https://repconnect.blaksheepdev.com/osteodiscitis-intro-to-a-new-id-opportunity/",
     },
-  ])
-  const [searh, setSearch] = useState("")
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState(0.7)
+  ]);
+  const [searh, setSearch] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.7);
 
   const handlePlay = () => {
-    setIsPlaying(true)
-  }
+    setIsPlaying(true);
+  };
   const handlePause = () => {
-    setIsPlaying(false)
-  }
+    setIsPlaying(false);
+  };
   const handleVolume = (value) => {
     // this.setState({ volume: value })
-    setVolume(value)
-  }
+    setVolume(value);
+  };
   return (
     <>
       <BreadCrum breadHeading="MicroGenDX Rep Connect" pageName="Home" />
@@ -204,7 +204,7 @@ export default function Home() {
               </div>
               <div>
                 {postData.map((e, idx) => {
-                  return <HomePagePosts key={idx} item={e} id={idx + 1} />
+                  return <HomePagePosts key={idx} item={e} id={idx + 1} />;
                 })}
               </div>
             </div>
@@ -246,7 +246,7 @@ export default function Home() {
                     Clearing of Chronic UTIs??
                   </h3>
                   <div className="video_section">
-                    <VideoPlayer
+                    {/* <VideoPlayer
                       url="../../public/video.mp4"
                       isPlaying={isPlaying}
                       volume={volume}
@@ -256,7 +256,7 @@ export default function Home() {
                       width="100%"
                       height="170px"
                       type="video/mp4"
-                    />
+                    /> */}
                     {/* <ReactPlayer
                       className="react-player"
                       url={url}
@@ -291,7 +291,7 @@ export default function Home() {
                               Link={e.Link}
                             />
                           </>
-                        )
+                        );
                       })}
                     </ul>
                   </div>
@@ -307,5 +307,5 @@ export default function Home() {
         </div>
       </section>
     </>
-  )
+  );
 }
