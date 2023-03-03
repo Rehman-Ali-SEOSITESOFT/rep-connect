@@ -85,14 +85,17 @@ const Sidebar = () => {
                     </ul>
                   </li>
                   <li>
-                    <Link href="/">
+                    <a
+                      href="https://www.dropbox.com/sh/rpxdpwlvoa0xd0f/AAB9oL3kI1eVe4wuJuwuG9Vfa?dl=0"
+                      target="_blank"
+                    >
                       <span>Conference Material</span>
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/request-kits-and-supplies/">
                   <span>Order Kits & Supplies</span>
                 </Link>
               </li>
