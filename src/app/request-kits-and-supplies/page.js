@@ -5,6 +5,7 @@ import standardkits from "../../assets/images/request-kit-supplies/request-kit-p
 import individual from "../../assets/images/request-kit-supplies/request-supplies.jpg";
 import labreq from "../../assets/images/request-kit-supplies/lab-req-2020-thumb.jpg";
 import Link from "next/link";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
 const page = () => {
   const [reqKits, setReqKits] = useState([
     {
@@ -15,34 +16,52 @@ const page = () => {
     {
       name: "Request Individual Supplies",
       link: "product-category/individual-kit-items/",
-      link: individual,
+      img: individual,
     },
     {
       name: "Pre-Filled Lab Req ",
       link: "/product/pre-filled-lab-req/",
-      link: labreq,
+      img: labreq,
     },
   ]);
   return (
-    <section className={style.request_kit_supplies}>
-      <div className="container-xxl">
-        <div className={`row ${style.request_kit_post_wrapper}`}>
-          {reqKits.map((element, index) => {
-            return (
-              <div className="col-lg-4 col-md-4 col-md-6" key={index}>
-                <div className="image_wrapper">
-                  <Link href="/">
-                    <img className="" src="" />
-                  </Link>
-                  <div className="image_links "></div>
+    <>
+      <BreadCrum
+        breadHeading={"Request Kits & Supplies"}
+        pageName={"Request Kits & Supplies"}
+      />
+      <section className={style.request_kit_supplies}>
+        <div className="container-xxl">
+          <div className={`row ${style.request_kit_post_wrapper}`}>
+            {reqKits.map((element, index) => {
+              return (
+                <div
+                  className={`col-lg-4 col-md-6 col-sm-6 ${style.request_item}`}
+                  key={index}
+                >
+                  <div className={style.image_wrapper}>
+                    <Link href={element.link} target="_blank">
+                      <img className="img-fluid" src={element.img.src} />
+                      <div className={style.mask}></div>
+                    </Link>
+                    <Link
+                      className={style.image_links}
+                      href={element.link}
+                      target="_blank"
+                    >
+                      <i className="fa-solid fa-link"></i>
+                    </Link>
+                  </div>
+                  <div className={style.wp_caption_text}>
+                    <p>{element.name}</p>
+                  </div>
                 </div>
-                <div className="wp-caption-text"></div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
