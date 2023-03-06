@@ -1,0 +1,46 @@
+.single_donwnload_detail {
+  padding: 50px 0;
+}
+
+.list_views li:first-child {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+.list_views {
+  padding: 0;
+  margin: 0;
+}
+
+.list_views li {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: #333333;
+}
+.list_views li:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+.list_views li span {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+@media screen and (max-width: 1400px) {
+  .single_donwnload_detail {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
