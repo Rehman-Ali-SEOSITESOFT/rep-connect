@@ -24,7 +24,7 @@
 .like_section .isNotLiked:after {
   content: "";
   display: block;
-  background-image: url("../../assets/images/likes.svg");
+  background-image: url("../../assets/images/singleproductsimages/likes.svg");
   background-size: contain;
   width: 16px;
   background-repeat: no-repeat;
