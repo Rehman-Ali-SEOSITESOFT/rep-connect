@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import repconnect from "../../assets/images/Rep-Connect-Logo-2021-2.svg";
+import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg";
 import myacount from "../../assets/images/side-bar-my-account-img.png";
 import "./Header.css";
 import { useDispatch } from "react-redux";
