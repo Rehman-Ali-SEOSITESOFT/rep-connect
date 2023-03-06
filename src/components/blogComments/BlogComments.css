@@ -21,7 +21,8 @@
   position: relative;
   padding-top: 20px;
 }
-.like_sections .likebtn::after {
+.like_sections .likebtn::after,
+.like_sections .isNotLiked:after {
   content: "";
   display: block;
   background-image: url("../../assets/images/likes.svg");
@@ -32,8 +33,12 @@
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
+  background-repeat: no-repeat;
+  transition: width 0.2s ease-in-out;
 }
-.like_sections .likebtn {
+
+.like_sections .likebtn,
+.like_sections .isNotLiked {
   margin: 0;
   position: relative;
   display: inline-block;
@@ -45,6 +50,13 @@
   text-align: center;
   transition: none;
   cursor: pointer;
+}
+.like_sections .isNotLiked:after {
+  filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg)
+    brightness(100%) contrast(111%);
+}
+.like_sections .likebtn:hover:after {
+  width: 100% !important;
 }
 .like_sections .likes_number::after {
   content: "";
@@ -89,7 +101,7 @@
   border-radius: 50%;
   overflow: hidden;
 }
-.replay a {
+.comment_wrapper_detail .replay a {
   font-family: "Poppins", sans-serif;
 
   background-color: #2754a4;
@@ -98,14 +110,17 @@
   padding: 3px 6px;
   border-radius: 3px;
 }
+
 .date_comment_section {
   font-size: 12px;
   font-style: italic;
   color: #0095eb;
   text-decoration: none;
 }
-.date_comment_section:hover {
+.date_comment_section:hover,
+.comment_wrapper_detail .replay a:hover {
   color: #f05c5d;
+  text-decoration: underline;
 }
 .user_commented {
   font-family: "Poppins", sans-serif;

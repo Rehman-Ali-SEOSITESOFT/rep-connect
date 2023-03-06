@@ -17,6 +17,7 @@ import LikedBypeople from "@/components/likedByPeople/LikedBypeople"
 import BlogComments from "@/components/blogComments/BlogComments"
 import comment2 from "../../../assets/images/comment2.jpg"
 import comment3 from "../../../assets/images/comment3.png"
+import BreadCrum from "@/components/breadCrum/BreadCrum"
 export default function page({ params }) {
   let { id } = params
 
@@ -25,6 +26,7 @@ export default function page({ params }) {
   })
   const [checkBox, setCheckBox] = useState(false)
   const [image, setImage] = useState([])
+  const [isLiked, setIsLiked] = useState(true)
 
   const [likes, setLikes] = useState([
     {
@@ -81,6 +83,9 @@ export default function page({ params }) {
       para: "Team  We have a lot going on but nothing will help you more than developing your own ID support in your territory! Don’t believe me…just ask Luis Lopez who is on the cusp on bringing on two whoppers in new accounts. IDs know Candida Auris is a problem and they love our price point and see the value of our NGS as a pre-screening solution!   As you pursue new business/providers a local ID Ambassador will help smooth acceptance and adoption!      Good hunting!",
     },
   ])
+  const _handleUnLiked = () => {
+    setIsLiked(!isLiked)
+  }
   function handleInput(e) {
     const newFormData = { ...formData }
     newFormData[e.target.name] = e.target.value
@@ -105,6 +110,7 @@ export default function page({ params }) {
 
   return (
     <>
+      <BreadCrum breadHeading={id} pageName="Home" subPage="Announcements" />
       <section className={styless.main_blog_wrappper}>
         <div className="container">
           <div className="row justify-content-center">
@@ -127,7 +133,12 @@ export default function page({ params }) {
                     <a href="#">sales piece.</a>
                   </span>{" "}
                 </p>
-                <a href="#">We also have a press release. </a>
+                <a
+                  href="https://www.newswire.com/news/microgendx-provides-rapid-screening-for-candida-auris-to-help-avoid-21736993?_ga=2.20744701.498954283.1654877679-1169054282.1654010273"
+                  target="_blank"
+                >
+                  We also have a press release.
+                </a>
                 <p>
                   As a reminder we can pick up C. auris in NGS but if your
                   accounts want fast C. auris testing, or an option for
@@ -141,7 +152,15 @@ export default function page({ params }) {
           <div className="row">
             <div className="col-lg-12">
               <div className={styless.like_section}>
-                <button className={styless.likebtn}> </button>
+                {/* <button className={styless.likebtn}> </button> */}
+                <button
+                  className={`${
+                    isLiked ? `${styless.likebtn}` : `${styless.isNotLiked}`
+                  }`}
+                  onClick={_handleUnLiked}
+                >
+                  {" "}
+                </button>
                 <span className={styless.likes_number}>+16</span>
               </div>
               <div className={styless.liked_by_people}>
@@ -168,6 +187,7 @@ export default function page({ params }) {
                         usertitle={e.usertitle}
                         dates={e.dates}
                         para={e.para}
+                        isLiked
                       />
                     </>
                   )

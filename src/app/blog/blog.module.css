@@ -20,19 +20,31 @@
   position: relative;
   padding: 20px 0px;
 }
-.like_section .likebtn::after {
+.like_section .likebtn::after,
+.like_section .isNotLiked:after {
   content: "";
   display: block;
   background-image: url("../../assets/images/likes.svg");
   background-size: contain;
   width: 16px;
+  background-repeat: no-repeat;
   height: 16px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
+  transition: width 0.2s ease-in-out;
 }
-.like_section .likebtn {
+.like_section .isNotLiked:after {
+  filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg)
+    brightness(100%) contrast(111%);
+}
+
+.like_section .likebtn:hover:after {
+  width: 100%;
+}
+.like_section .likebtn,
+.like_section .isNotLiked {
   margin: 0;
   position: relative;
   display: inline-block;
@@ -113,8 +125,10 @@
   color: #1790d0;
   text-decoration: none;
 }
+.leave_replay_section p a:hover,
 .leave_replay_section p a:hover {
   color: #f05c5d;
+  text-decoration: underline;
 }
 .uploadImage_section {
   display: flex;
@@ -173,7 +187,16 @@
   display: inline;
   width: 30px;
 }
-
+.second_row_blog span a,
+.second_row_blog a {
+  text-decoration: none;
+  color: #0095eb;
+}
+.second_row_blog span a:hover,
+.second_row_blog a:hover {
+  color: #f05c5d;
+  text-decoration: underline;
+}
 @media screen and (max-width: 1200px) {
   .main_blog_wrappper .image_wrapper {
     margin-bottom: 40px;

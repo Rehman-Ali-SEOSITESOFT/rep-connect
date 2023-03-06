@@ -1,8 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import Image from "next/image"
 import "./BlogComments.css"
 const BlogComments = (props) => {
   const { userIcon, usertitle, link, dates, link2, para } = props
+  const [isLikedd, setIsLikeddd] = useState(true)
+  const _handleUnLikedd = () => {
+    setIsLikeddd(!isLikedd)
+  }
   return (
     <>
       <div className="comment_wrapper_detail">
@@ -20,7 +24,14 @@ const BlogComments = (props) => {
             </a>
             <p className="user_commented">{para}</p>
             <div className="like_sections">
-              <button className="likebtn"> </button>
+              {/* <button className="likebtn"> </button>
+               */}
+              <button
+                className={`${isLikedd ? "likebtn" : "isNotLiked"}`}
+                onClick={_handleUnLikedd}
+              >
+                {" "}
+              </button>
               <span className="likes_number">+3</span>
             </div>
           </div>
