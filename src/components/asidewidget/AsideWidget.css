@@ -1,0 +1,74 @@
+.AsideWidget {
+  width: 25%;
+}
+.AsideWidget ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.AsideWidget .widget--title {
+  margin-bottom: 15px;
+  color: #1790d0;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+}
+.AsideWidget .continue--shopping--section li a {
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-weight: 400;
+  line-height: 24px;
+  overflow: hidden;
+  background-color: #2754a4 !important;
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+  margin: 0 0 15px;
+}
+
+.AsideWidget .continue--shopping--section li a {
+  position: relative;
+}
+.AsideWidget .continue--shopping--section li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(0, 0, 0, 0.13);
+  z-index: 1;
+  transition: width 0.2s ease-in-out;
+}
+.AsideWidget .continue--shopping--section li a:hover:after {
+  width: 100%;
+}
+
+/* other--suggestion--section */
+
+.other--suggestion--section .list {
+  display: flex;
+  align-items: flex-start;
+  text-decoration: none;
+  margin: 0 0 8px !important;
+  padding: 5px 0 10px !important;
+  border-bottom: 1px solid #eee;
+}
+
+.other--suggestion--section .list img {
+  width: 50px;
+}
+.other--suggestion--section .list .list--title {
+  color: #1790d0;
+  letter-spacing: 0px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5em;
+  padding-left: 15px;
+  text-decoration: none;
+}
