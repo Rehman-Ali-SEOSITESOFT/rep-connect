@@ -132,6 +132,18 @@
 .leaveAReplay {
   padding-top: 20px;
 }
+.pdf_preview {
+  position: relative;
+}
+.pdf_preview .arrowicon {
+  position: absolute;
+  background: black;
+  color: white;
+  padding: 10px 1rem;
+  right: 18px;
+  top: 57px;
+  cursor: pointer;
+}
 
 @media screen and (max-width: 1400px) {
   .single_donwnload_detail {

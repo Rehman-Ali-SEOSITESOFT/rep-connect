@@ -41,6 +41,13 @@ export default function page({ params }) {
                   width="100%"
                   height={"600px"}
                 />
+                <a
+                  target="_blank"
+                  className={style.arrowicon}
+                  href="https://docs.google.com/viewerng/viewer?url=https://repconnect.blaksheepdev.com/download/abd-labs-general-0131/?ind%3D1647890015149%26filename%3DABD_Labs_General_21-0131_11.pdf%26wpdmdl%3D21407%26refresh%3D6407069a4e0e11678182042%26open%3D1"
+                >
+                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
               </div>
             </div>
           </div>
