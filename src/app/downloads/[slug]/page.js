@@ -1,30 +1,46 @@
+"use client";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
+import Link from "next/link";
+import { useState } from "react";
 import style from "./style.module.css";
-// import { Document, Page } from "react-pdf";
-// import pdfs from "../../../assets/pdf/pdf-file-for-testing.pdf";
-export default function page({ params }) {
-  // const { slug } = params;
-  // let headingname = slug.split("-").join(" ");
-  // const [numPages, setNumPages] = useState(null);
-  // const [pageNumber, setPageNumber] = useState(1);
+// import pdftesting from "./../../../../public/assets/pdf/pdf-file-for-testing.pdf";
 
-  // function onDocumentLoadSuccess({ numPages }) {
-  //   setNumPages(numPages);
-  // }
+export default function page({ params }) {
+  const { slug } = params;
+  let headingname = slug.split("-").join(" ");
+
+  const [comments, setComments] = useState({
+    file: "",
+    comment: "",
+    notfiy: false,
+  });
+  const hanldChange = (e) => {
+    setComments({ ...comments, [e.target.name]: e.target.value });
+  };
+  const hanldeSubmit = (e) => {
+    e.preventDefault();
+    console.log(comments);
+  };
+  const hanldenotify = (e) => {
+    setComments({ ...comments, [e.target.name]: e.target.checked });
+  };
+
+  const hanldeImage = (e) => {
+    setComments({ ...comments, [e.target.name]: e.target.files });
+  };
   return (
     <>
-      {/* <BreadCrum breadHeading={headingname} pageName={headingname} /> */}
+      <BreadCrum breadHeading={headingname} pageName={headingname} />
       <section className={style.single_donwnload_detail}>
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              <div className="pdf_preview">
-                {/* <Document file={pdfs} onLoadSuccess={onDocumentLoadSuccess}>
-                  <Page pageNumber={pageNumber} />
-                </Document>
-                <p>
-                  Page {pageNumber} of {numPages}
-                </p> */}
+              <div className={style.pdf_preview}>
+                <iframe
+                  src={"/assets/pdf/pdf-file-for-testing.pdf"}
+                  width="100%"
+                  height={"600px"}
+                />
               </div>
             </div>
           </div>
@@ -58,6 +74,63 @@ export default function page({ params }) {
               </ul>
             </div>
           </div>
+          <div className="row">
+            <div className="col-12">
+              <a className={style.downloadbtndownloadspage} download>
+                download
+              </a>
+            </div>
+          </div>
+          <form onSubmit={hanldeSubmit}>
+            <div className="row">
+              <div className="col-12">
+                <div className={style.leaveAReplay}>
+                  <h2> Leave a Reply</h2>
+                  <p>
+                    Logged in as grtesting.{" "}
+                    <Link href="#">Edit your profile</Link> .{" "}
+                    <Link href="#"> Log out?</Link> Required fields are marked *
+                  </p>
+                  <div className={`d-flex  ${style.attachment}`}>
+                    <p>
+                      Upload attachment
+                      <small>
+                        (Allowed file types: <strong>jpg, gif, png,</strong>{" "}
+                        maximum file size: <strong>60MB.</strong> )
+                      </small>
+                    </p>
+                    <input name="file" type="file" onChange={hanldeImage} />
+                  </div>
+                  <div>
+                    <label> Comment *</label>
+                    <textarea
+                      className={style.commit}
+                      value={comments.comment}
+                      name="comment"
+                      onChange={hanldChange}
+                    />
+                  </div>
+                  <div className={style.notifydiv}>
+                    <label htmlFor="checkbox">
+                      <input
+                        type="checkbox"
+                        id="checkbox"
+                        name="notfiy"
+                        onChange={hanldenotify}
+                      />
+                      Notify me of followup comments via e-mail. You can also
+                      <a href="#"> subscribe </a> without commenting.
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12">
+                <button type="submit" className={style.submitpostcomment}>
+                  post comment
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </section>
     </>

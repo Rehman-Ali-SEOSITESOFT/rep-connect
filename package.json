@@ -17,5 +17,8 @@
     "react-dom": "18.2.0",
     "react-player": "^2.11.2",
     "react-redux": "^8.0.5"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0"
   }
 }
