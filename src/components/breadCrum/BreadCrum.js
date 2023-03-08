@@ -1,7 +1,7 @@
-import React from "react"
-import "./BreadCrum.css"
+import React from "react";
+import "./BreadCrum.css";
 const BreadCrum = (props) => {
-  const { breadHeading, pageName, subPage } = props
+  const { breadHeading, pageName, subPage } = props;
   return (
     <section className="breadcrum_wrapper">
       <div className="container">
@@ -24,7 +24,7 @@ const BreadCrum = (props) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default BreadCrum
+export default BreadCrum;
