@@ -11,6 +11,21 @@ body,
 html {
   font-family: "Poppins", sans-serif !important;
 }
+
+:root {
+  scrollbar-color: #1790d0 #f1f1f1;
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1790d0;
+}
 @media screen and (max-width: 1240px) {
   .main--content--wrapper {
     width: 100%;
