@@ -1,0 +1,19 @@
+.training_video_frame {
+  border: solid 1px #cccccc;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+.genreal_training_wrapper {
+  margin-bottom: 40px;
+}
+.genreal_training_wrapper h3 {
+  font-family: "Poppins", sans-serif;
+  color: #1790d0;
+  font-size: 25px;
+  line-height: 27px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  margin-bottom: 15px;
+}

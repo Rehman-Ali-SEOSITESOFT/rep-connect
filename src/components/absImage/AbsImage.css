@@ -1,6 +1,8 @@
 .course_image_wrapper {
   position: relative;
   overflow: hidden;
+  max-width: 90%;
+  margin: auto;
 }
 .course_image_wrapper:after {
   content: "";
@@ -28,6 +30,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  overflow: hidden;
 }
 .course_image_wrapper img,
 .course_image_wrapper .mask:after,

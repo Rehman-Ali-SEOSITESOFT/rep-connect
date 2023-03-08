@@ -7,6 +7,7 @@ import homestudy from "../../assets/images/microgendxuniversity/at-home-study.jp
 import fieldride from "../../assets/images/microgendxuniversity/field-ride.jpg"
 import className from "../../assets/images/microgendxuniversity/classroom-study.jpg"
 import MicrogenDxUniversity from "@/components/microgenDxUniversity/MicrogenDxUniversity"
+import UniversityLinks from "@/components/universityLinks/UniversityLinks"
 const page = () => {
   const [cardDetail, setCardDetail] = useState([
     {
@@ -23,6 +24,36 @@ const page = () => {
       cardImage: className,
       card_heading: "classroom",
       link: "classroom-training-103/",
+    },
+  ])
+  const [trainingLinks, setGeneralLinks] = useState([
+    {
+      title: "Basic Training",
+      link: "basic-training/",
+    },
+    {
+      title: "Advanced Training",
+      link: "sales-training/",
+    },
+    {
+      title: "Antibiotics 101",
+      link: "antibiotics-101/",
+    },
+    {
+      title: "Antibiotics 102",
+      link: "antibiotics-102/",
+    },
+    {
+      title: "Biofilm Training",
+      link: "biofilm-training-research/",
+    },
+    {
+      title: "Pronunciation of Species",
+      link: "pronunciations-of-panel-species/",
+    },
+    {
+      title: "Science of MicroGenDX",
+      link: "science-of-microgen-dx/",
     },
   ])
   return (
@@ -68,27 +99,9 @@ const page = () => {
               <div className={styless.general_training}>
                 <h3>General Training</h3>
                 <ul>
-                  <li>
-                    <a href="#">Basic Training</a>
-                  </li>
-                  <li>
-                    <a href="#">Advanced Training</a>
-                  </li>
-                  <li>
-                    <a href="#">Antibiotics 101</a>
-                  </li>
-                  <li>
-                    <a href="#">Antibiotics 102</a>
-                  </li>
-                  <li>
-                    <a href="#">Biofilm Training</a>
-                  </li>
-                  <li>
-                    <a href="#">Pronunciation of Species</a>
-                  </li>
-                  <li>
-                    <a href="#">Science of MicroGenDX</a>
-                  </li>
+                  {trainingLinks.map((e, idx) => {
+                    return <UniversityLinks key={idx} item={e} />
+                  })}
                 </ul>
               </div>
             </div>

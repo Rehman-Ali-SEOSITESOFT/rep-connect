@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 import "./HomePagePosts.css"
 import Link from "next/link"
-const HomePagePosts = ({ item }) => {
+const HomePagePosts = ({ item, index }) => {
   return (
     <>
       <div className="post_wrapper">

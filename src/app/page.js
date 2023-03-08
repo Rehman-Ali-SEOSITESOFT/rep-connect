@@ -123,6 +123,20 @@ export default function Home() {
       Link: "https://repconnect.blaksheepdev.com/osteodiscitis-intro-to-a-new-id-opportunity/",
     },
   ])
+  const [insiderButton, setInsiderButton] = useState([
+    {
+      title: "Customer Survey",
+      link: "https://airtable.com/shrQBdi4M4bj5Ch2U ",
+    },
+    {
+      title: "Physician Consulting Agreement",
+      link: "https://airtable.com/shr35R1fL083YmR54",
+    },
+    {
+      title: "Conference Leads Follow-Up",
+      link: "https://microgendx.quickbase.com/db/bp26g4yrf?a=nwr",
+    },
+  ])
   const [searh, setSearch] = useState("")
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(0.7)
@@ -204,7 +218,7 @@ export default function Home() {
               </div>
               <div>
                 {postData.map((e, idx) => {
-                  return <HomePagePosts key={idx} item={e} id={idx + 1} />
+                  return <HomePagePosts key={idx} item={e} />
                 })}
               </div>
             </div>
@@ -227,7 +241,16 @@ export default function Home() {
                   </h4>
                 </div>
                 <div className={styles.buttonDiv}>
-                  <HomePageInsiderBtn
+                  {insiderButton.map((e, idx) => {
+                    return (
+                      <HomePageInsiderBtn
+                        key={idx}
+                        title={e.title}
+                        link={e.link}
+                      />
+                    )
+                  })}
+                  {/* <HomePageInsiderBtn
                     title="Customer Survey"
                     link="https://airtable.com/shrQBdi4M4bj5Ch2U "
                   />
@@ -238,7 +261,7 @@ export default function Home() {
                   <HomePageInsiderBtn
                     title="Conference Leads Follow-Up"
                     link="https://microgendx.quickbase.com/db/bp26g4yrf?a=nwr"
-                  />
+                  /> */}
                 </div>
                 <div className={styles.media_video}>
                   <h3>
@@ -282,15 +305,13 @@ export default function Home() {
                     <ul>
                       {annList.map((e, idx) => {
                         return (
-                          <>
-                            <HomeAnnouncementList
-                              key={idx}
-                              image={e.image}
-                              annTitle={e.annTitle}
-                              date={e.date}
-                              Link={e.Link}
-                            />
-                          </>
+                          <HomeAnnouncementList
+                            key={idx}
+                            image={e.image}
+                            annTitle={e.annTitle}
+                            date={e.date}
+                            Link={e.Link}
+                          />
                         )
                       })}
                     </ul>

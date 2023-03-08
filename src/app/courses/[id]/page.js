@@ -6,6 +6,7 @@ import Link from "next/link"
 import CourseContent from "@/components/courseContent/CourseContent"
 import AbsImage from "@/components/absImage/AbsImage"
 import { useState } from "react"
+import MicrogenTutorialVideo from "@/components/microgenTutorialVideo/MicrogenTutorialVideo"
 export default function page({ params }) {
   const [img, setImg] = useState([
     {
@@ -18,27 +19,10 @@ export default function page({ params }) {
       <section className={styles.course_wrapper}>
         <div className="container-xxl">
           <div className="row justify-content-center">
-            <div className="col-lg-4">
+            <div className="col-lg-6 col-md-6 col-sm-12 text-center">
               {img.map((e, idx) => {
-                console.log(e.image.src)
-                console.log(e.image)
-                return (
-                  <>
-                    <AbsImage image={e.image.src} />
-                  </>
-                )
+                return <AbsImage image={e.image.src} key={idx} />
               })}
-              {/* <div className={styles.course_image_wrapper}>
-                <Link href="#">
-                  <div className={styles.mask}></div>
-                  <Image src={business} alt="image" className="img-fluid" />
-                </Link>
-                <div className={styles.image_links}>
-                  <Link href="#">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </Link>
-                </div>
-              </div> */}
             </div>
           </div>
           <div className="row">
@@ -67,6 +51,7 @@ export default function page({ params }) {
           </div>
         </div>
       </section>
+      {/* <MicrogenTutorialVideo /> */}
     </>
   )
 }
