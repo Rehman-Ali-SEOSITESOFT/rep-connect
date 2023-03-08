@@ -14,7 +14,7 @@ const BreadCrum = (props) => {
                   <li className="breadcrumb-item active" aria-current="page">
                     {pageName}
                   </li>
-                  <li class="breadcrumb-item active" aria-current="page">
+                  <li className="breadcrumb-item active" aria-current="page">
                     {subPage}
                   </li>
                 </ol>

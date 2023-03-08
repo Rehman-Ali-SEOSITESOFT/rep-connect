@@ -6,7 +6,9 @@ const MicrogenDxUniversity = ({ item }) => {
   return (
     <>
       <div className="university_card_wrapper">
-        <Link href={{ pathname: `/microgen-dx-university/${item.link}` }}>
+        <Link
+          href={{ pathname: `/microgen-dx-university/${item.link}` }}
+        >
           <div className="uni_card_image_">
             <Image src={item.cardImage} alt="Image" className="img-fluid" />
           </div>

@@ -9,24 +9,31 @@ export default function page({ params }) {
   const [courseData, setCourseData] = useState([
     {
       courseTitle: "1. MicroGenDX Training Introduction",
+      link: "courses/1-microgendx-training-introduction",
     },
     {
       courseTitle: "2. MicroGenDX Tutorial Videos",
+      link: "courses/2-microgendx-tutorial-videos/",
     },
     {
       courseTitle: "3. Microbiology Key Concepts",
+      link: "courses/3-microbiology-key-concepts/",
     },
     {
       courseTitle: "4. Technology",
+      link: "courses/4-technology-key-concepts/",
     },
     {
       courseTitle: "5. Science of MicroGenDX – Sales Training 2.1",
+      link: "courses/3-science-of-microgendx-sales-training-2-1/",
     },
     {
       courseTitle: "6. Understanding Clinical Papers",
+      link: "courses/5-understanding-clinical-papers/",
     },
     {
       courseTitle: "7. Business Development",
+      link: "courses/business-development/",
     },
   ])
   return (
