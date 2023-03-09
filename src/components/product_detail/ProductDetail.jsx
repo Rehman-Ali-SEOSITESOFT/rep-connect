@@ -118,7 +118,7 @@ const ProductDetail = (props) => {
                     >
                       <div className="accordion-body">
                         <ul
-                          className="nav nav-pills mb-3"
+                          className="nav nav-pills mb-3  discription--tabs--product--detail"
                           id="pills-tab"
                           role="tablist"
                         >
@@ -134,7 +134,7 @@ const ProductDetail = (props) => {
                               aria-selected="true"
                               tabIndex={0}
                             >
-                              Home
+                              What does this test look for?
                             </button>
                           </li>
                           <li className="nav-item" role="presentation">
@@ -149,7 +149,7 @@ const ProductDetail = (props) => {
                               aria-selected="false"
                               tabIndex={0}
                             >
-                              Profile
+                              Test Type
                             </button>
                           </li>
                           <li className="nav-item" role="presentation">
@@ -164,7 +164,22 @@ const ProductDetail = (props) => {
                               aria-selected="false"
                               tabIndex={0}
                             >
-                              Contact
+                              Main infections
+                            </button>
+                          </li>
+                          <li className="nav-item" role="presentation">
+                            <button
+                              className="nav-link"
+                              id="pills-sample-tab"
+                              data-bs-toggle="pill"
+                              data-bs-target="#pills-sample"
+                              type="button"
+                              role="tab"
+                              aria-controls="pills-sample"
+                              aria-selected="false"
+                              tabIndex={0}
+                            >
+                              Sample type
                             </button>
                           </li>
                         </ul>
@@ -176,7 +191,7 @@ const ProductDetail = (props) => {
                             aria-labelledby="pills-home-tab"
                             tabIndex="0"
                           >
-                            ...
+                            ... What does this test look for?
                           </div>
                           <div
                             className="tab-pane fade"
@@ -185,7 +200,7 @@ const ProductDetail = (props) => {
                             aria-labelledby="pills-profile-tab"
                             tabIndex="0"
                           >
-                            ...
+                            Test Type
                           </div>
                           <div
                             className="tab-pane fade"
@@ -194,7 +209,16 @@ const ProductDetail = (props) => {
                             aria-labelledby="pills-contact-tab"
                             tabIndex="0"
                           >
-                            ...
+                            Main infections
+                          </div>
+                          <div
+                            className="tab-pane fade"
+                            id="pills-sample"
+                            role="tabpanel"
+                            aria-labelledby="pills-sample-tab"
+                            tabIndex="0"
+                          >
+                            sample
                           </div>
                         </div>
                       </div>

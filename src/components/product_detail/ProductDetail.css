@@ -184,6 +184,7 @@ section.ProductDetail {
 }
 
 /*  SINGL DEAIL  */
+.discription--tabs--product--detail button,
 .sss--gr--single--deail button {
   color: #444444;
   padding: 0;
@@ -194,6 +195,9 @@ section.ProductDetail {
   cursor: pointer;
   background: #f9f9f9;
   box-shadow: inset 0px 4px 3px -2px rgba(0, 0, 0, 0.04);
+}
+.discription--tabs--product--detail button {
+  padding: 15px 20px;
 }
 .sss--gr--single--deail button:focus {
   box-shadow: none;
