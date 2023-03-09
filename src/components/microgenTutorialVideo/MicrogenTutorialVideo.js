@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import AbsImage from "../absImage/AbsImage"
-import "./MicrogenTutorialVideo.css"
-import tutVideo from "../../assets/images/microgendxuniversity/tutorial-videos.jpg"
+import React, { useState } from "react";
+import AbsImage from "../absImage/AbsImage";
+import "./MicrogenTutorialVideo.css";
+import tutVideo from "../../assets/images/microgendxuniversity/tutorial-videos.jpg";
 const MicrogenTutorialVideo = () => {
   const [tutImage, setTutImage] = useState([
     {
       image: tutVideo,
     },
-  ])
+  ]);
   return (
     <>
       <section className="tutorial_wrapper">
@@ -18,7 +18,7 @@ const MicrogenTutorialVideo = () => {
             <div className="col-lg-6 col-md-8 col-sm-12">
               <div className="tutorial_image">
                 {tutImage.map((e, idx) => {
-                  return <AbsImage image={e.image.src} key={idx} />
+                  return <AbsImage image={e.image.src} key={idx} />;
                 })}
               </div>
             </div>
@@ -30,7 +30,6 @@ const MicrogenTutorialVideo = () => {
                   <h6>Current Status </h6>
                   <div className="enrolled_">
                     <p
-                      tabIndex="0"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
                       title="Enroll in this course to get access"
@@ -60,7 +59,7 @@ const MicrogenTutorialVideo = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default MicrogenTutorialVideo
+export default MicrogenTutorialVideo;
