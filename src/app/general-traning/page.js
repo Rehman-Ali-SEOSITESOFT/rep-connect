@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./generalTraining.css"
+import styles from "./style.module.css"
 const page = () => {
   return (
     <>
