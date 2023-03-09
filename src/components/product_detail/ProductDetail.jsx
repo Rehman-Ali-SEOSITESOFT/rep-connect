@@ -6,7 +6,8 @@ import Image from "next/image";
 
 const ProductDetail = (props) => {
   const [qty, setQty] = useState(1);
-
+  const [defalutLoading, setDefaultLoading] = useState(false);
+  const [loading, setloading] = useState(false);
   const incrementQty = () => {
     setQty(qty + 1);
   };
@@ -14,6 +15,13 @@ const ProductDetail = (props) => {
     setQty(qty > 1 ? qty - 1 : 1);
   };
 
+  const hanldeAddToCart = () => {
+    setDefaultLoading(true);
+    setloading(true);
+  };
+  setTimeout(() => {
+    setloading(false);
+  }, [6000]);
   return (
     <section className="ProductDetail">
       <div className="container-xxl">
@@ -62,7 +70,26 @@ const ProductDetail = (props) => {
                   </span>
                 </div>
                 <div className="quanity-btn">
-                  <button className="add--to--cart"> Add to cart</button>
+                  <button
+                    className={`add--to--cart`}
+                    onClick={hanldeAddToCart}
+                    style={{
+                      opacity: loading ? "0.5" : 1,
+                    }}
+                  >
+                    Add to cart
+                    {defalutLoading ? (
+                      <>
+                        {loading ? (
+                          <span className="loader"></span>
+                        ) : (
+                          <span className="btn--icon">
+                            <i className="fa-solid fa-check"></i>
+                          </span>
+                        )}
+                      </>
+                    ) : null}
+                  </button>
                 </div>
               </div>
               <div className="single--product--detail--tabs">
@@ -70,7 +97,7 @@ const ProductDetail = (props) => {
                   className="accordion accordion-flush"
                   id="accordionFlushExample"
                 >
-                  <div className="accordion-item">
+                  <div className="accordion-item sss--gr--single--deail">
                     <h2 className="accordion-header" id="flush-headingOne">
                       <button
                         className="accordion-button collapsed"
@@ -173,7 +200,7 @@ const ProductDetail = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="accordion-item">
+                  <div className="accordion-item sss--gr--single--deail">
                     <h2 className="accordion-header" id="flush-headingTwo">
                       <button
                         className="accordion-button collapsed"

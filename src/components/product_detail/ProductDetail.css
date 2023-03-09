@@ -64,7 +64,7 @@ section.ProductDetail {
   padding: 6px 15px;
 }
 
-.cart--view--detail .cart-check-out-btn {
+.product--add--cart .quanity-btn .add--to--cart {
   border-radius: 3px;
   padding: 10px 20px;
   font-weight: 400;
@@ -72,16 +72,18 @@ section.ProductDetail {
   overflow: hidden;
   background-color: #2754a4 !important;
   color: #ffffff;
-  display: block;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   text-transform: capitalize;
-  margin: 0 0 15px;
+  border: none;
+  margin-left: 20px;
 }
-.cart--view--detail .cart-check-out-btn {
+.product--add--cart .quanity-btn .add--to--cart {
   position: relative;
 }
-.cart--view--detail .cart-check-out-btn::after {
+.product--add--cart .quanity-btn .add--to--cart::after {
   content: "";
   position: absolute;
   left: 0;
@@ -92,6 +94,142 @@ section.ProductDetail {
   z-index: 1;
   transition: width 0.2s ease-in-out;
 }
-.cart--view--detail .cart-check-out-btn:hover::after {
+.product--add--cart .quanity-btn .add--to--cart:hover::after {
   width: 100%;
+}
+.quanity-btn .add--to--cart .btn--icon {
+  margin-left: 15px;
+}
+
+.loader {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  display: inline-block;
+  --base-color: #2754a4;
+  top: 0;
+  left: 10px;
+}
+
+.loader::after {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  background-image: radial-gradient(
+      circle 5px at 12px 12px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 12px 0px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 0px 12px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 24px 12px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 12px 24px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 20px 3px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 20px 3px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 20px 20px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 3px 20px,
+      var(--base-color) 100%,
+      transparent 0
+    ),
+    radial-gradient(
+      circle 2.5px at 3px 3px,
+      var(--base-color) 100%,
+      transparent 0
+    );
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  animation: rotationBack 4s linear infinite reverse;
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/*  */
+.sss--gr--single--deail button {
+  color: #444444;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 600;
+  position: relative;
+  border: 0;
+  cursor: pointer;
+  background: #f9f9f9;
+  box-shadow: inset 0px 4px 3px -2px rgba(0, 0, 0, 0.04);
+}
+.sss--gr--single--deail button:focus {
+  box-shadow: none;
+}
+.sss--gr--single--deail .accordion-button:not(.collapsed) {
+  background: #f9f9f9;
+  color: #1790d0;
+}
+
+.sss--gr--single--deail .accordion-header {
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.sss--gr--single--deail .accordion-button::after {
+  display: none;
+}
+.sss--gr--single--deail .accordion-button:not(.collapsed)::before {
+  content: "\2212";
+  font-size: 18px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  display: block;
+  padding: 15px 20px;
+  margin-right: 15px;
+}
+.sss--gr--single--deail .accordion-button::before {
+  content: "\002B";
+  font-size: 18px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  display: block;
+  padding: 15px 20px;
+  margin-right: 15px;
+}
+.deail--product--desc .single--product--detail--tabs {
+  margin-top: 30px;
+}
+.single--product--detail--tabs .accordion-item {
+  border: none;
 }
