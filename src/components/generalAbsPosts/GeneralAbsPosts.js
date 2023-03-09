@@ -2,6 +2,7 @@ import React from "react"
 import "./GeneralAbsPosts.css"
 
 const GeneralAbsPosts = (props) => {
+  const { trainingHeading } = props
   return (
     <>
       <div className="genreal_training_wrapper">
