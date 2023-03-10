@@ -1,7 +1,11 @@
 import Link from "next/link"
-import React from "react"
+import React, { useState } from "react"
 import "./CourseContent.css"
 const CourseContent = () => {
+  const [toogle, settoogle] = useState(false)
+  const _handleToogle = () => {
+    settoogle(!toogle)
+  }
   return (
     <>
       <div className="course_content_wrapper">
@@ -16,6 +20,7 @@ const CourseContent = () => {
                   data-bs-target="#collapseOne"
                   aria-expanded="true"
                   aria-controls="collapseOne"
+                  onClick={_handleToogle}
                 >
                   <Link href="#">
                     <div className="circle_select"></div>
@@ -24,6 +29,19 @@ const CourseContent = () => {
                       <span>6 Topics</span>
                     </div>
                   </Link>
+                  <div className="expand_collapse">
+                    {toogle ? (
+                      <>
+                        <span className="icons_angle"></span>{" "}
+                        <span className="collapsingss"> Expand</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="icons_angle2"></span>{" "}
+                        <span className="expanding"> Collpase</span>{" "}
+                      </>
+                    )}
+                  </div>
                 </button>
               </h2>
               <div

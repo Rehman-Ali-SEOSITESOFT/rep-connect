@@ -152,17 +152,76 @@
   align-items: center;
 }
 
-.accordion-item,
-.accordion-item:focus,
-.accordion-item:active,
-.accordion-header,
-.accordion-header:focus,
-.accordion-header:active,
-.accordion-button,
-.accordion-button:focus,
-.accordion-button:active {
+.course_content_wrapper .accordion-item,
+.course_content_wrapper .accordion-item:focus,
+.course_content_wrapper .accordion-item:active,
+.course_content_wrapper .accordion-header,
+.course_content_wrapper .accordion-header:focus,
+.course_content_wrapper .accordion-header:active,
+.course_content_wrapper .accordion-button,
+.course_content_wrapper .accordion-button:focus,
+.course_content_wrapper .accordion-button:active {
   outline: none !important;
   box-shadow: none !important;
+}
+.icons_angle:before {
+  content: "\01F897";
+  background-image: none !important;
+  color: #fff;
+  border-radius: 100%;
+  width: 18px;
+  height: 18px;
+  padding-top: 12px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 700;
+  background-color: #2754a4 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icons_angle2:before {
+  content: "\01F897";
+  background-image: none !important;
+  color: #fff;
+  border-radius: 100%;
+  width: 18px;
+  height: 18px;
+  padding-top: 10px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 700;
+  background-color: #2754a4 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
+  margin-right: 8px;
+}
+/* .icons_angle2:before {
+  content: "\01F895";
+} */
+.course_content_wrapper .accordion-button:not(.collapsed):after,
+.course_content_wrapper .accordion-button:after {
+  display: none;
+}
+.expand_collapse {
+  display: flex;
+}
+.expand_collapse .icons_angle {
+  padding-right: 8px;
+}
+.course_content_wrapper button.accordion-button.collapsed,
+.course_content_wrapper button.accordion-button {
+  justify-content: space-between;
+}
+.expanding,
+.collapsingss {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  line-height: 21px;
+  color: #2754a4;
+  font-weight: 800;
 }
 @media screen and (max-width: 992px) {
   .simple_list {
