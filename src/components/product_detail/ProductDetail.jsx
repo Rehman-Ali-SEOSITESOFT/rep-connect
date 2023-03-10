@@ -6,7 +6,8 @@ import Image from "next/image";
 
 const ProductDetail = (props) => {
   const [qty, setQty] = useState(1);
-
+  const [defalutLoading, setDefaultLoading] = useState(false);
+  const [loading, setloading] = useState(false);
   const incrementQty = () => {
     setQty(qty + 1);
   };
@@ -14,6 +15,13 @@ const ProductDetail = (props) => {
     setQty(qty > 1 ? qty - 1 : 1);
   };
 
+  const hanldeAddToCart = () => {
+    setDefaultLoading(true);
+    setloading(true);
+  };
+  setTimeout(() => {
+    setloading(false);
+  }, [6000]);
   return (
     <section className="ProductDetail">
       <div className="container-xxl">
@@ -62,7 +70,26 @@ const ProductDetail = (props) => {
                   </span>
                 </div>
                 <div className="quanity-btn">
-                  <button className="add--to--cart"> Add to cart</button>
+                  <button
+                    className={`add--to--cart`}
+                    onClick={hanldeAddToCart}
+                    style={{
+                      opacity: loading ? "0.5" : 1,
+                    }}
+                  >
+                    Add to cart
+                    {defalutLoading ? (
+                      <>
+                        {loading ? (
+                          <span className="loader"></span>
+                        ) : (
+                          <span className="btn--icon">
+                            <i className="fa-solid fa-check"></i>
+                          </span>
+                        )}
+                      </>
+                    ) : null}
+                  </button>
                 </div>
               </div>
               <div className="single--product--detail--tabs">
@@ -70,7 +97,7 @@ const ProductDetail = (props) => {
                   className="accordion accordion-flush"
                   id="accordionFlushExample"
                 >
-                  <div className="accordion-item">
+                  <div className="accordion-item sss--gr--single--deail">
                     <h2 className="accordion-header" id="flush-headingOne">
                       <button
                         className="accordion-button collapsed"
@@ -91,7 +118,7 @@ const ProductDetail = (props) => {
                     >
                       <div className="accordion-body">
                         <ul
-                          className="nav nav-pills mb-3"
+                          className="nav nav-pills mb-3  discription--tabs--product--detail"
                           id="pills-tab"
                           role="tablist"
                         >
@@ -107,7 +134,7 @@ const ProductDetail = (props) => {
                               aria-selected="true"
                               tabIndex={0}
                             >
-                              Home
+                              What does this test look for?
                             </button>
                           </li>
                           <li className="nav-item" role="presentation">
@@ -122,7 +149,7 @@ const ProductDetail = (props) => {
                               aria-selected="false"
                               tabIndex={0}
                             >
-                              Profile
+                              Test Type
                             </button>
                           </li>
                           <li className="nav-item" role="presentation">
@@ -137,7 +164,22 @@ const ProductDetail = (props) => {
                               aria-selected="false"
                               tabIndex={0}
                             >
-                              Contact
+                              Main infections
+                            </button>
+                          </li>
+                          <li className="nav-item" role="presentation">
+                            <button
+                              className="nav-link"
+                              id="pills-sample-tab"
+                              data-bs-toggle="pill"
+                              data-bs-target="#pills-sample"
+                              type="button"
+                              role="tab"
+                              aria-controls="pills-sample"
+                              aria-selected="false"
+                              tabIndex={0}
+                            >
+                              Sample type
                             </button>
                           </li>
                         </ul>
@@ -149,7 +191,7 @@ const ProductDetail = (props) => {
                             aria-labelledby="pills-home-tab"
                             tabIndex="0"
                           >
-                            ...
+                            ... What does this test look for?
                           </div>
                           <div
                             className="tab-pane fade"
@@ -158,7 +200,7 @@ const ProductDetail = (props) => {
                             aria-labelledby="pills-profile-tab"
                             tabIndex="0"
                           >
-                            ...
+                            Test Type
                           </div>
                           <div
                             className="tab-pane fade"
@@ -167,13 +209,22 @@ const ProductDetail = (props) => {
                             aria-labelledby="pills-contact-tab"
                             tabIndex="0"
                           >
-                            ...
+                            Main infections
+                          </div>
+                          <div
+                            className="tab-pane fade"
+                            id="pills-sample"
+                            role="tabpanel"
+                            aria-labelledby="pills-sample-tab"
+                            tabIndex="0"
+                          >
+                            sample
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="accordion-item">
+                  <div className="accordion-item sss--gr--single--deail">
                     <h2 className="accordion-header" id="flush-headingTwo">
                       <button
                         className="accordion-button collapsed"
