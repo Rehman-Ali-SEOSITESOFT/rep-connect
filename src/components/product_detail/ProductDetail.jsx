@@ -3,11 +3,28 @@ import React, { useState } from "react";
 import "./ProductDetail.css";
 import img1 from "../../assets/images/download-category/MicroGenDX-COVID-19-Testing-Icon.png";
 import Image from "next/image";
-
+import ProductItem from "../categoryproducts/ProductItem/ProductItem";
+import img4 from "../../assets/images/download-category/ABD-Labs-General-0131-Icon.png";
+import img2 from "../../assets/images/download-category/ABD-Labs-Urology-0132-Icon.png";
+import img3 from "../../assets/images/download-category/COVIDFLURSV-Pediatrics-0177-Icon.png";
 const ProductDetail = (props) => {
   const [qty, setQty] = useState(1);
   const [defalutLoading, setDefaultLoading] = useState(false);
   const [loading, setloading] = useState(false);
+  const [productList, setProductList] = useState([
+    {
+      img: img4,
+      name: "AFB DNA Testing – 0006",
+    },
+    {
+      img: img2,
+      name: "Application of Topical Antibiotic Gels – 0118",
+    },
+    {
+      img: img3,
+      name: "Are Cultures Reliable Card – 0066",
+    },
+  ]);
   const incrementQty = () => {
     setQty(qty + 1);
   };
@@ -19,6 +36,9 @@ const ProductDetail = (props) => {
     setDefaultLoading(true);
     setloading(true);
   };
+
+  const [loadging, setLoaging] = useState(false);
+  // SETIME OUT FUNCTION LOADING FALSE
   setTimeout(() => {
     setloading(false);
   }, [6000]);
@@ -118,7 +138,7 @@ const ProductDetail = (props) => {
                     >
                       <div className="accordion-body">
                         <ul
-                          className="nav nav-pills mb-3  discription--tabs--product--detail"
+                          className="nav nav-pills mb-3  discription--tabs--product--detail justify-content-between"
                           id="pills-tab"
                           role="tablist"
                         >
@@ -191,7 +211,7 @@ const ProductDetail = (props) => {
                             aria-labelledby="pills-home-tab"
                             tabIndex="0"
                           >
-                            ... What does this test look for?
+                            <h5>Gastrointestinal qPCR Panel (PCR Only)</h5>
                           </div>
                           <div
                             className="tab-pane fade"
@@ -244,11 +264,28 @@ const ProductDetail = (props) => {
                       data-bs-parent="#accordionFlushExample"
                     >
                       <div className="accordion-body">
-                        Placeholder content for this accordion, which is
-                        intended to demonstrate the{" "}
-                        <code>.accordion-flush</code> class. This is the second
-                        item's accordion body. Let's imagine this being filled
-                        with some actual content.
+                        <table>
+                          <tbody>
+                            <tr>
+                              <th className="woocommerce---label">
+                                <span>Weight </span>
+                              </th>
+
+                              <td className="woocommerce---value">
+                                <span> 1 lbs</span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th className="woocommerce---label">
+                                {" "}
+                                <span>Weight </span>
+                              </th>
+                              <td className="woocommerce---value">
+                                <span>12.25 × 10.9 × 1.5 in</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -256,6 +293,53 @@ const ProductDetail = (props) => {
               </div>
             </div>
           </div>
+          <div className="col-12">
+            <div className="related-product-single-page">
+              <h3 className="title">Related products</h3>
+            </div>
+          </div>
+        </div>
+        <div className="row pt-4">
+          {productList.map((item, index) => {
+            return (
+              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 product__item">
+                <div className="product_gr__items">
+                  <a
+                    target="_blank"
+                    href={`/product-detail/demo`}
+                    className="product--gr--link"
+                  >
+                    <Image src={item.img} alt="product" className="img-fluid" />
+                    <div className="product_overlay_mask"></div>
+                    {loadging && (
+                      <div className="product--loadig--style">
+                        <div className="loading"></div>
+                      </div>
+                    )}
+                  </a>
+                  <div className="product_links">
+                    {loadging ? (
+                      <span>
+                        <div className="product-loader"></div>
+                      </span>
+                    ) : (
+                      <span onClick={hanldeAddToCart}>
+                        <i className="fa-solid fa-cart-shopping"></i>
+                      </span>
+                    )}
+                    <a href={`/product-detail/esting}`} target="_blank">
+                      <i className="fa-solid fa-link"></i>
+                    </a>
+                  </div>
+                </div>
+                <div className="product--gr--title">
+                  <a href={`/product-detail/esting`} target="_blank">
+                    {item.name}
+                  </a>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
