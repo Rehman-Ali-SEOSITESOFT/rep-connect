@@ -112,7 +112,7 @@ export default function page({ params }) {
     <>
       <BreadCrum breadHeading={id} pageName="Home" subPage="Announcements" />
       <section className={styless.main_blog_wrappper}>
-        <div className="container">
+        <div className="container-xxl">
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div className={styless.image_wrapper}>

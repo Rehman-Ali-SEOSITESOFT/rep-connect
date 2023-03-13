@@ -2,8 +2,14 @@
   padding: 50px 0px;
   margin: 0px 15px;
 }
+
 .speciality_heading {
   text-align: center;
+  background-image: url("../../assets/images/specialty/fancy_heading_hr.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: inherit;
+  padding-bottom: 30px;
 }
 .speciality_heading h2 {
   font-family: "Poppins", sans-serif;
@@ -13,14 +19,39 @@
   color: #2754a4;
 }
 .special_card_row {
-  margin-top: 40px;
+  margin-top: 40px !important;
 }
 /* .special_wrapper .columns {
   width: 20%;
 } */
 
+@media screen and (max-width: 992px) {
+  .speciality_heading h2 {
+    font-size: 38px;
+    line-height: 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .special_wrapper {
+    padding-bottom: 25px;
+  }
+  .special_card_row .columns {
+    margin-bottom: 15px;
+  }
+  .speciality_heading h2 {
+    font-size: 34px;
+    line-height: 38px;
+  }
+}
 @media screen and (max-width: 576px) {
   .special_wrapper .columns {
     width: 100%;
+  }
+  .speciality_heading h2 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .special_card_row {
+    margin-top: 30px !important;
   }
 }
