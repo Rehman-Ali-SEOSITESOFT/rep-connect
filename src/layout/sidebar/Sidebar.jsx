@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import "./sidebar.css";
-import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg";
-import myacount from "../../assets/images/side-bar-my-account-img.png";
-import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg";
-import { useSelector } from "react-redux";
+import Image from "next/image"
+import Link from "next/link"
+import React from "react"
+import "./sidebar.css"
+import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg"
+import myacount from "../../assets/images/side-bar-my-account-img.png"
+import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg"
+import { useSelector } from "react-redux"
 
 const Sidebar = () => {
-  const { toggle } = useSelector((redux) => redux.menuReducer);
+  const { toggle } = useSelector((redux) => redux.menuReducer)
   return (
     <aside className={toggle ? "side--bar" : "side--bar hide"}>
       <div className="sidebar--top">
@@ -105,12 +105,18 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link
+                  target="blank"
+                  href="https://microgendx.quickbase.com/db/main?a=SignIn&_c=wbzquy"
+                >
                   <span>Quickbase CRM</span>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link
+                  href="https://www.concursolutions.com/nui/signin?targetURL=%2FExpense%2FClient%2Fdefault.asp%3F"
+                  target="blank"
+                >
                   <span>SAP Concur</span>
                 </Link>
               </li>
@@ -135,7 +141,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/microgendex-insider/">
                   <span>MicroGenDX Insider</span>
                 </Link>
               </li>
@@ -205,7 +211,7 @@ const Sidebar = () => {
         </div>
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
