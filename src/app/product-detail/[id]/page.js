@@ -10,7 +10,7 @@ export default function page({ params }) {
       <section className={style.product_deail_page}>
         <div className="container-xxl">
           <div className="row">
-            <div className="col-12">
+            <div className="col-12 p-0">
               <div className={style.product_deail_wrapper}>
                 <ProductDetail />
                 <AsideWidget />

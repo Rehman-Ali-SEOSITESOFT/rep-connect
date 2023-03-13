@@ -319,14 +319,78 @@
   border-top: 1px solid #cdcdcd;
 }
 
+.deail--product--desc .out-of-stock {
+  color: red;
+}
+.deail--product--image div:first-child {
+  cursor: auto !important;
+}
 @media screen and (max-width: 1025px) {
   .ProductDetail {
     width: 70%;
   }
 }
+
+@media screen and (max-width: 992px) {
+  .deail--product--desc .title--clas {
+    font-size: 30px;
+    line-height: normal;
+  }
+  /* .quanitiy--detail span {
+    padding: 0 12px;
+  } */
+  .product--add--cart .quanitiy--detail input {
+    height: 40px;
+  }
+  .product--add--cart .quanity-btn .add--to--cart {
+    padding: 8px 20px;
+  }
+  .sss--gr--single--deail .accordion-button:not(.collapsed)::before,
+  .sss--gr--single--deail .accordion-button::before {
+    padding: 10px 15px;
+  }
+  .sss--gr--single--deail .accordion-body {
+    padding-top: 20px;
+  }
+  .discription--tabs--product--detail button {
+    padding: 8px 17px;
+  }
+}
 @media screen and (max-width: 768px) {
+  .related-product-single-page {
+    margin-top: 20px;
+  }
+  .deail--product--desc .title--clas {
+    font-size: 25px;
+  }
   .ProductDetail {
     width: 100%;
     padding-right: 0;
+  }
+  .deail--product--desc p {
+    font-size: 15px;
+  }
+  .deail--product--image {
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid #d7d7d7;
+    padding: 8px;
+    width: fit-content;
+    margin: auto;
+  }
+  .deail--product--image div:first-child {
+    height: 100% !important;
+  }
+  .product--add--cart .quanity-btn .add--to--cart {
+    padding: 8px 12px;
+    font-size: 15px;
+    margin-left: 5px;
+  }
+  .deail--product--image div img {
+    height: 100% !important;
+    object-fit: contain;
+    width: fit-content;
+    max-width: fit-content;
+    margin: auto;
   }
 }

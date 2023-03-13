@@ -7,6 +7,11 @@ import ProductItem from "../categoryproducts/ProductItem/ProductItem";
 import img4 from "../../assets/images/download-category/ABD-Labs-General-0131-Icon.png";
 import img2 from "../../assets/images/download-category/ABD-Labs-Urology-0132-Icon.png";
 import img3 from "../../assets/images/download-category/COVIDFLURSV-Pediatrics-0177-Icon.png";
+import dynamic from "next/dynamic";
+const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
+  ssr: false,
+});
+
 const ProductDetail = (props) => {
   const [qty, setQty] = useState(1);
   const [defalutLoading, setDefaultLoading] = useState(false);
@@ -46,18 +51,32 @@ const ProductDetail = (props) => {
     <section className="ProductDetail">
       <div className="container-xxl">
         <div className="row">
-          <div className="col-3">
+          <div className="col-xl-3 col-md-4 col-12">
             <figure className="deail--product">
               <div className="deail--product--image">
-                <Image
-                  src={img1}
-                  alt="for testing image"
-                  className="img-fluid"
+                <ReactImageMagnify
+                  {...{
+                    smallImage: {
+                      alt: "Wristwatch by Ted Baker London",
+                      isFluidWidth: true,
+                      src: img1.src,
+                      // sizes:
+                      //   "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                      imageClassName: "magnify-image",
+                    },
+                    largeImage: {
+                      src: img1.src,
+                      width: 1426,
+                      height: 2000,
+                    },
+
+                    enlargedImagePosition: "over",
+                  }}
                 />
               </div>
             </figure>
           </div>
-          <div className="col-9">
+          <div className="col-xl-9 col-md-8 col-12">
             <div className="deail--product--desc">
               <h4 className="title--clas">GI Test Service</h4>
               <p>
@@ -67,6 +86,9 @@ const ProductDetail = (props) => {
                 submitted sample will not be run/processed at the MicroGenDX
                 Laboratory. To learn more
                 <a href="#">CLICK HERE</a>
+              </p>
+              <p className="stock out-of-stock">
+                This product is currently out of stock and unavailable.
               </p>
               <div className="product--add--cart d-flex align-items-center">
                 <div className="quanitiy--detail">
