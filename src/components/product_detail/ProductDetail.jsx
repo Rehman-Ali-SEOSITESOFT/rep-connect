@@ -138,7 +138,7 @@ const ProductDetail = (props) => {
                     >
                       <div className="accordion-body">
                         <ul
-                          className="nav nav-pills mb-3  discription--tabs--product--detail justify-content-between"
+                          className="nav nav-pills discription--tabs--product--detail justify-content-start"
                           id="pills-tab"
                           role="tablist"
                         >

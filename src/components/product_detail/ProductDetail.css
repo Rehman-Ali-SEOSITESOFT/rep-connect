@@ -1,5 +1,6 @@
-section.ProductDetail {
+.ProductDetail {
   padding-right: 30px;
+  width: 75%;
 }
 
 .deail--product--desc .title--clas {
@@ -261,6 +262,8 @@ section.ProductDetail {
   border: 1px solid !important;
   border-color: #d8d8d83d !important;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 .discription--tabs--product--detail button.nav-link.active {
   color: #1790d0;
@@ -314,4 +317,16 @@ section.ProductDetail {
   margin-top: 60px;
   padding-top: 30px;
   border-top: 1px solid #cdcdcd;
+}
+
+@media screen and (max-width: 1025px) {
+  .ProductDetail {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .ProductDetail {
+    width: 100%;
+    padding-right: 0;
+  }
 }
