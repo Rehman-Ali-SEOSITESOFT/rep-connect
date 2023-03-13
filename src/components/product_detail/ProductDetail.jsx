@@ -302,7 +302,10 @@ const ProductDetail = (props) => {
         <div className="row pt-4">
           {productList.map((item, index) => {
             return (
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 product__item">
+              <div
+                className="col-xl-4 col-lg-4 col-md-6 col-sm-6 product__item"
+                key={index}
+              >
                 <div className="product_gr__items">
                   <a
                     target="_blank"
