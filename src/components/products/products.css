@@ -1,0 +1,23 @@
+.products-shop {
+  width: 75%;
+  padding-right: 30px;
+}
+
+@media screen and (max-width: 1025px) {
+  .products-shop {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products-shop {
+    width: 100%;
+    padding-right: 0px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .products-shop {
+    width: 100%;
+  }
+}
