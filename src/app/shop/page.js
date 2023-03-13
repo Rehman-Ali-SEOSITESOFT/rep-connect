@@ -12,7 +12,7 @@ const page = () => {
           <div className="row">
             <div className="col-12">
               <div
-                className={`d-flex justify-content-between  ${style.shop_product_wrapper}`}
+                className={`d-flex justify-content-between ${style.shop_product_wrapper}`}
               >
                 <Products />
                 <AsideWidget />
