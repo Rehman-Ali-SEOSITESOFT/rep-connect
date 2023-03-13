@@ -17,7 +17,6 @@ const ProductItem = ({ item }) => {
       <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 product__item">
         <div className="product_gr__items">
           <a
-            target="_blank"
             href={`/product-detail/${linkTesing}`}
             className="product--gr--link"
           >
@@ -39,15 +38,13 @@ const ProductItem = ({ item }) => {
                 <i className="fa-solid fa-cart-shopping"></i>
               </span>
             )}
-            <a href={`/product-detail/${linkTesing}`} target="_blank">
+            <a href={`/product-detail/${linkTesing}`}>
               <i className="fa-solid fa-link"></i>
             </a>
           </div>
         </div>
         <div className="product--gr--title">
-          <a href={`/product-detail/${linkTesing}`} target="_blank">
-            {item.name}
-          </a>
+          <a href={`/product-detail/${linkTesing}`}>{item.name}</a>
         </div>
       </div>
     </>
