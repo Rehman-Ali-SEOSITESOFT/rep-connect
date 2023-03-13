@@ -78,7 +78,7 @@ const Sidebar = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="/">
+                        <Link href="/how-to-set-up-a-va-hospital">
                           <span>How to Set Up a VA Hospital</span>
                         </Link>
                       </li>
@@ -141,7 +141,7 @@ const Sidebar = () => {
               </li>
 
               <li>
-                <Link href="/">
+                <Link href="/compliance">
                   <span>Compliance</span>
                 </Link>
               </li>
