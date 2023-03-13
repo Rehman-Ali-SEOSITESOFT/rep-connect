@@ -47,7 +47,7 @@ export default function page({ params }) {
           <div className="row">
             {trainingData.map((e, idx) => {
               return (
-                <div className=" col-lg-4">
+                <div className=" col-lg-4 col-md-6 col-sm-6" key={idx}>
                   <GeneralAbsPosts
                     key={idx}
                     trainingHeading={e.trainingHeading}

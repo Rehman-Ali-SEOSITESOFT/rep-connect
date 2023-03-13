@@ -75,7 +75,7 @@ const page = () => {
           <div className="row">
             {scienceCardData.map((e, idx) => {
               return (
-                <div className="col-lg-4 col-md-4 col-sm-12" key={idx}>
+                <div className="col-lg-4 col-md-6 col-sm-6" key={idx}>
                   <ScienceCards
                     cardImage={e.cardImage.src}
                     desctitle={e.desctitle}
