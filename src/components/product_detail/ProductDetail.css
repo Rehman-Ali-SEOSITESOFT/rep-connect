@@ -318,12 +318,17 @@
   padding-top: 30px;
   border-top: 1px solid #cdcdcd;
 }
-
+.deail--product .deail--product--image {
+  padding: 2px;
+  /* border: 1px solid #2754a4; */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
 .deail--product--desc .out-of-stock {
   color: red;
 }
 .deail--product--image div:first-child {
   cursor: auto !important;
+  overflow: hidden;
 }
 @media screen and (max-width: 1025px) {
   .ProductDetail {

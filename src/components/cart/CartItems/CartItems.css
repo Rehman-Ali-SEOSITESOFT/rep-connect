@@ -1,0 +1,101 @@
+.cart--item--head th {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cart--item--head th,
+.cart--item--body td {
+  padding: 12px 6px;
+
+  line-height: 1.4;
+  background: none;
+  box-shadow: 0 0 0 0;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.08);
+  text-align: center;
+  min-width: 100px;
+}
+.cart--item--head th {
+  padding: 20px 10px;
+}
+.cart--item--head th:first-child,
+.cart--item--head th:nth-child(2),
+.cart--item--body td:nth-child(2) {
+  min-width: 32px;
+  text-align: left;
+}
+.cart--item--head th:last-child,
+.cart--item--body td:last-child {
+  min-width: 60px;
+  text-align: center;
+}
+.cart--item--body .product-thumbnail img {
+  width: 100%;
+  max-width: 70px;
+}
+
+.cart--item--body .product-quantity .quantity {
+  background-color: #fff;
+  border: 1px solid #cdcdcd87;
+  display: flex;
+  align-items: center;
+}
+
+.cart--item--body .product-quantity .quantity span {
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 0;
+  font-size: 20px;
+  display: block;
+  cursor: pointer;
+  padding: 6px 12px;
+}
+.cart--item--body .product-quantity {
+  width: 130px;
+}
+.cart--item--body .product-quantity .quantity input {
+  outline: none;
+  box-shadow: none;
+  width: 50px;
+  text-align: center;
+  height: 42px;
+  color: #777;
+  font-weight: 700;
+  border: none;
+  /* border: 1px solid; */
+  /* border-top: 0;
+  border-bottom: 0;
+  border-left: 1px solid #cdcdcd;
+  border-bottom-color: #cdcdcd;
+  border-right: 1px solid #cdcdcd;
+  border-top-color: #cdcdcd; */
+}
+
+.cart--item--body .product-remove span {
+  color: rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.cart--item--body .product-remove span:hover {
+  color: rgba(0, 0, 0, 0.8);
+  transform: rotate(180deg);
+}
+.cart--item--body .product-price .amount,
+.cart--item--body .product-subtotal .amount {
+  color: #2754a4;
+}
+
+.cart--item--body .product-name a {
+  font-size: 17px;
+  font-weight: 400;
+  color: #333333;
+  text-decoration: none;
+}
+.cart--item--body .product-name a:hover {
+  text-decoration: underline;
+}

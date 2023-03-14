@@ -11,6 +11,9 @@
   .products-shop {
     width: 70%;
   }
+  .products-shop .product_gr__items .product--gr--link img {
+    max-height: fit-content;
+  }
 }
 
 @media screen and (max-width: 768px) {

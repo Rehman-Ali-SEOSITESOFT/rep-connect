@@ -10,7 +10,7 @@ const page = () => {
       <section className={style.shop_page}>
         <div className="container-xxl">
           <div className="row">
-            <div className="col-12">
+            <div className="col-12 p-0">
               <div
                 className={`d-flex justify-content-between ${style.shop_product_wrapper}`}
               >

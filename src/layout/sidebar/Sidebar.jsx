@@ -1,14 +1,14 @@
-import Image from "next/image"
-import Link from "next/link"
-import React from "react"
-import "./sidebar.css"
-import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg"
-import myacount from "../../assets/images/side-bar-my-account-img.png"
-import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg"
-import { useSelector } from "react-redux"
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import "./sidebar.css";
+import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg";
+import myacount from "../../assets/images/side-bar-my-account-img.png";
+import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const { toggle } = useSelector((redux) => redux.menuReducer)
+  const { toggle } = useSelector((redux) => redux.menuReducer);
   return (
     <aside className={toggle ? "side--bar" : "side--bar hide"}>
       <div className="sidebar--top">
@@ -58,7 +58,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/downloadable-sales-material/orthopedic-sales-material-2/">
                       <span>Orthopedic Sales Material</span>
                     </Link>
                   </li>
@@ -211,7 +211,7 @@ const Sidebar = () => {
         </div>
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
