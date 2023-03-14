@@ -1,10 +1,19 @@
 import React from "react";
-
+import "./CartPricingDetail.css";
 const CartPricingDetail = () => {
   return (
     <>
       <div className="cart--pricing--detail">
-        <h3>Cart totals</h3>
+        <h3 className="title">Cart totals</h3>
+
+        <div className="subt--total">
+          <h5>Subtotal</h5>
+          <h5>
+            <span>
+              <bdi>$ 0.00</bdi>
+            </span>
+          </h5>
+        </div>
         <div className="cart-shpping">
           <h5>Shipping</h5>
           <h5>Free shipping</h5>

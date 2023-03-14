@@ -121,9 +121,9 @@ const CartItems = () => {
               </td>
             </tr>
           </tbody>
-          <tfoot>
+          <tfoot className="cart--item--foot">
             <tr>
-              <td>
+              <td colSpan={6}>
                 <button> Update cart</button>
               </td>
             </tr>
