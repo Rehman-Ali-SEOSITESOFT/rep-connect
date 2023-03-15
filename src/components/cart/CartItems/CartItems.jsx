@@ -73,7 +73,7 @@ const CartItems = () => {
           <tbody className="cart--item--body">
             {listItem.map((element, index) => {
               return (
-                <tr key={index}>
+                <tr key={index} className="cart--item--row">
                   <td className="product-thumbnail">
                     <Image
                       src={element.img}

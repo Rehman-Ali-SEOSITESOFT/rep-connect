@@ -196,13 +196,15 @@
   }
 }
 @media screen and (max-width: 575px) {
+  .cart--item--foot button,
   .shipping_proceed_btns .continue_shopping,
   .shipping_proceed_btns .processed_btn {
     width: 100%;
     display: block;
-    width: -moz-fit-content;
-    width: fit-content;
     padding: 8px 0;
     border-radius: 0;
+  }
+  .cart--item--foot button {
+    margin: 15px 0 0 0;
   }
 }
