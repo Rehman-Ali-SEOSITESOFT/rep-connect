@@ -4,12 +4,7 @@
   padding: 30px;
   border-radius: 8px;
 }
-.cart--pricing--detail {
-  /* background: rgba(0, 0, 0, 0.03);
-  padding: 30px;
-  border-radius: 8px; */
-  /* margin-left: 20px; */
-}
+
 .cart--pricing--detail .title {
   font-size: 21px;
   line-height: 25px;
