@@ -1,3 +1,8 @@
+.cart-items {
+  width: 75% !important;
+  padding-right: 30px;
+  height: fit-content;
+}
 .cart--item--head th {
   font-size: 13px;
   letter-spacing: 1px;
@@ -128,4 +133,108 @@
 }
 .cart--item--foot button:hover::after {
   width: 100%;
+}
+
+@media screen and (max-width: 1430px) {
+  .cart--item--head th,
+  .cart--item--body td {
+    padding: 8px 4px;
+    min-width: 70px;
+  }
+  .cart--item--head th {
+    padding: 15px 7px;
+  }
+  .cart--item--body .product-name a {
+    font-size: 15px;
+  }
+  /* .cart--item--body .product-thumbnail img {
+  } */
+}
+
+@media screen and (max-width: 1200px) {
+  .cart--item--body .product-quantity .quantity span {
+    font-size: 15px;
+  }
+  .cart--item--body .product-quantity .quantity input {
+    width: 40px;
+  }
+  .cart--item--body .product-quantity .quantity {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .cart-items {
+    width: 70% !important;
+    padding-right: 10px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .cart-items {
+    width: 100% !important;
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cart--item--foot button {
+    margin: 30px 0 0 0;
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+  .cart--item--body .product-quantity .quantity span {
+    padding: 5px 8px;
+  }
+  .cart--item--body .product-quantity .quantity input {
+    width: 35px;
+    font-size: 15px;
+    padding: 0;
+  }
+  .cart--item--body .product-quantity {
+    width: 100px;
+  }
+  .cart--item--body .product-remove span {
+    font-size: 20px;
+  }
+  .cart--item--body .product-thumbnail img {
+    max-width: 40px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .cart--item--head th {
+    display: none;
+  }
+  .cart--item--body td {
+    display: block;
+  }
+  .cart--item--body td.product-thumbnail {
+    display: none;
+  }
+
+  .cart--item--body td::before {
+    content: attr(data-title);
+    font-weight: 700;
+    float: left;
+    display: block;
+    width: 100px;
+    text-align: left;
+  }
+  .cart--item--body .product-name a {
+    display: block;
+    text-align: end;
+  }
+  .cart--item--body td {
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart--item--body .product-quantity {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

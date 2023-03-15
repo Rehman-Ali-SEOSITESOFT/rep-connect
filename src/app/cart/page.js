@@ -12,13 +12,15 @@ const page = () => {
           <div className="row">
             <div className="col-12"> Cart "+" Checkout </div>
           </div>
-          <div className="row">
-            <div className="col-8">
-              <CartItems />
-            </div>
-            <div className="col-4">
-              <CartPricingDetail />
-            </div>
+          <div
+            className={`row  justify-content-between ${style.cart_items__wrapper}`}
+          >
+            {/* <div className="col-xl-8 col-md-8 col-8"> */}
+            <CartItems />
+            {/* </div> */}
+            {/* <div className="col-xl-4 col-md-4 col-4"> */}
+            <CartPricingDetail />
+            {/* </div> */}
           </div>
         </div>
       </section>
