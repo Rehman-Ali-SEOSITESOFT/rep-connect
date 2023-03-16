@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import "./CartPricingDetail.css";
-const CartPricingDetail = () => {
+const CartPricingDetail = ({ totalPriceCart }) => {
   const [shippingAddress, setShippingAddres] = useState(false);
   const [updateShipping, setUpdateShipping] = useState({
     shipping_county: "",
@@ -22,6 +22,13 @@ const CartPricingDetail = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const TotalPrice = () => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(totalPriceCart);
+  };
   return (
     <aside className="cart-sidebar">
       <div className="cart--pricing--detail">
@@ -31,7 +38,7 @@ const CartPricingDetail = () => {
           <h5 className="sub-title">Subtotal</h5>
           <h5 className="sub-title">
             <span>
-              <bdi>$ 0.00</bdi>
+              <bdi>{TotalPrice()}</bdi>
             </span>
           </h5>
         </div>
@@ -108,7 +115,7 @@ const CartPricingDetail = () => {
           <h4 className="sub-title">Total</h4>
           <h5 className="amount">
             <span>
-              <bdi>$ 0.00</bdi>
+              <bdi>{TotalPrice()}</bdi>
             </span>
           </h5>
         </div>
