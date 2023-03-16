@@ -1,0 +1,26 @@
+.surver_btn {
+  font-family: "Poppins", sans-serif;
+
+  background-color: #d30000 !important;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 3%),
+    inset 0px 4px 3px -2px rgb(0 0 0 / 7%);
+  padding: 10px 20px;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,
+    border-color 0.1s ease-in-out;
+  margin: 0 10px 30px 0;
+  width: 100%;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+}
+.surver_btn:hover {
+  color: #ffffff;
+}

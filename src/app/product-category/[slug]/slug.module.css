@@ -1,0 +1,19 @@
+.main_category_wrapper {
+  padding: 50px 0;
+}
+
+@media screen and (max-width: 1400px) {
+  /* .main_category_wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  } */
+  .productCatagoryPage {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .main_category_wrapper {
+    flex-direction: column;
+  }
+}
