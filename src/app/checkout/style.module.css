@@ -2,10 +2,6 @@
   padding: 50px 0;
 }
 
-.checkout_form_wrapper .checkout_billing_deatil,
-.checkout_form_wrapper .checkout_order_detail {
-  width: 50%;
-}
 
 @media screen and (max-width: 1400px) {
   .checkout_page {
