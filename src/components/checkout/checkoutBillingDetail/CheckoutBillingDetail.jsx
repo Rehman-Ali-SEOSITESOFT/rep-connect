@@ -1,13 +1,56 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "./checkout.css";
 const CheckoutBillingDetail = () => {
+  const [validated, setValidated] = useState({
+    firstname: false,
+    lastname: false,
+    compnayname: false,
+    countryregion: false,
+    towncity: false,
+    statecountry: false,
+    postcode: false,
+    phone: false,
+    email: false,
+    ordernotes: false,
+  });
+  const [orderForm, setOrderForm] = useState({
+    firstname: "",
+    lastname: "",
+    compnayname: "",
+    countryregion: "",
+    towncity: "",
+    statecountry: "",
+    postcode: "",
+    phone: "",
+    email: "",
+    ordernotes: "",
+  });
+  const hanldeChange = (event) => {
+    let name = event.target.name;
+    let value = event.target.value;
+    console.log(!orderForm.firstname);
+    console.log();
+    if (!orderForm.firstname) {
+      // } else {
+      //   setValidated({ ...validated, [name]: false });
+    }
+    setOrderForm({ ...orderForm, [name]: value });
+  };
+  const hanldesubmitorder = (e) => {
+    e.preventDefault();
+    console.log(validated);
+    // if (orderForm.firstname < 3) {
+    //   setValidated({ ...validated, [name]: true });
+    // }
+  };
+
   return (
     <>
-      <form onSubmit={() => console.log("")} className="checkout--details">
+      <form onSubmit={hanldesubmitorder} className="checkout--details">
         <aside className="billing-detail">
           <div className="fullname d-flex justify-content-between">
-            <div className="form-row fullname-children">
+            <div className={`form-row fullname-children ${validated}`}>
               <label htmlFor="firstname" className="form-label">
                 First Name <span className="required">*</span>
               </label>
@@ -17,9 +60,11 @@ const CheckoutBillingDetail = () => {
                 id="firstname"
                 name="firstname"
                 placeholder="John"
+                value={orderForm.firstname}
+                onChange={hanldeChange}
               />
             </div>
-            <div className="form-row fullname-children">
+            <div className={`form-row fullname-children ${validated}`}>
               <label htmlFor="lastname" className="form-label">
                 {" "}
                 Last Name <span className="required">*</span>
@@ -30,6 +75,8 @@ const CheckoutBillingDetail = () => {
                 id="lastname"
                 name="lastname"
                 placeholder="Doe"
+                value={orderForm.lastname}
+                onChange={hanldeChange}
               />
             </div>
           </div>
@@ -43,6 +90,8 @@ const CheckoutBillingDetail = () => {
               id="compnayname"
               name="compnayname"
               placeholder="John"
+              value={orderForm.compnayname}
+              onChange={hanldeChange}
             />
           </div>
           <div className="form-row">
@@ -53,6 +102,8 @@ const CheckoutBillingDetail = () => {
               name="countryregion"
               id="countryregion"
               className="form-control"
+              value={orderForm.countryregion}
+              onChange={hanldeChange}
             >
               <option value="AF">Afghanistan</option>
               <option value="AX">Åland Islands</option>
@@ -80,6 +131,8 @@ const CheckoutBillingDetail = () => {
               name="towncity"
               id="towncity"
               placeholder="Town City"
+              value={orderForm.towncity}
+              onChange={hanldeChange}
             />
           </div>
           <div className="form-row">
@@ -90,6 +143,8 @@ const CheckoutBillingDetail = () => {
               name="statecountry"
               id="statecountry"
               className="form-control"
+              value={orderForm.statecountry}
+              onChange={hanldeChange}
             >
               <option value="AGN">Agusan del Norte</option>
               <option value="AGS">Agusan del Sur</option>
@@ -103,7 +158,7 @@ const CheckoutBillingDetail = () => {
           </div>
           <div className="form-row">
             <label htmlFor="postcode" className="form-label">
-              Postcode / ZIP <span>*</span>{" "}
+              Postcode / ZIP <span className="required">*</span>{" "}
             </label>
             <input
               type="text"
@@ -111,11 +166,13 @@ const CheckoutBillingDetail = () => {
               name="postcode"
               id="postcode"
               placeholder="Postcode / ZIP"
+              value={orderForm.postcode}
+              onChange={hanldeChange}
             />
           </div>
           <div className="form-row">
             <label htmlFor="phone" className="form-label">
-              Phone <span>*</span>
+              Phone <span className="required">*</span>
             </label>
             <input
               type="text"
@@ -123,11 +180,13 @@ const CheckoutBillingDetail = () => {
               name="phone"
               id="phone"
               placeholder="923001234567"
+              value={orderForm.phone}
+              onChange={hanldeChange}
             />
           </div>
           <div className="form-row">
             <label htmlFor="email" className="form-label">
-              Email address <span>*</span>
+              Email address <span className="required">*</span>
             </label>
             <input
               type="email"
@@ -135,12 +194,14 @@ const CheckoutBillingDetail = () => {
               name="email"
               id="email"
               placeholder="johndeo@gmail.com"
+              value={orderForm.email}
+              onChange={hanldeChange}
             />
           </div>
           <div className="form-check">
             <input
               type="checkbox"
-              class="form-check-input"
+              className="form-check-input"
               id="differentshipping"
             />
             <label className="form-check-label" htmlFor="differentshipping">
@@ -155,6 +216,8 @@ const CheckoutBillingDetail = () => {
               className="form-control"
               id="ordernotes"
               name="ordernotes"
+              value={orderForm.ordernotes}
+              onChange={hanldeChange}
             />
           </div>
         </aside>
@@ -195,7 +258,7 @@ const CheckoutBillingDetail = () => {
               <tr className="order-total foot-row">
                 <td className="total"> Total</td>
                 <td className="total-price">
-                  <strong class="amount">
+                  <strong className="amount">
                     <bdi>75.00</bdi>
                   </strong>
                 </td>
@@ -210,12 +273,8 @@ const CheckoutBillingDetail = () => {
             <p>Pay with cash upon delivery.</p>
           </div>
           <div className="order-checkout-btns">
-            <a href="" className="place-order">
-              {" "}
-              Place order
-            </a>
-            <a href="" className="return-to-cart">
-              {" "}
+            <button className="place-order"> Place order</button>
+            <a href="/shop" className="return-to-cart">
               Return to cart
             </a>
           </div>

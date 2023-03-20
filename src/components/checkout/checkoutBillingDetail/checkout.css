@@ -10,17 +10,52 @@
 
 /* BILLING DETAIL'S */
 .billing-detail .form-row input,
-.billing-detail .form-row select {
+.billing-detail .form-row select,
+.billing-detail .form-row textarea {
   padding: 10px;
   color: #777777;
   border: 1px solid;
   background-color: rgba(255, 255, 255, 1);
-  border-color: #cdcdcd;
+  border-color: #cdcdcda1;
   border-radius: 0;
   box-shadow: none;
+  margin-bottom: 0;
 }
 
-/* BILLING DETAIL'S */
+.billing-detail .form-row textarea {
+  height: 150px;
+  resize: none;
+}
+.billing-detail .form-row textarea::placeholder,
+.billing-detail .form-row input::placeholder,
+.billing-detail .form-row select::placeholder {
+  color: #777777a6;
+}
+.billing-detail .form-row textarea:focus,
+.billing-detail .form-row input:focus,
+.billing-detail .form-row select:focus {
+  color: #333333;
+  background-color: rgba(255, 248, 220, 1);
+  border-color: #1790d0;
+}
+.billing-detail .form-check {
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+.billing-detail .fullname .fullname-children {
+  width: 48%;
+}
+.billing-detail .form-row label {
+  line-height: 2;
+  margin: 10px 0;
+  font-weight: 400;
+  color: #333333;
+  font-size: 16px;
+}
+.form-row .required {
+  color: red;
+}
+/* BILLING DETAIL'S END */
 /*  CHECK OUT ORDER PRODUCT DETAIL */
 .checkout--details .your-order {
   background: rgba(0, 0, 0, 0.03);
@@ -110,6 +145,8 @@
   text-transform: capitalize;
   margin: 0 0 15px;
   position: relative;
+  width: 100%;
+  border: none;
 }
 .your-order .order-checkout-btns .return-to-cart::before,
 .your-order .order-checkout-btns .place-order::before {
