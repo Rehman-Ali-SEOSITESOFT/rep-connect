@@ -11,8 +11,7 @@
 /* BILLING DETAIL'S */
 .billing-detail .form-row input,
 .billing-detail .form-row select {
-  padding: 8px;
-  padding-left: 40px;
+  padding: 10px;
   color: #777777;
   border: 1px solid;
   background-color: rgba(255, 255, 255, 1);

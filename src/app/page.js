@@ -1,33 +1,31 @@
-"use client" // this is a client component 👈🏽
-import Image from "next/image"
-import Link from "next/link"
-import { Inter } from "next/font/google"
-import styles from "./page.module.css"
-import BreadCrum from "@/components/breadCrum/BreadCrum"
-import { useState } from "react"
-import mdx from "../assets/images/singleproductsimages/mdxhomepagepost.jpg"
-import salepiece from "../assets/images/singleproductsimages/newSaleImage.png"
-import HomePagePosts from "@/components/homePagePosts/HomePagePosts"
-import micro from "../assets/images/singleproductsimages/microgenmicro.png"
-import newAccount from "../assets/images/singleproductsimages/newaccount.png"
-import localtion from "../assets/images/singleproductsimages/map.png"
-import newSalep from "../assets/images/singleproductsimages/newsalepiece.png"
-import mba from "../assets/images/singleproductsimages/mba.png"
-import hammer from "../assets/images/singleproductsimages/rulehamer.png"
-import HomePageInsiderBtn from "@/components/homePageInsiderButton/HomePageInsiderBtn"
+"use client"; // this is a client component 👈🏽
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./page.module.css";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
+import { useState } from "react";
+import mdx from "../assets/images/singleproductsimages/mdxhomepagepost.jpg";
+import salepiece from "../assets/images/singleproductsimages/newSaleImage.png";
+import HomePagePosts from "@/components/homePagePosts/HomePagePosts";
+import micro from "../assets/images/singleproductsimages/microgenmicro.png";
+import newAccount from "../assets/images/singleproductsimages/newaccount.png";
+import localtion from "../assets/images/singleproductsimages/map.png";
+import newSalep from "../assets/images/singleproductsimages/newsalepiece.png";
+import mba from "../assets/images/singleproductsimages/mba.png";
+import hammer from "../assets/images/singleproductsimages/rulehamer.png";
+import HomePageInsiderBtn from "@/components/homePageInsiderButton/HomePageInsiderBtn";
 // import VideoPlayer from "react-video-player-extended";
-import HomeAnnouncementList from "@/components/homePageAnnouncementList/HomeAnnouncementList"
-import ann1 from "../assets/images/singleproductsimages/ann1.png"
-import ann2 from "../assets/images/singleproductsimages/ann2.png"
-import ann3 from "../assets/images/singleproductsimages/ann3.png"
-import ann4 from "../assets/images/singleproductsimages/ann4.png"
-import ann5 from "../assets/images/singleproductsimages/ann5.png"
-import Pagination from "@/components/pagination/Pagination"
+import HomeAnnouncementList from "@/components/homePageAnnouncementList/HomeAnnouncementList";
+import ann1 from "../assets/images/singleproductsimages/ann1.png";
+import ann2 from "../assets/images/singleproductsimages/ann2.png";
+import ann3 from "../assets/images/singleproductsimages/ann3.png";
+import ann4 from "../assets/images/singleproductsimages/ann4.png";
+import ann5 from "../assets/images/singleproductsimages/ann5.png";
+import Pagination from "@/components/pagination/Pagination";
 
-const inter = Inter({ subsets: ["latin"] })
 const _handleSubmitForm = (e) => {
-  e.preventDefault()
-}
+  e.preventDefault();
+};
 export default function Home() {
   const [postData, setPostData] = useState([
     {
@@ -90,7 +88,7 @@ export default function Home() {
       readmore: "Read moore",
       link: "dr-clifford-martin-consulting-requests/",
     },
-  ])
+  ]);
   const [annList, setAnnList] = useState([
     {
       image: ann1,
@@ -122,7 +120,7 @@ export default function Home() {
       date: "June 3, 2022",
       Link: "https://repconnect.blaksheepdev.com/osteodiscitis-intro-to-a-new-id-opportunity/",
     },
-  ])
+  ]);
   const [insiderButton, setInsiderButton] = useState([
     {
       title: "Customer Survey",
@@ -136,21 +134,21 @@ export default function Home() {
       title: "Conference Leads Follow-Up",
       link: "https://microgendx.quickbase.com/db/bp26g4yrf?a=nwr",
     },
-  ])
-  const [searh, setSearch] = useState("")
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState(0.7)
+  ]);
+  const [searh, setSearch] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.7);
 
   const handlePlay = () => {
-    setIsPlaying(true)
-  }
+    setIsPlaying(true);
+  };
   const handlePause = () => {
-    setIsPlaying(false)
-  }
+    setIsPlaying(false);
+  };
   const handleVolume = (value) => {
     // this.setState({ volume: value })
-    setVolume(value)
-  }
+    setVolume(value);
+  };
   return (
     <>
       <BreadCrum breadHeading="MicroGenDX Rep Connect" pageName="Home" />
@@ -218,7 +216,7 @@ export default function Home() {
               </div>
               <div>
                 {postData.map((e, idx) => {
-                  return <HomePagePosts key={idx} item={e} />
+                  return <HomePagePosts key={idx} item={e} />;
                 })}
               </div>
             </div>
@@ -248,7 +246,7 @@ export default function Home() {
                         title={e.title}
                         link={e.link}
                       />
-                    )
+                    );
                   })}
                   {/* <HomePageInsiderBtn
                     title="Customer Survey"
@@ -312,7 +310,7 @@ export default function Home() {
                             date={e.date}
                             Link={e.Link}
                           />
-                        )
+                        );
                       })}
                     </ul>
                   </div>
@@ -328,5 +326,5 @@ export default function Home() {
         </div>
       </section>
     </>
-  )
+  );
 }

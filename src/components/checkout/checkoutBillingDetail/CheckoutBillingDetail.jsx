@@ -137,7 +137,7 @@ const CheckoutBillingDetail = () => {
               placeholder="johndeo@gmail.com"
             />
           </div>
-          <div class="form-row form-check">
+          <div className="form-check">
             <input
               type="checkbox"
               class="form-check-input"

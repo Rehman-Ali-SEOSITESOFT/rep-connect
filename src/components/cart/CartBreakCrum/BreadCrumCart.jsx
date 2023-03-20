@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import "./cart_bread_crum.css";
-const BreadCrumCart = () => {
-  let addclass = window.location.pathname;
+import { usePathname, useSearchParams } from "next/navigation";
 
+const BreadCrumCart = () => {
+  let path = usePathname();
+  let addclass = path;
   return (
     <div className="cart_bread_crum">
       <nav aria-label="breadcrumb">
