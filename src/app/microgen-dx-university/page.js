@@ -6,8 +6,10 @@ import unilogo from "../../assets/images/microgendxuniversity/microgendxuniversi
 import homestudy from "../../assets/images/microgendxuniversity/at-home-study.jpg"
 import fieldride from "../../assets/images/microgendxuniversity/field-ride.jpg"
 import className from "../../assets/images/microgendxuniversity/classroom-study.jpg"
+import MicrogenDx from "@/components/microgenDxUniversity/MicrogenDxUniversity"
 import MicrogenDxUniversity from "@/components/microgenDxUniversity/MicrogenDxUniversity"
 import UniversityLinks from "@/components/universityLinks/UniversityLinks"
+import Link from "next/link"
 const page = () => {
   const [cardDetail, setCardDetail] = useState([
     {
@@ -56,6 +58,32 @@ const page = () => {
       link: "science-of-microgen-dx/",
     },
   ])
+  const [link_list,setLintList] = useState([
+    {
+      title: "Effectively Using Sales Material",
+      link: "effectively-using-sales-material/",
+    },
+    {
+      title: "Hear From Your Peers",
+      link: "hear-from-your-peers/",
+    },
+    {
+      title: "Kristie Fuller's Sales Training Presentation",
+      link: "kristie-fuller's-sales-training-presentation/",
+    },
+    {
+      title: "Rick's Roundtable Discussions",
+      link: "rick's-roundtable-discussions/",
+    },
+    {
+      title: "Sales by Specialty",
+      link: "sales-by-specialty/",
+    },
+    {
+      title: "Sales Training Presentations",
+      link: "sales-training-presentations/",
+    },
+  ])
   return (
     <>
       <section className={styless.mircoUniversity_wrapper}>
@@ -99,9 +127,11 @@ const page = () => {
               <div className={styless.general_training}>
                 <h3>General Training</h3>
                 <ul>
-                  {trainingLinks.map((e, idx) => {
-                    return <UniversityLinks key={idx} item={e} />
-                  })}
+                  {
+                    trainingLinks.map((e, idx) => {
+                      return <UniversityLinks key={idx} item={e} />
+                    })
+                  }
                 </ul>
               </div>
             </div>
@@ -109,8 +139,15 @@ const page = () => {
               <div className={styless.sales_focussed}>
                 <h3>Sales Focussed Training</h3>
                 <ul>
+                  {/* {
+                    link_list.map((e,id)=>{
+                      return(
+                        <li key={id}> <Link href={`/microgen-university/${e.link}`} >{e.title}</Link>  </li>
+                      )
+                    })
+                  } */}
                   <li>
-                    <a href="#">Effectively Using Sales Material</a>
+                  <Link href={`/microgen-university/${link_list[0].link}`}> {link_list[0].title} </Link>
                   </li>
                   <li>
                     <a href="#">Hear From Your Peers</a>
@@ -125,7 +162,7 @@ const page = () => {
                     <a href="#">Sales by Specialty</a>
                   </li>
                   <li>
-                    <a href="#">Sales Training Presentations</a>
+                  <Link href="/sales-training"> {link_list[5].title} </Link>
                   </li>
                 </ul>
               </div>
@@ -141,7 +178,7 @@ const page = () => {
                     <a href="#">MicroGenDX Minute</a>
                   </li>
                   <li>
-                    <a href="#">Using the MDX Lab Portal</a>
+                    <Link href="/using-the-mdx-lab-portal">Using the MDX Lab Portal</Link>
                   </li>
                   <li>
                     <a href="#">Webinars</a>

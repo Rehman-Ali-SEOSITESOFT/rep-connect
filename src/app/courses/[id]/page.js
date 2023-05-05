@@ -13,7 +13,6 @@ export default function page({ params }) {
       image: business,
     },
   ])
-  
   let { id } = params
   return (
     <>

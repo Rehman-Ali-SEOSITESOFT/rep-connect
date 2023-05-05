@@ -8,9 +8,9 @@ import img4 from "../../assets/images/download-category/ABD-Labs-General-0131-Ic
 import img2 from "../../assets/images/download-category/ABD-Labs-Urology-0132-Icon.png";
 import img3 from "../../assets/images/download-category/COVIDFLURSV-Pediatrics-0177-Icon.png";
 import dynamic from "next/dynamic";
-const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
-  ssr: false,
-});
+// const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
+//   ssr: false,
+// });
 
 const ProductDetail = (props) => {
   const [qty, setQty] = useState(1);

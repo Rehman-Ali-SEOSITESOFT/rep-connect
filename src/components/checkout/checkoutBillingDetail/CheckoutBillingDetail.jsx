@@ -2,283 +2,510 @@
 import React, { useState } from "react";
 import "./checkout.css";
 const CheckoutBillingDetail = () => {
+  const [err, setErr] = useState([]);
+  const [address, setAddress] = useState(false)
   const [validated, setValidated] = useState({
     firstname: false,
+    ship_firstname: false,
     lastname: false,
-    compnayname: false,
+    ship_lastname: false,
+    // compnayname: false,
     countryregion: false,
+    ship_countryregion: false,
     towncity: false,
+    ship_towncity: false,
     statecountry: false,
+    ship_statecountry: false,
     postcode: false,
+    ship_postcode: false,
     phone: false,
     email: false,
-    ordernotes: false,
+    // ordernotes: false,
   });
   const [orderForm, setOrderForm] = useState({
     firstname: "",
+    ship_firstname: "",
     lastname: "",
+    ship_lastname: "",
     compnayname: "",
+    ship_companyname: "",
     countryregion: "",
+    ship_countryregion: "",
     towncity: "",
+    ship_towncity: "",
     statecountry: "",
+    ship_statecountry: "",
     postcode: "",
+    ship_postcode: "",
     phone: "",
     email: "",
     ordernotes: "",
   });
   const hanldeChange = (event) => {
-    let name = event.target.name;
-    let value = event.target.value;
-    console.log(!orderForm.firstname);
-    console.log();
-    if (!orderForm.firstname) {
-      // } else {
-      //   setValidated({ ...validated, [name]: false });
-    }
+    const { name, value } = event.target;
     setOrderForm({ ...orderForm, [name]: value });
+    if (value.trim().length == 0) {
+      setValidated({ ...validated, [name]: true });
+      // setInputError({ ...inputError, [name]: `${name} can not be empty` });
+    } else if (value.trim().length > 0) {
+      // console.log("Check")
+      // setInputError('');
+      setValidated({ ...validated, [name]: false });
+    }
   };
   const hanldesubmitorder = (e) => {
     e.preventDefault();
-    console.log(validated);
-    // if (orderForm.firstname < 3) {
-    //   setValidated({ ...validated, [name]: true });
-    // }
+    let error = [];
+    let updatedObject = { ...validated };
+
+    for (const key in orderForm) {
+      // console.log("Key:", key)
+      // else {
+      if (!orderForm[key]) {
+        if (key == 'ordernotes' || key == 'compnayname' || key == 'ship_companyname') {
+          console.log("iff")
+        }
+        else {
+          if (address === true) {
+            // console.log("ship to another address");
+            updatedObject[key] = true;
+            error.push(`${key} can not be empty`)
+          }
+          else {
+            if (key == 'ship_firstname' || key == 'ship_lastname' || key == 'ship_companyname' || key == 'ship_countryregion' || key == 'ship_towncity' || key == 'ship_statecountry' || key == 'ship_postcode') {
+
+            }
+            else {
+              // console.log("ship to my address address");
+              updatedObject[key] = true;
+              error.push(`${key} can not be empty`)
+            }
+          }
+        }
+      }
+      // }
+    }
+    setErr(error);
+    setValidated(updatedObject);
+  };
+  const handleCheckboxChange = (event) => {
+    setAddress(event.target.checked);
   };
 
   return (
     <>
       <form onSubmit={hanldesubmitorder} className="checkout--details">
-        <aside className="billing-detail">
-          <div className="fullname d-flex justify-content-between">
-            <div className={`form-row fullname-children ${validated}`}>
-              <label htmlFor="firstname" className="form-label">
-                First Name <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="firstname"
-                name="firstname"
-                placeholder="John"
-                value={orderForm.firstname}
-                onChange={hanldeChange}
-              />
-            </div>
-            <div className={`form-row fullname-children ${validated}`}>
-              <label htmlFor="lastname" className="form-label">
-                {" "}
-                Last Name <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="lastname"
-                name="lastname"
-                placeholder="Doe"
-                value={orderForm.lastname}
-                onChange={hanldeChange}
-              />
-            </div>
+        <div className="row main-row">
+          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            {
+              err.length > 0 ?
+                <div className="error-details">
+                  <div className="icon">
+                    <i className="fa-solid fa-triangle-exclamation"></i>
+                  </div>
+                  <div className="error-list">
+                    {
+                      err.map((err, index) => {
+                        return (
+                          <div key={index}>
+                            <div>
+                              <li key={index}>
+                                {err}
+                              </li>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                </div>
+                : ""
+            }
           </div>
-          <div className="form-row">
-            <label htmlFor="compnayname" className="form-label">
-              Company name (optional)
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="compnayname"
-              name="compnayname"
-              placeholder="John"
-              value={orderForm.compnayname}
-              onChange={hanldeChange}
-            />
+          <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <aside className="billing-detail">
+              <div className="fullname d-flex justify-content-between">
+                <div className={`form-row fullname-children`}>
+                  <label htmlFor="firstname" className="form-label">
+                    First Name <span className="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${validated.firstname ? "invalid" : ""}`}
+                    id="firstname"
+                    name="firstname"
+                    placeholder="John"
+                    value={orderForm.firstname}
+                    onChange={hanldeChange}
+                  />
+                  {validated.firstname ? <div style={{ color: 'red' }}>First Name can not be empty</div> : ""}
+                </div>
+                <div className={`form-row fullname-children ${validated}`}>
+                  <label htmlFor="lastname" className="form-label">
+                    {" "}
+                    Last Name <span className="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${validated.lastname ? "invalid" : ""}`}
+                    id="lastname"
+                    name="lastname"
+                    placeholder="Doe"
+                    value={orderForm.lastname}
+                    onChange={hanldeChange}
+                  />
+                  {validated.lastname ? <div style={{ color: 'red' }}>Last Name can not be empty</div> : ""}
+                </div>
+              </div>
+              <div className="form-row">
+                <label htmlFor="compnayname" className="form-label">
+                  Company name (optional)
+                </label>
+                <input
+                  type="text"
+                  className={`form-control ${validated.compnayname ? "invalid" : ""}`}
+                  id="compnayname"
+                  name="compnayname"
+                  placeholder="John"
+                  value={orderForm.compnayname}
+                  onChange={hanldeChange}
+                />
+                {validated.compnayname ? <div style={{ color: 'red' }}>Company Name can not be empty</div> : ""}
+              </div>
+              <div className="form-row">
+                <label htmlFor="countryregion" className="form-label">
+                  Country / Region <span className="required">*</span>
+                </label>
+                <select
+                  name="countryregion"
+                  id="countryregion"
+                  className={`form-control ${validated.countryregion ? "invalid" : ""}`}
+                  value={orderForm.countryregion}
+                  onChange={hanldeChange}
+                >
+                  <option value="AF">Afghanistan</option>
+                  <option value="AX">Åland Islands</option>
+                  <option value="AL">Albania</option>
+                  <option value="DZ">Algeria</option>
+                  <option value="AS">American Samoa</option>
+                  <option value="AD">Andorra</option>
+                  <option value="AO">Angola</option>
+                  <option value="AI">Anguilla</option>
+                  <option value="AQ">Antarctica</option>
+                  <option value="AG">Antigua and Barbuda</option>
+                  <option value="AR">Argentina</option>
+                  <option value="AM">Armenia</option>
+                  <option value="AW">Aruba</option>
+                  <option value="AU">Australia</option>
+                </select>
+                {validated.countryregion ? <div style={{ color: 'red' }}>Country Name can not be empty</div> : ""}
+              </div>
+              <div className="form-row">
+                <label htmlFor="towncity">
+                  Town / City <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  className={`form-control ${validated.towncity ? "invalid" : ""}`}
+                  name="towncity"
+                  id="towncity"
+                  placeholder="Town City"
+                  value={orderForm.towncity}
+                  onChange={hanldeChange}
+                />
+                {validated.towncity ? <div style={{ color: 'red' }}>Town/City Name can not be empty</div> : ""}
+              </div>
+              <div className="form-row">
+                <label htmlFor="statecountry">
+                  State / Country <span className="required">*</span>
+                </label>
+                <select
+                  name="statecountry"
+                  id="statecountry"
+                  className={`form-control ${validated.statecountry ? "invalid" : ""}`}
+                  value={orderForm.statecountry}
+                  onChange={hanldeChange}
+                >
+                  <option value="AGN">Agusan del Norte</option>
+                  <option value="AGS">Agusan del Sur</option>
+                  <option value="AKL">Aklan</option>
+                  <option value="ALB">Albay</option>
+                  <option value="ANT">Antique</option>
+                  <option value="APA">Apayao</option>
+                  <option value="AUR">Aurora</option>
+                  <option value="BAS">Basilan</option>
+                </select>
+                {validated.statecountry ? <div style={{ color: 'red' }}>State/Country can not be empty</div> : ""}
+              </div>
+              <div className="form-row">
+                <label htmlFor="postcode" className="form-label">
+                  Postcode / ZIP <span className="required">*</span>{" "}
+                </label>
+                <input
+                  type="text"
+                  className={`form-control ${validated.postcode ? "invalid" : ""}`}
+                  name="postcode"
+                  id="postcode"
+                  placeholder="Postcode / ZIP"
+                  value={orderForm.postcode}
+                  onChange={hanldeChange}
+                />
+                {validated.postcode ? <div style={{ color: 'red' }}>Post Code can not be empty</div> : ""}
+              </div>
+              <div className="form-row">
+                <label htmlFor="phone" className="form-label">
+                  Phone <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  className={`form-control ${validated.phone ? "invalid" : ""}`}
+                  name="phone"
+                  id="phone"
+                  placeholder="923001234567"
+                  value={orderForm.phone}
+                  onChange={hanldeChange}
+                />
+                {validated.phone ? <div style={{ color: 'red' }}>Phone can not be empty</div> : ""}
+              </div>
+              <div className="form-row">
+                <label htmlFor="email" className="form-label">
+                  Email address <span className="required">*</span>
+                </label>
+                <input
+                  type="email"
+                  className={`form-control ${validated.email ? "invalid" : ""}`}
+                  name="email"
+                  id="email"
+                  placeholder="johndeo@gmail.com"
+                  value={orderForm.email}
+                  onChange={hanldeChange}
+                />
+                {validated.email ? <div style={{ color: 'red' }}>Email can not be empty</div> : ""}
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="differentshipping"
+                  onChange={handleCheckboxChange}
+                />
+                <label className="form-check-label" htmlFor="differentshipping">
+                  Ship to a different address?
+                </label>
+              </div>
+              {
+                address ? <div>
+                  <div className="fullname d-flex justify-content-between">
+                    <div className={`form-row fullname-children`}>
+                      <label htmlFor="firstname" className="form-label">
+                        First Name <span className="required">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className={`form-control ${validated.ship_firstname ? "invalid" : ""}`}
+                        id="firstname"
+                        name="ship_firstname"
+                        placeholder="John"
+                        value={orderForm.ship_firstname}
+                        onChange={hanldeChange}
+                      />
+                      {validated.ship_firstname && address ? <div style={{ color: 'red' }}>First Name can not be empty</div> : ""}
+                    </div>
+                    <div className={`form-row fullname-children ${validated}`}>
+                      <label htmlFor="lastname" className="form-label">
+                        {" "}
+                        Last Name <span className="required">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className={`form-control ${validated.ship_lastname ? "invalid" : ""}`}
+                        id="lastname"
+                        name="ship_lastname"
+                        placeholder="Doe"
+                        value={orderForm.ship_lastname}
+                        onChange={hanldeChange}
+                      />
+                      {validated.ship_lastname && address ? <div style={{ color: 'red' }}>Last Name can not be empty</div> : ""}
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="compnayname" className="form-label">
+                      Company name (optional)
+                    </label>
+                    <input
+                      type="text"
+                      className={`form-control ${validated.ship_companyname ? "invalid" : ""}`}
+                      id="compnayname"
+                      name="ship_companyname"
+                      placeholder="John"
+                      value={orderForm.ship_companyname}
+                      onChange={hanldeChange}
+                    />
+                    {validated.ship_companyname && address ? <div style={{ color: 'red' }}>Company Name can not be empty</div> : ""}
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="countryregion" className="form-label">
+                      Country / Region <span className="required">*</span>
+                    </label>
+                    <select
+                      name="ship_countryregion"
+                      id="countryregion"
+                      className={`form-control ${validated.ship_countryregion ? "invalid" : ""}`}
+                      value={orderForm.ship_countryregion}
+                      onChange={hanldeChange}
+                    >
+                      <option value="AF">Afghanistan</option>
+                      <option value="AX">Åland Islands</option>
+                      <option value="AL">Albania</option>
+                      <option value="DZ">Algeria</option>
+                      <option value="AS">American Samoa</option>
+                      <option value="AD">Andorra</option>
+                      <option value="AO">Angola</option>
+                      <option value="AI">Anguilla</option>
+                      <option value="AQ">Antarctica</option>
+                      <option value="AG">Antigua and Barbuda</option>
+                      <option value="AR">Argentina</option>
+                      <option value="AM">Armenia</option>
+                      <option value="AW">Aruba</option>
+                      <option value="AU">Australia</option>
+                    </select>
+                    {validated.ship_countryregion && address ? <div style={{ color: 'red' }}>Country Name can not be empty</div> : ""}
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="towncity">
+                      Town / City <span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className={`form-control ${validated.ship_towncity ? "invalid" : ""}`}
+                      name="ship_towncity"
+                      id="towncity"
+                      placeholder="Town City"
+                      value={orderForm.ship_towncity}
+                      onChange={hanldeChange}
+                    />
+                    {validated.ship_towncity && address ? <div style={{ color: 'red' }}>Town/City Name can not be empty</div> : ""}
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="statecountry">
+                      State / Country <span className="required">*</span>
+                    </label>
+                    <select
+                      name="ship_towncity"
+                      id="statecountry"
+                      className={`form-control ${validated.ship_towncity ? "invalid" : ""}`}
+                      value={orderForm.ship_statecountry}
+                      onChange={hanldeChange}
+                    >
+                      <option value="AGN">Agusan del Norte</option>
+                      <option value="AGS">Agusan del Sur</option>
+                      <option value="AKL">Aklan</option>
+                      <option value="ALB">Albay</option>
+                      <option value="ANT">Antique</option>
+                      <option value="APA">Apayao</option>
+                      <option value="AUR">Aurora</option>
+                      <option value="BAS">Basilan</option>
+                    </select>
+                    {validated.ship_statecountry && address ? <div style={{ color: 'red' }}>State/Country can not be empty</div> : ""}
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="postcode" className="form-label">
+                      Postcode / ZIP <span className="required">*</span>{" "}
+                    </label>
+                    <input
+                      type="text"
+                      className={`form-control ${validated.ship_postcode ? "invalid" : ""}`}
+                      name="ship_postcode"
+                      id="postcode"
+                      placeholder="Postcode / ZIP"
+                      value={orderForm.ship_postcode}
+                      onChange={hanldeChange}
+                    />
+                    {validated.ship_postcode && address ? <div style={{ color: 'red' }}>Post Code can not be empty</div> : ""}
+                  </div>
+                </div>
+
+                  : ""
+              }
+              <div className="form-row">
+                <label htmlFor="ordernotes">Order notes (optional)</label>
+                <textarea
+                  type="text"
+                  placeholder="Notes about your order, e.g. special notes for delivery."
+                  className="form-control"
+                  id="ordernotes"
+                  name="ordernotes"
+                  value={orderForm.ordernotes}
+                  onChange={hanldeChange}
+                />
+                {validated.ordernotes ? <div style={{ color: 'red' }}>Notes can not be empty</div> : ""}
+              </div>
+            </aside>
           </div>
-          <div className="form-row">
-            <label htmlFor="countryregion" className="form-label">
-              Country / Region <span className="required">*</span>
-            </label>
-            <select
-              name="countryregion"
-              id="countryregion"
-              className="form-control"
-              value={orderForm.countryregion}
-              onChange={hanldeChange}
-            >
-              <option value="AF">Afghanistan</option>
-              <option value="AX">Åland Islands</option>
-              <option value="AL">Albania</option>
-              <option value="DZ">Algeria</option>
-              <option value="AS">American Samoa</option>
-              <option value="AD">Andorra</option>
-              <option value="AO">Angola</option>
-              <option value="AI">Anguilla</option>
-              <option value="AQ">Antarctica</option>
-              <option value="AG">Antigua and Barbuda</option>
-              <option value="AR">Argentina</option>
-              <option value="AM">Armenia</option>
-              <option value="AW">Aruba</option>
-              <option value="AU">Australia</option>
-            </select>
+
+          <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+
+            <aside className="your-order">
+              <table className="w-100 table-wrapper">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="product-name">
+                      <span className="product-id">AFB Test Service </span>
+                      <strong className="product-quantity"> × 1</strong>
+                    </td>
+                    <td className="product-total">
+                      <span className="amount">
+                        <bdi>0.00</bdi>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr className="foot-row">
+                    <td className="cart-subtotal-title"> Subtotal</td>
+                    <td className="subtotal-price">
+                      <span className="amount">
+                        <bdi>0.00</bdi>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="foot-row">
+                    <td className="shipping"> Shipping</td>
+                    <td className="free-shipping">Free shipping</td>
+                  </tr>
+                  <tr className="order-total foot-row">
+                    <td className="total"> Total</td>
+                    <td className="total-price">
+                      <strong className="amount">
+                        <bdi>75.00</bdi>
+                      </strong>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+              <div className="cash-on-delivery">
+                <span className="checked-icon">
+                  <i className="fa-solid fa-check"></i>
+                </span>
+                <p>Cash on delivery</p>
+                <p>Pay with cash upon delivery.</p>
+              </div>
+              <div className="order-checkout-btns">
+                <button className="place-order"> Place order</button>
+                <a href="/shop" className="return-to-cart">
+                  Return to cart
+                </a>
+              </div>
+            </aside>
           </div>
-          <div className="form-row">
-            <label htmlFor="towncity">
-              Town / City <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="towncity"
-              id="towncity"
-              placeholder="Town City"
-              value={orderForm.towncity}
-              onChange={hanldeChange}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="statecountry">
-              State / County <span className="required">*</span>
-            </label>
-            <select
-              name="statecountry"
-              id="statecountry"
-              className="form-control"
-              value={orderForm.statecountry}
-              onChange={hanldeChange}
-            >
-              <option value="AGN">Agusan del Norte</option>
-              <option value="AGS">Agusan del Sur</option>
-              <option value="AKL">Aklan</option>
-              <option value="ALB">Albay</option>
-              <option value="ANT">Antique</option>
-              <option value="APA">Apayao</option>
-              <option value="AUR">Aurora</option>
-              <option value="BAS">Basilan</option>
-            </select>
-          </div>
-          <div className="form-row">
-            <label htmlFor="postcode" className="form-label">
-              Postcode / ZIP <span className="required">*</span>{" "}
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="postcode"
-              id="postcode"
-              placeholder="Postcode / ZIP"
-              value={orderForm.postcode}
-              onChange={hanldeChange}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="phone" className="form-label">
-              Phone <span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="phone"
-              id="phone"
-              placeholder="923001234567"
-              value={orderForm.phone}
-              onChange={hanldeChange}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="email" className="form-label">
-              Email address <span className="required">*</span>
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              name="email"
-              id="email"
-              placeholder="johndeo@gmail.com"
-              value={orderForm.email}
-              onChange={hanldeChange}
-            />
-          </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="differentshipping"
-            />
-            <label className="form-check-label" htmlFor="differentshipping">
-              Ship to a different address?
-            </label>
-          </div>
-          <div className="form-row">
-            <label htmlFor="ordernotes">Order notes (optional)</label>
-            <textarea
-              type="text"
-              placeholder="Notes about your order, e.g. special notes for delivery."
-              className="form-control"
-              id="ordernotes"
-              name="ordernotes"
-              value={orderForm.ordernotes}
-              onChange={hanldeChange}
-            />
-          </div>
-        </aside>
-        <aside className="your-order">
-          <table className="w-100 table-wrapper">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="product-name">
-                  <span className="product-id">AFB Test Service </span>
-                  <strong className="product-quantity"> × 1</strong>
-                </td>
-                <td className="product-total">
-                  <span className="amount">
-                    <bdi>0.00</bdi>
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr className="foot-row">
-                <td className="cart-subtotal-title"> Subtotal</td>
-                <td className="subtotal-price">
-                  <span className="amount">
-                    <bdi>0.00</bdi>
-                  </span>
-                </td>
-              </tr>
-              <tr className="foot-row">
-                <td className="shipping"> Shipping</td>
-                <td className="free-shipping">Free shipping</td>
-              </tr>
-              <tr className="order-total foot-row">
-                <td className="total"> Total</td>
-                <td className="total-price">
-                  <strong className="amount">
-                    <bdi>75.00</bdi>
-                  </strong>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-          <div className="cash-on-delivery">
-            <span className="checked-icon">
-              <i className="fa-solid fa-check"></i>
-            </span>
-            <p>Cash on delivery</p>
-            <p>Pay with cash upon delivery.</p>
-          </div>
-          <div className="order-checkout-btns">
-            <button className="place-order"> Place order</button>
-            <a href="/shop" className="return-to-cart">
-              Return to cart
-            </a>
-          </div>
-        </aside>
+        </div>
       </form>
     </>
   );
