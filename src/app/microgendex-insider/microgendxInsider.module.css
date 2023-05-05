@@ -9,4 +9,157 @@
 .right_side_aside h3 {
   font-size: 18px;
   line-height: 22px;
+  color: #1790d0;
+  font-weight: 300;
+}
+.recentPostSection ul {
+  padding-left: 0px;
+}
+.recentPostSection ul li {
+  list-style-type: none;
+}
+.viewAllPosts a {
+  background-color: #08bfde !important;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03),
+    inset 0px 4px 3px -2px rgba(0, 0, 0, 0.07);
+  display: inline-block;
+  position: relative;
+  padding: 10px 20px;
+  font-size: inherit;
+  overflow: hidden;
+  text-decoration: none !important;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+.viewAllPosts a:hover:after {
+  width: 100%;
+  color: #ffffff;
+}
+.viewAllPosts a:hover {
+  color: white;
+}
+.viewAllPosts a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  transition: width 0.2s ease-in-out;
+  color: white;
+}
+.viewAllPosts {
+  padding-top: 30px;
+}
+.image_wrapper .image_ {
+  position: relative;
+  transition: all 0.3s;
+}
+.image_wrapper .image_:hover {
+  transform: translateY(-20px);
+}
+.like_section {
+  position: relative;
+  padding: 20px 0px;
+}
+.like_section .likebtn::after,
+.like_section .isNotLiked:after {
+  content: "";
+  display: block;
+  background-image: url("../../assets/images/singleproductsimages/likes.svg");
+  background-size: contain;
+  width: 16px;
+  background-repeat: no-repeat;
+  height: 16px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  transition: width 0.2s ease-in-out;
+}
+.like_section .isNotLiked:after {
+  filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg)
+    brightness(100%) contrast(111%);
+}
+
+.like_section .likebtn:hover:after {
+  width: 100%;
+}
+.like_section .likebtn,
+.like_section .isNotLiked {
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 0.25em;
+  box-shadow: none;
+  padding: 16px 20px;
+  border: none;
+  text-align: center;
+  transition: none;
+  cursor: pointer;
+}
+.like_section .likes_number {
+  position: relative;
+  border-radius: 0.25em;
+  font-size: 12px;
+  text-decoration: none;
+  background-color: #fff;
+  margin-left: 8px;
+  line-height: 28px;
+  display: inline-block;
+  padding: 0 10px;
+  box-shadow: 0 0 0 1px #bdbdbd inset;
+  color: #616161;
+  vertical-align: middle;
+  text-align: center;
+}
+.like_section .likes_number::after {
+  content: "";
+  position: absolute;
+  border: 1px solid transparent;
+  background: #fff;
+  border-bottom-color: #bdbdbd;
+  left: -5px;
+  top: 50%;
+  border-left-color: #bdbdbd;
+  transform: rotate(45deg) translatey(-50%);
+  width: 5px;
+  height: 5px;
+  margin: 0;
+}
+.insiderSubPageWrapper .para_section_ {
+  margin-top: 30px;
+}
+.insiderSubPageWrapper .para_section_ p {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 21px;
+  color: #333;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+@media screen and (max-width: 768px) {
+  .recentPostSection ul {
+    margin-bottom: 0px;
+  }
+  .viewAllPosts {
+    padding-top: 20px;
+  }
+  .insiderSubPageWrapper .para_section_ {
+    margin-top: 20px;
+  }
+
+  .insiderSubPageWrapper .para_section_ p {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
 }

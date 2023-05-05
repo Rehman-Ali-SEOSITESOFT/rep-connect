@@ -1,7 +1,8 @@
 import Link from "next/link"
 import React, { useState } from "react"
 import "./CourseContent.css"
-const CourseContent = () => {
+const CourseContent = (props) => {
+  const { links } = props
   const [toogle, settoogle] = useState(false)
   const _handleToogle = () => {
     settoogle(!toogle)
@@ -100,7 +101,7 @@ const CourseContent = () => {
         </div>
         <div className="simple_list">
           <div className="list">
-            <Link href="#">
+            <Link href={{ pathname: `/${links}` }}>
               <div className="circle"></div>
               <p className="discription">Techonology PPT</p>
             </Link>

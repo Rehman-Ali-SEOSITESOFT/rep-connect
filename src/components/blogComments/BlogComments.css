@@ -128,16 +128,21 @@
   font-weight: 400;
   color: #333333;
   line-height: 21px;
+  margin-bottom: 0px;
 }
 @media screen and (max-width: 768px) {
   .comment_wrapper_detail .user_detail_section_wrapper {
     padding-left: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   .image_comment img {
     width: 34px;
     height: 32px;
     border-radius: 50%;
     overflow: hidden;
+  }
+  .user_commented {
+    font-size: 14px;
+    line-height: 20px;
   }
 }

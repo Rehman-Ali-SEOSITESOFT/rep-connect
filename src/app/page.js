@@ -250,46 +250,13 @@ export default function Home() {
                       />
                     )
                   })}
-                  {/* <HomePageInsiderBtn
-                    title="Customer Survey"
-                    link="https://airtable.com/shrQBdi4M4bj5Ch2U "
-                  />
-                  <HomePageInsiderBtn
-                    title="Physician Consulting Agreement"
-                    link="https://airtable.com/shr35R1fL083YmR54"
-                  />
-                  <HomePageInsiderBtn
-                    title="Conference Leads Follow-Up"
-                    link="https://microgendx.quickbase.com/db/bp26g4yrf?a=nwr"
-                  /> */}
                 </div>
                 <div className={styles.media_video}>
                   <h3>
                     MicroGenDX Minute – Ep.5: Why is MicroGenDX Vital to the
                     Clearing of Chronic UTIs??
                   </h3>
-                  <div className="video_section">
-                    {/* <VideoPlayer
-                      url="../../public/video.mp4"
-                      isPlaying={isPlaying}
-                      volume={volume}
-                      onPlay={handlePlay}
-                      onPause={handlePause}
-                      onVolume={handleVolume}
-                      width="100%"
-                      height="170px"
-                      type="video/mp4"
-                    /> */}
-                    {/* <ReactPlayer
-                      className="react-player"
-                      url={url}
-                      // controls={true}
-                      config={config}
-                      width={width}
-                      height={height}
-                      type="video/youtube"
-                    /> */}
-                  </div>
+                  <div className="video_section"></div>
                 </div>
                 <div className={styles.question_section}>
                   <a href="#">

@@ -63,15 +63,13 @@ const page = () => {
     <>
       <section className={styles.microInsider_wrapper}>
         <div className="container-xxl">
-          <div className="row">
-            {micrognInsider.map((e, idx) => {
-              return (
-                <div className={`row ${styles.row_margin}`} key={idx}>
-                  <MicrogendxInsiderComponent items={e} key={idx} />
-                </div>
-              )
-            })}
-          </div>
+          {micrognInsider.map((e, idx) => {
+            return (
+              <div className={`row ${styles.row_margin}`} key={idx}>
+                <MicrogendxInsiderComponent items={e} />
+              </div>
+            )
+          })}
         </div>
       </section>
     </>

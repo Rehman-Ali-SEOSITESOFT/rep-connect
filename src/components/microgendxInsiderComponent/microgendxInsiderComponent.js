@@ -4,7 +4,7 @@ import "./microgendxInsiderComponent.css"
 const MicrogendxInsiderComponent = ({ items }) => {
   return (
     <>
-      <div className="col-lg-5">
+      <div className="col-lg-4 col-md-4 col-sm-12">
         <div className="insider_image_wrapper ">
           <Link href="#">
             <div className="mask"></div>
@@ -20,7 +20,7 @@ const MicrogendxInsiderComponent = ({ items }) => {
           </div>
         </div>
       </div>
-      <div className="col-lg-7">
+      <div className="col-lg-8 col-md-8 col-sm-12">
         <div className="insider_content_content">
           <h2>
             <Link href={{ pathname: `/microgendex-insider/${items.link}` }}>
