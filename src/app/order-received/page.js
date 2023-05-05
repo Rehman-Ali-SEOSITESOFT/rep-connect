@@ -1,23 +1,30 @@
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import BreadCrumCart from "@/components/cart/CartBreakCrum/BreadCrumCart";
-import CheckoutBillingDetail from "@/components/checkout/checkoutBillingDetail/CheckoutBillingDetail";
-
 import React from "react";
 import style from "./style.module.css";
 const page = () => {
   return (
     <>
-      <BreadCrum breadHeading="Checkout" pageName="Home" subPage="Checkout" />
-      <section className={style.checkout_page}>
+      <BreadCrum
+        breadHeading="Order Received"
+        subPage="Order Received"
+        pageName="Home"
+      />
+      <section className={style.order_recived}>
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
               <BreadCrumCart />
             </div>
           </div>
-          <div className={"row mt-5"}>
-            <div className="col-12 p-0">
-              <CheckoutBillingDetail />
+        </div>
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col-12">
+              <p>
+                Hi, we have received your order. We will validate the order and
+                will take necessary steps to move forward.
+              </p>
             </div>
           </div>
         </div>
