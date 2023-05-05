@@ -14,6 +14,7 @@ import Footer from "@/layout/footer/footer";
 import img from "./favicon21.png";
 import Image from "next/image";
 
+
 export default function RootLayout({ children }) {
   return (
     <Provider store={store}>

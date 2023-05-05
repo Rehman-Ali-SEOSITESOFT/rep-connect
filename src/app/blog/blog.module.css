@@ -157,7 +157,6 @@
 .commentArea textarea {
   border-radius: 0px;
   margin-bottom: 10px;
-  resize: none;
 }
 .commentArea textarea:focus {
   outline: 0 !important;

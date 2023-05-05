@@ -20,9 +20,9 @@ const HomePagePosts = ({ item, index }) => {
               <a href="#">
                 <i className="fa-solid fa-magnifying-glass"></i>
               </a>
-              <a href="#">
+              <Link href={{ pathname: `/blog/${item.link}` }}>
                 <i className="fa-solid fa-link"></i>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="post_details_section">
@@ -45,7 +45,7 @@ const HomePagePosts = ({ item, index }) => {
           </div>
           <div className="read_more">
             <i className="fa-solid fa-book"></i>
-            <a href="#">{item.readmore}</a>
+            <Link href={{ pathname: `/blog/${item.link}` }}>{item.readmore}</Link>
           </div>
         </div>
       </div>

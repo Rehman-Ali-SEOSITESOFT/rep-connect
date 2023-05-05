@@ -16,7 +16,7 @@ const page = () => {
             </div>
           </div>
           <div className={"row mt-5"}>
-            <div className="col-12 p-0">
+            <div className="col-12 p-0" >
               <CheckoutBillingDetail />
             </div>
           </div>

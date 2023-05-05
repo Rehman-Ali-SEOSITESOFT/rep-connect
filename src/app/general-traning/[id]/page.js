@@ -2,8 +2,10 @@
 import GeneralAbsPosts from "@/components/generalAbsPosts/GeneralAbsPosts"
 import { useState } from "react"
 import styless from "../style.module.css"
+import BreadCrum from "@/components/breadCrum/BreadCrum"
 export default function page({ params }) {
   let { id } = params
+  console.log("Params", id)
   const [trainingData, setTrainingData] = useState([
     {
       trainingHeading: "Sulfonamides",
@@ -42,6 +44,7 @@ export default function page({ params }) {
   return (
     <>
       {/* <h3>{id}</h3> */}
+      <BreadCrum  breadHeading={id} pageName="Home" subPage={`${id}`}/>
       <section className={styless.training_wrapper_}>
         <div className="container-xxl">
           <div className="row">

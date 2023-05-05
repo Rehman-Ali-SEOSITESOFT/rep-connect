@@ -20,7 +20,6 @@ import comment3 from "../../../assets/images/singleproductsimages/comment3.png"
 import BreadCrum from "@/components/breadCrum/BreadCrum"
 export default function page({ params }) {
   let { id } = params
-
   const [formData, setFormData] = useState({
     commentDetail: "",
   })
@@ -110,7 +109,7 @@ export default function page({ params }) {
 
   return (
     <>
-      <BreadCrum breadHeading={id} pageName="Home" subPage="Announcements" />
+      <BreadCrum breadHeading={id} pageName="Home" subPage={`${id}`} />
       <section className={styless.main_blog_wrappper}>
         <div className="container-xxl">
           <div className="row justify-content-center">
@@ -166,9 +165,9 @@ export default function page({ params }) {
               <div className={styless.liked_by_people}>
                 {likes.map((e, idx) => {
                   return (
-                    <>
-                      <LikedBypeople key={idx} img={e.img} />
-                    </>
+                    <div key={idx}>
+                      <LikedBypeople  img={e.img} />
+                    </div>
                   )
                 })}
               </div>
@@ -180,16 +179,16 @@ export default function page({ params }) {
                 <h3>3 Comments</h3>
                 {comments.map((e, idx) => {
                   return (
-                    <>
+                    <div key={idx}>
                       <BlogComments
-                        key={idx}
+                        
                         userIcon={e.userIcon}
                         usertitle={e.usertitle}
                         dates={e.dates}
                         para={e.para}
                         isLiked
                       />
-                    </>
+                    </div>
                   )
                 })}
               </div>
