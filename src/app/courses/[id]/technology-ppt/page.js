@@ -46,7 +46,7 @@ const Technology_ppt = () => {
                     </span>
                 </div>
                 <div>
-                    <button className={styles.status_btn}> Mark Complete and proceed  <i class="fa-solid fa-check"></i></button>
+                    <button className={styles.status_btn}> Mark Complete and proceed  <i className="fa-solid fa-check"></i></button>
                 </div>
             </div>
         </section>

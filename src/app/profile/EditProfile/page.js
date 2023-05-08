@@ -23,7 +23,7 @@ const EditProfile = () => {
         email: "",
     })
     const handleIcon = (value) => {
-    
+
         console.log("value:", changeIcon[value])
         const newArray = [...changeIcon];
         for (let i = 0; i < newArray.length; i++) {
@@ -40,6 +40,7 @@ const EditProfile = () => {
         setUserProfile({
             ...userProfile[e.target.name] = e.target.value
         })
+        console.log("res", e.target)
     }
     useEffect(() => {
         console.log("UseEffect Is Running")
@@ -92,7 +93,7 @@ const EditProfile = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-8 col-md-12 p-1">
-                                                        <input  className={`w-100 ${styles.input}`} />
+                                                        <input className={`w-100 ${styles.input}`} />
                                                     </div>
                                                 </div>
                                                 <div className={`row ${styles.profile_row}`}>
@@ -121,7 +122,7 @@ const EditProfile = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-8 col-md-12 p-2">
-                                                        <input  onChange={handleChange} value={userProfile.firstName}  name="firstName" className={`w-100 ${styles.input}`} />
+                                                        <input onChange={handleChange} value={userProfile.firstName} name="firstName" className={`w-100 ${styles.input}`} />
                                                     </div>
                                                 </div>
                                                 <div className={`row ${styles.profile_row}`}>
@@ -131,7 +132,7 @@ const EditProfile = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-8 col-md-12 p-2">
-                                                        <input  onChange={handleChange} value={userProfile.lastName}  name="lastName" className={`w-100 ${styles.input}`} />
+                                                        <input onChange={handleChange} value={userProfile.lastName} name="lastName" className={`w-100 ${styles.input}`} />
                                                     </div>
                                                 </div>
                                                 <div className={`row ${styles.profile_row}`}>
@@ -142,7 +143,7 @@ const EditProfile = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-8 col-md-12 p-2">
-                                                        <textarea  onChange={handleChange} value={userProfile.bioGraphy} name='bioGraphy' rows="6" className={`w-100 ${styles.textarea01}`} />
+                                                        <textarea onChange={handleChange} value={userProfile.bioGraphy} name='bioGraphy' rows="6" className={`w-100 ${styles.textarea01}`} />
                                                     </div>
                                                 </div>
                                                 <div className={`row ${styles.profile_row}`}>
@@ -152,10 +153,24 @@ const EditProfile = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-8 col-md-12 p-2" >
-                                                        <input type="radio"  onChange={handleChange} value={userProfile.gender}  id="html" name="Male" className={styles.radio_input} />
+                                                        <div className={styles.gender_area}>
+                                                            <div className="form-check">
+                                                                <input className="form-check-input" type="radio" name="gender" id="exampleRadios1" value={userProfile.gender} checked={userProfile.gender === 'Male'} onChange={handleChange} />
+                                                                <label className="form-check-label" htmlFor="exampleRadios1">
+                                                                    Male
+                                                                </label>
+                                                            </div>
+                                                            <div className="form-check">
+                                                                <input className="form-check-input" type="radio" name="gender" id="exampleRadios2" value={userProfile.gender} checked={userProfile.gender === 'Female'} onChange={handleChange} />
+                                                                <label className="form-check-label" htmlFor="exampleRadios2">
+                                                                    Female
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        {/* <input type="radio"  onChange={handleChange} value={userProfile.gender}  id="html" name="Male" className={styles.radio_input} />
                                                         <label htmlFor="male"  className={styles.radio_label}>Male</label>
                                                         <input type="radio"  onChange={handleChange} value={userProfile.gender} name="Female" id="html"  className={styles.radio_input} />
-                                                        <label htmlFor="Female" className={styles.radio_label}>Female</label><br />
+                                                        <label htmlFor="Female" className={styles.radio_label}>Female</label><br /> */}
                                                     </div>
                                                 </div>
                                                 <div className={`row ${styles.profile_row}`}>
@@ -168,7 +183,7 @@ const EditProfile = () => {
                                                     <div className="col-lg-8 col-md-12 p-2">
                                                         <div>
                                                             <div>
-                                                                <select className={`w-100 ${styles.input}`}  onChange={handleChange} value={userProfile.country} name="country" >
+                                                                <select className={`w-100 ${styles.input}`} onChange={handleChange} value={userProfile.country} name="country" >
                                                                     <option defaultValue="selected">Select</option>
                                                                     <option value="Afghanistan">Afghanistan</option>
                                                                     <option value="Albania">Albania</option>
@@ -513,7 +528,7 @@ const EditProfile = () => {
                                                     <div className="col-lg-8 col-md-12 p-2">
                                                         <div>
                                                             <div>
-                                                                <input  onChange={handleChange} value={userProfile.fb} name="fb" className={`w-100 ${styles.input}`} />
+                                                                <input onChange={handleChange} value={userProfile.fb} name="fb" className={`w-100 ${styles.input}`} />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -543,7 +558,7 @@ const EditProfile = () => {
                                                     <div className="col-lg-8 col-md-12 p-2">
                                                         <div>
                                                             <div>
-                                                                <input  onChange={handleChange} value={userProfile.google} className={`w-100 ${styles.input}`} />
+                                                                <input onChange={handleChange} value={userProfile.google} name="google" className={`w-100 ${styles.input}`} />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -551,14 +566,14 @@ const EditProfile = () => {
                                                 <div className={`row ${styles.profile_row}`}>
                                                     <div className="col-lg-4 col-md-12 p-2">
                                                         <div className={styles.profilePic}>
-                                                            <div className={styles.camIcon}><i class="fa-solid fa-house"></i> </div>
+                                                            <div className={styles.camIcon}><i className="fa-solid fa-house"></i> </div>
                                                             <div className={styles.iconLabel}> Website(URL) </div>
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-8 col-md-12 p-2">
                                                         <div>
                                                             <div>
-                                                                <input className={`w-100 ${styles.input}`} />
+                                                                <input onChange={handleChange} value={userProfile.website} name="website" className={`w-100 ${styles.input}`} />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -583,13 +598,13 @@ const EditProfile = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-8 col-md-12 p-2">
-                                                        <input className={`w-100 ${styles.input}`} />
+                                                        <input onChange={handleChange} value={userProfile.website} name="website" className={`w-100 ${styles.input}`} />
                                                     </div>
                                                 </div>
                                                 <div className={`row ${styles.profile_row}`}>
                                                     <div className="col-lg-4 col-md-12 p-2">
                                                         <div className={styles.profilePic}>
-                                                            <div className={styles.camIcon}><i class="fa-regular fa-envelope"></i> </div>
+                                                            <div className={styles.camIcon}><i className="fa-regular fa-envelope"></i> </div>
                                                             <div className={styles.iconLabel}> E-mail Address </div>
                                                         </div>
                                                     </div>
@@ -615,7 +630,7 @@ const EditProfile = () => {
                                                         <div>
                                                             <div className={`${styles.tickIcon}`}>
                                                                 <input className={`w-100 ${styles.tickIcon} ${styles.input}`} />
-                                                                <span className={`${styles.tickIcon01}`}> <i class="fa-solid fa-check"></i> </span>
+                                                                <span className={`${styles.tickIcon01}`}> <i className="fa-solid fa-check"></i> </span>
                                                             </div>
                                                         </div>
                                                     </div>
