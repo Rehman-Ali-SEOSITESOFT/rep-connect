@@ -37,9 +37,11 @@ const EditProfile = () => {
         setChangeIcon(newArray);
     }
     const handleChange = (e) => {
+
         setUserProfile({
-            ...userProfile[e.target.name] = e.target.value
+            ...userProfile, [e.target.name]: e.target.value
         })
+
         console.log("res", e.target)
     }
     useEffect(() => {
@@ -47,7 +49,7 @@ const EditProfile = () => {
     }, [])
     const handleProfileSubmit = (e) => {
         e.preventDefault();
-        console.log("asdfgadfsg", userProfile.firstName)
+        console.log("asdfgadfsg", userProfile)
     }
     return (
         <section>
@@ -155,13 +157,13 @@ const EditProfile = () => {
                                                     <div className="col-lg-8 col-md-12 p-2" >
                                                         <div className={styles.gender_area}>
                                                             <div className="form-check">
-                                                                <input className="form-check-input" type="radio" name="gender" id="exampleRadios1" value={userProfile.gender} checked={userProfile.gender === 'Male'} onChange={handleChange} />
+                                                                <input className="form-check-input" type="radio" name="gender" id="exampleRadios1" value="Male" checked={userProfile.gender === 'Male'} onChange={handleChange} />
                                                                 <label className="form-check-label" htmlFor="exampleRadios1">
                                                                     Male
                                                                 </label>
                                                             </div>
                                                             <div className="form-check">
-                                                                <input className="form-check-input" type="radio" name="gender" id="exampleRadios2" value={userProfile.gender} checked={userProfile.gender === 'Female'} onChange={handleChange} />
+                                                                <input className="form-check-input" type="radio" name="gender" id="exampleRadios2" value="Female" checked={userProfile.gender === 'Female'} onChange={handleChange} />
                                                                 <label className="form-check-label" htmlFor="exampleRadios2">
                                                                     Female
                                                                 </label>

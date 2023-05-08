@@ -10,7 +10,7 @@ const page = () => {
     })
     const handleChange = (e) => {
         setUser({
-            ...setUser[e.target.name] = e.target.value
+            ...setUser,[e.target.name] : e.target.value
         })
     }
     const handleSubmit=(event)=>{
