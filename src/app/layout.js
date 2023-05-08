@@ -13,9 +13,10 @@ import { store } from "@/redux/store";
 import Footer from "@/layout/footer/footer";
 import img from "./favicon21.png";
 import Image from "next/image";
-
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
+  const path = usePathname();
   return (
     <Provider store={store}>
       <html lang="en">
@@ -43,9 +44,18 @@ export default function RootLayout({ children }) {
         </head>
         <body>
           <main className="microgen_dx">
-            <Sidebar />
+            {path === "/employee-connect" || path === "/login" ? null : (
+              <Sidebar />
+            )}
+
             <Header />
-            <div className="main--content--wrapper">
+            <div
+              className={
+                path === "/employee-connect" || path === "/login"
+                  ? "container-fulid"
+                  : "main--content--wrapper"
+              }
+            >
               {children}
               <Footer />
             </div>
