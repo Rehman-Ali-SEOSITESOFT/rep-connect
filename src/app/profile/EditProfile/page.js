@@ -90,9 +90,11 @@ const EditProfile = () => {
                     >
                       {changeIcon[0] ? (
                         <div className={styles.icons}>
+                          {" "}
                           <span>
+                            {" "}
                             <i className="fa-solid fa-angle-right"></i>{" "}
-                          </span>
+                          </span>{" "}
                         </div>
                       ) : (
                         <div className={styles.icons}>
@@ -115,8 +117,9 @@ const EditProfile = () => {
                             Profile Display Name
                             <span>
                               <span>
+                                {" "}
                                 <Image src={help} alt="logo" />{" "}
-                              </span>
+                              </span>{" "}
                             </span>
                           </div>
                         </div>
