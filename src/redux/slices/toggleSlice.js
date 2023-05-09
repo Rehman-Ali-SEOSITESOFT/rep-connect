@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initial = {
-  loading: false,
-  product: [],
+  toggle: false,
 };
 
 export const toggleSlice = createSlice({
@@ -13,7 +12,6 @@ export const toggleSlice = createSlice({
       state.toggle = !state.toggle;
     },
   },
-  extraReducers: {},
 });
 
 export const { toggleMenu } = toggleSlice.actions;

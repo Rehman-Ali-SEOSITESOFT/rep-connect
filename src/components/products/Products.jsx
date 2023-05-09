@@ -11,104 +11,78 @@ import gitest from "../../assets/images/products/gi-pcr.jpg";
 import hpv from "../../assets/images/products/mensKEY-provider-22.jpg";
 import marsa from "../../assets/images/products/mrsa-test-service.jpg";
 import "./products.css";
-import { useProduct } from "@/hooks/product";
+import { useDispatch, useSelector } from "react-redux";
+import { product } from "@/redux/slices/productSlice";
 
 const Products = () => {
-  const [productItems, setProductItems] = useState([
-    {
-      name: "90mL Urine Collection Cup",
-      img: ml90,
-    },
-    {
-      name: "AFB Test Service",
-      img: afb,
-    },
-    {
-      name: "Basic STI Panel",
-      img: basic,
-    },
-    {
-      name: "Blood Test Service",
-      img: blood,
-    },
-    {
-      name: "COVID+FLU Test Service",
-      img: covid,
-    },
-    {
-      name: "Explant Breast Evaluation Test Service",
-      img: explant,
-    },
-    {
-      name: "Full STI Panel",
-      img: afb,
-    },
-    {
-      name: "GI Test Service",
-      img: gitest,
-    },
-    {
-      name: "HPV Panel",
-      img: hpv,
-    },
-    {
-      name: "HSV Panel",
-      img: afb,
-    },
-    {
-      name: "MensKEY Complete (Urine + Semen)",
-      img: afb,
-    },
-    {
-      name: "MRSA | PCR Only",
-      img: marsa,
-    },
-  ]);
-  const product = useProduct();
-  console.log(product);
+  // const [productItems, setProductItems] = useState([
+  //   {
+  //     name: "90mL Urine Collection Cup",
+  //     img: ml90,
+  //   },
+  //   {
+  //     name: "AFB Test Service",
+  //     img: afb,
+  //   },
+  //   {
+  //     name: "Basic STI Panel",
+  //     img: basic,
+  //   },
+  //   {
+  //     name: "Blood Test Service",
+  //     img: blood,
+  //   },
+  //   {
+  //     name: "COVID+FLU Test Service",
+  //     img: covid,
+  //   },
+  //   {
+  //     name: "Explant Breast Evaluation Test Service",
+  //     img: explant,
+  //   },
+  //   {
+  //     name: "Full STI Panel",
+  //     img: afb,
+  //   },
+  //   {
+  //     name: "GI Test Service",
+  //     img: gitest,
+  //   },
+  //   {
+  //     name: "HPV Panel",
+  //     img: hpv,
+  //   },
+  //   {
+  //     name: "HSV Panel",
+  //     img: afb,
+  //   },
+  //   {
+  //     name: "MensKEY Complete (Urine + Semen)",
+  //     img: afb,
+  //   },
+  //   {
+  //     name: "MRSA | PCR Only",
+  //     img: marsa,
+  //   },
+  // ]);
+  const state = useSelector((state) => {
+    return state.product;
+  });
 
   return (
     <div className="products-shop">
       <div className="container-xxl">
         <div className="row">
-          {productItems.map((item, index) => {
-            return (
-              <ProductItem item={item} key={index} />
-              // <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 product__item">
-              //   <div className="product_gr__items">
-              //     <a
-              //       href={`/product-detail/testingid`}
-              //       className="product--gr--link"
-              //     >
-              //       <Image src={item.img} alt="product" className="img-fluid" />
-              //       <div className="product_overlay_mask"></div>
-              //       {loadging && (
-              //         <div className="product--loadig--style">
-              //           <div className="loading"></div>
-              //         </div>
-              //       )}
-              //     </a>
-              //     <div className="product_links">
-              //       {loadging ? (
-              //         <span>
-              //           <div className="product-loader"></div>
-              //         </span>
-              //       ) : (
-              //         <span onClick={hanldeAddToCart}>
-              //           <i className="fa-solid fa-cart-shopping"></i>
-              //         </span>
-              //       )}
-              //       <a href={`/product-detail/${linkTesing}`}>
-              //         <i className="fa-solid fa-link"></i>
-              //       </a>
-              //     </div>
-              //   </div>
-              //   <div className="product--gr--title">
-              //     <a href={`/product-detail/${linkTesing}`}>{item.name}</a>
-              //   </div>
-              // </div>
-            );
-          })}
+          {state.loading ? (
+            <h1>Loading</h1>
+          ) : (
+            state.data.map((item, index) => {
+              return <ProductItem item={item} key={index} />;
+            })
+          )}
+          {/* {productItems.map((item, index) => {
+            return <ProductItem item={item} key={index} />;
+          })} */}
         </div>
       </div>
     </div>
