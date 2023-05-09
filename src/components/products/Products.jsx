@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "../categoryproducts/ProductItem/ProductItem";
 import ml90 from "../../assets/images/products/90mL-Urine-Collection-Cup-800x800.png";
 import afb from "../../assets/images/products/afb-sputum-4.jpg";
@@ -11,6 +11,8 @@ import gitest from "../../assets/images/products/gi-pcr.jpg";
 import hpv from "../../assets/images/products/mensKEY-provider-22.jpg";
 import marsa from "../../assets/images/products/mrsa-test-service.jpg";
 import "./products.css";
+import { useProduct } from "@/hooks/product";
+
 const Products = () => {
   const [productItems, setProductItems] = useState([
     {
@@ -62,6 +64,9 @@ const Products = () => {
       img: marsa,
     },
   ]);
+  const product = useProduct();
+  console.log(product);
+
   return (
     <div className="products-shop">
       <div className="container-xxl">

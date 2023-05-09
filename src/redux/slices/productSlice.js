@@ -1,19 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initial = {
-  loading: false,
-  product: [],
+  toggle: false,
 };
 
 export const toggleSlice = createSlice({
-  name: "productslice",
+  name: "toggleslice",
   initialState: initial,
   reducers: {
     toggleMenu: (state) => {
       state.toggle = !state.toggle;
     },
   },
-  extraReducers: {},
 });
 
 export const { toggleMenu } = toggleSlice.actions;
