@@ -143,7 +143,7 @@ const EmployeeConnect = () => {
                         <div className="col-4">
                           <label className="lable">
                             <span className="icon">
-                              <i className="fa-solid fa-lock"></i>{" "}
+                              <i className="fa-solid fa-lock"></i>
                             </span>
                             password
                           </label>
@@ -189,8 +189,8 @@ const EmployeeConnect = () => {
                         Login
                       </button>
                       <button className="account_btn">
-                        {" "}
-                        create an Account{" "}
+                        
+                        create an Account
                       </button>
                     </div>
                   </div>
