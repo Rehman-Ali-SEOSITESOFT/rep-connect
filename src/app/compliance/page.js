@@ -9,8 +9,16 @@ const page = () => {
     <>
       <BreadCrum
         breadHeading="MicroGenDX Compliance Training"
-        pageName="home"
-        subPage="MicroGenDX Compliance Training"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "MicroGenDX Compliance Training",
+            link: "/",
+          },
+        ]}
       />
       <section className={style.compliance_page}>
         <div className="container-xxl">

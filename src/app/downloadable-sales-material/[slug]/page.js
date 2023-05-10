@@ -29,7 +29,13 @@ const Page = ({ params }) => {
   };
   return (
     <>
-      <BreadCrum breadHeading={headingname} pageName={headingname} />
+      <BreadCrum
+        breadHeading={headingname}
+        pagess={[
+          { page: "Home", link: "/" },
+          { page: slug, link: "/" },
+        ]}
+      />
       <section className={style.download_wrapper}>
         <div className="container-xxl">
           <form className={style.form_fitler} onSubmit={hanldeSubmit}>

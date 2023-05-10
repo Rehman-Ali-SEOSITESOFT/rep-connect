@@ -20,37 +20,53 @@
   } */
 
 
-.accordion-button:not(.collapsed) {
-  color: inherit;
-  background-color: white;
+  .accordion-button:not(.collapsed) {
+    color: inherit;
+    background-color: white;
+    
+  }
   
-}
-
-.accordion__sho .accord_btn:not(.collapsed) {
-  color: #1790d0 !important;
-  padding: 14px 14px 14px 60px;
- 
-  position: relative;
-  border-width: 0;
-  border-style: solid;
-  cursor: pointer;
-  background: #f9f9f9;
-  /* background-color: ; */
-}
-
-/* .acc_btn {
-   color: inherit !important;
-  background-color: white !important;
-} */
-
-.accord_btn {
-  color: inherit !important;
-  background-color: white !important;
-  font-size: 13px;
-  font-weight: 700;
-  box-shadow: inset 0px 4px 3px -2px rgba(0, 0, 0, .04) !important;
-}
-
-.accordion-item {
-  margin-bottom: 15px;
-}
+  
+  .accordion__sho .accord_btn {
+    background-color: #f9f9f9 !important;
+    box-shadow: inset 0px 4px 3px -2px rgba(0,0,0,.04) !important;
+  }
+  
+  .accordion__sho .accord_btn:not(.collapsed) {
+    color: #1790d0 !important;
+    padding: 14px 14px 14px 60px;
+    background-color: white !important;
+    position: relative;
+    border-width: 0;
+    border-style: solid;
+    cursor: pointer;
+    background-color: #f9f9f9 !important;
+    box-shadow: inset 0px 4px 3px -2px rgba(0,0,0,.04) !important;
+    /* background-color: ; */
+  }
+  
+  /* .acc_btn {
+     color: inherit !important;
+    background-color: white !important;
+  } */
+  
+  
+  
+  .accord_btn {
+    color: inherit !important;
+    background-color: white !important;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: inset 0px 4px 3px -2px rgba(0, 0, 0, .04) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+  }
+  
+  .accord_btn:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .accordion-item {
+    margin-bottom: 15px;
+  }

@@ -15,6 +15,7 @@ const page = ({ params }) => {
     error: "",
     success: "",
   });
+  const [name, setName] = useState(null);
   const hanldeGetSingleProduct = () => {
     fetch(`${process.env.NEXT_PUBLIC_URL}api/product/${id}`)
       .then((resp) => {
@@ -30,6 +31,7 @@ const page = ({ params }) => {
             data: data.data.product,
             success: data.message,
           });
+          setName(data.data.product.name);
         }
       });
   };
@@ -40,7 +42,13 @@ const page = ({ params }) => {
 
   return (
     <>
-      <BreadCrum breadHeading="Shop" pageName="GI Test Service" />
+      <BreadCrum
+        breadHeading="Shop"
+        pagess={[
+          { page: "Home", link: "/" },
+          { page: name, link: "/" },
+        ]}
+      />
       <section className={style.product_deail_page}>
         <div className="container-xxl">
           <div className="row">

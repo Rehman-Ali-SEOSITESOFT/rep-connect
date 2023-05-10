@@ -1,16 +1,18 @@
-"use client"
-import Image from "next/image"
-import React, { useState } from "react"
-import styless from "./university.module.css"
-import unilogo from "../../assets/images/microgendxuniversity/microgendxuniversity.png"
-import homestudy from "../../assets/images/microgendxuniversity/at-home-study.jpg"
-import fieldride from "../../assets/images/microgendxuniversity/field-ride.jpg"
-import className from "../../assets/images/microgendxuniversity/classroom-study.jpg"
-import MicrogenDx from "@/components/microgenDxUniversity/MicrogenDxUniversity"
-import MicrogenDxUniversity from "@/components/microgenDxUniversity/MicrogenDxUniversity"
-import UniversityLinks from "@/components/universityLinks/UniversityLinks"
+"use client";
+import Image from "next/image";
+import React, { useState } from "react";
+import styless from "./university.module.css";
+import unilogo from "../../assets/images/microgendxuniversity/microgendxuniversity.png";
+import homestudy from "../../assets/images/microgendxuniversity/at-home-study.jpg";
+import fieldride from "../../assets/images/microgendxuniversity/field-ride.jpg";
+import className from "../../assets/images/microgendxuniversity/classroom-study.jpg";
+import MicrogenDx from "@/components/microgenDxUniversity/MicrogenDxUniversity";
+import MicrogenDxUniversity from "@/components/microgenDxUniversity/MicrogenDxUniversity";
+import UniversityLinks from "@/components/universityLinks/UniversityLinks";
 import Link from "next/link";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
 import withAuth from "@/utils/auth"
+
 const page = () => {
   const [cardDetail, setCardDetail] = useState([
     {
@@ -28,7 +30,7 @@ const page = () => {
       card_heading: "classroom",
       link: "classroom-training-103/",
     },
-  ])
+  ]);
   const [trainingLinks, setGeneralLinks] = useState([
     {
       title: "Basic Training",
@@ -58,8 +60,8 @@ const page = () => {
       title: "Science of MicroGenDX",
       link: "science-of-microgen-dx/",
     },
-  ])
-  const [link_list,setLintList] = useState([
+  ]);
+  const [link_list, setLintList] = useState([
     {
       title: "Effectively Using Sales Material",
       link: "effectively-using-sales-material/",
@@ -84,9 +86,22 @@ const page = () => {
       title: "Sales Training Presentations",
       link: "sales-training-presentations/",
     },
-  ])
+  ]);
   return (
     <>
+      <BreadCrum
+        breadHeading="MicroGenDX University"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "MicroGenDX University",
+            link: "/",
+          },
+        ]}
+      />
       <section className={styless.mircoUniversity_wrapper}>
         <div className="container-xxl">
           <div className="row">
@@ -113,7 +128,7 @@ const page = () => {
                 <div className="col-lg-4 col-md-4 col-sm-12">
                   <MicrogenDxUniversity key={idx} item={e} />
                 </div>
-              )
+              );
             })}
           </div>
           <div className="row">
@@ -128,11 +143,9 @@ const page = () => {
               <div className={styless.general_training}>
                 <h3>General Training</h3>
                 <ul>
-                  {
-                    trainingLinks.map((e, idx) => {
-                      return <UniversityLinks key={idx} item={e} />
-                    })
-                  }
+                  {trainingLinks.map((e, idx) => {
+                    return <UniversityLinks key={idx} item={e} />;
+                  })}
                 </ul>
               </div>
             </div>
@@ -148,7 +161,10 @@ const page = () => {
                     })
                   } */}
                   <li>
-                  <Link href={`/microgen-university/${link_list[0].link}`}> {link_list[0].title} </Link>
+                    <Link href={`/microgen-university/${link_list[0].link}`}>
+                      {" "}
+                      {link_list[0].title}{" "}
+                    </Link>
                   </li>
                   <li>
                     <a href="#">Hear From Your Peers</a>
@@ -163,7 +179,7 @@ const page = () => {
                     <a href="#">Sales by Specialty</a>
                   </li>
                   <li>
-                  <Link href="/sales-training"> {link_list[5].title} </Link>
+                    <Link href="/sales-training"> {link_list[5].title} </Link>
                   </li>
                 </ul>
               </div>
@@ -179,7 +195,9 @@ const page = () => {
                     <a href="#">MicroGenDX Minute</a>
                   </li>
                   <li>
-                    <Link href="/using-the-mdx-lab-portal">Using the MDX Lab Portal</Link>
+                    <Link href="/using-the-mdx-lab-portal">
+                      Using the MDX Lab Portal
+                    </Link>
                   </li>
                   <li>
                     <a href="#">Webinars</a>
@@ -191,7 +209,7 @@ const page = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
 export default withAuth(page);
