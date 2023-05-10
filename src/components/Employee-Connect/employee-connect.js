@@ -23,34 +23,29 @@ const EmployeeConnect = () => {
                     <div className="col-4">
                       <label className="lable">
                         <span className="icon">
-                          {" "}
-                          <i className="fa-solid fa-user"></i>{" "}
-                        </span>{" "}
-                        username or E-mail{" "}
+                          <i className="fa-solid fa-user"></i>
+                        </span>
+                        username or E-mail
                       </label>
                     </div>
                     <div className="col-8">
                       <div className="input_area">
-                        {" "}
-                        <input className="input w-100" />{" "}
+                        <input className="input w-100" />
                       </div>
                     </div>
                   </div>
                   <div className="row text">
                     <div className="col-4">
                       <label className="lable">
-                        {" "}
                         <span className="icon">
-                          {" "}
-                          <i className="fa-solid fa-lock"></i>{" "}
+                          <i className="fa-solid fa-lock"></i>
                         </span>
-                        password{" "}
+                        password
                       </label>
                     </div>
                     <div className="col-8">
                       <div className="input_area">
-                        {" "}
-                        <input className="input w-100" />{" "}
+                        <input className="input w-100" />
                       </div>
                     </div>
                   </div>
