@@ -97,7 +97,7 @@ const Header = () => {
               <li> Rep Connect Home </li>
               <li onClick={hanldeCollapse} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup01" aria-controls="navbarNavAltMarkup01" aria-expanded="false" aria-label="Toggle navigation">
                 <div className="header-collapse">
-                  <div> Sales Representative <span> <i class="fa-solid fa-caret-right"></i> </span> </div>
+                  <div> Sales Representative <span> <i className="fa-solid fa-caret-right"></i> </span> </div>
                   <div>
                     {
                       collapse ? <i className="fa-solid fa-plus"></i> : <i className="fa-solid fa-minus"></i>

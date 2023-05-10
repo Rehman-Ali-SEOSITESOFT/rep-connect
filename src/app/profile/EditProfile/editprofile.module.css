@@ -291,4 +291,10 @@
   .photooo{
     left: 15%;
   }
+  
+}
+
+.gender_area {
+    display: flex;
+    justify-content: space-around;
 }
