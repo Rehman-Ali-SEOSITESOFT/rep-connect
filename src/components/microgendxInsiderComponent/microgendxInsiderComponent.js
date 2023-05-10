@@ -1,6 +1,7 @@
 import Link from "next/link"
 import React from "react"
 import "./microgendxInsiderComponent.css"
+import Pagination from "../pagination/Pagination"
 const MicrogendxInsiderComponent = (props) => {
   // console.log("props:", props)
   return (
@@ -41,6 +42,7 @@ const MicrogendxInsiderComponent = (props) => {
           </div>
         </div>
       </div>
+     
     </>
   )
 }

@@ -5,8 +5,8 @@
     max-width: 500px;
     padding:15px 10px;
     z-index: 11111111;
-    position: fixed
-
+    position: fixed;
+    top: 200px;
 }
 .overlay {
     position: fixed;

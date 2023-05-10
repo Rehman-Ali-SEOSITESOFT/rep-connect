@@ -1,162 +1,177 @@
-"use client"
-import React, { useEffect, useState } from "react"
-import Image from "next/image"
-import Member from "../../../assets/images/Profile/member.png"
-import styles from "./editprofile.module.css"
-import help from "../../../assets/images/Profile/help.png"
-import axios from "axios"
-import WebCam from "@/components/webCam/WebCam"
-import WebCamera from "@/components/webCam/WebCam"
+"use client";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import Member from "../../../assets/images/Profile/member.png";
+import styles from "./editprofile.module.css";
+import help from "../../../assets/images/Profile/help.png";
+import axios from "axios";
+import WebCam from "@/components/webCam/WebCam";
+import WebCamera from "@/components/webCam/WebCam";
 
 const EditProfile = () => {
+const [getImage, setGetImage] = useState("");
+const [base64Image, setBase64Image] = useState("");
+const [userProfile, setUserProfile] = useState({
+  first_name: "",
+  last_name: "",
+  bioGraphy: "",
+  gender: "",
+  country: "",
+  facebook_page: "",
+  twitter: "",
+  mobile: "",
+  website: "",
+  mobile: "",
+  email: "",
+});
+const [entries, setEntries] = useState([]);
+const [changeIcon, setChangeIcon] = useState([false, false, false]);
+const [images, setImages] = useState([]);
+const [active, setActive] = useState(false);
+const _handleChangeInputs = (e) => {
+  setActive(!active);
+  setTimeout(() => {
+    setActive(false);
+  }, 3000);
+};
 
-  const [userProfile, setUserProfile] = useState({
-    first_name: "",
-    last_name: "",
-    bioGraphy: "",
-    gender: "",
-    country: "",
-    facebook_page: "",
-    twitter: "",
-    mobile: "",
-    website: "",
-    mobile: "",
-    email: "",
-  })
-  const [entries, setEntries] = useState([])
-  const [changeIcon, setChangeIcon] = useState([false, false, false])
-  const [images, setImages] = useState([])
-  const [active, setActive] = useState(false)
-  const _handleChangeInputs = (e) => {
-    setActive(!active)
-    setTimeout(() => {
-      setActive(false)
-    }, 3000)
-  }
-  console.log(active)
-  const [input, setInput] = useState({
-    password: "",
-    confirmPassword: "",
-  })
-  const [error, setError] = useState({
-    password: "",
-    confirmPassword: "",
-  })
-  const onInputChange = (e) => {
-    const { name, value } = e.target
-    setInput((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-    validateInput(e)
-  }
-  // const [changeClass, setChangeClass] = useState([false, false, false]);
-  const newArray = [false, false, false]
-  const handleProfileSubmit = (e) => {
-    e.preventDefault()
-    // console.log("asdfgadfsg", userProfile.firstName)
-  }
-  const handleIcon = (value) => {
-    console.log("value:", changeIcon[value])
-    const newArray = [...changeIcon]
-    for (let i = 0; i < newArray.length; i++) {
-      if (i === value) {
-        newArray[i] = !newArray[i]
-      } else {
-        newArray[i] = false
-      }
+const [input, setInput] = useState({
+  password: "",
+  confirmPassword: "",
+});
+const [error, setError] = useState({
+  password: "",
+  confirmPassword: "",
+});
+const onInputChange = (e) => {
+  const { name, value } = e.target;
+  setInput((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+  validateInput(e);
+};
+// const [changeClass, setChangeClass] = useState([false, false, false]);
+const newArray = [false, false, false];
+const handleProfileSubmit = (e) => {
+  e.preventDefault();
+};
+const handleIcon = (value) => {
+  const newArray = [...changeIcon];
+  for (let i = 0; i < newArray.length; i++) {
+    if (i === value) {
+      newArray[i] = !newArray[i];
+    } else {
+      newArray[i] = false;
     }
-    setChangeIcon(newArray)
   }
-  const handleChange = (e) => {
-    setEntries({
-      ...setUserProfile,
-      [e.target.name]: e.target.value,
+  setChangeIcon(newArray);
+};
+const handleChange = (e) => {
+  setEntries({
+    ...setUserProfile,
+    [e.target.name]: e.target.value,
+  });
+};
+const [userToken, setUserToken] = useState("");
+useEffect(() => {
+  setUserToken(JSON.parse(localStorage.getItem("token")));
+  const header = {
+    "x-auth-token": userToken,
+    "Content-Type": "application/json",
+  };
+
+  axios
+    .get("https://anxious-foal-shift.cyclic.app/api/user/getSingleUser", {
+      headers: header,
     })
-  }
-  const [userToken, setUserToken] = useState("")
-  useEffect(() => {
-    setUserToken(JSON.parse(localStorage.getItem("token")))
-    const header = {
-      "x-auth-token": userToken,
-      "Content-Type": "application/json",
-    }
-
-    axios
-      .get("https://anxious-foal-shift.cyclic.app/api/user/getSingleUser", {
-        headers: header,
-      })
-      .then((resp) => {
-        setEntries(resp.data.data[0])
-      })
-      .catch((err) => console.log(err))
-  }, [userToken])
-const [isRendered ,setIsRendered]=useState(false)
-  const validateInput = (e) => {
-    let { name, value } = e.target
-    setError((prev) => {
-      const stateObj = { ...prev, [name]: "" }
-      switch (name) {
-        case "password":
-          if (!value) {
-            stateObj[name] = "Please enter Password."
-          } else if (input.confirmPassword && value !== input.confirmPassword) {
-            stateObj["confirmPassword"] =
-              "Password and Confirm Password does not match."
-          } else {
-            stateObj["confirmPassword"] = input.confirmPassword
-              ? ""
-              : error.confirmPassword
-          }
-          break
-        case "confirmPassword":
-          if (!value) {
-            stateObj[name] = "Please enter Confirm Password."
-          } else if (input.password && value !== input.password) {
-            stateObj[name] = "Password and Confirm Password does not match."
-          }
-          break
-      }
-      return stateObj
+    .then((resp) => {
+      setEntries(resp.data.data[0]);
     })
-  }
-
-  const _handleUpdateData = (event, data) => {
-    console.log(userToken, "user token for patch")
-    const header = {
-      "x-auth-token": userToken,
-      "Content-Type": "application/json",
-    }
-    const userData = {
-      first_name: entries.first_name,
-      last_name: entries.last_name,
-      bioGraphy: entries.bioGraphy,
-      gender: entries.gender,
-      // facebook_page: entries.social_profiles.facebook_page,
-    }
-    axios
-      .patch(
-        "https://anxious-foal-shift.cyclic.app/api/user/editProfile",
-        userData,
-        {
-          headers: header,
+    .catch((err) => console.log(err));
+}, [userToken]);
+const [isRendered, setIsRendered] = useState(false);
+const validateInput = (e) => {
+  let { name, value } = e.target;
+  setError((prev) => {
+    const stateObj = { ...prev, [name]: "" };
+    switch (name) {
+      case "password":
+        if (!value) {
+          stateObj[name] = "Please enter Password.";
+        } else if (input.confirmPassword && value !== input.confirmPassword) {
+          stateObj["confirmPassword"] =
+            "Password and Confirm Password does not match.";
+        } else {
+          stateObj["confirmPassword"] = input.confirmPassword
+            ? ""
+            : error.confirmPassword;
         }
-      )
-      .then((resp) => console.log(resp))
-      .catch((err) => console.log(err))
-  }
-  const _handleImage=()=>{
-    setIsRendered(true)
-  }
-  const _handleCaputeree=()=>{
-    setIsRendered(!isRendered);
-  }
-  return (
-    <>
-    {/* <WebCamera/> */}
-    
-    <section className="position-relative">
+        break;
+      case "confirmPassword":
+        if (!value) {
+          stateObj[name] = "Please enter Confirm Password.";
+        } else if (input.password && value !== input.password) {
+          stateObj[name] = "Password and Confirm Password does not match.";
+        }
+        break;
+    }
+    return stateObj;
+  });
+};
 
+const _handleUpdateData = (event, data) => {
+  console.log(userToken, "user token for patch");
+  const header = {
+    "x-auth-token": userToken,
+    "Content-Type": "application/json",
+  };
+  const userData = {
+    first_name: entries.first_name,
+    last_name: entries.last_name,
+    bioGraphy: entries.bioGraphy,
+    gender: entries.gender,
+    // facebook_page: entries.social_profiles.facebook_page,
+  };
+  axios
+    .patch(
+      "https://anxious-foal-shift.cyclic.app/api/user/editProfile",
+      userData,
+      {
+        headers: header,
+      }
+    )
+    .then((resp) => console.log(resp))
+    .catch((err) => console.log(err));
+};
+const _handleImage = () => {
+  setIsRendered(true);
+};
+const _handleCaputeree = (e) => {
+  setIsRendered(!isRendered);
+  setGetImage(e);
+};
+const _handleDelteImage = () => {
+  setGetImage("");
+};
+const setImageSec = () => {
+  setImg(img);
+};
+const handleImageChange = (event) => {
+  const reader = new FileReader();
+  reader.onload = () => {
+    setBase64Image(reader.result);
+  };
+  reader.readAsDataURL(event.target.files[0]);
+};
+const removeUpload = () => {
+  setBase64Image("");
+};
+return (
+  <>
+    {/* <WebCamera/> */}
+
+    <section className="position-relative">
       <div className="container-xxl">
         <div className={styles.profile_container}>
           <div className={styles.profile_area}>
@@ -230,7 +245,6 @@ const [isRendered ,setIsRendered]=useState(false)
                             <div className={styles.label}>
                               <label> Profile Display Name </label>
                               <span>
-                            
                                 <Image src={help} alt="logo" />{" "}
                               </span>
                             </div>
@@ -243,7 +257,6 @@ const [isRendered ,setIsRendered]=useState(false)
                               value={entries.username}
                               onChange={handleChange}
                               onClick={_handleChangeInputs}
-                            
                             />
                           </div>
                         </div>
@@ -251,14 +264,11 @@ const [isRendered ,setIsRendered]=useState(false)
                           <div className="col-lg-4 col-md-12 p-2">
                             <div className={styles.profilePic}>
                               <div className={styles.camIcon}>
-                          
                                 <i className="fa-solid fa-camera"></i>{" "}
                               </div>
                               <div className={styles.iconLabel}>
-                          
                                 Profile Picture{" "}
                                 <span>
-                            
                                   <Image
                                     alt="logo"
                                     src={help}
@@ -273,27 +283,109 @@ const [isRendered ,setIsRendered]=useState(false)
                           <div className="col-lg-8 col-md-12 p-1">
                             <div>
                               <div className={styles.img_area}>
-                                <Image
-                                  height={80}
-                                  className={`${styles.logImg}`}
-                                  src={Member}
-                                  alt="logo"
-                                />
+                                {base64Image ? (
+                                  <Image
+                                    src={base64Image}
+                                    alt=""
+                                    width={80}
+                                    height={80}
+                                  />
+                                ) : (
+                                    <Image
+                                      height={80}
+                                      className={`${styles.logImg}`}
+                                      src={Member}
+                                      alt="logo"
+                                    />
+                                  ) && getImage ? (
+                                  <Image
+                                    src={getImage}
+                                    alt="img"
+                                    height={80}
+                                    width={80}
+                                    className={`${styles.logImg}`}
+                                  />
+                                ) : (
+                                  <Image
+                                    height={80}
+                                    className={`${styles.logImg}`}
+                                    src={Member}
+                                    alt="logo"
+                                  />
+                                )}
                               </div>
                               <div>
-                               
-                              <label for="myfile" className={styles.upload_pic}>Upload a profile picture</label>
-                                <input type="file" id="myfile" name="myfile" style={{display:"none"}}/>
-                                <button className={styles.click_photo} onClick={_handleImage}>
-                                Take Photo
-                                </button>
-                                {/* <button>Take Photo</button> */}
+                                <label
+                                  for="myfile"
+                                  className={styles.upload_pic}
+                                >
+                                  Upload a profile picture
+                                </label>
+                                <input
+                                  type="file"
+                                  id="myfile"
+                                  name="myfile"
+                                  onChange={handleImageChange}
+                                  style={{ display: "none" }}
+                                />
+                                {base64Image ? (
+                                  <>
+                                    <button
+                                      className={`${styles.removeUpload}`}
+                                      onClick={removeUpload}
+                                    >
+                                      remove
+                                    </button>
+                                    <button
+                                      className={styles.click_photo}
+                                      onClick={_handleImage}
+                                    >
+                                      Take Photo
+                                    </button>
+                                  </>
+                                ) : (
+                                    <button
+                                      className={styles.click_photo}
+                                      onClick={_handleImage}
+                                    >
+                                      Take Photo
+                                    </button>
+                                  ) && getImage ? (
+                                  <>
+                                    <button
+                                      className={`${styles.remove}`}
+                                      onClick={_handleDelteImage}
+                                    >
+                                      remove
+                                    </button>
+                                    <button
+                                      className={styles.click_photo}
+                                      onClick={_handleImage}
+                                    >
+                                      Take Photo
+                                    </button>
+                                  </>
+                                ) : (
+                                  <button
+                                    className={styles.click_photo}
+                                    onClick={_handleImage}
+                                  >
+                                    Take Photo
+                                  </button>
+                                )}
+
                                 <div className={`${styles.photooo}`}>
-                              
-                                   {
-                                    isRendered ? <WebCamera rendered={isRendered} _handleCaputer={_handleCaputeree}/>:<button className="d-none"></button>
-                                   }   
-                                   </div>
+                                  {isRendered ? (
+                                    <WebCamera
+                                      rendered={isRendered}
+                                      _handleCaputer={(e) =>
+                                        _handleCaputeree(e)
+                                      }
+                                    />
+                                  ) : (
+                                    <button className="d-none"></button>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -365,7 +457,6 @@ const [isRendered ,setIsRendered]=useState(false)
                             <div className={styles.label}>Gender</div>
                           </div>
                           <div className="col-lg-8 col-md-12 p-2">
-                            {/* <div className={styles.gender_area}> */}
                             <div className="form-check">
                               <input
                                 className="form-check-input"
@@ -439,7 +530,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                   <option value="Andorra">Andorra</option>
                                   <option value="Angola">Angola</option>
                                   <option value="Anguilla">Anguilla</option>
-                                  <option value="Antarctica">Antarctica</option>
+                                  <option value="Antarctica">
+                                    Antarctica
+                                  </option>
                                   <option value="Antigua and Barbuda">
                                     Antigua and Barbuda
                                   </option>
@@ -448,10 +541,14 @@ const [isRendered ,setIsRendered]=useState(false)
                                   <option value="Aruba">Aruba</option>
                                   <option value="Australia">Australia</option>
                                   <option value="Austria">Austria</option>
-                                  <option value="Azerbaijan">Azerbaijan</option>
+                                  <option value="Azerbaijan">
+                                    Azerbaijan
+                                  </option>
                                   <option value="Bahamas">Bahamas</option>
                                   <option value="Bahrain">Bahrain</option>
-                                  <option value="Bangladesh">Bangladesh</option>
+                                  <option value="Bangladesh">
+                                    Bangladesh
+                                  </option>
                                   <option value="Barbados">Barbados</option>
                                   <option value="Belarus">Belarus</option>
                                   <option value="Belgium">Belgium</option>
@@ -482,7 +579,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                     Burkina Faso
                                   </option>
                                   <option value="Burundi">Burundi</option>
-                                  <option value="Cabo Verde">Cabo Verde</option>
+                                  <option value="Cabo Verde">
+                                    Cabo Verde
+                                  </option>
                                   <option value="Cambodia">Cambodia</option>
                                   <option value="Cameroon">Cameroon</option>
                                   <option value="Canada">Canada</option>
@@ -510,7 +609,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                   <option value="Cook Islands">
                                     Cook Islands
                                   </option>
-                                  <option value="Costa Rica">Costa Rica</option>
+                                  <option value="Costa Rica">
+                                    Costa Rica
+                                  </option>
                                   <option value="Croatia">Croatia</option>
                                   <option value="Cuba">Cuba</option>
                                   <option value="Curaçao">Curaçao</option>
@@ -564,7 +665,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                   <option value="Greece">Greece</option>
                                   <option value="Greenland">Greenland</option>
                                   <option value="Grenada">Grenada</option>
-                                  <option value="Guadeloupe">Guadeloupe</option>
+                                  <option value="Guadeloupe">
+                                    Guadeloupe
+                                  </option>
                                   <option value="Guam">Guam</option>
                                   <option value="Guatemala">Guatemala</option>
                                   <option value="Guernsey">Guernsey</option>
@@ -596,7 +699,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                   <option value="Japan">Japan</option>
                                   <option value="Jersey">Jersey</option>
                                   <option value="Jordan">Jordan</option>
-                                  <option value="Kazakhstan">Kazakhstan</option>
+                                  <option value="Kazakhstan">
+                                    Kazakhstan
+                                  </option>
                                   <option value="Kenya">Kenya</option>
                                   <option value="Kiribati">Kiribati</option>
                                   <option value="Korea, Democratic People's Republic of">
@@ -606,7 +711,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                     Korea, Republic of
                                   </option>
                                   <option value="Kuwait">Kuwait</option>
-                                  <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                  <option value="Kyrgyzstan">
+                                    Kyrgyzstan
+                                  </option>
                                   <option value="Lao People's Democratic Republic">
                                     Lao People's Democratic Republic
                                   </option>
@@ -619,9 +726,13 @@ const [isRendered ,setIsRendered]=useState(false)
                                     Liechtenstein
                                   </option>
                                   <option value="Lithuania">Lithuania</option>
-                                  <option value="Luxembourg">Luxembourg</option>
+                                  <option value="Luxembourg">
+                                    Luxembourg
+                                  </option>
                                   <option value="Macao">Macao</option>
-                                  <option value="Madagascar">Madagascar</option>
+                                  <option value="Madagascar">
+                                    Madagascar
+                                  </option>
                                   <option value="Malawi">Malawi</option>
                                   <option value="Malaysia">Malaysia</option>
                                   <option value="Maldives">Maldives</option>
@@ -630,19 +741,31 @@ const [isRendered ,setIsRendered]=useState(false)
                                   <option value="Marshall Islands">
                                     Marshall Islands
                                   </option>
-                                  <option value="Martinique">Martinique</option>
-                                  <option value="Mauritania">Mauritania</option>
+                                  <option value="Martinique">
+                                    Martinique
+                                  </option>
+                                  <option value="Mauritania">
+                                    Mauritania
+                                  </option>
                                   <option value="Mauritius">Mauritius</option>
                                   <option value="Mayotte">Mayotte</option>
                                   <option value="Mexico">Mexico</option>
-                                  <option value="Micronesia">Micronesia</option>
+                                  <option value="Micronesia">
+                                    Micronesia
+                                  </option>
                                   <option value="Moldova">Moldova</option>
                                   <option value="Monaco">Monaco</option>
                                   <option value="Mongolia">Mongolia</option>
-                                  <option value="Montenegro">Montenegro</option>
-                                  <option value="Montserrat">Montserrat</option>
+                                  <option value="Montenegro">
+                                    Montenegro
+                                  </option>
+                                  <option value="Montserrat">
+                                    Montserrat
+                                  </option>
                                   <option value="Morocco">Morocco</option>
-                                  <option value="Mozambique">Mozambique</option>
+                                  <option value="Mozambique">
+                                    Mozambique
+                                  </option>
                                   <option value="Myanmar">Myanmar</option>
                                   <option value="Namibia">Namibia</option>
                                   <option value="Nauru">Nauru</option>
@@ -702,7 +825,8 @@ const [isRendered ,setIsRendered]=useState(false)
                                     Saint Barthélemy
                                   </option>
                                   <option value="Saint Helena, Ascension and Tristan da Cunha">
-                                    Saint Helena, Ascension and Tristan da Cunha
+                                    Saint Helena, Ascension and Tristan da
+                                    Cunha
                                   </option>
                                   <option value="Saint Kitts and Nevis">
                                     Saint Kitts and Nevis
@@ -720,7 +844,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                     Saint Vincent and the Grenadines
                                   </option>
                                   <option value="Samoa">Samoa</option>
-                                  <option value="San Marino">San Marino</option>
+                                  <option value="San Marino">
+                                    San Marino
+                                  </option>
                                   <option value="Sao Tome and Principe">
                                     Sao Tome and Principe
                                   </option>
@@ -729,7 +855,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                   </option>
                                   <option value="Senegal">Senegal</option>
                                   <option value="Serbia">Serbia</option>
-                                  <option value="Seychelles">Seychelles</option>
+                                  <option value="Seychelles">
+                                    Seychelles
+                                  </option>
                                   <option value="Sierra Leone">
                                     Sierra Leone
                                   </option>
@@ -747,7 +875,8 @@ const [isRendered ,setIsRendered]=useState(false)
                                     South Africa
                                   </option>
                                   <option value="South Georgia and the South Sandwich Islands">
-                                    South Georgia and the South Sandwich Islands
+                                    South Georgia and the South Sandwich
+                                    Islands
                                   </option>
                                   <option value="South Sudan">
                                     South Sudan
@@ -767,7 +896,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                     Syria Arab Republic
                                   </option>
                                   <option value="Taiwan">Taiwan</option>
-                                  <option value="Tajikistan">Tajikistan</option>
+                                  <option value="Tajikistan">
+                                    Tajikistan
+                                  </option>
                                   <option value="Tanzania, the United Republic of">
                                     Tanzania, the United Republic of
                                   </option>
@@ -805,7 +936,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                     United States
                                   </option>
                                   <option value="Uruguay">Uruguay</option>
-                                  <option value="Uzbekistan">Uzbekistan</option>
+                                  <option value="Uzbekistan">
+                                    Uzbekistan
+                                  </option>
                                   <option value="Vanuatu">Vanuatu</option>
                                   <option value="Venezuela">Venezuela</option>
                                   <option value="Viet Nam">Viet Nam</option>
@@ -892,7 +1025,9 @@ const [isRendered ,setIsRendered]=useState(false)
                               <div>
                                 <input
                                   onChange={handleChange}
-                                  value={entries.social_profiles?.facebook_page}
+                                  value={
+                                    entries.social_profiles?.facebook_page
+                                  }
                                   name="fb"
                                   className={`w-100 ${
                                     active ? styles.input : styles.secondInput
@@ -937,7 +1072,10 @@ const [isRendered ,setIsRendered]=useState(false)
                               <div className={styles.camIcon}>
                                 <i className="fa-brands fa-google-plus-g"></i>{" "}
                               </div>
-                              <div className={styles.iconLabel}> Google+ </div>
+                              <div className={styles.iconLabel}>
+                                {" "}
+                                Google+{" "}
+                              </div>
                             </div>
                           </div>
                           <div className="col-lg-8 col-md-12 p-2">
@@ -971,10 +1109,10 @@ const [isRendered ,setIsRendered]=useState(false)
                             <div>
                               <div>
                                 <input
-                                    className={`w-100 ${
-                                      active ? styles.input : styles.secondInput
-                                    }`}
-                                    onClick={_handleChangeInputs}
+                                  className={`w-100 ${
+                                    active ? styles.input : styles.secondInput
+                                  }`}
+                                  onClick={_handleChangeInputs}
                                   // value={entries.social_profiles}
                                 />
                               </div>
@@ -1032,7 +1170,7 @@ const [isRendered ,setIsRendered]=useState(false)
                           </div>
                           <div className="col-lg-8 col-md-12 p-2">
                             <input
-                               className={`w-100 ${
+                              className={`w-100 ${
                                 active ? styles.input : styles.secondInput
                               }`}
                               onClick={_handleChangeInputs}
@@ -1059,10 +1197,10 @@ const [isRendered ,setIsRendered]=useState(false)
                             <div>
                               <div>
                                 <input
-                                    className={`w-100 ${
-                                      active ? styles.input : styles.secondInput
-                                    }`}
-                                    onClick={_handleChangeInputs}
+                                  className={`w-100 ${
+                                    active ? styles.input : styles.secondInput
+                                  }`}
+                                  onClick={_handleChangeInputs}
                                   value={entries.email}
                                   name="email"
                                   onChange={handleChange}
@@ -1113,7 +1251,9 @@ const [isRendered ,setIsRendered]=useState(false)
                                   <i class="fa-solid fa-check"></i>{" "}
                                 </span>
                                 {error.password && (
-                                  <span className="err">{error.password}</span>
+                                  <span className="err">
+                                    {error.password}
+                                  </span>
                                 )}
                               </div>
                             </div>
@@ -1121,7 +1261,9 @@ const [isRendered ,setIsRendered]=useState(false)
                         </div>
                         <div className={`row ${styles.profile_row}`}>
                           <div className="col-lg-4 col-md-12 p-2">
-                            <div className={styles.label}>Confirm Password</div>
+                            <div className={styles.label}>
+                              Confirm Password
+                            </div>
                           </div>
                           <div className="col-lg-8 col-md-12 p-2">
                             <input
@@ -1162,8 +1304,8 @@ const [isRendered ,setIsRendered]=useState(false)
         </div>
       </div>
     </section>
-    </>
-  )
-}
+  </>
+);
+};
 
-export default EditProfile
+export default EditProfile;
