@@ -1,35 +1,34 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import styles from "./microgendxInsider.module.css"
-import MicrogendxInsiderComponent from "@/components/microgendxInsiderComponent/microgendxInsiderComponent"
-import labCompany from "../../assets/images/microgenInsider/lab-company.png"
-import drpleads from "../../assets/images/microgenInsider/doctorpleads.png"
-import indicated from "../../assets/images/microgenInsider/tenindicted.png"
-import business from "../../assets/images/microgenInsider/businessagreement.png"
-import jail from "../../assets/images/microgenInsider/jail.png"
-import Image from "next/image"
+import React, { useState } from "react";
+import styles from "./microgendxInsider.module.css";
+import MicrogendxInsiderComponent from "@/components/microgendxInsiderComponent/microgendxInsiderComponent";
+import labCompany from "../../assets/images/microgenInsider/lab-company.png";
+import drpleads from "../../assets/images/microgenInsider/doctorpleads.png";
+import indicated from "../../assets/images/microgenInsider/tenindicted.png";
+import business from "../../assets/images/microgenInsider/businessagreement.png";
+import jail from "../../assets/images/microgenInsider/jail.png";
+import Image from "next/image";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
 const page = () => {
   const [imageCounter, setImageCounter] = useState(0);
-  const [layout, setLayout] = useState(false)
+  const [layout, setLayout] = useState(false);
   const imageControls = (value) => {
-    if (value === 'forward') {
+    if (value === "forward") {
       if (imageCounter < micrognInsider.length - 1) {
-        setImageCounter(imageCounter + 1)
-      }
-      else {
-        setImageCounter(0)
+        setImageCounter(imageCounter + 1);
+      } else {
+        setImageCounter(0);
       }
     }
-    if (value === 'back') {
+    if (value === "back") {
       if (imageCounter != 0) {
-        setImageCounter(imageCounter - 1)
-      }
-      else {
-        setImageCounter(4)
+        setImageCounter(imageCounter - 1);
+      } else {
+        setImageCounter(4);
       }
     }
-  }
+  };
   const [micrognInsider, setMicrognInsider] = useState([
     {
       image: labCompany,
@@ -79,16 +78,16 @@ const page = () => {
       readComment: "Read more",
       link: "laboratory-owner-sentenced-to-82-months-in-prison-for-covid-19-kickback-scheme/",
     },
-  ])
+  ]);
   const func = (value) => {
     setLayout(true);
-    setImageCounter(value)
+    setImageCounter(value);
     // console.log("func value", value)
-  }
+  };
   const cancel = (event) => {
     event.preventDefault();
-    setLayout(false)
-  }
+    setLayout(false);
+  };
   return (
     <>
       {/* {
@@ -103,26 +102,59 @@ const page = () => {
           </div>
         </div> : ""
       } */}
+      <BreadCrum
+        breadHeading="MicroGenDX Insider"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "MicroGenDX Insider",
+            link: "/",
+          },
+        ]}
+      />
       <div className={layout ? styles.layout01 : ""}></div>
-      {
-        layout ?
-          <div className="row">
-            <div className={`col-12 ${styles.layout_column}`}>
-              <div className={styles.imagepopup}>
-                <div className={styles.img_container}>
-                  <div className={styles.cancel}> <button onClick={cancel} className={styles.cancel_btn}><i className="fa-solid fa-xmark"></i> </button> </div>
-                  <div className={styles.btns_ctrl}>
-                    <button className={styles.controls} onClick={() => imageControls("back")} > <i className="fa-solid fa-angle-left"></i> </button>
-                    <Image className="img-fluid" width={800} src={micrognInsider[imageCounter].image} alt="logo" />
-                    <button className={styles.controls} onClick={() => imageControls("forward")} ><i className="fa-solid fa-angle-right"></i> </button>
-                  </div>
+      {layout ? (
+        <div className="row">
+          <div className={`col-12 ${styles.layout_column}`}>
+            <div className={styles.imagepopup}>
+              <div className={styles.img_container}>
+                <div className={styles.cancel}>
+                  {" "}
+                  <button onClick={cancel} className={styles.cancel_btn}>
+                    <i className="fa-solid fa-xmark"></i>{" "}
+                  </button>{" "}
+                </div>
+                <div className={styles.btns_ctrl}>
+                  <button
+                    className={styles.controls}
+                    onClick={() => imageControls("back")}
+                  >
+                    {" "}
+                    <i className="fa-solid fa-angle-left"></i>{" "}
+                  </button>
+                  <Image
+                    className="img-fluid"
+                    width={800}
+                    src={micrognInsider[imageCounter].image}
+                    alt="logo"
+                  />
+                  <button
+                    className={styles.controls}
+                    onClick={() => imageControls("forward")}
+                  >
+                    <i className="fa-solid fa-angle-right"></i>{" "}
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-
-          : ""
-      }
+        </div>
+      ) : (
+        ""
+      )}
 
       <section className={styles.microInsider_wrapper}>
         <div className="container-xxl">
@@ -130,15 +162,19 @@ const page = () => {
             {micrognInsider.map((e, idx) => {
               return (
                 <div className={`row ${styles.row_margin}`} key={idx}>
-                  <MicrogendxInsiderComponent popFunction={() => func(idx)} items={e} key={idx} />
+                  <MicrogendxInsiderComponent
+                    popFunction={() => func(idx)}
+                    items={e}
+                    key={idx}
+                  />
                 </div>
-              )
+              );
             })}
           </div>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

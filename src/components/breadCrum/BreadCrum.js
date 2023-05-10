@@ -1,22 +1,32 @@
 import React from "react";
 import "./BreadCrum.css";
 const BreadCrum = (props) => {
-  const { breadHeading, pageName, subPage } = props;
+  const { breadHeading, pagess } = props;
+
   return (
     <section className="breadcrum_wrapper">
       <div className="container">
         <div className="row justify-content-center align-items-center">
           <div className="col-lg-12 text-center">
             <div className="bread_details text-center">
-              <h1>{breadHeading}</h1>
+              <h4 className="heading">{breadHeading}</h4>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb m-0 justify-content-center">
-                  <li className="breadcrumb-item active" aria-current="page">
-                    {pageName}
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    {subPage}
-                  </li>
+                  {pagess.map((el, index) => {
+                    return (
+                      <React.Fragment key={index}>
+                        {pagess.length === 1 ? (
+                          <li className="breadcrumb-item">{el.page}</li>
+                        ) : pagess.length - 1 !== index ? (
+                          <a className="breadcrumb-item" href={el.link}>
+                            {el.page}
+                          </a>
+                        ) : (
+                          <li className="breadcrumb-item">{el.page}</li>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
                 </ol>
               </nav>
             </div>

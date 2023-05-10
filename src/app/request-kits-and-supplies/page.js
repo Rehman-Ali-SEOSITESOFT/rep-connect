@@ -20,7 +20,7 @@ const page = () => {
     },
     {
       name: "Pre-Filled Lab Req ",
-      link: "/product/pre-filled-lab-req/",
+      link: "/product-detail/pre-filled-lab-req/",
       img: labreq,
     },
   ]);
@@ -28,7 +28,16 @@ const page = () => {
     <>
       <BreadCrum
         breadHeading={"Request Kits & Supplies"}
-        pageName={"Request Kits & Supplies"}
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Request Kits & Supplies",
+            link: "/",
+          },
+        ]}
       />
       <section className={style.request_kit_supplies}>
         <div className="container-xxl">

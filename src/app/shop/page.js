@@ -13,7 +13,19 @@ const page = () => {
   }, []);
   return (
     <>
-      <BreadCrum breadHeading="Shop" pageName="Home" subPage="Shop" />
+      <BreadCrum
+        breadHeading="Shop"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Shop",
+            link: "/",
+          },
+        ]}
+      />
       <section className={style.shop_page}>
         <div className="container-xxl">
           <div className="row">
