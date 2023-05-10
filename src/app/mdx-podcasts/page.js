@@ -6,7 +6,7 @@ import podcast from '../../assets/images/podcasts/MDX-Podcast-Icon-Horizontal-20
 import podcast01 from '../../assets/images/podcasts/podcasr01.png';
 import podcast02 from '../../assets/images/podcasts/podcast02.png';
 import podcast03 from '../../assets/images/podcasts/podcast03.png';
-
+import withAuth from '@/utils/auth';
 
 const Mdx_podcasts = () => {
   const [search, setSearch] = useState('')
@@ -445,4 +445,4 @@ const Mdx_podcasts = () => {
   )
 }
 
-export default Mdx_podcasts;
+export default withAuth(Mdx_podcasts);

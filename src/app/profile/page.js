@@ -4,7 +4,8 @@ import Image from "next/image"
 import Logo from "../../../src/assets/images/Profile/profile.png"
 import Member from "../../../src/assets/images/Profile/member.png"
 import styles from "./profile.module.css"
-import BreadCrum from "@/components/breadCrum/BreadCrum"
+import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth"
 function Profile() {
 
   return (
@@ -793,4 +794,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default withAuth(Profile);

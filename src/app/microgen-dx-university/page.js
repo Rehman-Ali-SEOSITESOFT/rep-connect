@@ -9,7 +9,8 @@ import className from "../../assets/images/microgendxuniversity/classroom-study.
 import MicrogenDx from "@/components/microgenDxUniversity/MicrogenDxUniversity"
 import MicrogenDxUniversity from "@/components/microgenDxUniversity/MicrogenDxUniversity"
 import UniversityLinks from "@/components/universityLinks/UniversityLinks"
-import Link from "next/link"
+import Link from "next/link";
+import withAuth from "@/utils/auth"
 const page = () => {
   const [cardDetail, setCardDetail] = useState([
     {
@@ -193,4 +194,4 @@ const page = () => {
   )
 }
 
-export default page
+export default withAuth(page);

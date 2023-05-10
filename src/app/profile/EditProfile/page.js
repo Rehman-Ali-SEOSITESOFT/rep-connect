@@ -7,6 +7,7 @@ import help from "../../../assets/images/Profile/help.png"
 import axios from "axios"
 import WebCam from "@/components/webCam/WebCam"
 import WebCamera from "@/components/webCam/WebCam"
+import withAuth from "@/utils/auth"
 
 const EditProfile = () => {
 
@@ -1166,4 +1167,4 @@ const [isRendered ,setIsRendered]=useState(false)
   )
 }
 
-export default EditProfile
+export default withAuth(EditProfile)

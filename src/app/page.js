@@ -22,11 +22,9 @@ import ann3 from "../assets/images/singleproductsimages/ann3.png";
 import ann4 from "../assets/images/singleproductsimages/ann4.png";
 import ann5 from "../assets/images/singleproductsimages/ann5.png";
 import Pagination from "@/components/pagination/Pagination";
+import withAuth from "@/utils/auth";
 
-const _handleSubmitForm = (e) => {
-  e.preventDefault();
-};
-export default function Home() {
+const Home =  () => {
   const [postData, setPostData] = useState([
     {
       postImage: salepiece,
@@ -328,3 +326,6 @@ export default function Home() {
     </>
   );
 }
+
+
+export default withAuth(Home);

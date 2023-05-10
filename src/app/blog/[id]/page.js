@@ -17,8 +17,9 @@ import LikedBypeople from "@/components/likedByPeople/LikedBypeople"
 import BlogComments from "@/components/blogComments/BlogComments"
 import comment2 from "../../../assets/images/singleproductsimages/comment2.jpg"
 import comment3 from "../../../assets/images/singleproductsimages/comment3.png"
-import BreadCrum from "@/components/breadCrum/BreadCrum"
-export default function page({ params }) {
+import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth"
+const  page =  ({ params }) => {
   let { id } = params
   const [formData, setFormData] = useState({
     commentDetail: "",
@@ -262,3 +263,6 @@ export default function page({ params }) {
     </>
   )
 }
+
+
+export default withAuth(page) 

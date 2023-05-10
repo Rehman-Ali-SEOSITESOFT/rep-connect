@@ -1,6 +1,7 @@
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import React from "react";
 import style from "./hospital.module.css";
+import withAuth from "@/utils/auth";
 const page = () => {
   return (
     <>
@@ -61,4 +62,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

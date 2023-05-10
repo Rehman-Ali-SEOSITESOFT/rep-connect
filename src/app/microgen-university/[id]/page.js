@@ -1,7 +1,7 @@
 import BreadCrum from '@/components/breadCrum/BreadCrum'
 import React from 'react'
 import styles from '../microgen-university.module.css'
-
+import withAuth from '@/utils/auth'
 const Page = ({ params }) => {
     let { id } = params
     return (
@@ -21,4 +21,4 @@ const Page = ({ params }) => {
     )
 }
 
-export default Page
+export default withAuth(Page);

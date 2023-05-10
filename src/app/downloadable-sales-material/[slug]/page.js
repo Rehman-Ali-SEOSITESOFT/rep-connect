@@ -7,7 +7,8 @@ import testing from "../../../assets/images/download-category/Patient-COVID-Port
 import style from "./style.module.css";
 import Image from "next/image";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
-export default function Page({ params }) {
+import withAuth from "@/utils/auth";
+const Page = ({ params }) => {
   const { slug } = params;
 
   const [downloadAbleMaterial, setDownloadAbleMaterial] = useState(
@@ -162,3 +163,6 @@ export default function Page({ params }) {
     </>
   );
 }
+
+
+export default withAuth(Page);

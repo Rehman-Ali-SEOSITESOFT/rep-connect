@@ -6,7 +6,8 @@ import SpecialtyCards from "@/components/specialtyCards/SpecialtyCards"
 import ortho from "../../assets/images/specialty/orthopedic-icon.jpg"
 import podiatry from "../../assets/images/specialty/podiatry-nail-4.jpg"
 import urology from "../../assets/images/specialty/urology-icon.jpg"
-import woundCare from "../../assets/images/specialty/wound-icon.jpg"
+import woundCare from "../../assets/images/specialty/wound-icon.jpg";
+import withAuth from "@/utils/auth"
 const page = () => {
   const [specialCardDetail, setSpecialCardDetail] = useState([
     {
@@ -62,4 +63,4 @@ const page = () => {
   )
 }
 
-export default page
+export default  withAuth(page)

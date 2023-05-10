@@ -8,7 +8,8 @@ import drpleads from "../../assets/images/microgenInsider/doctorpleads.png"
 import indicated from "../../assets/images/microgenInsider/tenindicted.png"
 import business from "../../assets/images/microgenInsider/businessagreement.png"
 import jail from "../../assets/images/microgenInsider/jail.png"
-import Image from "next/image"
+import Image from "next/image";
+import withAuth from "@/utils/auth"
 const page = () => {
   const [imageCounter, setImageCounter] = useState(0);
   const [layout, setLayout] = useState(false)
@@ -141,4 +142,4 @@ const page = () => {
   )
 }
 
-export default page
+export default withAuth(page);

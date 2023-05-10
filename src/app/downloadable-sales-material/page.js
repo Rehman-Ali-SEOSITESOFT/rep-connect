@@ -21,6 +21,7 @@ import womenhealth from "../../assets/images/download/gyne-124.png";
 import workingwithhospital from "../../assets/images/download/hospitals-124.png";
 import woundcare from "../../assets/images/download/wound-124.png";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth";
 const page = () => {
   const [downloadAbleMaterial, setDownloadAbleMaterial] = useState([
     {
@@ -141,4 +142,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

@@ -3,6 +3,7 @@ import BreadCrum from "@/components/breadCrum/BreadCrum";
 import Link from "next/link";
 import React, { useState } from "react";
 import style from "./office.module.css";
+import withAuth from "@/utils/auth";
 const page = () => {
   const [steps, setSteps] = useState([
     {
@@ -140,4 +141,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

@@ -13,7 +13,7 @@ import tutorial from '../../assets/images/Courses/tutorial-videos.jpg'
 import training_intro from '../../assets/images/Courses/training-introduction.jpg'
 import Link from "next/link"
 import BreadCrum from "@/components/breadCrum/BreadCrum"
-
+import withAuth from "@/utils/auth"
 const page = () => {
   return (
     <>
@@ -245,4 +245,4 @@ const page = () => {
   )
 }
 
-export default page
+export default withAuth(page);

@@ -2,8 +2,9 @@
 import GeneralAbsPosts from "@/components/generalAbsPosts/GeneralAbsPosts"
 import { useState } from "react"
 import styless from "../style.module.css"
-import BreadCrum from "@/components/breadCrum/BreadCrum"
-export default function page({ params }) {
+import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth";
+const page = ({ params }) => {
   let { id } = params
   console.log("Params", id)
   const [trainingData, setTrainingData] = useState([
@@ -64,3 +65,4 @@ export default function page({ params }) {
     </>
   )
 }
+export default withAuth(page);

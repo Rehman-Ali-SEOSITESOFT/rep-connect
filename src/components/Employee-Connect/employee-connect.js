@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify"
 const EmployeeConnect = () => {
   const [error, setError] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
   const [login, setLogin] = useState({
     userName: "",
     password: "",
@@ -100,6 +101,8 @@ const EmployeeConnect = () => {
         })
     }
   }
+
+
 
   return (
     <>

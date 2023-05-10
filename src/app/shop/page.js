@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import style from "./shop.module.css";
 import { useDispatch } from "react-redux";
 import { product } from "@/redux/slices/productSlice";
+import withAuth from "@/utils/auth";
 const page = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,4 +33,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default  withAuth(page);

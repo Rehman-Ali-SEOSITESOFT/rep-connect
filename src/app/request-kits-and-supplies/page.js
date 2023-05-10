@@ -6,6 +6,7 @@ import individual from "../../assets/images/request-kit-supplies/request-supplie
 import labreq from "../../assets/images/request-kit-supplies/lab-req-2020-thumb.jpg";
 import Link from "next/link";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth";
 const page = () => {
   const [reqKits, setReqKits] = useState([
     {
@@ -65,4 +66,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);
