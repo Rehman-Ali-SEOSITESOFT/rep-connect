@@ -117,7 +117,19 @@ const page = () => {
   ]);
   return (
     <>
-      <BreadCrum breadHeading="Downloadable Sales Material" pageName="Home" />
+      <BreadCrum
+        breadHeading="Downloadable Sales Material"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Downloadable Sales Material",
+            link: "/",
+          },
+        ]}
+      />
       <section className={style.download_able_material}>
         <div className="container-xxl">
           <div className="row">

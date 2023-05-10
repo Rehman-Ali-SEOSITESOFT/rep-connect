@@ -2,22 +2,29 @@
   background-color: rgba(23, 144, 208, 1);
   padding: 30px 0;
 }
-.bread_details h1 {
+.bread_details .heading {
   font-family: "Poppins", sans-serif;
-
   font-size: 25px;
   line-height: 25px;
   font-weight: 400;
   letter-spacing: 0px;
   color: #ffffff;
+  text-transform: capitalize;
 }
+.bread_details ol a,
 .bread_details ol li {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.6) !important;
   font-size: 16px;
   line-height: 21px;
+  text-decoration: none;
+  text-transform: capitalize;
 }
+.bread_details ol a:hover {
+  text-decoration: underline;
+}
+
 .breadcrum_wrapper .breadcrumb-item + .breadcrumb-item::before {
   content: ">";
   color: rgba(255, 255, 255, 0.6) !important;

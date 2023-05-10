@@ -5,10 +5,23 @@ import CategoryProducts from "@/components/categoryproducts/CategoryProducts";
 import style from "./slug.module.css";
 export default function Page({ params }) {
   const { slug } = params;
+  const renamed = slug.split("-").join(" ");
 
   return (
     <>
-      <BreadCrum breadHeading={slug} pageName={slug} />
+      <BreadCrum
+        breadHeading={renamed}
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: renamed,
+            link: "/",
+          },
+        ]}
+      />
       <section className={style.productCatagoryPage}>
         <div className="container-xxl">
           <div className="row">

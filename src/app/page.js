@@ -151,7 +151,15 @@ export default function Home() {
   };
   return (
     <>
-      <BreadCrum breadHeading="MicroGenDX Rep Connect" pageName="Home" />
+      <BreadCrum
+        breadHeading="MicroGenDX Rep Connect"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+        ]}
+      />
       <section className={styles.home_page}>
         <div className="container">
           <div className="row">

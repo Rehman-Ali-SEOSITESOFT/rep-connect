@@ -30,7 +30,20 @@ export default function page({ params }) {
   };
   return (
     <>
-      <BreadCrum breadHeading={headingname} pageName={headingname} />
+      <BreadCrum
+        breadHeading={headingname}
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+
+          {
+            page: headingname,
+            link: "/",
+          },
+        ]}
+      />
       <section className={style.single_donwnload_detail}>
         <div className="container-xxl">
           <div className="row">

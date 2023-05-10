@@ -9,8 +9,16 @@ const page = () => {
     <>
       <BreadCrum
         breadHeading="How to Set Up a VA Hospital"
-        pageName="Home"
-        subPage="How to Set Up a VA Hospital"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "How to Set Up a VA Hospital",
+            link: "/",
+          },
+        ]}
       />
       <section className={style.main_set_up_va_hospital}>
         <div className="container-xxl">

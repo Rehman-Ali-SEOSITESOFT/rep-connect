@@ -60,30 +60,37 @@ function Profile() {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className={styles.login}>
-                <div className={styles.loginArea}>
-                  <span className={styles.btnspan}>
-                    <button className={styles.logout}> logout </button>
-                  </span>
-                  <div className={styles.loginAreaDetails}>
-                    <div>
-                      <Image height={80} className={styles.logImg} src={Member} alt="logo" />
-                    </div>
-                    <div>
-                      <p className={styles.para}>grtesting</p>
-                    </div>
-                    <div>
-                      <button className={styles.editprofile}>Edit Profile</button>
-                    </div>
-                    <div className={styles.email}>
-                      <i className="fa-regular fa-envelope"></i>
+                <div className={styles.login}>
+                  <div className={styles.loginArea}>
+                    <span className={styles.btnspan}>
+                      <button className={styles.logout}> logout </button>
+                    </span>
+                    <div className={styles.loginAreaDetails}>
+                      <div>
+                        <Image
+                          height={80}
+                          className={styles.logImg}
+                          src={Member}
+                          alt="logo"
+                        />
+                      </div>
+                      <div>
+                        <p className={styles.para}>grtesting</p>
+                      </div>
+                      <div>
+                        <button className={styles.editprofile}>
+                          Edit Profile
+                        </button>
+                      </div>
+                      <div className={styles.email}>
+                        <i className="fa-regular fa-envelope"></i>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className={styles.analytics}>
-                  <div className={styles.analytic}>
-                    0 CONNECTIONS
+                  <div className={styles.analytics}>
+                    <div className={styles.analytic}>0 CONNECTIONS</div>
+                    <div className={styles.analytic}>0 FOLLOWING</div>
+                    <div className={styles.analytic}>0 FOLLOWERS</div>
                   </div>
                   <div className={styles.analytic}>
                     0 FOLLOWING
@@ -133,28 +140,49 @@ function Profile() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className='accordion__sho01'>
-                    <div className="accordion" id="accordionPanelsStayOpenExample">
-                      <div className="accordion-item">
-                        <h2 className="accordion-header" id="panelsStayOpen-headingOne">
-                          <button className={`accordion-button sho_ ${styles.accordion_btn}`} type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne01" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                            Account Details
-                          </button>
-                        </h2>
-                        <div id="panelsStayOpen-collapseOne01" className="accordion-collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                          <div className="accordion-body">
-                            <div>
-                              <div className={styles.profile_img}>
-                                <div className={styles.iconContainer}>
-                                  <i className={`fa-regular fa-envelope ${styles.proicon}`}></i>
+                    <div className="accordion__sho01">
+                      <div
+                        className="accordion"
+                        id="accordionPanelsStayOpenExample"
+                      >
+                        <div className="accordion-item">
+                          <h2
+                            className="accordion-header"
+                            id="panelsStayOpen-headingOne"
+                          >
+                            <button
+                              className={`accordion-button sho_ ${styles.accordion_btn}`}
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#panelsStayOpen-collapseOne01"
+                              aria-expanded="true"
+                              aria-controls="panelsStayOpen-collapseOne"
+                            >
+                              Account Details
+                            </button>
+                          </h2>
+                          <div
+                            id="panelsStayOpen-collapseOne01"
+                            className="accordion-collapse show"
+                            aria-labelledby="panelsStayOpen-headingOne"
+                          >
+                            <div className="accordion-body">
+                              <div>
+                                <div className={styles.profile_img}>
+                                  <div className={styles.iconContainer}>
+                                    <i
+                                      className={`fa-regular fa-envelope ${styles.proicon}`}
+                                    ></i>
+                                  </div>
+                                  <div className={styles.userProfilemail}>
+                                    {" "}
+                                    seositesoft7@gmail.com{" "}
+                                  </div>
                                 </div>
                                 <div className={styles.profileDet}> E-mail Address </div>
                                 <div className={styles.userProfilemail}>  seositesoft7@gmail.com  </div>
                                 <span className={styles.envelopIcon}> <i className={`fa-regular fa-envelope`}></i> </span>
                               </div>
-                              <hr />
-                              <button className={styles.verify}> Request Verification </button>
                             </div>
                           </div>
                         </div>
@@ -176,21 +204,13 @@ function Profile() {
                     <div> 1 </div>
                     <div> 0 </div>
                   </div>
-                </div>
-                <div className={styles.headings}>
-                  <div> Courses </div>
-                  <div> Completed </div>
-                  <div> Certificated </div>
-                </div>
-                <div className={styles.input_container}>
-                  <input placeholder="search" className={styles.input} />
-                  <i className={`fa-solid fa-magnifying-glass ${styles.search_icon}`}></i>
-                </div>
-                <div className={styles.section}>
-                  <div className={styles.courses}>
-                    <h3>
-                      Your Courses
-                    </h3>
+                  <hr />
+                  <div className={styles.tracker_heading}>
+                    <div className={styles.scores}>
+                      <div> 11 </div>
+                      <div> 1 </div>
+                      <div> 0 </div>
+                    </div>
                   </div>
                   <div className={styles.expand_all}>
                     <button
@@ -224,24 +244,21 @@ function Profile() {
                           <div className={styles.accord_body_alignment}>
                             <div>
                               <div>
-                                Course
+                                <div>Course</div>
+                                <div>Progress</div>
                               </div>
-                              <div>
-                                Progress
+                              <div className={styles.progress}>
+                                <div>0%</div>
+                                <div>Complete</div>
+                                <div className={styles.steps}>
+                                  <small>0/2 Steps</small>
+                                </div>
                               </div>
                             </div>
-                            <div className={styles.progress}>
-                              <div>
-                                0%
-                              </div>
-                              <div>
-                                Complete
-                              </div>
-                              <div className={styles.steps}>
-                                <small>
-                                  0/2 Steps
-                                </small>
-                              </div>
+                            <div className={styles.file}>
+                              <progress id="file" value="0" max="100">
+                                {" "}
+                              </progress>
                             </div>
                           </div>
                           <div className={styles.file}>
@@ -258,7 +275,8 @@ function Profile() {
                         <div className={styles.markup}>
                           <div> 1. MicrogenDX Traning Introduction </div>
                           <div>
-                            <span className={styles.statusMark}>complete</span>
+                            {" "}
+                            5. Science of MicroGenDX - Sales Training 2.1{" "}
                           </div>
                         </div>
                       </button>
@@ -269,28 +287,22 @@ function Profile() {
                           <div className={styles.accord_body_alignment}>
                             <div>
                               <div>
-                                Course
+                                <div>Course</div>
+                                <div>Progress</div>
                               </div>
-                              <div>
-                                Progress
-                              </div>
-                            </div>
-                            <div className={styles.progress}>
-                              <div>
-                                0%
-                              </div>
-                              <div>
-                                Complete
-                              </div>
-                              <div className={styles.steps}>
-                                <small>
-                                  1/1 Steps
-                                </small>
+                              <div className={styles.progress}>
+                                <div>0%</div>
+                                <div>Complete</div>
+                                <div className={styles.steps}>
+                                  <small>0/51 Steps</small>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div className={styles.file}>
-                            <progress id="file" value="1" max="1"></progress>
+                            <div className={styles.file}>
+                              <progress id="file" value="0" max="51">
+                                {" "}
+                              </progress>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -360,28 +372,22 @@ function Profile() {
                           <div className={styles.accord_body_alignment}>
                             <div>
                               <div>
-                                Course
+                                <div>Course</div>
+                                <div>Progress</div>
                               </div>
-                              <div>
-                                Progress
-                              </div>
-                            </div>
-                            <div className={styles.progress}>
-                              <div>
-                                5%
-                              </div>
-                              <div>
-                                Complete
-                              </div>
-                              <div className={styles.steps}>
-                                <small>
-                                  1/17 Steps
-                                </small>
+                              <div className={styles.progress}>
+                                <div>0%</div>
+                                <div>Complete</div>
+                                <div className={styles.steps}>
+                                  <small>0/3 Steps</small>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div className={styles.file}>
-                            <progress id="file" value="1" max="17">  </progress>
+                            <div className={styles.file}>
+                              <progress id="file" value="0" max="3">
+                                {" "}
+                              </progress>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -399,24 +405,22 @@ function Profile() {
                           <div className={styles.accord_body_alignment}>
                             <div>
                               <div>
-                                Course
+                                <div>Course</div>
+                                <div>Progress</div>
                               </div>
-                              <div>
-                                Progress
+                              <div className={styles.progress}>
+                                <div>0%</div>
+                                <div>Complete</div>
+                                <div className={styles.steps}>
+                                  <small>0/6 Steps</small>
+                                </div>
                               </div>
                             </div>
-                            <div className={styles.progress}>
-                              <div>
-                                0%
-                              </div>
-                              <div>
-                                Complete
-                              </div>
-                              <div className={styles.steps}>
-                                <small>
-                                  0/9 Steps
-                                </small>
-                              </div>
+                            <div className={styles.file}>
+                              <progress id="file" value="0" max="6">
+                                {" "}
+                                32%{" "}
+                              </progress>
                             </div>
                           </div>
                           <div className={styles.file}>
@@ -709,4 +713,4 @@ function Profile() {
   </div>;
 }
 
-export default Profile;
+export default Profile

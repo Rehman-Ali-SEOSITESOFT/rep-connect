@@ -13,9 +13,9 @@ const Sidebar = () => {
   const [DropDown, setDropDown] = useState(false);
   const handleDropDown = (event) => {
     event.preventDefault();
-    console.log("asdf")
+    console.log("asdf");
     setDropDown(!DropDown);
-  }
+  };
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
@@ -24,7 +24,11 @@ const Sidebar = () => {
           <div className="sidebar--top">
             <div className="top--section--top">
               <Link href="/">
-                <Image src={repconnect} alt="rep-connect" className="img-fluid" />
+                <Image
+                  src={repconnect}
+                  alt="rep-connect"
+                  className="img-fluid"
+                />
               </Link>
             </div>
             <div className="sidebar--navigation">
@@ -35,8 +39,8 @@ const Sidebar = () => {
                       <span>Rep Connect Home</span>
                     </Link>
                   </li>
-                  <li className="drop-menu--side--bar"  >
-                    <div className="sales" onClick={handleDropDown} >
+                  <li className="drop-menu--side--bar">
+                    <div className="sales" onClick={handleDropDown}>
                       Sales Resources
                       <i className="fa-solid fa-caret-right"></i>
                     </div>
@@ -127,7 +131,11 @@ const Sidebar = () => {
             </div>
             <div className="top--section--bottom">
               <Link href="/">
-                <Image src={mircogendx} alt="MicroGenDX" className="img-fluid" />
+                <Image
+                  src={mircogendx}
+                  alt="MicroGenDX"
+                  className="img-fluid"
+                />
               </Link>
             </div>
           </div>
@@ -135,7 +143,11 @@ const Sidebar = () => {
             <div className="bottom--cart">
               <div className="bottom--myaccount">
                 <Link href="/my-account">
-                  <Image src={myacount} alt="my-account" className="img-fluid" />
+                  <Image
+                    src={myacount}
+                    alt="my-account"
+                    className="img-fluid"
+                  />
                 </Link>
               </div>
               <Link href="/cart" className="bottom--cart">
@@ -188,7 +200,7 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/downloadable-sales-material/orthopedic-sales-material-2/">
+              <Link href="/downloadable-sales-material/orthopedic-sales-material/">
                 <span>Orthopedic Sales Material</span>
               </Link>
             </li>

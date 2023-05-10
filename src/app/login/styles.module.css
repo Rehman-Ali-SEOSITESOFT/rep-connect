@@ -4,7 +4,23 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
+.dp_flex{
+    display: flex;
+}
+
+
+.dp_flex2{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
 
 .input_container {
     display: flex;
@@ -64,6 +80,9 @@
     padding: 0 15px;
     display: flex;
     color: #08aed3 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .language_area {

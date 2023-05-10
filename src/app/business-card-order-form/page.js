@@ -62,7 +62,16 @@ const page = () => {
     <>
       <BreadCrum
         breadHeading={"Business Card Order Form"}
-        pageName={"Business Card Order Form"}
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Business Card Order Form",
+            link: "/business-card-order-form",
+          },
+        ]}
       />
       <section className={style.name_tag_order_form}>
         <div className="container-xxl">

@@ -74,7 +74,16 @@ const page = () => {
     <>
       <BreadCrum
         breadHeading="Setting Up an Office/In-Service"
-        pageName="Setting Up an Office/In-Service"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Setting Up an Office/In-Service",
+            link: "/",
+          },
+        ]}
       />
       <section className={style.in_office_page}>
         <div className="container-xxl">
