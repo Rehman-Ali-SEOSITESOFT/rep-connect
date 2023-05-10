@@ -2,15 +2,21 @@
 import React, { useState } from "react";
 import Webcam from "react-webcam";
 import style from './webCam.module.css'
+import { useDispatch, useSelector } from "react-redux";
+import { AddImage } from "@/redux/slices/editProfile";
 
-const WebCamera = ({rendered , _handleCaputer}) => {
+const WebCamera = ({rendered , _handleCaputer ,getImage}) => {
+  const imageProfile = useSelector((state)=>state.editPro)
+  const dispatch =useDispatch()
   const [isRendered,setIsRendered]=useState(rendered)
+  
   const videoConstraints = {
     width: 400,
     height: 400,
     facingMode: "user",
   };
   const [picture, setPicture] = useState("");
+ 
   const webcamRef = React.useRef(null);
   const capture = React.useCallback(() => {
     const pictureSrc = webcamRef.current.getScreenshot();
@@ -19,12 +25,15 @@ const WebCamera = ({rendered , _handleCaputer}) => {
   });
   const _handleCaputeree=(e)=>{
   e.preventDefault();
-  capture();
-  setIsRendered(false)
-  setTimeout(() =>_handleCaputer(false) , 3000);
+//   console.log(picture,"pic");
+//  console.log( dispatch(AddImage(picture)),"hello");
+//   capture();
+//   setIsRendered(false)
+//   setTimeout(() =>_handleCaputer(false) , 3000);
+_handleCaputer(webcamRef.current.getScreenshot())
 
-  }
-  console.log(isRendered,"rendered");
+}
+  console.log(picture,"picture");
   return (
     <>
       <div className={`${style.main_image_webvcam}`}>
@@ -46,11 +55,12 @@ const WebCamera = ({rendered , _handleCaputer}) => {
         <div>
           {picture != "" ? (
             <button
-              onClick={(e) => {
-                e.preventDefault();
-                setPicture();
-                setIsRendered(false)
-               }}
+            onClick={_handleCaputeree}
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   setPicture();
+              //   setIsRendered(false)
+              //  }}
               className={`${style.takeeee} hhh`}
             >
               Take Photo
