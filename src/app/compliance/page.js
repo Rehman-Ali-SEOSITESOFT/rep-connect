@@ -1,3 +1,4 @@
+"use client";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import ComplianceAsideWidget from "@/components/complianceAsideWidget/ComplianceAsideWidget";
 import React from "react";
