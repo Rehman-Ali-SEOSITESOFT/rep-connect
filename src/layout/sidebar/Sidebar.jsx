@@ -19,6 +19,7 @@ const Sidebar = () => {
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
+      <div onClick={handleDropDown}  className="layout" style={DropDown ? { display: "block" } : { display: "none" }}> </div>
         <div>
           <div className="sidebar--top">
             <div className="top--section--top">
@@ -157,8 +158,10 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
+        
         <div className="drop--down--menu" style={DropDown ? { display: "block" } : { display: "none" }}>
-          <ul >
+       
+          <ul>
             <li>
               <Link href="/product-category/sales-material/">
                 <span>Order Printed Sales Materials</span>
@@ -221,6 +224,7 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
+        
       </aside>
     </>
   );

@@ -5,7 +5,6 @@
 
 .main {
     display: flex;
-    justify-content: center;
     padding: 10px 0px;
 }
 
@@ -51,15 +50,16 @@
 }
 
 .profileDet {
-    width: 100px;
     font-size: 12px !important;
     color: #444 !important;
     font-weight: bold !important;
-    margin-left: 40px;
+    /* margin: 0px 44px; */
 }
 
 
-
+.icon_span {
+    margin: 0px 5px;
+}
 
 
 .acbody_content_para {
@@ -164,20 +164,23 @@
 }
 
 .dpname {
-    padding: 0 45px;
+    /* padding: 0 45px; */
     color: #999;
     font-size: smaller;
 }
-
+.envelopIcon {
+    margin: 0 5px;
+}
 
 .iconContainer {
     width: 35px;
-    height: 30px;
+    height: 35px;
     background-color: #dee2e6;
     text-align: center;
     border-radius: 50px;
     cursor: pointer;
     padding: 0px;
+    line-height: 38px;
 }
 
 .iconContainer:hover {
@@ -196,7 +199,6 @@
 
 .userProfileimage {
     border: 1px solid #999;
-    margin-left: 10px;
     width: 100%;
     padding: 4px;
 }
@@ -212,12 +214,16 @@
     color: #333;
     font-size: xx-large;
     text-align: center;
-    padding: 15px 0;
+    /* padding: 15px 0; */
 }
 
 .tracker {
-    padding: 30px;
+    padding: 20px 30px;
     background-color: rgba(0, 162, 232, 0.2);
+}
+
+.tracker hr {
+    margin: 0.5rem;
 }
 
 .scores {
@@ -242,6 +248,18 @@
     align-items: center;
     text-align: center;
     color: #333333;
+    margin-bottom: 10px;
+}
+
+
+
+.acc_btn {
+    background-color: white !important;
+}
+
+.acc_btn:focus{
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 .input_container {

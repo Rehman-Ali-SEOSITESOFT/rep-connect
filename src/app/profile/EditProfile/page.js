@@ -37,12 +37,9 @@ const EditProfile = () => {
         setChangeIcon(newArray);
     }
     const handleChange = (e) => {
-
         setUserProfile({
             ...userProfile, [e.target.name]: e.target.value
         })
-
-        console.log("res", e.target)
     }
     useEffect(() => {
         console.log("UseEffect Is Running")

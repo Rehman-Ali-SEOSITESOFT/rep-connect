@@ -9,6 +9,20 @@ import NewAccordion from "@/components/accordoin/newAccordion";
 import CourseContent from "@/components/courseContent/CourseContent";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 function Profile() {
+  const [expand,setExpand] = useState(true)
+  const expandAll = (e) => {
+    e.preventDefault();
+    setExpand(!expand)
+    var accordions = document.querySelectorAll('.accordion-collapse');
+      accordions.forEach(function (accordion) {
+        if (!accordion.classList.contains('show')) {
+          accordion.classList.add('show');
+        }
+        else {
+          accordion.classList.remove('show');
+        }
+      });
+  }
   return <div>
     <BreadCrum breadHeading="My Profile" pageName=" Home " subPage="My Profile" />
     <div className={styles.dummyDiv}></div>
@@ -32,11 +46,11 @@ function Profile() {
               <div className='accordion__sho'>
                 <div className="accordion" id="accordionPanelsStayOpenExample">
                   <div className="accordion-item">
-                    <h2 className="accordion-header" id="panelsStayOpen-headingOne">
+                    <div className="accordion-header" id="panelsStayOpen-headingOne">
                       <button className="accordion-button accord_btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne03" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                         Points History
                       </button>
-                    </h2>
+                    </div>
                     <div id="panelsStayOpen-collapseOne03" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                       <div className="accordion-body">
                         <p className={styles.acbody_content_para}> Recent Awarded Points for Activity: </p>
@@ -89,19 +103,29 @@ function Profile() {
                         </h2>
                         <div id="panelsStayOpen-collapseOne02" className="accordion-collapse show" aria-labelledby="panelsStayOpen-headingOne">
                           <div className="accordion-body">
-                            <div className={styles.acbody}>
-                              <div>
+                            <div className="row pb-3">
+                              <div className="col-4">
                                 <div className={styles.profileDet}> Profile Display Name </div>
                               </div>
-                              <div>
-                                <div className={styles.dpname}> <p>grtesting</p> </div>
+                              <div className="col-8">
+                                <div className={styles.dpname}>grtesting</div>
                               </div>
                             </div>
-                            <div>
-                              <div className={styles.profile_img}>
-                                <div className={styles.iconContainer}>
-                                  <i className={`fa-solid fa-camera ${styles.proicon}`}></i>
+                           
+                            <div className="row">
+                              <div className="col-4">
+                                <div className="row">
+                                  <div className="col-2">
+                                    <div className={styles.iconContainer}>
+                                      <i className={`fa-solid fa-camera ${styles.proicon}`}></i>
+                                    </div>
+                                  </div>
+                                  <div className="col-10">
+                                    <div className={styles.profileDet}>Profile Picture </div>
+                                  </div>
                                 </div>
+                              </div>
+                              <div className="col-8">
                                 <div className={styles.userProfileimage}>  <Image src={Member} height={80} alt="logo" />  </div>
                               </div>
                             </div>
@@ -125,7 +149,9 @@ function Profile() {
                                 <div className={styles.iconContainer}>
                                   <i className={`fa-regular fa-envelope ${styles.proicon}`}></i>
                                 </div>
+                                <div className={styles.profileDet}> E-mail Address </div>
                                 <div className={styles.userProfilemail}>  seositesoft7@gmail.com  </div>
+                                <span className={styles.envelopIcon}> <i className={`fa-regular fa-envelope`}></i> </span>
                               </div>
                               <hr />
                               <button className={styles.verify}> Request Verification </button>
@@ -141,7 +167,7 @@ function Profile() {
             <div className="col-lg-5 col-md-6">
               <div className={styles.tracker}>
                 <div>
-                  <p className={styles.tracker_heading}> Course Tracker </p>
+                  <h2 className={styles.tracker_heading}> Course Tracker </h2>
                 </div>
                 <hr />
                 <div className={styles.tracker_heading}>
@@ -168,6 +194,8 @@ function Profile() {
                   </div>
                   <div className={styles.expand_all}>
                     <button
+                      onClick={expandAll}
+                      id="collapse-all-button"
                       data-bs-toggle="collapse"
                       data-bs-target=".shoaib"
                       aria-expanded="false"
@@ -177,19 +205,20 @@ function Profile() {
                       <span>
                         <i className="fa-solid fa-angle-down"></i>
                       </span>{" "}
-                      Expand All
+                     { expand ? 'Expand All' : 'Collapse All' }
                     </button>
                   </div>
                 </div>
                 {/* <CourseContent/> */}
+
                 <div className="accordion" id="accordionExample">
                   <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingOne01">
-                      <button className={`accordion-button ${styles.acc_btn}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <h2 className="accordion-header" id="headingOne">
+                      <button className={`accordion-button ${styles.acc_btn}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-01" aria-expanded="true" aria-controls="collapseOne">
                         <div className={styles.circle_select}></div> <div> 1. Classroom Traning </div>
                       </button>
                     </h2>
-                    <div id="collapseOne" className="shoaib accordion-collapse show" aria-labelledby="headingOne01" data-bs-parent="#accordionExample">
+                    <div id="collapseOne-01" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -216,7 +245,7 @@ function Profile() {
                             </div>
                           </div>
                           <div className={styles.file}>
-                            <progress id="file" value="0" max="100">  </progress>
+                            <progress id="file" value="0" max="9">  </progress>
                           </div>
                         </div>
                       </div>
@@ -224,7 +253,7 @@ function Profile() {
                   </div>
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="headingOne">
-                      <button className={`accordion-button ${styles.acc_btn}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <button className={`accordion-button ${styles.acc_btn}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-02" aria-expanded="true" aria-controls="collapseOne">
                         <div className={styles.markTick}><i className="fa-solid fa-check"></i> </div>
                         <div className={styles.markup}>
                           <div> 1. MicrogenDX Traning Introduction </div>
@@ -234,7 +263,7 @@ function Profile() {
                         </div>
                       </button>
                     </h2>
-                    <div id="collapseOne" className="shoaib accordion-collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne-02" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -267,6 +296,52 @@ function Profile() {
                       </div>
                     </div>
                   </div>
+
+                  {/* <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingOne">
+                      <button className={`accordion-button ${styles.acc_btn}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-02" aria-expanded="true" aria-controls="collapseOne">
+                        <div className={styles.markTick}><i className="fa-solid fa-check"></i> </div>
+                        <div className={styles.markup}>
+                          <div> 1. MicrogenDX Traning Introduction </div>
+                          <div>
+                            <span className={styles.statusMark}>complete</span>
+                          </div>
+                        </div>
+                      </button>
+                    </h2>
+                    <div id="collapseOne-02" className="shoaib accordion-collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div className={`accordion-body ${styles.acc_body}`}>
+                        <div className={styles.accord_body}>
+                          <div className={styles.accord_body_alignment}>
+                            <div>
+                              <div>
+                                Course
+                              </div>
+                              <div>
+                                Progress
+                              </div>
+                            </div>
+                            <div className={styles.progress}>
+                              <div>
+                                0%
+                              </div>
+                              <div>
+                                Complete
+                              </div>
+                              <div className={styles.steps}>
+                                <small>
+                                  1/1 Steps
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div className={styles.file}>
+                            <progress id="file" value="1" max="1"></progress>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> */}
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="headingOne">
                       <button className={`accordion-button ${styles.acc_btn}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne03" aria-expanded="true" aria-controls="collapseOne">
@@ -279,7 +354,7 @@ function Profile() {
                         </div>
                       </button>
                     </h2>
-                    <div id="collapseOne03" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne03" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -318,7 +393,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 3. Microbiology Key Concepts </div>
                       </button>
                     </h2>
-                    <div id="collapseOne04" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne04" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -357,7 +432,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 3. Sales Report Videos </div>
                       </button>
                     </h2>
-                    <div id="collapseOne05" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne05" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -396,7 +471,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 4. Sales Material </div>
                       </button>
                     </h2>
-                    <div id="collapseOne06" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne06" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -435,7 +510,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 4. Technology </div>
                       </button>
                     </h2>
-                    <div id="collapseOne07" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne07" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -474,7 +549,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 5. MicroGenDX Minute </div>
                       </button>
                     </h2>
-                    <div id="collapseOne08" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne08" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -513,7 +588,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 5. Science of MicroGenDX - Sales Training 2.1 </div>
                       </button>
                     </h2>
-                    <div id="collapseOne09" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne09" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -552,7 +627,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 6. Understanding Clinical Papers </div>
                       </button>
                     </h2>
-                    <div id="collapseOne10" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne10" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
@@ -591,7 +666,7 @@ function Profile() {
                         <div className={styles.circle_select}></div> <div> 7. Business Development </div>
                       </button>
                     </h2>
-                    <div id="collapseOne11" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne11" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div className={`accordion-body ${styles.acc_body}`}>
                         <div className={styles.accord_body}>
                           <div className={styles.accord_body_alignment}>
