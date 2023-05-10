@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
-import styles from "./microgendxInsider.module.css";
-import MicrogendxInsiderComponent from "@/components/microgendxInsiderComponent/microgendxInsiderComponent";
-import labCompany from "../../assets/images/microgenInsider/lab-company.png";
-import drpleads from "../../assets/images/microgenInsider/doctorpleads.png";
-import indicated from "../../assets/images/microgenInsider/tenindicted.png";
-import business from "../../assets/images/microgenInsider/businessagreement.png";
-import jail from "../../assets/images/microgenInsider/jail.png";
-import Image from "next/image";
-import BreadCrum from "@/components/breadCrum/BreadCrum";
+import React, { useState } from "react"
+import styles from "./microgendxInsider.module.css"
+import MicrogendxInsiderComponent from "@/components/microgendxInsiderComponent/microgendxInsiderComponent"
+import labCompany from "../../assets/images/microgenInsider/lab-company.png"
+import drpleads from "../../assets/images/microgenInsider/doctorpleads.png"
+import indicated from "../../assets/images/microgenInsider/tenindicted.png"
+import business from "../../assets/images/microgenInsider/businessagreement.png"
+import jail from "../../assets/images/microgenInsider/jail.png"
+import Image from "next/image"
+import Pagination from "@/components/pagination/Pagination"
 const page = () => {
   const [imageCounter, setImageCounter] = useState(0);
   const [layout, setLayout] = useState(false);
@@ -170,6 +170,9 @@ const page = () => {
                 </div>
               );
             })}
+             <div className="pagi_margin">
+        <Pagination/>
+      </div>
           </div>
         </div>
       </section>

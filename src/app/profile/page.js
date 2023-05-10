@@ -1,96 +1,47 @@
-"use client";
+"use client"
 import { useState } from "react";
 import Image from "next/image";
-import Logo from "../../../src/assets/images/Profile/profile.png";
-import Member from "../../../src/assets/images/Profile/member.png";
-import styles from "./profile.module.css";
+import Logo from '../../../src/assets/images/Profile/profile.png';
+import Member from '../../../src/assets/images/Profile/member.png'
+import styles from './profile.module.css'
 import Accordoin from "@/components/accordoin/accordoin";
 import NewAccordion from "@/components/accordoin/newAccordion";
 import CourseContent from "@/components/courseContent/CourseContent";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 function Profile() {
-  return (
-    <div>
-      <BreadCrum
-        breadHeading="My Profile"
-        pagess={[
-          {
-            page: "Home",
-            link: "/",
-          },
-          {
-            page: "My Profile",
-            link: "/",
-          },
-        ]}
-      />
-      <div className={styles.dummyDiv}></div>
-      <section>
-        <div className="container-xxl">
-          <div className={styles.main}>
-            <div className={styles.logorow}>
-              <div>
-                <Image
-                  src={Logo}
-                  height={80}
-                  className={styles.logoImg}
-                  alt="logo"
-                />
-              </div>
-              <div>
-                <span>
-                  You Currently Have:{" "}
-                  <span className={styles.bold}>
-                    [mycred_my_balance wrapper=0 balance_el=""] Points
-                  </span>
-                </span>
-              </div>
+  return <div>
+    <BreadCrum breadHeading="My Profile" pageName=" Home " subPage="My Profile" />
+    <div className={styles.dummyDiv}></div>
+    <section>
+      <div className="container-xxl">
+        <div className={styles.main}>
+          <div className={styles.logorow}>
+            <div>
+              <Image src={Logo} height={80} className={styles.logoImg} alt="logo" />
+            </div>
+            <div>
+              <span>
+                You Currently Have: <span className={styles.bold}>[mycred_my_balance wrapper=0 balance_el=""] Points</span>
+              </span>
             </div>
           </div>
-          <div className={styles.main}>
-            <div className={`row ${styles.row01} ${styles.custom__accd__shob}`}>
-              <div className="col-lg-7 col-md-6">
-                <div className="accordion__sho">
-                  <div
-                    className="accordion"
-                    id="accordionPanelsStayOpenExample"
-                  >
-                    <div className="accordion-item">
-                      <h2
-                        className="accordion-header"
-                        id="panelsStayOpen-headingOne"
-                      >
-                        <button
-                          className="accordion-button accord_btn"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#panelsStayOpen-collapseOne03"
-                          aria-expanded="true"
-                          aria-controls="panelsStayOpen-collapseOne"
-                        >
-                          Points History
-                        </button>
-                      </h2>
-                      <div
-                        id="panelsStayOpen-collapseOne03"
-                        className="accordion-collapse collapse show"
-                        aria-labelledby="panelsStayOpen-headingOne"
-                      >
-                        <div className="accordion-body">
-                          <p className={styles.acbody_content_para}>
-                            {" "}
-                            Recent Awarded Points for Activity:{" "}
-                          </p>
-                          <p>
-                            {" "}
-                            [mycred_history user_id="current" pagination=2
-                            show_nav=0]{" "}
-                          </p>
-                          <span className={styles.acbody_content_link}>
-                            {" "}
-                            View Full History{" "}
-                          </span>
-                        </div>
+        </div>
+        <div className={styles.main}>
+          <div className={`row ${styles.row01} ${styles.custom__accd__shob}`} >
+            <div className="col-lg-7 col-md-6">
+              <div className='accordion__sho'>
+                <div className="accordion" id="accordionPanelsStayOpenExample">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="panelsStayOpen-headingOne">
+                      <button className="accordion-button accord_btn" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne03" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Points History
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne03" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                      <div className="accordion-body">
+                        <p className={styles.acbody_content_para}> Recent Awarded Points for Activity: </p>
+                        <p> [mycred_history user_id="current" pagination=2 show_nav=0] </p>
+                        <span className={styles.acbody_content_link}>  View Full History  </span>
                       </div>
                     </div>
                   </div>
@@ -798,9 +749,9 @@ function Profile() {
             </div>
           </div>
         </div>
-      </section>
-    </div>
-  );
+      </div>
+    </section>
+  </div>;
 }
 
-export default Profile;
+export default Profile

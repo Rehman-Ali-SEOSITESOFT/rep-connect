@@ -3,6 +3,8 @@
   overflow: hidden;
   max-width: 100%;
   margin: auto;
+  width: 440px;
+  height: 250px;
 }
 .insider_image_wrapper:after {
   content: "";
@@ -134,4 +136,8 @@
 .read_and_comment a:hover {
   text-decoration: underline;
   color: #f05c5d;
+}
+.pagi_margin{
+  margin: 40px 30px 0;
+
 }

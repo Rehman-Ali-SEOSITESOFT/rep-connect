@@ -1,30 +1,64 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Member from "../../../assets/images/Profile/member.png";
 import styles from "./editprofile.module.css";
 import help from "../../../assets/images/Profile/help.png";
+import axios from "axios";
+import WebCam from "@/components/webCam/WebCam";
+import WebCamera from "@/components/webCam/WebCam";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 
 const EditProfile = () => {
-  const [changeIcon, setChangeIcon] = useState([false, false, false]);
-  // const [changeClass, setChangeClass] = useState([false, false, false]);
-  const newArray = [false, false, false];
+  const [getImage, setGetImage] = useState("");
+  const [base64Image, setBase64Image] = useState("");
   const [userProfile, setUserProfile] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     bioGraphy: "",
     gender: "",
     country: "",
-    fb: "",
+    facebook_page: "",
     twitter: "",
-    google: "",
+    mobile: "",
     website: "",
     mobile: "",
     email: "",
   });
+  const [entries, setEntries] = useState([]);
+  const [changeIcon, setChangeIcon] = useState([false, false, false]);
+  const [images, setImages] = useState([]);
+  const [active, setActive] = useState(false);
+  const _handleChangeInputs = (e) => {
+    setActive(!active);
+    setTimeout(() => {
+      setActive(false);
+    }, 3000);
+  };
+
+  const [input, setInput] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    validateInput(e);
+  };
+  // const [changeClass, setChangeClass] = useState([false, false, false]);
+  const newArray = [false, false, false];
+  const handleProfileSubmit = (e) => {
+    e.preventDefault();
+  };
   const handleIcon = (value) => {
-    console.log("value:", changeIcon[value]);
     const newArray = [...changeIcon];
     for (let i = 0; i < newArray.length; i++) {
       if (i === value) {
@@ -36,41 +70,118 @@ const EditProfile = () => {
     setChangeIcon(newArray);
   };
   const handleChange = (e) => {
-    setUserProfile({
-      ...userProfile,
+    setEntries({
+      ...setUserProfile,
       [e.target.name]: e.target.value,
     });
-
-    console.log("res", e.target);
   };
+  const [userToken, setUserToken] = useState("");
   useEffect(() => {
-    console.log("UseEffect Is Running");
-  }, []);
-  const handleProfileSubmit = (e) => {
-    e.preventDefault();
-    console.log("asdfgadfsg", userProfile);
+    setUserToken(JSON.parse(localStorage.getItem("token")));
+    const header = {
+      "x-auth-token": userToken,
+      "Content-Type": "application/json",
+    };
+
+    axios
+      .get("https://anxious-foal-shift.cyclic.app/api/user/getSingleUser", {
+        headers: header,
+      })
+      .then((resp) => {
+        setEntries(resp.data.data[0]);
+      })
+      .catch((err) => console.log(err));
+  }, [userToken]);
+  const [isRendered, setIsRendered] = useState(false);
+  const validateInput = (e) => {
+    let { name, value } = e.target;
+    setError((prev) => {
+      const stateObj = { ...prev, [name]: "" };
+      switch (name) {
+        case "password":
+          if (!value) {
+            stateObj[name] = "Please enter Password.";
+          } else if (input.confirmPassword && value !== input.confirmPassword) {
+            stateObj["confirmPassword"] =
+              "Password and Confirm Password does not match.";
+          } else {
+            stateObj["confirmPassword"] = input.confirmPassword
+              ? ""
+              : error.confirmPassword;
+          }
+          break;
+        case "confirmPassword":
+          if (!value) {
+            stateObj[name] = "Please enter Confirm Password.";
+          } else if (input.password && value !== input.password) {
+            stateObj[name] = "Password and Confirm Password does not match.";
+          }
+          break;
+      }
+      return stateObj;
+    });
+  };
+
+  const _handleUpdateData = (event, data) => {
+    console.log(userToken, "user token for patch");
+    const header = {
+      "x-auth-token": userToken,
+      "Content-Type": "application/json",
+    };
+    const userData = {
+      first_name: entries.first_name,
+      last_name: entries.last_name,
+      bioGraphy: entries.bioGraphy,
+      gender: entries.gender,
+      // facebook_page: entries.social_profiles.facebook_page,
+    };
+    axios
+      .patch(
+        "https://anxious-foal-shift.cyclic.app/api/user/editProfile",
+        userData,
+        {
+          headers: header,
+        }
+      )
+      .then((resp) => console.log(resp))
+      .catch((err) => console.log(err));
+  };
+  const _handleImage = () => {
+    setIsRendered(true);
+  };
+  const _handleCaputeree = (e) => {
+    setIsRendered(!isRendered);
+    setGetImage(e);
+  };
+  const _handleDelteImage = () => {
+    setGetImage("");
+  };
+  const setImageSec = () => {
+    setImg(img);
+  };
+  const handleImageChange = (event) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      setBase64Image(reader.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  const removeUpload = () => {
+    setBase64Image("");
   };
   return (
     <>
+      {/* <WebCamera/> */}
       <BreadCrum
         breadHeading="Edit Profile"
         pagess={[
-          {
-            page: "Home",
-            link: "/",
-          },
-          {
-            page: "My Profile",
-            link: "/profile",
-          },
-          {
-            page: "Edit Profile",
-            link: "/",
-          },
+          { page: "Home", link: "/" },
+          { page: "My Profile", link: "/profile" },
+          { page: "Edit Profile", link: "/" },
         ]}
       />
 
-      <section>
+      <section className="position-relative">
         <div className="container-xxl">
           <div className={styles.profile_container}>
             <div className={styles.profile_area}>
@@ -144,57 +255,147 @@ const EditProfile = () => {
                               <div className={styles.label}>
                                 <label> Profile Display Name </label>
                                 <span>
-                                  {" "}
                                   <Image src={help} alt="logo" />{" "}
                                 </span>
                               </div>
                             </div>
                             <div className="col-lg-8 col-md-12 p-1">
-                              <input className={`w-100 ${styles.input}`} />
+                              <input
+                                className={`w-100 ${
+                                  active ? styles.input : styles.secondInput
+                                }`}
+                                value={entries.username}
+                                onChange={handleChange}
+                                onClick={_handleChangeInputs}
+                              />
                             </div>
                           </div>
                           <div className={`row ${styles.profile_row}`}>
                             <div className="col-lg-4 col-md-12 p-2">
                               <div className={styles.profilePic}>
                                 <div className={styles.camIcon}>
-                                  {" "}
                                   <i className="fa-solid fa-camera"></i>{" "}
                                 </div>
                                 <div className={styles.iconLabel}>
-                                  {" "}
                                   Profile Picture{" "}
                                   <span>
-                                    {" "}
                                     <Image
                                       alt="logo"
                                       src={help}
                                       data-toggle="tooltip"
                                       data-placement="bottom"
                                       title="Upload a picture that presents you across this site"
-                                    />{" "}
-                                  </span>{" "}
+                                    />
+                                  </span>
                                 </div>
                               </div>
                             </div>
                             <div className="col-lg-8 col-md-12 p-1">
                               <div>
                                 <div className={styles.img_area}>
-                                  <Image
-                                    height={80}
-                                    className={`${styles.logImg}`}
-                                    src={Member}
-                                    alt="logo"
-                                  />
+                                  {base64Image ? (
+                                    <Image
+                                      src={base64Image}
+                                      alt=""
+                                      width={80}
+                                      height={80}
+                                    />
+                                  ) : (
+                                      <Image
+                                        height={80}
+                                        className={`${styles.logImg}`}
+                                        src={Member}
+                                        alt="logo"
+                                      />
+                                    ) && getImage ? (
+                                    <Image
+                                      src={getImage}
+                                      alt="img"
+                                      height={80}
+                                      width={80}
+                                      className={`${styles.logImg}`}
+                                    />
+                                  ) : (
+                                    <Image
+                                      height={80}
+                                      className={`${styles.logImg}`}
+                                      src={Member}
+                                      alt="logo"
+                                    />
+                                  )}
                                 </div>
                                 <div>
-                                  <button className={styles.upload_pic}>
-                                    {" "}
-                                    upload a profile picture{" "}
-                                  </button>
-                                  <button className={styles.click_photo}>
-                                    {" "}
-                                    Take Photo{" "}
-                                  </button>
+                                  <label
+                                    for="myfile"
+                                    className={styles.upload_pic}
+                                  >
+                                    Upload a profile picture
+                                  </label>
+                                  <input
+                                    type="file"
+                                    id="myfile"
+                                    name="myfile"
+                                    onChange={handleImageChange}
+                                    style={{ display: "none" }}
+                                  />
+                                  {base64Image ? (
+                                    <>
+                                      <button
+                                        className={`${styles.removeUpload}`}
+                                        onClick={removeUpload}
+                                      >
+                                        remove
+                                      </button>
+                                      <button
+                                        className={styles.click_photo}
+                                        onClick={_handleImage}
+                                      >
+                                        Take Photo
+                                      </button>
+                                    </>
+                                  ) : (
+                                      <button
+                                        className={styles.click_photo}
+                                        onClick={_handleImage}
+                                      >
+                                        Take Photo
+                                      </button>
+                                    ) && getImage ? (
+                                    <>
+                                      <button
+                                        className={`${styles.remove}`}
+                                        onClick={_handleDelteImage}
+                                      >
+                                        remove
+                                      </button>
+                                      <button
+                                        className={styles.click_photo}
+                                        onClick={_handleImage}
+                                      >
+                                        Take Photo
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <button
+                                      className={styles.click_photo}
+                                      onClick={_handleImage}
+                                    >
+                                      Take Photo
+                                    </button>
+                                  )}
+
+                                  <div className={`${styles.photooo}`}>
+                                    {isRendered ? (
+                                      <WebCamera
+                                        rendered={isRendered}
+                                        _handleCaputer={(e) =>
+                                          _handleCaputeree(e)
+                                        }
+                                      />
+                                    ) : (
+                                      <button className="d-none"></button>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -208,9 +409,12 @@ const EditProfile = () => {
                             <div className="col-lg-8 col-md-12 p-2">
                               <input
                                 onChange={handleChange}
-                                value={userProfile.firstName}
-                                name="firstName"
-                                className={`w-100 ${styles.input}`}
+                                value={entries.first_name}
+                                name="first_name"
+                                className={`w-100 ${
+                                  active ? styles.input : styles.secondInput
+                                }`}
+                                onClick={_handleChangeInputs}
                               />
                             </div>
                           </div>
@@ -223,9 +427,12 @@ const EditProfile = () => {
                             <div className="col-lg-8 col-md-12 p-2">
                               <input
                                 onChange={handleChange}
-                                value={userProfile.lastName}
-                                name="lastName"
-                                className={`w-100 ${styles.input}`}
+                                value={entries.last_name}
+                                name="last_name"
+                                className={`w-100 ${
+                                  active ? styles.input : styles.secondInput
+                                }`}
+                                onClick={_handleChangeInputs}
                               />
                             </div>
                           </div>
@@ -248,7 +455,7 @@ const EditProfile = () => {
                             <div className="col-lg-8 col-md-12 p-2">
                               <textarea
                                 onChange={handleChange}
-                                value={userProfile.bioGraphy}
+                                value={entries.bioGraphy}
                                 name="bioGraphy"
                                 rows="6"
                                 className={`w-100 ${styles.textarea01}`}
@@ -260,46 +467,41 @@ const EditProfile = () => {
                               <div className={styles.label}>Gender</div>
                             </div>
                             <div className="col-lg-8 col-md-12 p-2">
-                              <div className={styles.gender_area}>
-                                <div className="form-check">
-                                  <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="gender"
-                                    id="exampleRadios1"
-                                    value="Male"
-                                    checked={userProfile.gender === "Male"}
-                                    onChange={handleChange}
-                                  />
-                                  <label
-                                    className="form-check-label"
-                                    htmlFor="exampleRadios1"
-                                  >
-                                    Male
-                                  </label>
-                                </div>
-                                <div className="form-check">
-                                  <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="gender"
-                                    id="exampleRadios2"
-                                    value="Female"
-                                    checked={userProfile.gender === "Female"}
-                                    onChange={handleChange}
-                                  />
-                                  <label
-                                    className="form-check-label"
-                                    htmlFor="exampleRadios2"
-                                  >
-                                    Female
-                                  </label>
-                                </div>
+                              <div className="form-check">
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="gender"
+                                  id="exampleRadios1"
+                                  value="Male"
+                                  checked={entries.gender === "Male"}
+                                  onChange={handleChange}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="exampleRadios1"
+                                >
+                                  Male
+                                </label>
                               </div>
-                              {/* <input type="radio"  onChange={handleChange} value={userProfile.gender}  id="html" name="Male" className={styles.radio_input} />
-                                                        <label htmlFor="male"  className={styles.radio_label}>Male</label>
-                                                        <input type="radio"  onChange={handleChange} value={userProfile.gender} name="Female" id="html"  className={styles.radio_input} />
-                                                        <label htmlFor="Female" className={styles.radio_label}>Female</label><br /> */}
+                              <div className="form-check">
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="gender"
+                                  id="exampleRadios2"
+                                  value="Female"
+                                  checked={entries.gender === "Female"}
+                                  onChange={handleChange}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="exampleRadios2"
+                                >
+                                  Female
+                                </label>
+                                {/* </div> */}
+                              </div>
                             </div>
                           </div>
                           <div className={`row ${styles.profile_row}`}>
@@ -833,9 +1035,14 @@ const EditProfile = () => {
                                 <div>
                                   <input
                                     onChange={handleChange}
-                                    value={userProfile.fb}
+                                    value={
+                                      entries.social_profiles?.facebook_page
+                                    }
                                     name="fb"
-                                    className={`w-100 ${styles.input}`}
+                                    className={`w-100 ${
+                                      active ? styles.input : styles.secondInput
+                                    }`}
+                                    onClick={_handleChangeInputs}
                                   />
                                 </div>
                               </div>
@@ -858,9 +1065,12 @@ const EditProfile = () => {
                                 <div>
                                   <input
                                     onChange={handleChange}
-                                    value={userProfile.twitter}
+                                    // value={entries.social_profiles}
                                     name="twitter"
-                                    className={`w-100 ${styles.input}`}
+                                    className={`w-100 ${
+                                      active ? styles.input : styles.secondInput
+                                    }`}
+                                    onClick={_handleChangeInputs}
                                   />
                                 </div>
                               </div>
@@ -883,9 +1093,11 @@ const EditProfile = () => {
                                 <div>
                                   <input
                                     onChange={handleChange}
-                                    value={userProfile.google}
-                                    name="google"
-                                    className={`w-100 ${styles.input}`}
+                                    // value={entries.social_profiles.google_plus}
+                                    className={`w-100 ${
+                                      active ? styles.input : styles.secondInput
+                                    }`}
+                                    onClick={_handleChangeInputs}
                                   />
                                 </div>
                               </div>
@@ -895,7 +1107,7 @@ const EditProfile = () => {
                             <div className="col-lg-4 col-md-12 p-2">
                               <div className={styles.profilePic}>
                                 <div className={styles.camIcon}>
-                                  <i className="fa-solid fa-house"></i>{" "}
+                                  <i class="fa-solid fa-house"></i>{" "}
                                 </div>
                                 <div className={styles.iconLabel}>
                                   {" "}
@@ -907,10 +1119,11 @@ const EditProfile = () => {
                               <div>
                                 <div>
                                   <input
-                                    onChange={handleChange}
-                                    value={userProfile.website}
-                                    name="website"
-                                    className={`w-100 ${styles.input}`}
+                                    className={`w-100 ${
+                                      active ? styles.input : styles.secondInput
+                                    }`}
+                                    onClick={_handleChangeInputs}
+                                    // value={entries.social_profiles}
                                   />
                                 </div>
                               </div>
@@ -967,10 +1180,14 @@ const EditProfile = () => {
                             </div>
                             <div className="col-lg-8 col-md-12 p-2">
                               <input
+                                className={`w-100 ${
+                                  active ? styles.input : styles.secondInput
+                                }`}
+                                onClick={_handleChangeInputs}
+                                value={entries.mobile}
+                                type="number"
+                                name="mobile"
                                 onChange={handleChange}
-                                value={userProfile.website}
-                                name="website"
-                                className={`w-100 ${styles.input}`}
                               />
                             </div>
                           </div>
@@ -978,7 +1195,7 @@ const EditProfile = () => {
                             <div className="col-lg-4 col-md-12 p-2">
                               <div className={styles.profilePic}>
                                 <div className={styles.camIcon}>
-                                  <i className="fa-regular fa-envelope"></i>{" "}
+                                  <i class="fa-regular fa-envelope"></i>{" "}
                                 </div>
                                 <div className={styles.iconLabel}>
                                   {" "}
@@ -989,7 +1206,15 @@ const EditProfile = () => {
                             <div className="col-lg-8 col-md-12 p-2">
                               <div>
                                 <div>
-                                  <input className={`w-100 ${styles.input}`} />
+                                  <input
+                                    className={`w-100 ${
+                                      active ? styles.input : styles.secondInput
+                                    }`}
+                                    onClick={_handleChangeInputs}
+                                    value={entries.email}
+                                    name="email"
+                                    onChange={handleChange}
+                                  />
                                   <span className={styles.check_box}>
                                     <input type="checkbox" />
                                     <span className={styles.check_box_label}>
@@ -1008,17 +1233,15 @@ const EditProfile = () => {
                                   <i className="fa-solid fa-lock"></i>{" "}
                                 </div>
                                 <div className={styles.iconLabel}>
-                                  {" "}
-                                  Password{" "}
+                                  Password
                                   <span>
-                                    {" "}
                                     <Image
                                       src={help}
                                       data-toggle="tooltip"
                                       data-placement="bottom"
                                       title="Upload a picture that presents you across this site"
                                       alt="logo"
-                                    />{" "}
+                                    />
                                   </span>
                                 </div>
                               </div>
@@ -1027,12 +1250,21 @@ const EditProfile = () => {
                               <div>
                                 <div className={`${styles.tickIcon}`}>
                                   <input
+                                    type="password"
+                                    name="password"
                                     className={`w-100 ${styles.tickIcon} ${styles.input}`}
+                                    value={input.password}
+                                    onChange={onInputChange}
+                                    onBlur={validateInput}
                                   />
                                   <span className={`${styles.tickIcon01}`}>
-                                    {" "}
-                                    <i className="fa-solid fa-check"></i>{" "}
+                                    <i class="fa-solid fa-check"></i>{" "}
                                   </span>
+                                  {error.password && (
+                                    <span className="err">
+                                      {error.password}
+                                    </span>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -1044,17 +1276,19 @@ const EditProfile = () => {
                               </div>
                             </div>
                             <div className="col-lg-8 col-md-12 p-2">
-                              <input className={`w-100 ${styles.input}`} />
-                            </div>
-                          </div>
-                          <div className={`row ${styles.profile_row}`}>
-                            <div className="col-lg-4 col-md-12 p-2">
-                              <div className={styles.label}>
-                                Confirm Password
-                              </div>
-                            </div>
-                            <div className="col-lg-8 col-md-12 p-2">
-                              <input className={`w-100 ${styles.input}`} />
+                              <input
+                                type="password"
+                                name="confirmPassword"
+                                className={`w-100 ${styles.input}`}
+                                value={input.confirmPassword}
+                                onChange={onInputChange}
+                                onBlur={validateInput}
+                              />
+                              {error.confirmPassword && (
+                                <span className="err">
+                                  {error.confirmPassword}
+                                </span>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -1063,13 +1297,15 @@ const EditProfile = () => {
                   </div>
                   <hr />
                   <div className={styles.btns_row}>
-                    <button type="submit" className={styles.save_changes}>
-                      {" "}
-                      save changes{" "}
-                    </button>{" "}
+                    <button
+                      type="submit"
+                      className={styles.save_changes}
+                      onClick={(event, data) => _handleUpdateData(event, data)}
+                    >
+                      save changes
+                    </button>
                     <button className={styles.upload_pic02}>
-                      {" "}
-                      Request Verification{" "}
+                      Request Verification
                     </button>
                   </div>
                 </div>
