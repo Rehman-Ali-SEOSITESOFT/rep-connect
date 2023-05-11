@@ -1,3 +1,4 @@
+"use client"
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import styles from "./using-the-mdx-lab-portal.module.css";
 import React from "react";

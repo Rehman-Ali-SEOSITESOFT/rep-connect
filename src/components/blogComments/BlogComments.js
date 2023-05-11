@@ -1,12 +1,21 @@
-import React, { useState } from "react"
-import Image from "next/image"
-import "./BlogComments.css"
+import React, { useState } from "react";
+import Image from "next/image";
+import "./BlogComments.css";
+import ReplaySection from "../replaySection/ReplaySection";
 const BlogComments = (props) => {
-  const { userIcon, usertitle, link, dates, link2, para } = props
-  const [isLikedd, setIsLikeddd] = useState(true)
+  const { userIcon, usertitle, link, dates, link2, para ,id ,idx ,inddex} = props;
+  const [isLikedd, setIsLikeddd] = useState(true);
+  const [comment, setComment] = useState(false);
+  
   const _handleUnLikedd = () => {
-    setIsLikeddd(!isLikedd)
-  }
+    setIsLikeddd(!isLikedd);
+  };
+  const _handleReplaySection = (e) => {
+    console.log(e.target.value);
+    
+    setComment(!comment);
+    console.log(id,idx,inddex,"id");
+  };
   return (
     <>
       <div className="comment_wrapper_detail">
@@ -36,12 +45,15 @@ const BlogComments = (props) => {
             </div>
           </div>
           <div className="replay">
-            <a href={link2}>Reply</a>
+            <a href={link2} onClick={_handleReplaySection}>
+              Reply
+            </a>
           </div>
         </div>
       </div>
+      <div className="comment_wrapper">{comment   ? <ReplaySection /> : false}</div>
     </>
-  )
-}
+  );
+};
 
-export default BlogComments
+export default BlogComments;

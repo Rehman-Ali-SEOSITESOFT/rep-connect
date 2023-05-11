@@ -88,6 +88,7 @@
 }
 .liked_by_people {
   margin-bottom: 30px;
+  display: flex;
 }
 .comment_section {
   border-top: 1px solid rgba(0, 0, 0, 0.08);

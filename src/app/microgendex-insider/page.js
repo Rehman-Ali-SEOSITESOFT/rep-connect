@@ -11,6 +11,7 @@ import jail from "../../assets/images/microgenInsider/jail.png"
 import Image from "next/image";
 import withAuth from "@/utils/auth"
 import Pagination from "@/components/pagination/Pagination"
+import BreadCrum from "@/components/breadCrum/BreadCrum";
 const page = () => {
   const [imageCounter, setImageCounter] = useState(0);
   const [layout, setLayout] = useState(false);
