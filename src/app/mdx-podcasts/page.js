@@ -16,6 +16,7 @@ const Mdx_podcasts = () => {
   const [pause, setPause] = useState(true);
   var [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [result,setResult] = useState(false)
 
   function handleTimeUpdate(event) {
     setCurrentTime(event.target.currentTime);
@@ -74,6 +75,7 @@ const Mdx_podcasts = () => {
       if (text.includes(search)) {
         items[i].style.display = "block";
         console.log("hey", text);
+        setResult(true)
       } else {
         items[i].style.display = "none";
       }
@@ -105,7 +107,7 @@ const Mdx_podcasts = () => {
               <div className={styles.main_card}>
                 <div className={styles.card_title}>Rick Talk Podcast</div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast01} className="img-fluid" />
+                  <Image alt="logo" src={podcast01} className={styles.podcast_img01} />
                   <div className={styles.card_heading}>
                     How to Sell MicroGenDX in the Hospital Setting – with Rick
                     Martin and Robert Fichetti
@@ -172,9 +174,9 @@ const Mdx_podcasts = () => {
                               <i
                                 className="fa-solid fa-bars"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne"
+                                data-bs-target="#flush-collapseOne01"
                                 aria-expanded="false"
-                                aria-controls="flush-collapseOne"
+                                aria-controls="flush-collapseOne01"
                               ></i>
                             </div>
                             <div>
@@ -184,7 +186,7 @@ const Mdx_podcasts = () => {
                         </button>
                       </h2>
                       <div
-                        id="flush-collapseOne"
+                        id="flush-collapseOne01"
                         className="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample"
@@ -220,6 +222,7 @@ const Mdx_podcasts = () => {
                               </span>
                             </p>
                           </div>
+                          { result? <span> No Record Found</span> : "" }
                         </div>
                       </div>
                     </div>
@@ -231,7 +234,7 @@ const Mdx_podcasts = () => {
               <div className={styles.main_card}>
                 <div className={styles.card_title}>Rick Talk Podcast</div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast02} className="img-fluid" />
+                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
                   <div className={styles.card_heading}>
                     MDX Round table session 4-4 motivations and rewards
                   </div>
@@ -293,9 +296,9 @@ const Mdx_podcasts = () => {
                               <i
                                 className="fa-solid fa-bars"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne"
+                                data-bs-target="#flush-collapseOne02"
                                 aria-expanded="false"
-                                aria-controls="flush-collapseOne"
+                                aria-controls="flush-collapseOne02"
                               ></i>
                             </div>
                             <div>
@@ -305,7 +308,7 @@ const Mdx_podcasts = () => {
                         </button>
                       </h2>
                       <div
-                        id="flush-collapseOne"
+                        id="flush-collapseOne02"
                         className="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample"
@@ -328,7 +331,7 @@ const Mdx_podcasts = () => {
                   Using Sales Material Effectively Podcast with Rick Martin
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className="img-fluid" />
+                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>
@@ -390,9 +393,9 @@ const Mdx_podcasts = () => {
                               <i
                                 className="fa-solid fa-bars"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne"
+                                data-bs-target="#flush-collapseOne03"
                                 aria-expanded="false"
-                                aria-controls="flush-collapseOne"
+                                aria-controls="flush-collapseOne03"
                               ></i>
                             </div>
                             <div>
@@ -402,7 +405,7 @@ const Mdx_podcasts = () => {
                         </button>
                       </h2>
                       <div
-                        id="flush-collapseOne"
+                        id="flush-collapseOne03"
                         className="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample"
@@ -428,7 +431,7 @@ const Mdx_podcasts = () => {
                   Advisory Board Presentations Podcast
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className="img-fluid" />
+                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>
@@ -491,9 +494,9 @@ const Mdx_podcasts = () => {
                               <i
                                 className="fa-solid fa-bars"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne"
+                                data-bs-target="#flush-collapseOne04"
                                 aria-expanded="false"
-                                aria-controls="flush-collapseOne"
+                                aria-controls="flush-collapseOne04"
                               ></i>
                             </div>
                             <div>
@@ -503,7 +506,7 @@ const Mdx_podcasts = () => {
                         </button>
                       </h2>
                       <div
-                        id="flush-collapseOne"
+                        id="flush-collapseOne04"
                         className="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample"
@@ -526,7 +529,7 @@ const Mdx_podcasts = () => {
                   The Preceptorship Podcast
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className="img-fluid" />
+                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>
@@ -589,9 +592,9 @@ const Mdx_podcasts = () => {
                               <i
                                 className="fa-solid fa-bars"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne"
+                                data-bs-target="#flush-collapseOne05"
                                 aria-expanded="false"
-                                aria-controls="flush-collapseOne"
+                                aria-controls="flush-collapseOne05"
                               ></i>
                             </div>
                             <div>
@@ -601,7 +604,7 @@ const Mdx_podcasts = () => {
                         </button>
                       </h2>
                       <div
-                        id="flush-collapseOne"
+                        id="flush-collapseOne05"
                         className="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample"
@@ -624,7 +627,7 @@ const Mdx_podcasts = () => {
                   The Listen and Learn Podcast
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className="img-fluid" />
+                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>
@@ -687,9 +690,9 @@ const Mdx_podcasts = () => {
                               <i
                                 className="fa-solid fa-bars"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne"
+                                data-bs-target="#flush-collapseOne06"
                                 aria-expanded="false"
-                                aria-controls="flush-collapseOne"
+                                aria-controls="flush-collapseOne06"
                               ></i>
                             </div>
                             <div>
@@ -699,7 +702,7 @@ const Mdx_podcasts = () => {
                         </button>
                       </h2>
                       <div
-                        id="flush-collapseOne"
+                        id="flush-collapseOne06"
                         className="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample"
