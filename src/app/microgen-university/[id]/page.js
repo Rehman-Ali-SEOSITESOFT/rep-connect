@@ -6,7 +6,7 @@ const Page = ({ params }) => {
     let { id } = params
     return (
         <>
-            <BreadCrum breadHeading="MicroGen-dx-University" pageName="Home" subPage={id} />
+            <BreadCrum breadHeading="MicroGen-dx-University" pagess />
             <div className='container-xxl'>
                 <div className="row justify-content-center">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
