@@ -1,7 +1,7 @@
 
 "use client";
 import React, { useState, useEffect } from "react";
-import React, { useEffect, useState } from "react";
+
 import Image from "next/image";
 import Member from "../../../assets/images/Profile/member.png";
 import styles from "./editprofile.module.css";

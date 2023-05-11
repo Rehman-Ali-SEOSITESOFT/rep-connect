@@ -1,3 +1,4 @@
+"use client";
 import BreadCrum from '@/components/breadCrum/BreadCrum'
 import React from 'react'
 import styles from '../microgen-university.module.css'
