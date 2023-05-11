@@ -45,7 +45,7 @@
     font-size: 12px !important;
     color: #444 !important;
     font-weight: bold !important;
-    /* margin: 0px 44px; */
+    margin: 0px 10px;
 }
 
 
@@ -53,6 +53,10 @@
     margin: 0px 5px;
 }
 
+.ac_item {
+  border: none !important;
+  box-shadow: none;
+}
 
 .acbody_content_para {
   border-top: 1px solid #dee2e6;
@@ -84,6 +88,10 @@
   padding: 5px 15px;
   float: right;
   border: 1px solid #eee;
+}
+.logout:hover {
+  color: #fff;
+  background-color: #666;
 }
 
 .editprofile {
@@ -131,6 +139,12 @@
   width: 33px;
   text-align: center;
 }
+
+.email:hover {
+  background: #fff;
+  color: #333;
+}
+
 
 .analytics {
   display: flex;
@@ -495,6 +509,12 @@
 .accordion_btn {
   border-bottom: 1px solid #f8f8f8;
 }
+
+.profile_pic {
+  display:flex;
+  align-items: center;
+}
+
 
 @media only screen and (max-width: 425px) {
   .inProgressMain {
