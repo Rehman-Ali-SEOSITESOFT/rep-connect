@@ -87,6 +87,26 @@ const page = () => {
       link: "sales-training-presentations/",
     },
   ]);
+
+  const [contineEducation,setContineEducation]=useState([
+    {
+      title: "Preceptorships",
+      link: "microgen-dx-university/preceptorships/",
+    },
+    {
+      title: "MicroGenDX Minute",
+      link: "microgendx-minute/",
+    },
+    {
+      title: "Using the MDX Lab Portal",
+      link: "using-the-mdx-lab-portal/",
+    },
+    {
+      title: "Webinars",
+      link: "webinars",
+    },
+  ])
+
   return (
     <>
       <BreadCrum
@@ -162,8 +182,7 @@ const page = () => {
                   } */}
                   <li>
                     <Link href={`/microgen-university/${link_list[0].link}`}>
-                      {" "}
-                      {link_list[0].title}{" "}
+                      {link_list[0].title}
                     </Link>
                   </li>
                   <li>
@@ -176,7 +195,7 @@ const page = () => {
                     <a href="#">Rick's Roundtable Discussions</a>
                   </li>
                   <li>
-                    <a href="#">Sales by Specialty</a>
+                    <a href={`/sales-resources-by-speciality`}>{link_list[4].title} </a>
                   </li>
                   <li>
                     <Link href="/sales-training"> {link_list[5].title} </Link>
@@ -189,10 +208,10 @@ const page = () => {
                 <h3>Continued Education</h3>
                 <ul>
                   <li>
-                    <a href="#">Preceptorships</a>
+                    <a href="/preceptorships">Preceptorships</a>
                   </li>
                   <li>
-                    <a href="#">MicroGenDX Minute</a>
+                    <Link href="">MicroGenDX Minute</Link>
                   </li>
                   <li>
                     <Link href="/using-the-mdx-lab-portal">

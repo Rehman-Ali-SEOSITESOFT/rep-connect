@@ -23,10 +23,11 @@ const page = ({ params }) => {
   let { id } = params;
   const [formData, setFormData] = useState({
     commentDetail: "",
-  });
-  const [checkBox, setCheckBox] = useState(false);
-  const [image, setImage] = useState([]);
-  const [isLiked, setIsLiked] = useState(true);
+  })
+  const [inddex,setInddex]=useState()
+  const [checkBox, setCheckBox] = useState(false)
+  const [image, setImage] = useState([])
+  const [isLiked, setIsLiked] = useState(true)
 
   const [likes, setLikes] = useState([
     {
@@ -198,11 +199,14 @@ const page = ({ params }) => {
                   return (
                     <div key={idx}>
                       <BlogComments
+                        id={idx}
+                        idx={idx}
                         userIcon={e.userIcon}
                         usertitle={e.usertitle}
                         dates={e.dates}
                         para={e.para}
                         isLiked
+                        inddex={idx}
                       />
                     </div>
                   );

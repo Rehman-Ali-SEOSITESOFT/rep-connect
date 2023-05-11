@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import styles from './sales-training.module.css'
 import BreadCrum from '@/components/breadCrum/BreadCrum';

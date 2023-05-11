@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+"use client"
+=======
 "use client";
+>>>>>>> 95ec039230c075afdc8a400b94cac6120fb3cd3c
 import BreadCrum from '@/components/breadCrum/BreadCrum'
 import React from 'react'
 import styles from '../microgen-university.module.css'
