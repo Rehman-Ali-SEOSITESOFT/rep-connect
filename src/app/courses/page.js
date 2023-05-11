@@ -1,19 +1,21 @@
-import React from "react"
-import Image from "next/image"
-import styles from './course.module.css'
-import img01 from '../../assets/images/Courses/minute01.jpg'
-import training from '../../assets/images/Courses/classroom-training.jpg'
-import salesMaterial from '../../assets/images/Courses/Sales-material.jpg'
-import supportVideos from '../../assets/images/Courses/sales-support-videos.jpg'
-import processVideos from '../../assets/images/Courses/process-videos.jpg'
-import business_support from '../../assets/images/Courses/business-development.jpg'
-import clinical_paper from '../../assets/images/Courses/uderstanding-clinical-papers.jpg'
-import science_microgen from '../../assets/images/Courses/science-of-microgendx.jpg'
-import tutorial from '../../assets/images/Courses/tutorial-videos.jpg'
-import training_intro from '../../assets/images/Courses/training-introduction.jpg'
-import Link from "next/link"
-import BreadCrum from "@/components/breadCrum/BreadCrum"
+"use client";
 import withAuth from "@/utils/auth"
+import React from "react";
+import Image from "next/image";
+import styles from "./course.module.css";
+import img01 from "../../assets/images/Courses/minute01.jpg";
+import training from "../../assets/images/Courses/classroom-training.jpg";
+import salesMaterial from "../../assets/images/Courses/Sales-material.jpg";
+import supportVideos from "../../assets/images/Courses/sales-support-videos.jpg";
+import processVideos from "../../assets/images/Courses/process-videos.jpg";
+import business_support from "../../assets/images/Courses/business-development.jpg";
+import clinical_paper from "../../assets/images/Courses/uderstanding-clinical-papers.jpg";
+import science_microgen from "../../assets/images/Courses/science-of-microgendx.jpg";
+import tutorial from "../../assets/images/Courses/tutorial-videos.jpg";
+import training_intro from "../../assets/images/Courses/training-introduction.jpg";
+import Link from "next/link";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
+
 const page = () => {
   return (
     <>

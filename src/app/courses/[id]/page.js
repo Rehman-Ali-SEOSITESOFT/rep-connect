@@ -1,15 +1,15 @@
-"use client"
-import Image from "next/image"
-import styles from "../course.module.css"
-import business from "../../../assets/images/microgendxuniversity/business-development.jpg"
-import Link from "next/link"
-import CourseContent from "@/components/courseContent/CourseContent"
-import AbsImage from "@/components/absImage/AbsImage"
-import { useState } from "react"
-import MicrogenTutorialVideo from "@/components/microgenTutorialVideo/MicrogenTutorialVideo"
+"use client";
+import Image from "next/image";
+import styles from "../course.module.css";
+import business from "../../../assets/images/microgendxuniversity/business-development.jpg";
+import Link from "next/link";
+import CourseContent from "@/components/courseContent/CourseContent";
+import AbsImage from "@/components/absImage/AbsImage";
+import { useState } from "react";
+import MicrogenTutorialVideo from "@/components/microgenTutorialVideo/MicrogenTutorialVideo";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
 import withAuth from "@/utils/auth";
-import BreadCrum from "@/components/breadCrum/BreadCrum"
-const page = ({ params }) => {
+ function page({ params }) {
   const [img, setImg] = useState([
     {
       image: business,

@@ -1,5 +1,4 @@
 "use client";
-
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import React from "react";
 import style from "./style.module.css";

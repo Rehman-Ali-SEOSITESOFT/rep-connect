@@ -1,4 +1,4 @@
-"use client "
+"use client"
 import styles from "../microgendxInsider.module.css"
 import jail from "../../../assets/images/microgenInsider/jail.png";
 import withAuth from "@/utils/auth";
