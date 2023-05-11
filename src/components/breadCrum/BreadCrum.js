@@ -12,7 +12,7 @@ const BreadCrum = (props) => {
               <h4 className="heading">{breadHeading}</h4>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb m-0 justify-content-center">
-                  {/* {pagess.map((el, index) => {
+                  {pagess?.map((el, index) => {
                     return (
                       <React.Fragment key={index}>
                         {pagess.length === 1 ? (
@@ -26,7 +26,11 @@ const BreadCrum = (props) => {
                         )}
                       </React.Fragment>
                     );
-                  })} */}
+<<<<<<< HEAD
+                  })}
+=======
+                  })} 
+>>>>>>> 0f5071dcce89e79f7092a6abb386b4a84a0c456d
                 </ol>
               </nav>
             </div>

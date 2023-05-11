@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 "use client"
+=======
+"use client";
+>>>>>>> 95ec039230c075afdc8a400b94cac6120fb3cd3c
 import BreadCrum from '@/components/breadCrum/BreadCrum'
 import React from 'react'
 import styles from '../microgen-university.module.css'
@@ -7,7 +11,7 @@ const Page = ({ params }) => {
     let { id } = params
     return (
         <>
-            <BreadCrum breadHeading="MicroGen-dx-University" pageName="Home" subPage={id} />
+            <BreadCrum breadHeading="MicroGen-dx-University" pagess />
             <div className='container-xxl'>
                 <div className="row justify-content-center">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
