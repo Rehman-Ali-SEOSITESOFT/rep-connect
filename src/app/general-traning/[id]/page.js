@@ -1,12 +1,12 @@
-"use client"
-import GeneralAbsPosts from "@/components/generalAbsPosts/GeneralAbsPosts"
-import { useState } from "react"
-import styless from "../style.module.css"
+"use client";
+import GeneralAbsPosts from "@/components/generalAbsPosts/GeneralAbsPosts";
+import { useState } from "react";
+import styless from "../style.module.css";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import withAuth from "@/utils/auth";
 const page = ({ params }) => {
-  let { id } = params
-  console.log("Params", id)
+  let { id } = params;
+  console.log("Params", id);
   const [trainingData, setTrainingData] = useState([
     {
       trainingHeading: "Sulfonamides",
@@ -41,11 +41,27 @@ const page = ({ params }) => {
     {
       trainingHeading: "Streptogramins",
     },
-  ])
+  ]);
   return (
     <>
       {/* <h3>{id}</h3> */}
-      <BreadCrum  breadHeading={id} pageName="Home" subPage={`${id}`}/>
+      <BreadCrum
+        breadHeading={id}
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Generning Tranning",
+            link: "/",
+          },
+          {
+            page: "Home",
+            link: { id },
+          },
+        ]}
+      />
       <section className={styless.training_wrapper_}>
         <div className="container-xxl">
           <div className="row">
@@ -57,12 +73,12 @@ const page = ({ params }) => {
                     trainingHeading={e.trainingHeading}
                   />
                 </div>
-              )
+              );
             })}
           </div>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 export default withAuth(page);

@@ -1,29 +1,30 @@
-"use client" // this is a client component 👈🏽
-import { useState } from "react"
-import Image from "next/image"
-import styless from "../blog.module.css"
-import blog from "../../../assets/images/singleproductsimages/blogImagess.png"
-import like1 from "../../../assets/images/singleproductsimages/like1.png"
-import like3 from "../../../assets/images/singleproductsimages/like3.jpeg"
-import like4 from "../../../assets/images/singleproductsimages/like4.png"
-import like5 from "../../../assets/images/singleproductsimages/like5.png"
-import like6 from "../../../assets/images/singleproductsimages/like6.png"
-import like7 from "../../../assets/images/singleproductsimages/like7.jpg"
-import like8 from "../../../assets/images/singleproductsimages/like8.jpg"
-import like9 from "../../../assets/images/singleproductsimages/like9.jpg"
-import like10 from "../../../assets/images/singleproductsimages/like10.png"
-import comment1 from "../../../assets/images/singleproductsimages/comment1.png"
-import LikedBypeople from "@/components/likedByPeople/LikedBypeople"
-import BlogComments from "@/components/blogComments/BlogComments"
-import comment2 from "../../../assets/images/singleproductsimages/comment2.jpg"
-import comment3 from "../../../assets/images/singleproductsimages/comment3.png"
+"use client"; // this is a client component 👈🏽
+import { useState } from "react";
+import Image from "next/image";
+import styless from "../blog.module.css";
+import blog from "../../../assets/images/singleproductsimages/blogImagess.png";
+import like1 from "../../../assets/images/singleproductsimages/like1.png";
+import like3 from "../../../assets/images/singleproductsimages/like3.jpeg";
+import like4 from "../../../assets/images/singleproductsimages/like4.png";
+import like5 from "../../../assets/images/singleproductsimages/like5.png";
+import like6 from "../../../assets/images/singleproductsimages/like6.png";
+import like7 from "../../../assets/images/singleproductsimages/like7.jpg";
+import like8 from "../../../assets/images/singleproductsimages/like8.jpg";
+import like9 from "../../../assets/images/singleproductsimages/like9.jpg";
+import like10 from "../../../assets/images/singleproductsimages/like10.png";
+import comment1 from "../../../assets/images/singleproductsimages/comment1.png";
+import LikedBypeople from "@/components/likedByPeople/LikedBypeople";
+import BlogComments from "@/components/blogComments/BlogComments";
+import comment2 from "../../../assets/images/singleproductsimages/comment2.jpg";
+import comment3 from "../../../assets/images/singleproductsimages/comment3.png";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
-import withAuth from "@/utils/auth"
-const  page =  ({ params }) => {
-  let { id } = params
+import withAuth from "@/utils/auth";
+const page = ({ params }) => {
+  let { id } = params;
   const [formData, setFormData] = useState({
     commentDetail: "",
   })
+  const [inddex,setInddex]=useState()
   const [checkBox, setCheckBox] = useState(false)
   const [image, setImage] = useState([])
   const [isLiked, setIsLiked] = useState(true)
@@ -62,7 +63,7 @@ const  page =  ({ params }) => {
     {
       img: like10,
     },
-  ])
+  ]);
   const [comments, setComments] = useState([
     {
       userIcon: comment1,
@@ -82,35 +83,51 @@ const  page =  ({ params }) => {
       dates: "June 16, 2022 at 11:26 am",
       para: "Team  We have a lot going on but nothing will help you more than developing your own ID support in your territory! Don’t believe me…just ask Luis Lopez who is on the cusp on bringing on two whoppers in new accounts. IDs know Candida Auris is a problem and they love our price point and see the value of our NGS as a pre-screening solution!   As you pursue new business/providers a local ID Ambassador will help smooth acceptance and adoption!      Good hunting!",
     },
-  ])
+  ]);
   const _handleUnLiked = () => {
-    setIsLiked(!isLiked)
-  }
+    setIsLiked(!isLiked);
+  };
   function handleInput(e) {
-    const newFormData = { ...formData }
-    newFormData[e.target.name] = e.target.value
-    setFormData(newFormData)
+    const newFormData = { ...formData };
+    newFormData[e.target.name] = e.target.value;
+    setFormData(newFormData);
   }
 
   const handleFileSelect = (e) => {
-    console.log(e.target.files)
-    setImage(e.target.files)
-  }
+    console.log(e.target.files);
+    setImage(e.target.files);
+  };
   const _handleCheckBox = (e) => {
-    setCheckBox(!checkBox)
+    setCheckBox(!checkBox);
     // console.log(checkBox)
-  }
+  };
   const _handleBlogDetails = (e) => {
-    e.preventDefault()
-    console.log("form data get", image, formData.commentDetail)
+    e.preventDefault();
+    console.log("form data get", image, formData.commentDetail);
     // console.log(formData.checkBox)
-    console.log("image", image)
-    console.log(checkBox, "check box value is here")
-  }
+    console.log("image", image);
+    console.log(checkBox, "check box value is here");
+  };
 
   return (
     <>
-      <BreadCrum breadHeading={id} pageName="Home" subPage={`${id}`} />
+      <BreadCrum
+        breadHeading={id}
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Categoryname",
+            link: "/",
+          },
+          {
+            page: id,
+            link: "/",
+          },
+        ]}
+      />
       <section className={styless.main_blog_wrappper}>
         <div className="container-xxl">
           <div className="row justify-content-center">
@@ -167,9 +184,9 @@ const  page =  ({ params }) => {
                 {likes.map((e, idx) => {
                   return (
                     <div key={idx}>
-                      <LikedBypeople  img={e.img} />
+                      <LikedBypeople img={e.img} />
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -182,15 +199,17 @@ const  page =  ({ params }) => {
                   return (
                     <div key={idx}>
                       <BlogComments
-                        
+                        id={idx}
+                        idx={idx}
                         userIcon={e.userIcon}
                         usertitle={e.usertitle}
                         dates={e.dates}
                         para={e.para}
                         isLiked
+                        inddex={idx}
                       />
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -261,8 +280,7 @@ const  page =  ({ params }) => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-
-export default withAuth(page) 
+export default withAuth(page);
