@@ -106,3 +106,9 @@
     border: 1px solid #08aed3;
     padding: 5px 7px;
 }
+.error_msg {
+    color: red;
+    text-align: center;
+    font-size: 12px;
+  }
+  

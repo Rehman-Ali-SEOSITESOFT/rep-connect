@@ -8,7 +8,8 @@ import AbsImage from "@/components/absImage/AbsImage";
 import { useState } from "react";
 import MicrogenTutorialVideo from "@/components/microgenTutorialVideo/MicrogenTutorialVideo";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
-export default function page({ params }) {
+import withAuth from "@/utils/auth";
+ function page({ params }) {
   const [img, setImg] = useState([
     {
       image: business,
@@ -70,3 +71,4 @@ export default function page({ params }) {
     </>
   );
 }
+export default withAuth(page);

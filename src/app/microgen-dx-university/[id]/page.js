@@ -1,9 +1,10 @@
 "use client"
 import UniversityCourse from "@/components/universityCourse/UniversityCourse"
 import { useState } from "react"
-import styles from "../university.module.css"
+import styles from "../university.module.css";
+import withAuth from "@/utils/auth";
 // this is a client component 👈🏽
-export default function page({ params }) {
+const page = ({ params }) => {
   let { id } = params
 
   const [courseData, setCourseData] = useState([
@@ -58,3 +59,4 @@ export default function page({ params }) {
     </>
   )
 }
+  export default withAuth(page);

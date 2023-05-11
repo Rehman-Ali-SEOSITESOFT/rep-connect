@@ -2,6 +2,7 @@
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import React, { useState } from "react";
 import style from "./bussiness.module.css";
+import withAuth from "@/utils/auth";
 const page = () => {
   const [errorResponse, setErrorResponse] = useState(false);
   const [trueResponse, setTrueResponse] = useState(false);
@@ -717,4 +718,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import style from "./style.module.css";
 // import pdftesting from "./../../../../public/assets/pdf/pdf-file-for-testing.pdf";
-
-export default function page({ params }) {
+import withAuth from "@/utils/auth";
+const  page = ({ params }) => {
   const { slug } = params;
   let headingname = slug.split("-").join(" ");
 
@@ -156,3 +156,4 @@ export default function page({ params }) {
     </>
   );
 }
+export default withAuth(page);

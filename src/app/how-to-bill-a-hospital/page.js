@@ -1,6 +1,9 @@
+"use client";
+
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import React from "react";
 import style from "./hopsital.module.css";
+import withAuth from "@/utils/auth";
 const page = () => {
   return (
     <>
@@ -63,4 +66,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

@@ -11,6 +11,8 @@ import MicrogenDxUniversity from "@/components/microgenDxUniversity/MicrogenDxUn
 import UniversityLinks from "@/components/universityLinks/UniversityLinks";
 import Link from "next/link";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth"
+
 const page = () => {
   const [cardDetail, setCardDetail] = useState([
     {
@@ -210,4 +212,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

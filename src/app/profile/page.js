@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
+import withAuth from "@/utils/auth"
 import Image from "next/image";
 import Logo from '../../../src/assets/images/Profile/profile.png';
 import Member from '../../../src/assets/images/Profile/member.png'
@@ -724,4 +725,4 @@ function Profile() {
   </div>;
 }
 
-export default Profile;
+export default withAuth(Profile);

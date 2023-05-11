@@ -1,5 +1,7 @@
+
 "use client";
 import React, { useState, useEffect } from "react";
+
 import Image from "next/image";
 import Member from "../../../assets/images/Profile/member.png";
 import styles from "./editprofile.module.css";
@@ -8,6 +10,7 @@ import axios from "axios";
 import WebCam from "@/components/webCam/WebCam";
 import WebCamera from "@/components/webCam/WebCam";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth";
 
 const EditProfile = () => {
   const [getImage, setGetImage] = useState("");
@@ -1317,4 +1320,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default withAuth(EditProfile)

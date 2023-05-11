@@ -2,6 +2,7 @@ import BreadCrum from "@/components/breadCrum/BreadCrum";
 import BreadCrumCart from "@/components/cart/CartBreakCrum/BreadCrumCart";
 import React from "react";
 import style from "./style.module.css";
+import withAuth from "@/utils/auth";
 const page = () => {
   return (
     <>
@@ -33,4 +34,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default  withAuth(page);

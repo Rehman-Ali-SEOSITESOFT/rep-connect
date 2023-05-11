@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
-import EmployeeConnect from '@/components/Employee-Connect/employee-connect'
+import EmployeeConnect from '@/components/Employee-Connect/employee-connect';
+import withAuth from '@/utils/auth';
 const Page = () => {
   return (
     <div>
@@ -9,4 +10,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default withAuth(Page);

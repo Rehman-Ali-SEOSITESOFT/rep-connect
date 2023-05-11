@@ -26,7 +26,7 @@ const BreadCrum = (props) => {
                         )}
                       </React.Fragment>
                     );
-                  })}
+                  })} 
                 </ol>
               </nav>
             </div>

@@ -7,15 +7,24 @@ import myacount from "../../assets/images/side-bar-my-account-img.png";
 import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 const Sidebar = () => {
   const { toggle } = useSelector((redux) => redux.menuReducer);
   const [DropDown, setDropDown] = useState(false);
+  const router = useRouter();
   const handleDropDown = (event) => {
     event.preventDefault();
     console.log("asdf");
     setDropDown(!DropDown);
-  };
+  }
+
+  const onClickLogout = (e) =>{
+    e.preventDefault();
+    localStorage.removeItem("token");
+    router.push('/login')
+  }
+
+
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
@@ -121,8 +130,8 @@ const Sidebar = () => {
                     </Link>
                   </li>
 
-                  <li>
-                    <Link href="/">
+                  <li onClick={(e) => onClickLogout(e)}>
+                   <Link href="#">
                       <span>Logout</span>
                     </Link>
                   </li>

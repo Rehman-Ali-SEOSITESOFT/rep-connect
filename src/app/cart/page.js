@@ -10,7 +10,7 @@ import img3 from "../../assets/images/products//covid-flu-22.jpg";
 import BreadCrumCart from "@/components/cart/CartBreakCrum/BreadCrumCart";
 import Image from "next/image";
 import emptyshoppingcart from "../../assets/images/empty-shopping-cart.png";
-import { useRouter } from "next/router";
+import withAuth from "@/utils/auth";
 const page = () => {
   const [listItem, setListItem] = useState([
     {
@@ -121,4 +121,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

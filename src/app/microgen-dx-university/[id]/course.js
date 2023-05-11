@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-
+import withAuth from "@/utils/auth"
 const CourseVideoPage = () => {
   const router = useRouter()
   const { course } = router.query
@@ -10,4 +10,4 @@ const CourseVideoPage = () => {
   )
 }
 
-export default CourseVideoPage
+export default withAuth(CourseVideoPage);

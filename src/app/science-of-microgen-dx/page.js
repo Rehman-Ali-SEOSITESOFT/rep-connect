@@ -7,7 +7,8 @@ import dna from "../../assets/images/sciencecards/understanding-genetics-and-dna
 import human from "../../assets/images/sciencecards/human-immune-defense.jpg"
 import biofilm from "../../assets/images/sciencecards/biofilms-720.jpg"
 import diagnose from "../../assets/images/sciencecards/diagnose-infections.jpg"
-import antibiotics from "../../assets/images/sciencecards/antibiotics-and-antifungals-2.jpg"
+import antibiotics from "../../assets/images/sciencecards/antibiotics-and-antifungals-2.jpg";
+import withAuth from "@/utils/auth"
 const page = () => {
   const [scienceCardData, setScienceCardData] = useState([
     {
@@ -103,4 +104,4 @@ const page = () => {
   )
 }
 
-export default page
+export default withAuth(page);

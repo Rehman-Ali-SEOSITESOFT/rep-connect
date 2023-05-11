@@ -1,9 +1,10 @@
+"use client";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import React from "react";
 import style from "./style.module.css";
 import vahospital from "../../assets/images/global/va-logo-mgn-knoe.jpg";
 import Image from "next/image";
-
+import withAuth from "@/utils/auth";
 const page = () => {
   return (
     <>
@@ -55,4 +56,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

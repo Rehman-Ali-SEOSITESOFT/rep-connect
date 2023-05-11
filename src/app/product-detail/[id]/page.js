@@ -5,8 +5,8 @@ import BreadCrum from "@/components/breadCrum/BreadCrum";
 import ProductDetail from "@/components/product_detail/ProductDetail";
 import style from "./style.module.css";
 import { useEffect, useState } from "react";
-
-export default function page({ params }) {
+import withAuth from "@/utils/auth";
+const page = ({ params }) => {
   const { id } = params;
 
   const [singleProduct, setSingleProduct] = useState({
@@ -64,3 +64,5 @@ export default function page({ params }) {
     </>
   );
 }
+
+export default withAuth(page);

@@ -2,7 +2,7 @@
 import BreadCrum from '@/components/breadCrum/BreadCrum'
 import React from 'react'
 import styles from './technology-ppt.module.css'
-
+import withAuth from '@/utils/auth'
 const Technology_ppt = () => {
     return (<>
         <BreadCrum breadHeading="Technology PPT" pageName=" Home " subPage="Technology PPT"/>
@@ -54,4 +54,4 @@ const Technology_ppt = () => {
     )
 }
 
-export default Technology_ppt
+export default withAuth(Technology_ppt);

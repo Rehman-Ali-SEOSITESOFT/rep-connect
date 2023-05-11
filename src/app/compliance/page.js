@@ -1,7 +1,9 @@
+"use client";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import ComplianceAsideWidget from "@/components/complianceAsideWidget/ComplianceAsideWidget";
 import React from "react";
 import style from "./compliance.module.css";
+import withAuth from "@/utils/auth";
 const page = () => {
   return (
     <>
@@ -71,4 +73,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

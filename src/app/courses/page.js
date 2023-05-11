@@ -1,3 +1,5 @@
+"use client";
+import withAuth from "@/utils/auth"
 import React from "react";
 import Image from "next/image";
 import styles from "./course.module.css";
@@ -404,4 +406,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

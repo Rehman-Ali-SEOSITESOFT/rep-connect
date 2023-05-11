@@ -3,7 +3,8 @@ import AsideWidget from "@/components/asidewidget/AsideWidget";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import CategoryProducts from "@/components/categoryproducts/CategoryProducts";
 import style from "./slug.module.css";
-export default function Page({ params }) {
+import withAuth from "@/utils/auth";
+const Page = ({ params }) => {
   const { slug } = params;
   const renamed = slug.split("-").join(" ");
 
@@ -39,3 +40,6 @@ export default function Page({ params }) {
     </>
   );
 }
+
+
+export default withAuth(Page);
