@@ -3,7 +3,10 @@
     margin: 40px 0px;
 }
 
-
+.podcast_img01 {
+    width: 370px;
+    height: 370px;
+}
 .card {
     text-align: center;
     border: 1px solid #dee2e6;
@@ -17,8 +20,8 @@
     font-size: 14px;
     font-weight: bold;
     line-height: 1.25;
-    text-overflow: ellipsis; /* enables ellipsis */
-    white-space: nowrap; /* keeps the text in a single line */
+    /* text-overflow: ellipsis; enables ellipsis */
+    /* white-space: nowrap; keeps the text in a single line */
     overflow: hidden;
     /* width: 247px; */
     text-align: left;
@@ -76,6 +79,10 @@
 
 .accordion_btn {
     padding: 0px 5px !important;
+}
+.accordion_btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .accordion_btn::after {
