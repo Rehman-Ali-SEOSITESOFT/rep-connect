@@ -1,4 +1,6 @@
+import BlogFilters from "@/components/blogs/Filter/BlogFilters";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
+import withAuth from "@/utils/auth";
 import React from "react";
 
 const page = ({ params }) => {
@@ -19,9 +21,9 @@ const page = ({ params }) => {
           },
         ]}
       />
-      tag page
+      <BlogFilters />
     </>
   );
 };
 
-export default page;
+export default withAuth(page);

@@ -43,7 +43,13 @@
 .reset li span {
   padding-left: 10px;
 }
-
+.filter-tabs {
+  width: calc(100% - 40px);
+}
+.close-colum-filter {
+  width: 40px;
+  margin-top: 0.5%;
+}
 .filter-tabs ul li {
   padding: 0;
   display: inline-block;
@@ -61,6 +67,7 @@
   -o-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  font-size: 15px;
 }
 .filter-tabs ul li:hover a {
   background-color: #2754a4;
@@ -71,7 +78,25 @@
   -ms-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
+.filter-tabs ul li.active a {
+  background-color: #2754a4;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
 
+.close-filter-btn {
+  text-align: center;
+  width: 38px;
+  padding: 7px 7px 4px 7px;
+  background: #8b8b8b;
+  border: 1px solid #f7f7f7 !important;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.close-filter-btn:hover {
+  background-color: #545454;
+}
 @media screen and (max-width: 768px) {
   .filter-list {
     padding: 15px 0;
