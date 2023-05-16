@@ -126,6 +126,10 @@
   .filter-list li.filtername {
     display: none;
   }
+  .filter-tabs ul li a {
+    padding: 5px 5px;
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 400px) {

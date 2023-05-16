@@ -25,7 +25,9 @@
   height: 150px;
   resize: none;
 }
-
+.last_section {
+  padding-top: 20px;
+}
 .last_section .label__heading,
 .first_section .label__heading,
 .second_section .label__heading {
@@ -119,6 +121,7 @@
   border-radius: 0;
   border: none;
   color: #ffff;
+  margin-top: 30px;
 }
 .second_section .form_field label {
   color: #333333;
