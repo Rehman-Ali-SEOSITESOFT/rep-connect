@@ -1,4 +1,4 @@
-"use client"; // this is a client component 👈🏽
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import styless from "../blog.module.css";
@@ -21,13 +21,14 @@ import BreadCrum from "@/components/breadCrum/BreadCrum";
 import withAuth from "@/utils/auth";
 const page = ({ params }) => {
   let { id } = params;
+  const withoutdash = id.split("-").join(" ");
   const [formData, setFormData] = useState({
     commentDetail: "",
-  })
-  const [inddex,setInddex]=useState()
-  const [checkBox, setCheckBox] = useState(false)
-  const [image, setImage] = useState([])
-  const [isLiked, setIsLiked] = useState(true)
+  });
+  const [inddex, setInddex] = useState();
+  const [checkBox, setCheckBox] = useState(false);
+  const [image, setImage] = useState([]);
+  const [isLiked, setIsLiked] = useState(true);
 
   const [likes, setLikes] = useState([
     {
@@ -112,7 +113,7 @@ const page = ({ params }) => {
   return (
     <>
       <BreadCrum
-        breadHeading={id}
+        breadHeading={withoutdash}
         pagess={[
           {
             page: "Home",
@@ -123,7 +124,7 @@ const page = ({ params }) => {
             link: "/",
           },
           {
-            page: id,
+            page: withoutdash,
             link: "/",
           },
         ]}

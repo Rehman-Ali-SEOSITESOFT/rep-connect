@@ -112,7 +112,7 @@ const BlogFilters = () => {
         <div className="row">
           <div className="col filter-column">
             <div className="main-filter d-flex justify-content-between flex-column  flex-sm-row  ">
-              <ul className="m-0 filter-list d-flex">
+              <ul className="m-0 filter-list d-flex ">
                 <li className="filtername">Filter by</li>
                 {filterTabs.map((elem, ind) => {
                   return (
@@ -143,7 +143,7 @@ const BlogFilters = () => {
               <div className="filter-tabs">
                 {filterTabs.map((elem, ind) => {
                   return tabs === ind + 1 ? (
-                    <ul className="p-0 m-0 align-items-center" key={ind}>
+                    <ul className="align-items-center filter-listeed" key={ind}>
                       {elem.data}
                     </ul>
                   ) : null;

@@ -1,7 +1,7 @@
 import React from "react";
 import withAuth from "@/utils/auth";
 const page = () => {
-  return <h1>this is product page</h1>;
+  return <h5>this is product page</h5>;
 };
 
 export default withAuth(page);

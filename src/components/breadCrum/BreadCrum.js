@@ -10,7 +10,7 @@ const BreadCrum = (props) => {
           <div className="col-lg-12 text-center">
             <div className="bread_details text-center">
               <h4 className="heading">{breadHeading}</h4>
-              <nav aria-label="breadcrumb">
+              <nav aria-label="breadcrumb" className="breadcrumsss-class">
                 <ol className="breadcrumb m-0 justify-content-center">
                   {pagess?.map((el, index) => {
                     return (

@@ -1,7 +1,7 @@
 import React from "react";
-import "./CategoryItem.css";
+import "./TagsItem.css";
 import Image from "next/image";
-const CategoryItem = ({ item }) => {
+const TagsItem = ({ item }) => {
   let name = item.name.split(" ").join("-").toLowerCase();
 
   return (
@@ -42,4 +42,4 @@ const CategoryItem = ({ item }) => {
   );
 };
 
-export default CategoryItem;
+export default TagsItem;

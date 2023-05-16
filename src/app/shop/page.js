@@ -35,7 +35,7 @@ const page = () => {
                 className={`d-flex justify-content-between ${style.shop_product_wrapper}`}
               >
                 <Products />
-                <AsideWidget />
+                {/* <AsideWidget /> */}
               </div>
             </div>
           </div>
@@ -45,4 +45,4 @@ const page = () => {
   );
 };
 
-export default  withAuth(page);
+export default withAuth(page);

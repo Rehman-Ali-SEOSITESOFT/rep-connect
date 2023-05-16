@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from "react";
 
@@ -1109,7 +1108,7 @@ const EditProfile = () => {
                             <div className="col-lg-4 col-md-12 p-2">
                               <div className={styles.profilePic}>
                                 <div className={styles.camIcon}>
-                                  <i class="fa-solid fa-house"></i>{" "}
+                                  <i className="fa-solid fa-house"></i>{" "}
                                 </div>
                                 <div className={styles.iconLabel}>
                                   {" "}
@@ -1197,7 +1196,7 @@ const EditProfile = () => {
                             <div className="col-lg-4 col-md-12 p-2">
                               <div className={styles.profilePic}>
                                 <div className={styles.camIcon}>
-                                  <i class="fa-regular fa-envelope"></i>{" "}
+                                  <i className="fa-regular fa-envelope"></i>{" "}
                                 </div>
                                 <div className={styles.iconLabel}>
                                   {" "}
@@ -1260,7 +1259,7 @@ const EditProfile = () => {
                                     onBlur={validateInput}
                                   />
                                   <span className={`${styles.tickIcon01}`}>
-                                    <i class="fa-solid fa-check"></i>{" "}
+                                    <i className="fa-solid fa-check"></i>{" "}
                                   </span>
                                   {error.password && (
                                     <span className="err">
@@ -1320,4 +1319,4 @@ const EditProfile = () => {
   );
 };
 
-export default withAuth(EditProfile)
+export default withAuth(EditProfile);

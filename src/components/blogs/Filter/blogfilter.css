@@ -17,6 +17,7 @@
   font-size: 16px;
   cursor: pointer;
   line-height: 21px;
+  list-style: none;
 }
 .filter-list li.active {
   color: #f05c5d;
@@ -55,6 +56,11 @@
   display: inline-block;
   width: auto;
   margin: 0.5%;
+}
+.filter-tabs ul.filter-listeed {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 40px;
 }
 .filter-tabs ul li a {
   display: inline-block;
@@ -108,15 +114,23 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 575px) {
   .main-filter {
     align-items: normal;
   }
+
   .main-filter .reset {
     text-align: end;
     padding-bottom: 15px;
   }
   .filter-list li.filtername {
     display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .reset li,
+  .filter-list li {
+    font-size: 14px;
   }
 }

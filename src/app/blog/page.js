@@ -1,11 +1,12 @@
-import React from "react"
-import withAuth from "@/utils/auth"
+"use client";
+import React from "react";
+import withAuth from "@/utils/auth";
 const page = () => {
   return (
     <div>
-      <h1>hello</h1>
+      <h4>Blog Page</h4>
     </div>
-  )
-}
+  );
+};
 
 export default withAuth(page);
