@@ -1,3 +1,5 @@
+"use client";
+
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import BreadCrumCart from "@/components/cart/CartBreakCrum/BreadCrumCart";
 import React from "react";
@@ -34,4 +36,4 @@ const page = () => {
   );
 };
 
-export default  withAuth(page);
+export default withAuth(page);
