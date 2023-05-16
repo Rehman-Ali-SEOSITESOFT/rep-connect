@@ -55,7 +55,7 @@ const page = ({ params }) => {
             <div className="col-12 p-0">
               <div className={style.product_deail_wrapper}>
                 <ProductDetail item={singleProduct} />
-                <AsideWidget />
+                {/* <AsideWidget /> */}
               </div>
             </div>
           </div>
@@ -63,6 +63,6 @@ const page = ({ params }) => {
       </section>
     </>
   );
-}
+};
 
 export default withAuth(page);

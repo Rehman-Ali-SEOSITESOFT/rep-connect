@@ -31,7 +31,7 @@ const Page = ({ params }) => {
                 className={`${style.main_category_wrapper} d-flex justify-content-between`}
               >
                 <CategoryProducts />
-                <AsideWidget />
+                {/* <AsideWidget /> */}
               </div>
             </div>
           </div>
@@ -39,7 +39,6 @@ const Page = ({ params }) => {
       </section>
     </>
   );
-}
-
+};
 
 export default withAuth(Page);

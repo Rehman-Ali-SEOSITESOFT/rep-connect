@@ -7,8 +7,7 @@ import podcast01 from "../../assets/images/podcasts/podcasr01.png";
 import podcast02 from "../../assets/images/podcasts/podcast02.png";
 import podcast03 from "../../assets/images/podcasts/podcast03.png";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
-import withAuth from '@/utils/auth';
-
+import withAuth from "@/utils/auth";
 
 const Mdx_podcasts = () => {
   const [search, setSearch] = useState("");
@@ -16,7 +15,7 @@ const Mdx_podcasts = () => {
   const [pause, setPause] = useState(true);
   var [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [result,setResult] = useState(false)
+  const [result, setResult] = useState(false);
 
   function handleTimeUpdate(event) {
     setCurrentTime(event.target.currentTime);
@@ -75,7 +74,7 @@ const Mdx_podcasts = () => {
       if (text.includes(search)) {
         items[i].style.display = "block";
         console.log("hey", text);
-        setResult(true)
+        setResult(true);
       } else {
         items[i].style.display = "none";
       }
@@ -107,7 +106,11 @@ const Mdx_podcasts = () => {
               <div className={styles.main_card}>
                 <div className={styles.card_title}>Rick Talk Podcast</div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast01} className={styles.podcast_img01} />
+                  <Image
+                    alt="logo"
+                    src={podcast01}
+                    className={styles.podcast_img01}
+                  />
                   <div className={styles.card_heading}>
                     How to Sell MicroGenDX in the Hospital Setting – with Rick
                     Martin and Robert Fichetti
@@ -222,7 +225,7 @@ const Mdx_podcasts = () => {
                               </span>
                             </p>
                           </div>
-                          { result? <span> No Record Found</span> : "" }
+                          {result ? <span> No Record Found</span> : ""}
                         </div>
                       </div>
                     </div>
@@ -234,7 +237,11 @@ const Mdx_podcasts = () => {
               <div className={styles.main_card}>
                 <div className={styles.card_title}>Rick Talk Podcast</div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
+                  <Image
+                    alt="logo"
+                    src={podcast03}
+                    className={styles.podcast_img01}
+                  />
                   <div className={styles.card_heading}>
                     MDX Round table session 4-4 motivations and rewards
                   </div>
@@ -313,7 +320,7 @@ const Mdx_podcasts = () => {
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample"
                       >
-                        <div class="accordion-body">
+                        <div className="accordion-body">
                           Placeholder content for this accordion, which is
                           intended to demonstrate the{" "}
                           <code>.accordion-flush</code> class. This is the first
@@ -331,7 +338,11 @@ const Mdx_podcasts = () => {
                   Using Sales Material Effectively Podcast with Rick Martin
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
+                  <Image
+                    alt="logo"
+                    src={podcast03}
+                    className={styles.podcast_img01}
+                  />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>
@@ -431,7 +442,11 @@ const Mdx_podcasts = () => {
                   Advisory Board Presentations Podcast
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
+                  <Image
+                    alt="logo"
+                    src={podcast03}
+                    className={styles.podcast_img01}
+                  />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>
@@ -529,7 +544,11 @@ const Mdx_podcasts = () => {
                   The Preceptorship Podcast
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
+                  <Image
+                    alt="logo"
+                    src={podcast03}
+                    className={styles.podcast_img01}
+                  />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>
@@ -627,7 +646,11 @@ const Mdx_podcasts = () => {
                   The Listen and Learn Podcast
                 </div>
                 <div className={styles.card}>
-                  <Image alt="logo" src={podcast03} className={styles.podcast_img01} />
+                  <Image
+                    alt="logo"
+                    src={podcast03}
+                    className={styles.podcast_img01}
+                  />
                   <div className={styles.card_heading}>
                     0154 Be Wary of Unscrupulous PCR Labs PODCAST
                   </div>

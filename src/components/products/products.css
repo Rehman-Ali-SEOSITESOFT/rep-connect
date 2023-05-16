@@ -1,5 +1,5 @@
 .products-shop {
-  width: 75%;
+  width: 100%;
 
   padding-right: 30px;
 }
@@ -9,7 +9,7 @@
 }
 @media screen and (max-width: 1025px) {
   .products-shop {
-    width: 70%;
+    width: 100%;
   }
   .products-shop .product_gr__items .product--gr--link img {
     max-height: fit-content;

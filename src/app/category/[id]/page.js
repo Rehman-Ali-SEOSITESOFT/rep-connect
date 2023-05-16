@@ -10,6 +10,8 @@ import withAuth from "@/utils/auth";
 const page = ({ params }) => {
   const { id } = params;
 
+  const withoutdash = id.split("-").join(" ");
+
   const [blog, setBlogs] = useState([
     {
       name: "starting off 2018 breaking records!",
@@ -24,7 +26,7 @@ const page = ({ params }) => {
       comment: 1,
     },
     {
-      name: "It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey",
+      name: "It has been a month since the publication in JB&JS of our first major study on PJIs",
       desc: "It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey  We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey  We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey  We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey It has been a month since the publication in JB&JS of our first major study on PJIs. We sent you the key messages to convey",
       img: blo2,
       comment: 1,
@@ -33,14 +35,14 @@ const page = ({ params }) => {
   return (
     <>
       <BreadCrum
-        breadHeading={id}
+        breadHeading={withoutdash}
         pagess={[
           {
             page: "Home",
             link: "/",
           },
           {
-            page: id,
+            page: withoutdash,
             link: "/",
           },
         ]}
