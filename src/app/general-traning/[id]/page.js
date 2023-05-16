@@ -44,8 +44,7 @@ const page = ({ params }) => {
   ]);
   return (
     <>
-      {/* <h3>{id}</h3> */}
-      <BreadCrum
+        <BreadCrum
         breadHeading={id}
         pagess={[
           {

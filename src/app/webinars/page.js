@@ -1,15 +1,15 @@
-"use client";
-import BreadCrum from "@/components/breadCrum/BreadCrum";
-import withAuth from "@/utils/auth";
-import React from "react";
-import styles from "./preceptorships.module.css";
+"use client"
+import BreadCrum from '@/components/breadCrum/BreadCrum'
+import withAuth from '@/utils/auth'
+import React from 'react'
+import styles from './webinars.module.css'
 const page = () => {
   return (
     <>
-      <BreadCrum
-        breadHeading="preceptorships"
+        <BreadCrum
+        breadHeading="Webinars"
         pageName="Home"
-        subPage="Preceptorships"
+        subPage="Webinars"
       />
       <div className="container">
         <div className="row justify-content-center">
@@ -17,8 +17,7 @@ const page = () => {
             <div className={styles.video_container}>
               <div className={styles.video_heading}>
                 <h2>
-                OrthoKey:Evolutionary Step in Diagnosis of Orthopedic Infections
-                - Javad Parvizi
+                What's Next in Next-Gen Sequencing - with Dr. Joseph John & MicroGenDX
                 </h2>
               </div>
               <div className={styles.video}>
@@ -39,7 +38,7 @@ const page = () => {
           <div className={styles.video_container}>
             <div className={styles.video_heading}>
               <h2>
-              Wound Preceptorship Physician's Perspective by Dr. Lam
+              What is PCR?
               </h2>
             </div>
             <div className={styles.video}>
@@ -55,11 +54,9 @@ const page = () => {
           </div>
         </div>
       </div>
-      </div>
-
-      
+      </div>    
     </>
-  );
-};
+  )
+}
 
-export default withAuth(page);
+export default withAuth(page)

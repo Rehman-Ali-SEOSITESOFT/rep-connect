@@ -1,62 +1,48 @@
-"use client"
-import React, { useState } from "react"
-import styless from "./style.module.css";
-import withAuth from "@/utils/auth";
+"use client";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import GeneralAbsPosts from "@/components/generalAbsPosts/GeneralAbsPosts";
+import withAuth from "@/utils/auth";
+import React, { useState } from "react";
+import styless from "./anitibiotics.module.css";
 const page = () => {
   const [trainingData, setTrainingData] = useState([
     {
-      trainingHeading: "Sulfonamides",
+      trainingHeading: "Aminoglycoside",
     },
     {
-      trainingHeading: "Tetracyclines",
+      trainingHeading: "Beta-lactam",
     },
     {
-      trainingHeading: "Aminoglycosides",
+      trainingHeading: "Carbapenam",
     },
     {
-      trainingHeading: "Amphenicol",
+      trainingHeading: "Macrolide",
     },
     {
-      trainingHeading: "Beta Lactams",
+      trainingHeading: "Tetracycline",
     },
     {
-      trainingHeading: "Cephalosporins",
+      trainingHeading: "Quinolones",
     },
     {
-      trainingHeading: "Glycopeptides",
-    },
-    {
-      trainingHeading: "Macrolides",
-    },
-    {
-      trainingHeading: "Oxazolidinones",
-    },
-    {
-      trainingHeading: "Penicillins",
-    },
-    {
-      trainingHeading: "Streptogramins",
+      trainingHeading: "Vancomycin",
     },
   ]);
   return (
     <>
       <BreadCrum
-      breadHeading="Antibiotics 101"
+        breadHeading="Antibiotics 101"
         pagess={[
           {
             page: "Home",
             link: "/",
           },
           {
-            page: "antibiotics-101",
-            link: "/",
+            page: "Antibiotics 101",
           },
-       
         ]}
       />
-    <section className={styless.training_wrapper_}>
+      <section className={styless.training_wrapper_}>
         <div className="container-xxl">
           <div className="row">
             {trainingData.map((e, idx) => {
@@ -73,7 +59,7 @@ const page = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
 export default withAuth(page);
