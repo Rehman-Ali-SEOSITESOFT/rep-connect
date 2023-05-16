@@ -3,7 +3,7 @@ import styles from "../microgendxInsider.module.css"
 import jail from "../../../assets/images/microgenInsider/jail.png";
 import withAuth from "@/utils/auth";
 const page = ({ params }) => {
-  let { id } = params
+  let { id } = params;
   return (
     <>
       <section className={styles.insiderSubPageWrapper}>
