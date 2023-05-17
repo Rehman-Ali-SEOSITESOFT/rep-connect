@@ -1,8 +1,8 @@
-"use client"
-import Sidebar from "@/layout/sidebar/Sidebar"
-import "./globals.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import Header from "@/layout/header/Header"
+"use client";
+import Sidebar from "@/layout/sidebar/Sidebar";
+import "./globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "@/layout/header/Header";
 
 // export const metadata = {
 //   title: "MicroGenDX Rep Connect – Connect Through Communication",
@@ -47,12 +47,11 @@ export default function RootLayout({ children }) {
         <body>
           <main className="microgen_dx">
             {path === "/employee-connect" || path === "/login" ? null : (
-            
-            <>
-            <Sidebar />
-            <Header />
-            </>
-            )}           
+              <>
+                <Sidebar />
+                <Header />
+              </>
+            )}
             <div
               className={
                 path === "/employee-connect" || path === "/login"
@@ -60,9 +59,10 @@ export default function RootLayout({ children }) {
                   : "main--content--wrapper"
               }
             >
-              {children}
+              <div className="d-flex flex-column conte-min-height">{children}</div>
+
               {path === "/employee-connect" || path === "/login" ? null : (
-              <Footer />
+                <Footer />
               )}
             </div>
           </main>
@@ -84,5 +84,5 @@ export default function RootLayout({ children }) {
         </body>
       </html>
     </Provider>
-  )
+  );
 }

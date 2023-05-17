@@ -10,11 +10,41 @@ footer .copyright p {
   margin-bottom: 0;
 }
 
+footer .down-arrow {
+  background-color: #f7f7f7;
+  color: #747474;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03),
+    inset 0px 4px 3px -2px rgba(0, 0, 0, 0.07);
+  padding: 10px 17px;
+  cursor: pointer;
+  position: relative;
+}
+footer .down-arrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  transition: width 0.2s ease-in-out;
+}
+footer .down-arrow:hover:after {
+  width: 100%;
+  transition: width 0.2s ease-in-out;
+}
 @media screen and (max-width: 1200px) {
   footer {
     padding: 20px 15px;
   }
   footer .copyright p {
     font-size: 15px;
+  }
+}
+@media screen and (max-width: 768px) {
+  footer .down-arrow {
+    padding: 5px 12px;
   }
 }

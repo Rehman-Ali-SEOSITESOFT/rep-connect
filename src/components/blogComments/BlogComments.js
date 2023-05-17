@@ -3,18 +3,19 @@ import Image from "next/image";
 import "./BlogComments.css";
 import ReplaySection from "../replaySection/ReplaySection";
 const BlogComments = (props) => {
-  const { userIcon, usertitle, link, dates, link2, para ,id ,idx ,inddex} = props;
+  const { userIcon, usertitle, link, dates, link2, para, id, idx, inddex } =
+    props;
   const [isLikedd, setIsLikeddd] = useState(true);
   const [comment, setComment] = useState(false);
-  
+
   const _handleUnLikedd = () => {
     setIsLikeddd(!isLikedd);
   };
   const _handleReplaySection = (e) => {
     console.log(e.target.value);
-    
+
     setComment(!comment);
-    console.log(id,idx,inddex,"id");
+    console.log(id, idx, inddex, "id");
   };
   return (
     <>
@@ -51,7 +52,9 @@ const BlogComments = (props) => {
           </div>
         </div>
       </div>
-      <div className="comment_wrapper">{comment   ? <ReplaySection /> : false}</div>
+      {/* <div className="comment_wrapper">
+        <ReplaySection />
+      </div> */}
     </>
   );
 };

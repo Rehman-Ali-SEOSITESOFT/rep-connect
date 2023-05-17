@@ -13,7 +13,6 @@
   line-height: 22px;
 }
 
-
 .layout01 {
   position: absolute;
   height: 100%;
@@ -58,12 +57,10 @@
   color: white;
 }
 
-
 .cancel {
   text-align: end;
   padding: 0 25px;
 }
-
 
 .cancel_btn {
   background: border-box;
@@ -74,4 +71,40 @@
 .cancel_btn:hover {
   color: red !important;
   transform: rotate(deg);
+}
+.comment_section h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 25px;
+  color: #1790d0;
+  padding: 20px 0px;
+}
+
+.links_box .link_item {
+  height: 50px;
+  width: 50px;
+  padding: 3px;
+  border: 1px solid #d6d6d6;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 0.5s ease-in-out;
+}
+
+.links_box .link_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.links_box .link_item:hover {
+  border: 1px solid #a3a2a2;
+  transition: border 0.5s ease-in-out;
+}
+.links_box .link_item:hover img {
+  opacity: 0.8;
 }

@@ -53,7 +53,7 @@ const Page = ({ params }) => {
                 <select
                   name="orderBy"
                   value={filtering.orderBy}
-                  className="custom-select form-control"
+                  className="custom-select form-select"
                   onChange={applyFilter}
                 >
                   <option value="date" disabled="disabled">
@@ -69,7 +69,7 @@ const Page = ({ params }) => {
               <div className="col-xxl-2 col-lg-2 col-md-4 col-sm-4">
                 <select
                   name="order"
-                  className="custom-select form-control"
+                  className="custom-select form-select"
                   onChange={applyFilter}
                   value={filtering.order}
                 >
@@ -168,7 +168,6 @@ const Page = ({ params }) => {
       </section>
     </>
   );
-}
-
+};
 
 export default withAuth(Page);
