@@ -10,11 +10,11 @@ const BlogFilters = () => {
   const [filterTabs, setFilterTabs] = useState([
     {
       name: (
-        <>
+        <React.Fragment>
           <i className="fa-regular fa-paste" />
           <span>Categories </span>
           <i className="fa-solid fa-caret-down" />
-        </>
+        </React.Fragment>
       ),
       data: [
         "Advisory Board Presentations Podcast",
@@ -36,7 +36,7 @@ const BlogFilters = () => {
         return (
           <li
             key={e}
-            className={nameOfCategegory === activePath[2] && "active"}
+            className={nameOfCategegory === activePath[2] ? "active" : null}
           >
             <Link href={`/category/${nameOfCategegory}`}>{e}</Link>
           </li>
@@ -45,10 +45,10 @@ const BlogFilters = () => {
     },
     {
       name: (
-        <>
+        <React.Fragment>
           <i className="fa-solid fa-tag" /> <span>Tags</span>
           <i className="fa-solid fa-caret-down" />
-        </>
+        </React.Fragment>
       ),
       data: [
         "AAHKS COMMITTEE",
@@ -73,7 +73,10 @@ const BlogFilters = () => {
       ].map((e) => {
         let nameOfTags = `${e.toLowerCase().split(" ").join("-")}`;
         return (
-          <li key={e} className={nameOfTags === activePath[2] && "active"}>
+          <li
+            key={e}
+            className={nameOfTags === activePath[2] ? "active" : null}
+          >
             <Link href={`/tag/${e.toLowerCase().split(" ").join("-")}`}>
               {e}
             </Link>
@@ -83,10 +86,10 @@ const BlogFilters = () => {
     },
     {
       name: (
-        <>
+        <React.Fragment>
           <i className="fa-solid fa-user" /> <span>Authors</span>
           <i className="fa-solid fa-caret-down" />
-        </>
+        </React.Fragment>
       ),
       data: [
         "John-Paul White",
@@ -96,7 +99,10 @@ const BlogFilters = () => {
       ].map((e) => {
         let nameOfAuthor = `${e.toLowerCase().split(" ").join("-")}`;
         return (
-          <li key={e} className={nameOfAuthor === activePath[2] && "active"}>
+          <li
+            key={e}
+            className={nameOfAuthor === activePath[2] ? "active" : null}
+          >
             <Link href={`/author/${e.toLowerCase().split(" ").join("-")}`}>
               {e}
             </Link>

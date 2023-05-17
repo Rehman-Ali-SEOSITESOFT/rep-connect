@@ -8,6 +8,7 @@ import podiatry from "../../assets/images/specialty/podiatry-nail-4.jpg"
 import urology from "../../assets/images/specialty/urology-icon.jpg"
 import woundCare from "../../assets/images/specialty/wound-icon.jpg";
 import withAuth from "@/utils/auth"
+import BreadCrum from "@/components/breadCrum/BreadCrum"
 const page = () => {
   const [specialCardDetail, setSpecialCardDetail] = useState([
     {
@@ -33,6 +34,20 @@ const page = () => {
   ])
   return (
     <>
+       <BreadCrum
+        breadHeading="MicroGenDX University"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "sales Resources by Specialty",
+           
+          },
+         
+        ]}
+      /> 
       <section className={styles.special_wrapper}>
         <div className="container-xxl">
           <div className="row">
@@ -50,6 +65,7 @@ const page = () => {
                   key={idx}
                 >
                   <SpecialtyCards
+                    key={idx}
                     specialimg={e.specialimg.src}
                     specialHeading={e.specialHeading}
                   />

@@ -7,17 +7,19 @@ const page = () => {
   return (
     <>
       <BreadCrum
-        breadHeading="Sales Training Presentation"
+        breadHeading="preceptorships"
         pageName="Home"
-        subPage="Sales Training Presentation"
+        subPage="Preceptorships"
       />
       <div className="container">
-        <div className="row">
+        <div className="row justify-content-center">
           <div className="col-lg-6">
             <div className={styles.video_container}>
               <div className={styles.video_heading}>
+                <h2>
                 OrthoKey:Evolutionary Step in Diagnosis of Orthopedic Infections
                 - Javad Parvizi
+                </h2>
               </div>
               <div className={styles.video}>
                 <iframe
@@ -32,11 +34,13 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row justify-content-center">
         <div className="col-lg-6">
           <div className={styles.video_container}>
             <div className={styles.video_heading}>
+              <h2>
               Wound Preceptorship Physician's Perspective by Dr. Lam
+              </h2>
             </div>
             <div className={styles.video}>
               <iframe

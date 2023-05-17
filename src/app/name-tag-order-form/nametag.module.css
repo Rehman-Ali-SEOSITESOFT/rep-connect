@@ -112,13 +112,16 @@
   vertical-align: sub;
   width: 22px;
 }
-
+.last_section {
+  padding-top: 20px;
+}
 .form_name_tag_order .send_form_btn {
   background: #2754a1;
   padding: 10px 2rem;
   border-radius: 0;
   border: none;
   color: #ffff;
+  margin-top: 30px;
 }
 @media screen and (max-width: 1400px) {
   .name_tag_order_form {

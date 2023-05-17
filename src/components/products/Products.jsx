@@ -74,7 +74,9 @@ const Products = () => {
       <div className="container-xxl">
         <div className="row">
           {state.loading ? (
-            <h1>Loading</h1>
+            <div className="col position-relative text-center">
+              <span className="loaderCustom"></span>
+            </div>
           ) : (
             state.data.map((item, index) => {
               return <ProductItem item={item} key={index} />;

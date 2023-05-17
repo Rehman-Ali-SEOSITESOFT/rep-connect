@@ -64,7 +64,7 @@ const page = () => {
   const [link_list, setLintList] = useState([
     {
       title: "Effectively Using Sales Material",
-      link: "effectively-using-sales-material/",
+      link: "effectively-Sales-Material/",
     },
     {
       title: "Hear From Your Peers",
@@ -118,11 +118,10 @@ const page = () => {
           },
           {
             page: "MicroGenDX University",
-            link: "/",
           },
         ]}
-      />
-      <section className={styless.mircoUniversity_wrapper}>
+      /> 
+      <section className={styless.mircoUniversity_wrapper}> 
         <div className="container-xxl">
           <div className="row">
             <div className="col-lg-12 ">
@@ -163,9 +162,16 @@ const page = () => {
               <div className={styless.general_training}>
                 <h3>General Training</h3>
                 <ul>
-                  {trainingLinks.map((e, idx) => {
+                  <li><Link href="/basicTraining">Basic Training</Link></li>
+                  <li><Link href="/advance-training">Advanced Training</Link></li>
+                  <li><Link href="/antibiotics-101">Antibiotics 101</Link></li>
+                  <li><Link href="/antibiotics-102">Antibiotics 102</Link></li>
+                  <li><Link href="/biofilm-training-research">BioFilm Traning</Link></li>
+                  <li><Link href="/">Pronunciation of Species</Link></li>
+                  <li><Link href="/science-of-microgen-dx">Science of MicroGenDx</Link></li>
+                  {/* {trainingLinks.map((e, idx) => {
                     return <UniversityLinks key={idx} item={e} />;
-                  })}
+                  })} */}
                 </ul>
               </div>
             </div>
@@ -173,29 +179,22 @@ const page = () => {
               <div className={styless.sales_focussed}>
                 <h3>Sales Focussed Training</h3>
                 <ul>
-                  {/* {
-                    link_list.map((e,id)=>{
-                      return(
-                        <li key={id}> <Link href={`/microgen-university/${e.link}`} >{e.title}</Link>  </li>
-                      )
-                    })
-                  } */}
-                  <li>
-                    <Link href={`/microgen-university/${link_list[0].link}`}>
+                   <li>
+                    <Link href="/effectively-Sales-Material">
                       {link_list[0].title}
                     </Link>
                   </li>
                   <li>
-                    <a href="#">Hear From Your Peers</a>
+                    <Link href="/hear-from-your-peers">Hear From Your Peers</Link>
                   </li>
                   <li>
-                    <a href="#">Kristie Fuller's Sales Training Presentation</a>
+                    <Link href="/kristine-Fuller-sale-training-presentation">Kristie Fuller's Sales Training Presentation</Link>
                   </li>
                   <li>
-                    <a href="#">Rick's Roundtable Discussions</a>
+                    <Link href="/ricks-roundtable-discussion">Rick's Roundtable Discussions</Link>
                   </li>
                   <li>
-                    <a href={`/sales-resources-by-speciality`}>{link_list[4].title} </a>
+                    <Link href="/sales-resources-by-speciality">{link_list[4].title} </Link>
                   </li>
                   <li>
                     <Link href="/sales-training"> {link_list[5].title} </Link>
@@ -208,10 +207,10 @@ const page = () => {
                 <h3>Continued Education</h3>
                 <ul>
                   <li>
-                    <a href="/preceptorships">Preceptorships</a>
+                    <Link href="/preceptorships">Preceptorships</Link>
                   </li>
                   <li>
-                    <Link href="">MicroGenDX Minute</Link>
+                    <Link href="/mircoGenDxMinute">MicroGenDX Minute</Link>
                   </li>
                   <li>
                     <Link href="/using-the-mdx-lab-portal">
@@ -219,7 +218,7 @@ const page = () => {
                     </Link>
                   </li>
                   <li>
-                    <a href="#">Webinars</a>
+                    <Link href="/webinars">Webinars</Link>
                   </li>
                 </ul>
               </div>

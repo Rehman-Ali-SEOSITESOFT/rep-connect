@@ -1,0 +1,19 @@
+.microgendxMin {
+  padding-top: 30px;
+}
+.div_height {
+  height: 210px;
+  border: solid 1px #cccccc;
+}
+.main_row {
+  margin-bottom: 40px;
+}
+.first_section h4 {
+  font-family: "Poppins", sans-serif;
+  color: #1790d0;
+  font-size: 25px;
+  line-height: 27px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  height: 60px;
+}
