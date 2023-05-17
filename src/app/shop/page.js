@@ -7,6 +7,7 @@ import style from "./shop.module.css";
 import { useDispatch } from "react-redux";
 import { product } from "@/redux/slices/productSlice";
 import withAuth from "@/utils/auth";
+import ProductPagination from "@/components/productPagination/ProductPagination";
 const page = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -40,6 +41,7 @@ const page = () => {
             </div>
           </div>
         </div>
+        <ProductPagination />
       </section>
     </>
   );

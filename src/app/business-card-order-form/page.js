@@ -372,7 +372,7 @@ const page = () => {
                   <div className={`col-lg-6 ${style.form_field}`}>
                     <label className="form-label">Country</label>
                     <select
-                      className="form-control"
+                      className="form-select"
                       name="country"
                       value={tagOrderField.country}
                       onChange={hanldechange}

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import withAuth from "@/utils/auth";
 const page = () => {

@@ -4,6 +4,7 @@ import BreadCrum from "@/components/breadCrum/BreadCrum";
 import CategoryProducts from "@/components/categoryproducts/CategoryProducts";
 import style from "./slug.module.css";
 import withAuth from "@/utils/auth";
+import ProductPagination from "@/components/productPagination/ProductPagination";
 const Page = ({ params }) => {
   const { slug } = params;
   const renamed = slug.split("-").join(" ");
@@ -36,6 +37,7 @@ const Page = ({ params }) => {
             </div>
           </div>
         </div>
+        <ProductPagination />
       </section>
     </>
   );
