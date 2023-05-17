@@ -10,11 +10,11 @@ const BlogFilters = () => {
   const [filterTabs, setFilterTabs] = useState([
     {
       name: (
-        <>
+        <React.Fragment>
           <i className="fa-regular fa-paste" />
           <span>Categories </span>
           <i className="fa-solid fa-caret-down" />
-        </>
+        </React.Fragment>
       ),
       data: [
         "Advisory Board Presentations Podcast",
@@ -45,10 +45,10 @@ const BlogFilters = () => {
     },
     {
       name: (
-        <>
+        <React.Fragment>
           <i className="fa-solid fa-tag" /> <span>Tags</span>
           <i className="fa-solid fa-caret-down" />
-        </>
+        </React.Fragment>
       ),
       data: [
         "AAHKS COMMITTEE",
@@ -86,10 +86,10 @@ const BlogFilters = () => {
     },
     {
       name: (
-        <>
+        <React.Fragment>
           <i className="fa-solid fa-user" /> <span>Authors</span>
           <i className="fa-solid fa-caret-down" />
-        </>
+        </React.Fragment>
       ),
       data: [
         "John-Paul White",
