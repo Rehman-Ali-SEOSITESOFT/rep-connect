@@ -1,15 +1,15 @@
-import React from 'react'
-import './additionalBio.css'
+import React from "react";
+import "./additionalBio.css";
 const AdditionalBioFilmVideo = (props) => {
-    const {title}=props
+  const { title } = props;
   return (
     <>
-    <div className='biofilm_video_wrapper'>
+      <div className="biofilm_video_wrapper">
         <h5>{title}</h5>
-        <div className='bio_video'></div>
-    </div>
+        <div className="bio_video"></div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default AdditionalBioFilmVideo
+export default AdditionalBioFilmVideo;

@@ -24,6 +24,8 @@ import report15 from "../../assets/images/microgendxuniversity/report15.jpg";
 import report18 from "../../assets/images/microgendxuniversity/report18.jpg";
 
 import PdfBioResearch from "@/components/pdfbioResearch/PdfBioResearch";
+import MainSlider from "@/components/slider/MainSlider";
+import Popup from "@/components/slider/popup/Popup";
 const page = () => {
   const [trainingData, setTrainingData] = useState([
     {
@@ -64,65 +66,74 @@ const page = () => {
         "Applications of Clinical Microbial Next-Generation Sequencing",
     },
     {
-      pdfImage:report2,
-      buttonTitle:"Understanding the Importance of Biofilms In Treating Chronic Sinusitis"
+      pdfImage: report2,
+      buttonTitle:
+        "Understanding the Importance of Biofilms In Treating Chronic Sinusitis",
     },
     {
-      pdfImage:report3,
-      buttonTitle:"Biofilm-Related Periprosthetic Joint Infections | Dustin L. Williams and Roy D. Bloebaum"
+      pdfImage: report3,
+      buttonTitle:
+        "Biofilm-Related Periprosthetic Joint Infections | Dustin L. Williams and Roy D. Bloebaum",
     },
     {
-      pdfImage:report4,
-      buttonTitle:"The Role of Bacterial Biofilms and the Pathophysiology of Chronic Rhinosinusitis"
+      pdfImage: report4,
+      buttonTitle:
+        "The Role of Bacterial Biofilms and the Pathophysiology of Chronic Rhinosinusitis",
     },
     {
-      pdfImage:report5,
-      buttonTitle:"ESCMID guideline for the diagnosis and treatment of biofilm infections2014"
+      pdfImage: report5,
+      buttonTitle:
+        "ESCMID guideline for the diagnosis and treatment of biofilm infections2014",
     },
     {
-      pdfImage:report6,
-      buttonTitle:"Economic aspects of biofilm-based wound care in diabetic foot ulcers"
+      pdfImage: report6,
+      buttonTitle:
+        "Economic aspects of biofilm-based wound care in diabetic foot ulcers",
     },
     {
-      pdfImage:report7,
-      buttonTitle:"More effective cell-based therapy through biofilm suppression"
+      pdfImage: report7,
+      buttonTitle:
+        "More effective cell-based therapy through biofilm suppression",
     },
     {
-      pdfImage:report8,
-      buttonTitle:"The Role of Bacterial Biofilms in Chronic InfectionsT. Bjarnsholt"
+      pdfImage: report8,
+      buttonTitle:
+        "The Role of Bacterial Biofilms in Chronic InfectionsT. Bjarnsholt",
     },
     {
-      pdfImage:report9,
-      buttonTitle:"ASM Microbe June 2016 Presentation"
+      pdfImage: report9,
+      buttonTitle: "ASM Microbe June 2016 Presentation",
     },
     {
-      pdfImage:report10,
-      buttonTitle:"Clinically Addressing Biofilm in Chronic Wounds"
+      pdfImage: report10,
+      buttonTitle: "Clinically Addressing Biofilm in Chronic Wounds",
     },
     {
-      pdfImage:report11,
-      buttonTitle:"Culture Negative Infections"
+      pdfImage: report11,
+      buttonTitle: "Culture Negative Infections",
     },
     {
-      pdfImage:report12,
-      buttonTitle:"Molecular Microbiology New Dimensions for Cutaneous Biology and Wound Healing"
+      pdfImage: report12,
+      buttonTitle:
+        "Molecular Microbiology New Dimensions for Cutaneous Biology and Wound Healing",
     },
     {
-      pdfImage:report13,
-      buttonTitle:"Actionable Diagnosis of Neuroleptospirosis by Next-Generation Sequencing"
+      pdfImage: report13,
+      buttonTitle:
+        "Actionable Diagnosis of Neuroleptospirosis by Next-Generation Sequencing",
     },
     {
-      pdfImage:report14,
-      buttonTitle:"Ramikrishnan Culture vs Sequencing"
+      pdfImage: report14,
+      buttonTitle: "Ramikrishnan Culture vs Sequencing",
     },
     {
-      pdfImage:report15,
-      buttonTitle:"The Problem of Culture Negative Infections "
+      pdfImage: report15,
+      buttonTitle: "The Problem of Culture Negative Infections ",
     },
     {
-      pdfImage:report18,
-      buttonTitle:"Wolcott Wound Repair and Regeneration "
-    }
+      pdfImage: report18,
+      buttonTitle: "Wolcott Wound Repair and Regeneration ",
+    },
   ]);
   return (
     <>
@@ -211,6 +222,7 @@ const page = () => {
                 </div>
               );
             })}
+            <MainSlider />
           </div>
         </div>
       </section>

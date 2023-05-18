@@ -13,6 +13,7 @@
   font-weight: 400;
   color: #2754a4;
   text-decoration: none;
+  margin-bottom: 20px;
 }
 .button_seciton_pdf {
   margin: 0 10px 15px 0;
@@ -31,10 +32,19 @@
 .button_seciton_pdf .anchor_button:hover:after {
   width: 100%;
 }
-.button_seciton_pdf a{
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #2754a4;
-    line-height: 21px;
+.button_seciton_pdf a {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #2754a4;
+  line-height: 21px;
+}
+.icon_color {
+  color: white;
+}
+@media screen and(max-width:576px) {
+  .button_seciton_pdf .anchor_button {
+    font-size: 14px;
+    line-height: 18px;
+  }
 }

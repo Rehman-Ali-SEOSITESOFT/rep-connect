@@ -1,8 +1,8 @@
-import React from "react"
-import "./GeneralAbsPosts.css"
+import React from "react";
+import "./GeneralAbsPosts.css";
 
 const GeneralAbsPosts = (props) => {
-  const { trainingHeading } = props
+  const { trainingHeading } = props;
   return (
     <>
       <div className="genreal_training_wrapper">
@@ -10,7 +10,7 @@ const GeneralAbsPosts = (props) => {
         <div className="training_video_frame"></div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default GeneralAbsPosts
+export default GeneralAbsPosts;
