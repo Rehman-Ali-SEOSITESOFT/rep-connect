@@ -28,9 +28,7 @@ const page = () => {
             <div className="col-lg-6">
               <div className={styles.sale_material_video}>
                 <h4>New Report Guide Trifold</h4>
-                <div className={styles.videoBox}>
-                 
-                </div>
+                <div className={styles.videoBox}></div>
               </div>
             </div>
           </div>
