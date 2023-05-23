@@ -75,7 +75,8 @@
   text-decoration: none;
   color: #0095eb;
 }
-.general_training ul li a:hover {
+.general_training ul li a:hover,
+.sales_focussed ul li a:hover {
   color: #f05c5d;
   text-decoration: underline;
 }
