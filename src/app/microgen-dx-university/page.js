@@ -197,7 +197,7 @@ const page = () => {
                 <h3>Sales Focussed Training</h3>
                 <ul>
                   <li>
-                    <Link href="/effectively-Sales-Material">
+                    <Link href="/effectively-sales-material">
                       {link_list[0].title}
                     </Link>
                   </li>
@@ -207,7 +207,7 @@ const page = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/kristine-Fuller-sale-training-presentation">
+                    <Link href="/kristine-fuller-sale-training-presentation">
                       Kristie Fuller's Sales Training Presentation
                     </Link>
                   </li>

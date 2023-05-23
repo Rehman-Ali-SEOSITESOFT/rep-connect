@@ -1,16 +1,15 @@
 "use client";
-
-import React, { useState } from "react"
-import styles from "./microgendxInsider.module.css"
-import MicrogendxInsiderComponent from "@/components/microgendxInsiderComponent/microgendxInsiderComponent"
-import labCompany from "../../assets/images/microgenInsider/lab-company.png"
-import drpleads from "../../assets/images/microgenInsider/doctorpleads.png"
-import indicated from "../../assets/images/microgenInsider/tenindicted.png"
-import business from "../../assets/images/microgenInsider/businessagreement.png"
-import jail from "../../assets/images/microgenInsider/jail.png"
+import React, { useState } from "react";
+import styles from "./microgendxInsider.module.css";
+import MicrogendxInsiderComponent from "@/components/microgendxInsiderComponent/microgendxInsiderComponent";
+import labCompany from "../../assets/images/microgenInsider/lab-company.png";
+import drpleads from "../../assets/images/microgenInsider/doctorpleads.png";
+import indicated from "../../assets/images/microgenInsider/tenindicted.png";
+import business from "../../assets/images/microgenInsider/businessagreement.png";
+import jail from "../../assets/images/microgenInsider/jail.png";
 import Image from "next/image";
-import withAuth from "@/utils/auth"
-import Pagination from "@/components/pagination/Pagination"
+import withAuth from "@/utils/auth";
+import Pagination from "@/components/pagination/Pagination";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 const page = () => {
   const [imageCounter, setImageCounter] = useState(0);
@@ -19,7 +18,7 @@ const page = () => {
     if (value === "forward") {
       if (imageCounter < micrognInsider.length - 1) {
         setImageCounter(imageCounter + 1);
-      } else {
+      } else {   
         setImageCounter(0);
       }
     }
@@ -84,7 +83,6 @@ const page = () => {
   const func = (value) => {
     setLayout(true);
     setImageCounter(value);
-    // console.log("func value", value)
   };
   const cancel = (event) => {
     event.preventDefault();
@@ -124,18 +122,16 @@ const page = () => {
             <div className={styles.imagepopup}>
               <div className={styles.img_container}>
                 <div className={styles.cancel}>
-                  {" "}
                   <button onClick={cancel} className={styles.cancel_btn}>
-                    <i className="fa-solid fa-xmark"></i>{" "}
-                  </button>{" "}
+                    <i className="fa-solid fa-xmark"></i>
+                  </button>
                 </div>
                 <div className={styles.btns_ctrl}>
                   <button
                     className={styles.controls}
                     onClick={() => imageControls("back")}
                   >
-                    {" "}
-                    <i className="fa-solid fa-angle-left"></i>{" "}
+                    <i className="fa-solid fa-angle-left"></i>
                   </button>
                   <Image
                     className="img-fluid"
@@ -147,7 +143,7 @@ const page = () => {
                     className={styles.controls}
                     onClick={() => imageControls("forward")}
                   >
-                    <i className="fa-solid fa-angle-right"></i>{" "}
+                    <i className="fa-solid fa-angle-right"></i>
                   </button>
                 </div>
               </div>
@@ -157,7 +153,6 @@ const page = () => {
       ) : (
         ""
       )}
-
       <section className={styles.microInsider_wrapper}>
         <div className="container-xxl">
           <div className="row">
@@ -172,9 +167,9 @@ const page = () => {
                 </div>
               );
             })}
-             <div className="pagi_margin">
-        <Pagination/>
-      </div>
+            <div className="pagi_margin">
+              <Pagination />
+            </div>
           </div>
         </div>
       </section>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import styles from "./using-the-mdx-lab-portal.module.css";
 import React from "react";
@@ -7,13 +7,20 @@ const page = () => {
   return (
     <>
       <BreadCrum
-        breadHeading="using-the-mdx-lab-portal"
-        pageName="Home"
-        subPage="using-the-mdx-lab-portal"
+        breadHeading="Using the MDX Lab Portal"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Using the MDX Lab Portal",
+          },
+        ]}
       />
       <div className="container-xxl">
         <div className="row mt-4 mb-4">
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-sm-12 ">
             <div>
               <div className={styles.heading}>
                 Navigating the Lab Portal for REPS
@@ -21,9 +28,9 @@ const page = () => {
               <div className={styles.box}></div>
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <div>
-              <div className={styles.heading}>
+              <div className={`${styles.heading}   ${styles.second_heading}`}>
                 Navigating the Lab Portal for Physicians
               </div>
               <div className={styles.box}></div>
@@ -49,13 +56,13 @@ const page = () => {
           </p>
         </div>
         <div className="row">
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <button className={styles.portal_btn}>
               <i className="fa-solid fa-flask"></i>
               <span className={styles.btn_text}> Portal Lab </span>
             </button>
           </div>
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <button className={styles.portal_btn}>
               <i className="fa-regular fa-address-book"></i>
               <span className={styles.btn_text}> Portal Lab </span>
@@ -77,7 +84,7 @@ const page = () => {
           contractors.
         </p>
         <div className="row justify-content-center">
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <button className={styles.portal_btn}>
               <i className="fa-regular fa-address-book"></i>
               <span className={styles.btn_text}>
@@ -109,7 +116,7 @@ const page = () => {
           <p>For additional assistance, contact information@pathogenius.com.</p>
         </div>
         <div className="row justify-content-center mb-5">
-          <div className="col-6">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             <button className={styles.portal_btn}>
               <i className="fa-regular fa-address-book"></i>
               <span className={styles.btn_text}>
