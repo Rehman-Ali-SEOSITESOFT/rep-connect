@@ -1,11 +1,12 @@
-"use client"
-import UniversityCourse from "@/components/universityCourse/UniversityCourse"
-import { useState } from "react"
+"use client";
+import UniversityCourse from "@/components/universityCourse/UniversityCourse";
+import { useState } from "react";
 import styles from "../university.module.css";
 import withAuth from "@/utils/auth";
+import BreadCrum from "@/components/breadCrum/BreadCrum";
 // this is a client component 👈🏽
 const page = ({ params }) => {
-  let { id } = params
+  let { id } = params;
 
   const [courseData, setCourseData] = useState([
     {
@@ -36,9 +37,21 @@ const page = ({ params }) => {
       courseTitle: "7. Business Development",
       link: "courses/business-development/",
     },
-  ])
+  ]);
   return (
     <>
+      <BreadCrum
+        breadHeading="Home Study 101"
+        pagess={[
+          {
+            page: "Home",
+            link: "/",
+          },
+          {
+            page: "Home Study 101",
+          },
+        ]}
+      />
       <section className={styles.course_wrapper_section}>
         <div className="container-xxl">
           <div className="row">
@@ -49,7 +62,7 @@ const page = ({ params }) => {
                     <>
                       <UniversityCourse key={idx} item={e} />
                     </>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -57,6 +70,6 @@ const page = ({ params }) => {
         </div>
       </section>
     </>
-  )
-}
-  export default withAuth(page);
+  );
+};
+export default withAuth(page);

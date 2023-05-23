@@ -12,6 +12,10 @@ html {
   font-family: "Poppins", sans-serif !important;
 }
 
+.conte-min-height {
+  min-height: 91.4vh;
+}
+
 /* :root {
   scrollbar-color: #1790d0 #f1f1f1;
   scrollbar-width: thin;
@@ -36,6 +40,10 @@ html {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
+
+.my-account {
+  padding: 80px 0;
 }
 
 @keyframes rotation {

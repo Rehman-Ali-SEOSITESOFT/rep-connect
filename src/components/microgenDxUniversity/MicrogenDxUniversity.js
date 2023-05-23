@@ -1,7 +1,7 @@
-import Image from "next/image"
-import Link from "next/link"
-import React from "react"
-import "./MicrogenDxUniversity.css"
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import "./MicrogenDxUniversity.css";
 const MicrogenDxUniversity = ({ item }) => {
   return (
     <>
@@ -16,7 +16,7 @@ const MicrogenDxUniversity = ({ item }) => {
         </Link>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default MicrogenDxUniversity
+export default MicrogenDxUniversity;

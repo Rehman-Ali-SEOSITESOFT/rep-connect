@@ -11,7 +11,7 @@ import MicrogenDxUniversity from "@/components/microgenDxUniversity/MicrogenDxUn
 import UniversityLinks from "@/components/universityLinks/UniversityLinks";
 import Link from "next/link";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
-import withAuth from "@/utils/auth"
+import withAuth from "@/utils/auth";
 
 const page = () => {
   const [cardDetail, setCardDetail] = useState([
@@ -88,7 +88,7 @@ const page = () => {
     },
   ]);
 
-  const [contineEducation,setContineEducation]=useState([
+  const [contineEducation, setContineEducation] = useState([
     {
       title: "Preceptorships",
       link: "microgen-dx-university/preceptorships/",
@@ -105,7 +105,7 @@ const page = () => {
       title: "Webinars",
       link: "webinars",
     },
-  ])
+  ]);
 
   return (
     <>
@@ -120,8 +120,8 @@ const page = () => {
             page: "MicroGenDX University",
           },
         ]}
-      /> 
-      <section className={styless.mircoUniversity_wrapper}> 
+      />
+      <section className={styless.mircoUniversity_wrapper}>
         <div className="container-xxl">
           <div className="row">
             <div className="col-lg-12 ">
@@ -162,16 +162,33 @@ const page = () => {
               <div className={styless.general_training}>
                 <h3>General Training</h3>
                 <ul>
-                  <li><Link href="/basicTraining">Basic Training</Link></li>
-                  <li><Link href="/advance-training">Advanced Training</Link></li>
-                  <li><Link href="/antibiotics-101">Antibiotics 101</Link></li>
-                  <li><Link href="/antibiotics-102">Antibiotics 102</Link></li>
-                  <li><Link href="/biofilm-training-research">BioFilm Traning</Link></li>
-                  <li><Link href="/">Pronunciation of Species</Link></li>
-                  <li><Link href="/science-of-microgen-dx">Science of MicroGenDx</Link></li>
-                  {/* {trainingLinks.map((e, idx) => {
-                    return <UniversityLinks key={idx} item={e} />;
-                  })} */}
+                  <li>
+                    <Link href="/basicTraining">Basic Training</Link>
+                  </li>
+                  <li>
+                    <Link href="/advance-training">Advanced Training</Link>
+                  </li>
+                  <li>
+                    <Link href="/antibiotics-101">Antibiotics 101</Link>
+                  </li>
+                  <li>
+                    <Link href="/antibiotics-102">Antibiotics 102</Link>
+                  </li>
+                  <li>
+                    <Link href="/biofilm-training-research">
+                      BioFilm Traning
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/pronunciations-of-panel-species">
+                      Pronunciation of Species
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/science-of-microgen-dx">
+                      Science of MicroGenDx
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -179,22 +196,30 @@ const page = () => {
               <div className={styless.sales_focussed}>
                 <h3>Sales Focussed Training</h3>
                 <ul>
-                   <li>
-                    <Link href="/effectively-Sales-Material">
+                  <li>
+                    <Link href="/effectively-sales-material">
                       {link_list[0].title}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/hear-from-your-peers">Hear From Your Peers</Link>
+                    <Link href="/hear-from-your-peers">
+                      Hear From Your Peers
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/kristine-Fuller-sale-training-presentation">Kristie Fuller's Sales Training Presentation</Link>
+                    <Link href="/kristine-fuller-sale-training-presentation">
+                      Kristie Fuller's Sales Training Presentation
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/ricks-roundtable-discussion">Rick's Roundtable Discussions</Link>
+                    <Link href="/ricks-roundtable-discussion">
+                      Rick's Roundtable Discussions
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/sales-resources-by-speciality">{link_list[4].title} </Link>
+                    <Link href="/sales-resources-by-speciality">
+                      {link_list[4].title}{" "}
+                    </Link>
                   </li>
                   <li>
                     <Link href="/sales-training"> {link_list[5].title} </Link>
