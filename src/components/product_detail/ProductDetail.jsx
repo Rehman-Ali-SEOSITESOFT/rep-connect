@@ -12,7 +12,8 @@ const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
   ssr: false,
 });
 
-const ProductDetail = ({ item }) => {
+const ProductDetail = (props) => {
+  const item = props.item;
   const [qty, setQty] = useState(1);
   const [defalutLoading, setDefaultLoading] = useState(false);
   const [loading, setloading] = useState(false);
@@ -66,13 +67,12 @@ const ProductDetail = ({ item }) => {
                           smallImage: {
                             alt: "Wristwatch by Ted Baker London",
                             isFluidWidth: true,
-                            src: img1.src,
-                            // sizes:
-                            //   "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                            src: item.data.cover_image.image_url,
+
                             imageClassName: "magnify-image",
                           },
                           largeImage: {
-                            src: img1.src,
+                            src: item.data.cover_image.image_url,
                             width: 1426,
                             height: 2000,
                           },
