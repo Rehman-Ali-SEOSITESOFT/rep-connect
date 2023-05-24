@@ -14,16 +14,6 @@ const AddShipping = () => {
     zipcode: "",
   });
 
-  // const [validated, setValidated] = useState({
-  //   firstname: false,
-  //   lastname: false,
-  //   // compnayname: false,
-  //   countryregion: false,
-  //   towncity: false,
-  //   streetaddres: false,
-  //   state: false,
-  //   zipcode: false,
-  // });
   const hanldeChanged = (e) => {
     setshippingForm({ ...shippingForm, [e.target.name]: e.target.value });
     // setValidated({ ...validated, [e.target.name]: true });
