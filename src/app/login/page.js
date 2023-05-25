@@ -1,5 +1,5 @@
 "use client";
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Logo from "../../assets/images/login/Rep-Connect-Logo-2021.png";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const Page = () => {
   const [error, setError] = useState([]);
   const router = useRouter();
@@ -19,11 +20,9 @@ const Page = () => {
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("token"));
     if (token) {
-         return (
-        location.replace("/")
-        );
-      }
-}, []);
+      return location.replace("/");
+    }
+  }, []);
 
   const handleChange = (e) => {
     setLogin({
@@ -83,8 +82,7 @@ const Page = () => {
               password: "",
             });
             setIsLoggedIn(false);
-            router.push("/")
-            
+            router.push("/");
           } else {
             toast.warn(resp.data.message, {
               position: "top-right",
@@ -201,7 +199,7 @@ const Page = () => {
           <div className="row justify-content-center">
             <div className="col-lg-6 col-md-6">
               <div className={styles.register_area}>
-                <div> Register </div>
+                <Link href="/register"> Register </Link>
                 <div className={styles.line}> </div>
                 <div> Lost your password? </div>
               </div>

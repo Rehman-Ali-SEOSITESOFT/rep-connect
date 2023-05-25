@@ -1,6 +1,5 @@
 "use client";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
-import withAuth from "@/utils/auth";
 import React from "react";
 import style from "./register.module.css";
 import RegisterAccordian from "@/components/registerAccordian/RegisterAccordian";
@@ -25,11 +24,11 @@ const page = () => {
               </div>
             </div>
           </div>
-        <RegisterAccordian/>
+          <RegisterAccordian />
         </div>
       </section>
     </>
   );
 };
 
-export default withAuth(page);
+export default page;

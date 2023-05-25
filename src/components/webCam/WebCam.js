@@ -24,11 +24,7 @@ const WebCamera = ({ rendered, _handleCaputer, getImage }) => {
   });
   const _handleCaputeree = (e) => {
     e.preventDefault();
-    //   console.log(picture,"pic");
-    //  console.log( dispatch(AddImage(picture)),"hello");
-    //   capture();
-    //   setIsRendered(false)
-    //   setTimeout(() =>_handleCaputer(false) , 3000);
+
     _handleCaputer(webcamRef.current.getScreenshot());
   };
   console.log(picture, "picture");

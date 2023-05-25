@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import "./RegisterAccordian.css";
 import tooltip from "../../assets/images/register/help.png";
 import Image from "next/image";
-import defaultImage from "../../assets/images/register/download.png";
 import { CountyList } from "@/data/countylist/CountyList";
+import Member from "../../assets/images/Profile/member.png";
+import axios from "axios";
+import WebCamera from "../webCam/WebCam";
+import { ToastContainer, toast } from "react-toastify";
 const RegisterAccordian = () => {
+  const [base64Image, setBase64Image] = useState("");
+  const [getImage, setGetImage] = useState("");
+  const [isRendered, setIsRendered] = useState(false);
   const [registerForm, setRegisterForm] = useState({
     userName: "",
     firstName: "",
@@ -23,14 +29,80 @@ const RegisterAccordian = () => {
     google: "",
     website: "",
   });
+  const data = {
+    username: registerForm.userName,
+    first_name: registerForm.firstName,
+    last_name: registerForm.lastName,
+    position: registerForm.position,
+    email: registerForm.email,
+    mobile: registerForm.mobile,
+    password: registerForm.password,
+    gender: registerForm.gender,
+    country: registerForm.country,
+    profile_picture: getImage ? getImage : base64Image,
+    social_profiles: {
+      facebook_page: registerForm.facebook,
+      twitter: registerForm.twitter,
+      google_plus: registerForm.google,
+      websiteUrl: registerForm.website,
+    },
+  };
   const _handleRegistrationForm = (e) => {
     e.preventDefault();
+    axios
+      .post(` ${process.env.NEXT_PUBLIC_URL}api/user/register`, data)
+      .then((resp) => {
+        if (resp.data.success === 1) {
+          toast.success(resp.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+          });
+        } else {
+          toast.warning(resp.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      });
   };
   const _handleChange = (e) => {
+    console.log(e.target.value);
     setRegisterForm({
       ...registerForm,
       [e.target.name]: e.target.value,
     });
+  };
+  const _handleImage = () => {
+    setIsRendered(true);
+  };
+  const _handleCaputeree = (e) => {
+    setIsRendered(!isRendered);
+    setGetImage(e);
+  };
+  const _handleDelteImage = () => {
+    setGetImage("");
+  };
+  const handleImageChange = (event) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      setBase64Image(reader.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  const removeUpload = () => {
+    setBase64Image("");
   };
   return (
     <>
@@ -58,8 +130,8 @@ const RegisterAccordian = () => {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-5">
+                    <div className="row align-items-center userName_section">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <div className="username_area">
                           <span className="iconss">
                             <i className="fa-solid fa-user"></i>
@@ -69,22 +141,22 @@ const RegisterAccordian = () => {
                           </h6>
                         </div>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
-                          value={registerForm.firstName}
+                          value={registerForm.userName}
                           onChange={_handleChange}
-                          name="firstName"
+                          name="userName"
                         />
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-5">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <h6 className="without_icon">
                           First Name <span>*</span>
                         </h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           onChange={_handleChange}
@@ -93,12 +165,12 @@ const RegisterAccordian = () => {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-5">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <h6 className="without_icon">
                           Last Name <span>*</span>
                         </h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.lastName}
@@ -108,10 +180,10 @@ const RegisterAccordian = () => {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-5">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <h6 className="without_icon">Title/Position</h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.position}
@@ -120,14 +192,14 @@ const RegisterAccordian = () => {
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-5 d-flex align-items-center">
+                    <div className="row email_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 d-flex align-items-center col-sm-4 col-sm-12">
                         <span className="iconss">
                           <i className="fa-regular fa-envelope-open"></i>
                         </span>
                         <h6>Email Address</h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.email}
@@ -137,10 +209,10 @@ const RegisterAccordian = () => {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-5">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <h6 className="without_icon">Mobile Number</h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.mobile}
@@ -149,16 +221,22 @@ const RegisterAccordian = () => {
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-5 d-flex align-items-center">
-                        <span className="iconss">
+                    <div className="row password_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 d-flex align-items-center">
+                        <span
+                          className="iconss"
+                          type="button"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="bottom"
+                          title="Your password must b 8 characters long atleast"
+                        >
                           <i className="fa-solid fa-lock"></i>
                         </span>
                         <h6>
                           Password <span>*</span>
                         </h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.password}
@@ -168,12 +246,12 @@ const RegisterAccordian = () => {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-5">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <h6 className="without_icon">
                           Confirm Password <span>*</span>
                         </h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.confrimPassword}
@@ -213,39 +291,79 @@ const RegisterAccordian = () => {
                 >
                   <div className="accordion-body">
                     <div className="row align-items-center">
-                      <div className="col-lg-5">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <div className="username_area">
                           <h6 className="without_icon">
                             Profile Display Name
-                            <span>
+                            <span
+                              type="button"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="bottom"
+                              title="Your profile name / nickname that will be displayed to public"
+                            >
                               <Image src={tooltip} alt="" />
                             </span>
                           </h6>
                         </div>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control display_name"
                           value={registerForm.profileName}
                           onChange={_handleChange}
+                          name="profileName"
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-5 d-flex align-items-center">
+                    <div className="row profile_picture_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 d-flex align-items-center">
                         <span className="iconss">
                           <i className="fa-solid fa-camera"></i>
                         </span>
                         <h6 className="mb-0">
                           profile Picture
-                          <span>
+                          <span
+                            type="button"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="Upload a profile that represents you accross tha site "
+                          >
                             <Image src={tooltip} alt="" />
                           </span>
                         </h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <div className="image_section">
-                          <Image src={defaultImage} alt="" />
+                          {base64Image ? (
+                            <Image
+                              src={base64Image}
+                              alt=""
+                              width={80}
+                              height={80}
+                            />
+                          ) : (
+                              <Image
+                                height={80}
+                                className="logImg"
+                                src={Member}
+                                alt="logo"
+                              />
+                            ) && getImage ? (
+                            <Image
+                              src={getImage}
+                              alt="img"
+                              height={80}
+                              width={80}
+                              className="logImg"
+                            />
+                          ) : (
+                            <Image
+                              height={80}
+                              className="logImg"
+                              src={Member}
+                              alt="logo"
+                            />
+                          )}
                           <div>
                             <label for="myfile" className="upload_pic">
                               Upload a profile picture
@@ -254,24 +372,73 @@ const RegisterAccordian = () => {
                               type="file"
                               id="myfile"
                               name="myfile"
-                              // onChange={handleImageChange}
+                              onChange={handleImageChange}
                               style={{ display: "none" }}
                             />
-                            <button
-                              className="click_photo"
-                              // onClick={_handleImage}
-                            >
-                              Take Photo
-                            </button>
+                            {base64Image ? (
+                              <>
+                                <button
+                                  className="removeUpload"
+                                  onClick={removeUpload}
+                                >
+                                  remove
+                                </button>
+                                <button
+                                  className="click_photo"
+                                  onClick={_handleImage}
+                                >
+                                  Take Photo
+                                </button>
+                              </>
+                            ) : (
+                                <button
+                                  className="click_photo"
+                                  onClick={_handleImage}
+                                >
+                                  Take Photo
+                                </button>
+                              ) && getImage ? (
+                              <>
+                                <button
+                                  className="remove"
+                                  onClick={_handleDelteImage}
+                                >
+                                  remove
+                                </button>
+                                <button
+                                  className="click_photo"
+                                  onClick={_handleImage}
+                                >
+                                  Take Photo
+                                </button>
+                              </>
+                            ) : (
+                              <button
+                                className="click_photo"
+                                onClick={_handleImage}
+                              >
+                                Take Photo
+                              </button>
+                            )}
+                            <div className="photooo">
+                              {isRendered ? (
+                                <WebCamera
+                                  rendered={isRendered}
+                                  _handleCaputer={(e) => _handleCaputeree(e)}
+                                />
+                              ) : (
+                                <button className="d-none"></button>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-5">
+                      <div className="col-lg-5 col-md-4 col-sm-12">
                         <h6 className="without_icon">Gender</h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <div className="d-flex">
                           <div className="form-check">
                             <input
@@ -280,8 +447,7 @@ const RegisterAccordian = () => {
                               name="gender"
                               id="exampleRadios1"
                               value="Male"
-
-                              //   onChange={handleChange}
+                              onChange={_handleChange}
                             />
                             <label
                               className="form-check-label"
@@ -297,6 +463,7 @@ const RegisterAccordian = () => {
                               name="gender"
                               id="exampleRadios1"
                               value="Female"
+                              onChange={_handleChange}
                             />
                             <label
                               className="form-check-label"
@@ -308,15 +475,19 @@ const RegisterAccordian = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-5 d-flex align-items-center">
+                    <div className="row country_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 d-flex align-items-center">
                         <span className="iconss">
                           <i className="fa-solid fa-location-dot"></i>
                         </span>
                         <h6 className="mb-0">Country/Region</h6>
                       </div>
-                      <div className="col-lg-7">
-                        <select className="w-100">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
+                        <select
+                          className="w-100"
+                          onChange={_handleChange}
+                          name="country"
+                        >
                           {CountyList.map((e, idx) => {
                             return <option key={idx}>{e}</option>;
                           })}
@@ -352,8 +523,8 @@ const RegisterAccordian = () => {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                    <div className="row">
-                      <div className="col-lg-5 align-items-center">
+                    <div className="row facebook_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 align-items-center">
                         <div className="username_area">
                           <span className="iconss">
                             <i className="fa-brands fa-facebook-f"></i>
@@ -361,56 +532,60 @@ const RegisterAccordian = () => {
                           <h6>Facebook Page</h6>
                         </div>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.facebook}
                           onChange={_handleChange}
+                          name="facebook"
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-5 d-flex align-items-center">
+                    <div className="row twitter_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 d-flex align-items-center">
                         <span className="iconss">
                           <i className="fa-brands fa-twitter"></i>
                         </span>
                         <h6 className="mb-0">Twitter</h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.twitter}
                           onChange={_handleChange}
+                          name="twitter"
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-5 d-flex align-items-center">
+                    <div className="row google_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 d-flex align-items-center">
                         <span className="iconss">
                           <i className="fa-brands fa-google-plus-g"></i>
                         </span>
                         <h6 className="mb-0">Google+</h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.google}
                           onChange={_handleChange}
+                          name="google"
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-5 d-flex align-items-center">
+                    <div className="row website_row">
+                      <div className="col-lg-5 col-md-4 col-sm-12 d-flex align-items-center">
                         <span className="iconss">
                           <i className="fa-solid fa-house"></i>
                         </span>
                         <h6 className="mb-0">Website (URL)</h6>
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-7 col-md-8 col-sm-12">
                         <input
                           className="form-control"
                           value={registerForm.website}
                           onChange={_handleChange}
+                          name="website"
                         />
                       </div>
                     </div>
@@ -442,6 +617,7 @@ const RegisterAccordian = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </form>
     </>
   );
