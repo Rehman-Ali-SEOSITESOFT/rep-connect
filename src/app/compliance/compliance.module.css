@@ -1,6 +1,19 @@
 .compliance_page {
   padding: 50px 0;
 }
+.complaince_section {
+  padding-top: 40px;
+}
+.row_margin {
+  margin-bottom: 40px;
+}
+.row_margin:nth-child(1) {
+  padding-top: 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.row_margin .insider_image_wrapper {
+  float: left !important;
+}
 .compliance__wrap__top .compliance_content {
   width: 75%;
   padding-right: 30px;

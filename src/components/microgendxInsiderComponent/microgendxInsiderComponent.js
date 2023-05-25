@@ -1,7 +1,7 @@
-import Link from "next/link"
-import React from "react"
-import "./microgendxInsiderComponent.css"
-import Pagination from "../pagination/Pagination"
+import Link from "next/link";
+import React from "react";
+import "./microgendxInsiderComponent.css";
+import Pagination from "../pagination/Pagination";
 const MicrogendxInsiderComponent = (props) => {
   // console.log("props:", props)
   return (
@@ -10,7 +10,11 @@ const MicrogendxInsiderComponent = (props) => {
         <div className="insider_image_wrapper ">
           <Link href="#">
             <div className="mask"></div>
-            <img src={props.items.image.src} alt="image" className="img-fluid" />
+            <img
+              src={props.items.image.src}
+              alt="image"
+              className="img-fluid"
+            />
           </Link>
           <div className="image_links">
             {/* <Link href="#"> */}
@@ -27,7 +31,9 @@ const MicrogendxInsiderComponent = (props) => {
       <div className="col-lg-7">
         <div className="insider_content_content">
           <h2>
-            <Link href={{ pathname: `/microgendex-insider/${props.items.link}` }}>
+            <Link
+              href={{ pathname: `/microgendex-insider/${props.items.link}` }}
+            >
               {props.items.heading}
             </Link>
           </h2>
@@ -37,14 +43,17 @@ const MicrogendxInsiderComponent = (props) => {
               <i className="fa-regular fa-comment"></i>
               <a href="#">{props.items.comments}</a>
               <i className="fa-solid fa-book"></i>
-              <a href="#">{props.items.readComment}</a>
+              <Link
+                href={{ pathname: `/microgendex-insider/${props.items.link}` }}
+              >
+                {props.items.readComment}
+              </Link>
             </div>
           </div>
         </div>
       </div>
-     
     </>
-  )
-}
+  );
+};
 
-export default MicrogendxInsiderComponent
+export default MicrogendxInsiderComponent;

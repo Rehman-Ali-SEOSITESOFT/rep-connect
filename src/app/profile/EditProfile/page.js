@@ -6,10 +6,10 @@ import Member from "../../../assets/images/Profile/member.png";
 import styles from "./editprofile.module.css";
 import help from "../../../assets/images/Profile/help.png";
 import axios from "axios";
-import WebCam from "@/components/webCam/WebCam";
 import WebCamera from "@/components/webCam/WebCam";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import withAuth from "@/utils/auth";
+import { CountyList } from "@/data/countylist/CountyList";
 
 const EditProfile = () => {
   const [getImage, setGetImage] = useState("");
@@ -29,8 +29,9 @@ const EditProfile = () => {
   });
   const [entries, setEntries] = useState([]);
   const [changeIcon, setChangeIcon] = useState([false, false, false]);
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
   const [active, setActive] = useState(false);
+  const [images, setImages] = useState(null);
   const _handleChangeInputs = (e) => {
     setActive(!active);
     setTimeout(() => {
@@ -56,9 +57,7 @@ const EditProfile = () => {
   };
   // const [changeClass, setChangeClass] = useState([false, false, false]);
   const newArray = [false, false, false];
-  const handleProfileSubmit = (e) => {
-    e.preventDefault();
-  };
+
   const handleIcon = (value) => {
     const newArray = [...changeIcon];
     for (let i = 0; i < newArray.length; i++) {
@@ -71,25 +70,28 @@ const EditProfile = () => {
     setChangeIcon(newArray);
   };
   const handleChange = (e) => {
+    e.preventDefault();
+    console.log(e.target.value, "=======================");
     setEntries({
-      ...setUserProfile,
+      ...entries,
       [e.target.name]: e.target.value,
     });
   };
   const [userToken, setUserToken] = useState("");
   useEffect(() => {
-    setUserToken(JSON.parse(localStorage.getItem("token")));
+    const token = JSON.parse(localStorage.getItem("token"));
     const header = {
-      "x-auth-token": userToken,
+      "x-auth-token": token,
       "Content-Type": "application/json",
     };
 
     axios
-      .get("https://anxious-foal-shift.cyclic.app/api/user/getSingleUser", {
+      .get(`${process.env.NEXT_PUBLIC_URL}api/user/getSingleUser`, {
         headers: header,
       })
       .then((resp) => {
         setEntries(resp.data.data[0]);
+        console.log(resp.data.data[0]);
       })
       .catch((err) => console.log(err));
   }, [userToken]);
@@ -122,37 +124,77 @@ const EditProfile = () => {
       return stateObj;
     });
   };
-
-  const _handleUpdateData = (event, data) => {
-    console.log(userToken, "user token for patch");
+  const handleProfileSubmit = (e) => {
+    e.preventDefault();
+    const userToken = JSON.parse(localStorage.getItem("token"));
+    const formData = new FormData();
+    const data = JSON.stringify({
+      facebook_page: entries.social_profiles.facebook_page,
+      google_plus: entries.social_profiles.google_plus,
+      twitter: entries.social_profiles.twitter,
+      websiteUrl: entries.social_profiles.websiteUrl,
+    });
+    formData.append("first_name", entries.first_name);
+    formData.append("last_name", entries.last_name);
+    formData.append("bioGraphy", entries.bioGraphy);
+    formData.append("gender", entries.gender);
+    formData.append("country", entries.country);
+    formData.append("mobile", entries.mobile);
+    formData.append("email", entries.email);
+    formData.append("social_profiles", data);
     const header = {
       "x-auth-token": userToken,
       "Content-Type": "application/json",
     };
-    const userData = {
-      first_name: entries.first_name,
-      last_name: entries.last_name,
-      bioGraphy: entries.bioGraphy,
-      gender: entries.gender,
-      // facebook_page: entries.social_profiles.facebook_page,
-    };
     axios
-      .patch(
-        "https://anxious-foal-shift.cyclic.app/api/user/editProfile",
-        userData,
-        {
-          headers: header,
-        }
-      )
+      .put(` ${process.env.NEXT_PUBLIC_URL}api/user/editProfile`, formData, {
+        headers: header,
+      })
       .then((resp) => console.log(resp))
       .catch((err) => console.log(err));
+
+    // e.preventDefault();
+    // console.log(userToken, "user token for patch");
+    // const getUsertoken = JSON.parse(localStorage.getItem("token"));
+    // const header = {
+    //   "x-auth-token": getUsertoken,
+    //   "Content-Type": "application/json",
+    // };
+    // // const data = JSON.stringify({
+    // //   facebook_page: entries.social_profiles.facebook_page,
+    // //   twitter: entries.social_profiles.twitter,
+    // //   websiteUrl: entries.social_profiles.websiteUrl,
+    // //   google_plus: entries.social_profiles.google_plus,
+    // // });
+    // const formData = new FormData();
+    // formData.append("first_name", entries.first_name);
+    // formData.append("last_name", entries.last_name);
+    // formData.append("mobile", entries.mobile);
+    // formData.append("bioGraphy", entries.bioGraphy);
+    // formData.append("gender", entries.gender);
+    // formData.append("country", entries.country);
+    // formData.append("password", entries.password);
+    // // formData.append("social_profiles", data);
+    // // formData.append("profile_picture", entries.profile_picture);
+    // axios
+    //   .put(
+    //     "https://anxious-foal-shift.cyclic.app/api/user/editProfile",
+    //     formData,
+    //     {
+    //       headers: header,
+    //     }
+    //   )
+    //   .then((resp) => console.log(resp))
+    //   .catch((err) => console.log(err));
   };
+
   const _handleImage = () => {
     setIsRendered(true);
   };
   const _handleCaputeree = (e) => {
     setIsRendered(!isRendered);
     setGetImage(e);
+    console.log(e);
   };
   const _handleDelteImage = () => {
     setGetImage("");
@@ -166,10 +208,12 @@ const EditProfile = () => {
       setBase64Image(reader.result);
     };
     reader.readAsDataURL(event.target.files[0]);
+    // console.log(setImages(event.target.file));
   };
   const removeUpload = () => {
     setBase64Image("");
   };
+
   return (
     <>
       {/* <WebCamera/> */}
@@ -521,10 +565,17 @@ const EditProfile = () => {
                             <div className="col-lg-8 col-md-12 p-2">
                               <div>
                                 <div>
-                                  <select
+                                  <select>
                                     className={`w-100 ${styles.input}`}
                                     onChange={handleChange}
-                                    value={userProfile.country}
+                                    name="country"
+                                    {CountyList.map((e, idx) => {
+                                      return <option key={idx}>{e}</option>;
+                                    })}
+                                  </select>
+                                  {/* <select
+                                    className={`w-100 ${styles.input}`}
+                                    onChange={handleChange}
                                     name="country"
                                   >
                                     <option defaultValue="selected">
@@ -971,7 +1022,7 @@ const EditProfile = () => {
                                     <option value="Åland Islands">
                                       Åland Islands
                                     </option>{" "}
-                                  </select>
+                                  </select> */}
                                 </div>
                               </div>
                             </div>
@@ -1039,7 +1090,7 @@ const EditProfile = () => {
                                     value={
                                       entries.social_profiles?.facebook_page
                                     }
-                                    name="fb"
+                                    name="facebook_page"
                                     className={`w-100 ${
                                       active ? styles.input : styles.secondInput
                                     }`}
@@ -1066,12 +1117,12 @@ const EditProfile = () => {
                                 <div>
                                   <input
                                     onChange={handleChange}
-                                    // value={entries.social_profiles}
                                     name="twitter"
                                     className={`w-100 ${
                                       active ? styles.input : styles.secondInput
                                     }`}
                                     onClick={_handleChangeInputs}
+                                    value={entries.social_profiles?.twitter}
                                   />
                                 </div>
                               </div>
@@ -1099,6 +1150,8 @@ const EditProfile = () => {
                                       active ? styles.input : styles.secondInput
                                     }`}
                                     onClick={_handleChangeInputs}
+                                    value={entries.social_profiles?.google_plus}
+                                    name="google_plus"
                                   />
                                 </div>
                               </div>
@@ -1124,7 +1177,9 @@ const EditProfile = () => {
                                       active ? styles.input : styles.secondInput
                                     }`}
                                     onClick={_handleChangeInputs}
-                                    // value={entries.social_profiles}
+                                    value={entries.social_profiles?.websiteUrl}
+                                    name="websiteUrl"
+                                    onChange={handleChange}
                                   />
                                 </div>
                               </div>
@@ -1262,7 +1317,7 @@ const EditProfile = () => {
                                     <i className="fa-solid fa-check"></i>{" "}
                                   </span>
                                   {error.password && (
-                                    <span className="err">
+                                    <span className={styles.err}>
                                       {error.password}
                                     </span>
                                   )}
@@ -1286,7 +1341,7 @@ const EditProfile = () => {
                                 onBlur={validateInput}
                               />
                               {error.confirmPassword && (
-                                <span className="err">
+                                <span className={styles.err}>
                                   {error.confirmPassword}
                                 </span>
                               )}
@@ -1298,11 +1353,7 @@ const EditProfile = () => {
                   </div>
                   <hr />
                   <div className={styles.btns_row}>
-                    <button
-                      type="submit"
-                      className={styles.save_changes}
-                      onClick={(event, data) => _handleUpdateData(event, data)}
-                    >
+                    <button type="submit" className={styles.save_changes}>
                       save changes
                     </button>
                     <button className={styles.upload_pic02}>

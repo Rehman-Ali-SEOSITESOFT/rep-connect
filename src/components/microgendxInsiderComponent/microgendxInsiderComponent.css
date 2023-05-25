@@ -137,14 +137,12 @@
   text-decoration: underline;
   color: #f05c5d;
 }
-.pagi_margin{
+.pagi_margin {
   margin: 40px 30px 0;
-
 }
 
-
-@media screen and (max-width:768px){
-  .insider_image_wrapper{
+@media screen and (max-width: 768px) {
+  .insider_image_wrapper {
     height: auto;
   }
 }
