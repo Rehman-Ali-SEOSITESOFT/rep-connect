@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import styles from "./microgendxInsider.module.css";
 import MicrogendxInsiderComponent from "@/components/microgendxInsiderComponent/microgendxInsiderComponent";
@@ -84,7 +83,6 @@ const page = () => {
   const func = (value) => {
     setLayout(true);
     setImageCounter(value);
-    // console.log("func value", value)
   };
   const cancel = (event) => {
     event.preventDefault();
@@ -133,7 +131,7 @@ const page = () => {
                     className={styles.controls}
                     onClick={() => imageControls("back")}
                   >
-                    <i className="fa-solid fa-angle-left"></i>{" "}
+                    <i className="fa-solid fa-angle-left"></i>
                   </button>
                   <Image
                     className="img-fluid"
@@ -145,7 +143,7 @@ const page = () => {
                     className={styles.controls}
                     onClick={() => imageControls("forward")}
                   >
-                    <i className="fa-solid fa-angle-right"></i>{" "}
+                    <i className="fa-solid fa-angle-right"></i>
                   </button>
                 </div>
               </div>
@@ -155,7 +153,6 @@ const page = () => {
       ) : (
         ""
       )}
-
       <section className={styles.microInsider_wrapper}>
         <div className="container-xxl">
           <div className="row">

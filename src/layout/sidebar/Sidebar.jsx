@@ -16,19 +16,24 @@ const Sidebar = () => {
     event.preventDefault();
     console.log("asdf");
     setDropDown(!DropDown);
-  }
+  };
 
-  const onClickLogout = (e) =>{
+  const onClickLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
-    router.push('/login')
-  }
-
+    router.push("/login");
+  };
 
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
-      <div onClick={handleDropDown}  className="layout" style={DropDown ? { display: "block" } : { display: "none" }}> </div>
+        <div
+          onClick={handleDropDown}
+          className="layout"
+          style={DropDown ? { display: "block" } : { display: "none" }}
+        >
+          {" "}
+        </div>
         <div>
           <div className="sidebar--top">
             <div className="top--section--top">
@@ -131,7 +136,7 @@ const Sidebar = () => {
                   </li>
 
                   <li onClick={(e) => onClickLogout(e)}>
-                   <Link href="#">
+                    <Link href="#">
                       <span>Logout</span>
                     </Link>
                   </li>
@@ -179,9 +184,11 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-        
-        <div className="drop--down--menu" style={DropDown ? { display: "block" } : { display: "none" }}>
-       
+
+        <div
+          className="drop--down--menu"
+          style={DropDown ? { display: "block" } : { display: "none" }}
+        >
           <ul>
             <li>
               <Link href="/product-category/sales-material/">
@@ -245,7 +252,6 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
-        
       </aside>
     </>
   );

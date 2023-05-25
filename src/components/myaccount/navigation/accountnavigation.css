@@ -52,3 +52,11 @@
   padding-top: 5px;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
+
+@media screen and (max-width: 767px) {
+  .my-account-navigation {
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+}
