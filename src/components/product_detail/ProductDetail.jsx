@@ -96,6 +96,14 @@ const ProductDetail = (props) => {
                 <div className="col-xl-9 col-md-8 col-12">
                   <div className="deail--product--desc">
                     <h4 className="title--clas">{item.data.name}</h4>
+                    <div>
+                      <p className="price">
+                        Price : <span>450</span>
+                      </p>
+                      <p className="price">
+                        Sale Price : <span>450</span>
+                      </p>
+                    </div>
                     <p>
                       This test service is available to United States residents
                       only. All submitted lab requisition forms must have a
