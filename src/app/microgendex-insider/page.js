@@ -18,7 +18,7 @@ const page = () => {
     if (value === "forward") {
       if (imageCounter < micrognInsider.length - 1) {
         setImageCounter(imageCounter + 1);
-      } else {   
+      } else {
         setImageCounter(0);
       }
     }

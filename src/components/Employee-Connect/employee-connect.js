@@ -1,61 +1,61 @@
-"use client"
-import Image from "next/image"
-import React, { useState } from "react"
-import "./employee-connect.css"
-import logo from "../../assets/images/employee-connect/MicroGenDX-EC-Logo2.svg"
-import axios from "axios"
-import { ToastContainer, toast } from "react-toastify"
+"use client";
+import Image from "next/image";
+import React, { useState } from "react";
+import "./employee-connect.css";
+import logo from "../../assets/images/employee-connect/MicroGenDX-EC-Logo2.svg";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const EmployeeConnect = () => {
-  const [error, setError] = useState([])
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  
+  const [error, setError] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [login, setLogin] = useState({
     userName: "",
     password: "",
-  })
+  });
   const handleChange = (e) => {
     setLogin({
       ...login,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
   const _handleLoginForm = (e) => {
-    e.preventDefault()
-    let password = login.password.trim()
-    let err = []
+    e.preventDefault();
+    let password = login.password.trim();
+    let err = [];
     if (
       !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(login.userName) ||
       password.length == 0
     ) {
-      let err = []
+      let err = [];
       if (
         !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(login.userName)
       ) {
-        err.push("Invalid Email Address !")
+        err.push("Invalid Email Address !");
 
-        setError(err)
-        console.log(error)
+        setError(err);
+        console.log(error);
       }
       if (password.length == 0) {
-        err.push("Enter Valid Password !")
-        setError(err)
+        err.push("Enter Valid Password !");
+        setError(err);
       }
       // setError(err)
     } else {
-      let err = []
-      setError(err)
+      let err = [];
+      setError(err);
       axios
         .post("https://anxious-foal-shift.cyclic.app/api/user/login", {
           email: login.userName,
           password: login.password,
         })
         .then((resp) => {
-          console.log(resp.data.token)
-          setIsLoggedIn(false)
+          console.log(resp.data.token);
+          setIsLoggedIn(false);
           if (resp.data.success === 1) {
-            localStorage.setItem("token", JSON.stringify(resp.data.token))
-            setIsLoggedIn(false)
+            localStorage.setItem("token", JSON.stringify(resp.data.token));
+            setIsLoggedIn(false);
             toast.success(resp.data.message, {
               position: "top-right",
               autoClose: 5000,
@@ -65,11 +65,11 @@ const EmployeeConnect = () => {
               draggable: true,
               progress: undefined,
               theme: "light",
-            })
+            });
             setLogin({
               userName: "",
               password: "",
-            })
+            });
           } else {
             toast.warn(resp.data.message, {
               position: "top-right",
@@ -80,7 +80,7 @@ const EmployeeConnect = () => {
               draggable: true,
               progress: undefined,
               theme: "light",
-            })
+            });
           }
         })
         .catch((err) => {
@@ -93,16 +93,14 @@ const EmployeeConnect = () => {
             draggable: true,
             progress: undefined,
             theme: "light",
-          })
+          });
           setLogin({
             userName: "",
             password: "",
-          })
-        })
+          });
+        });
     }
-  }
-
-
+  };
 
   return (
     <>
@@ -172,7 +170,7 @@ const EmployeeConnect = () => {
                                     <div className="errors" key={index}>
                                       <p className="error_msg"> {err}</p>
                                     </div>
-                                  )
+                                  );
                                 })
                               : ""}
                           </div>
@@ -191,10 +189,7 @@ const EmployeeConnect = () => {
                       <button className="login_btn" typeof="submit">
                         Login
                       </button>
-                      <button className="account_btn">
-                        
-                        create an Account
-                      </button>
+                      <button className="account_btn">create an Account</button>
                     </div>
                   </div>
                 </div>
@@ -205,7 +200,7 @@ const EmployeeConnect = () => {
         <ToastContainer />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default EmployeeConnect
+export default EmployeeConnect;

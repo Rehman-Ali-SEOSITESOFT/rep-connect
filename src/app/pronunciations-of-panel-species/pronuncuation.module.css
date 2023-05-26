@@ -3,9 +3,9 @@
 }
 .prounssss h3 {
   font-family: "Poppins", sans-serif;
-  font-size: 25px;
-  font-weight: 300;
-  line-height: 27px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 22px;
   color: #1790d0;
 }
 
@@ -17,16 +17,11 @@
 }
 @media screen and (max-width: 1200px) {
   .prounssss h3 {
-    font-size: 22px;
-    line-height: 25px;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .prounssss h3 {
     font-size: 20px;
-    line-height: 24px;
+    line-height: 22px;
   }
 }
+
 @media screen and (max-width: 768px) {
   .prounssss h3 {
     font-size: 18px;
