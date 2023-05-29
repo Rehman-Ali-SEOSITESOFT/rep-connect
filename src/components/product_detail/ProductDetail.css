@@ -1,6 +1,7 @@
 .ProductDetail {
-  padding-right: 30px;
-  width: 75%;
+  padding-right: 0px;
+  /* padding-right: 30px; */
+  width: 100%;
 }
 
 .deail--product--desc .title--clas {
@@ -329,6 +330,12 @@
 .deail--product--image div:first-child {
   cursor: auto !important;
   overflow: hidden;
+  height: 300px !important;
+  object-fit: cover;
+}
+
+.deail--product--image img {
+  height: 100% !important;
 }
 @media screen and (max-width: 1025px) {
   .ProductDetail {
