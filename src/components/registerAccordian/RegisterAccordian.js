@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./RegisterAccordian.css";
 import tooltip from "../../assets/images/register/help.png";
 import Image from "next/image";
@@ -7,10 +7,16 @@ import Member from "../../assets/images/Profile/member.png";
 import axios from "axios";
 import WebCamera from "../webCam/WebCam";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const RegisterAccordian = () => {
+  const [errors, setErrors] = useState({});
   const [base64Image, setBase64Image] = useState("");
   const [getImage, setGetImage] = useState("");
   const [isRendered, setIsRendered] = useState(false);
+  const [error, setError] = useState({
+    password: "",
+    confirmPassword: "",
+  });
   const [registerForm, setRegisterForm] = useState({
     userName: "",
     firstName: "",
@@ -29,6 +35,41 @@ const RegisterAccordian = () => {
     google: "",
     website: "",
   });
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
+    if (registerForm.userName.trim() === "") {
+      newErrors.userName = "Name is required";
+      isValid = false;
+    }
+
+    if (registerForm.firstName.trim() === "") {
+      newErrors.firstName = "First Name is Reuqired";
+      isValid = false;
+    }
+    if (registerForm.lastName.trim() === "") {
+      newErrors.lastName = "Last Name is Required";
+    }
+    if (registerForm.email.trim() === "") {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(registerForm.email)) {
+      newErrors.email = "Email is invalid";
+      isValid = false;
+    }
+    if (registerForm.password.trim() === "") {
+      newErrors.password = "Password is required";
+      isValid = false;
+    } else if (registerForm.password.length < 8) {
+      newErrors.password = "Password should be at least 8 characters";
+      isValid = false;
+    }
+    if (registerForm.confrimPassword.trim() === "") {
+      newErrors.confrimPassword = "Comfirm password is required";
+    }
+    setErrors(newErrors);
+    return isValid;
+  };
   const data = {
     username: registerForm.userName,
     first_name: registerForm.firstName,
@@ -49,33 +90,54 @@ const RegisterAccordian = () => {
   };
   const _handleRegistrationForm = (e) => {
     e.preventDefault();
-    axios
-      .post(` ${process.env.NEXT_PUBLIC_URL}api/user/register`, data)
-      .then((resp) => {
-        if (resp.data.success === 1) {
-          toast.success(resp.data.message, {
+    if (validateForm()) {
+      axios
+        .post(` ${process.env.NEXT_PUBLIC_URL}api/user/register`, data)
+        .then((resp) => {
+          if (resp.data.success === 1) {
+            toast.success(resp.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+            });
+            setRegisterForm({
+              userName: "",
+              firstName: "",
+              lastName: "",
+              position: "",
+              distributionGroup: "",
+              email: "",
+              mobile: "",
+              password: "",
+              confrimPassword: "",
+              profileName: "",
+              gender: "",
+              country: "",
+              facebook: "",
+              twitter: "",
+              google: "",
+              website: "",
+            });
+            setGetImage("");
+          } else {
+            toast.warning(resp.data.message, {
+              position: "top-center",
+              autoClose: 2000,
+            });
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
             position: "top-right",
             autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
           });
-        } else {
-          toast.warning(resp.data.message, {
-            position: "top-center",
-            autoClose: 2000,
-          });
-        }
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
         });
-      });
+    }
   };
   const _handleChange = (e) => {
     console.log(e.target.value);
@@ -84,7 +146,7 @@ const RegisterAccordian = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const _handleImage = () => {
+  const _handleImage = (e) => {
     setIsRendered(true);
   };
   const _handleCaputeree = (e) => {
@@ -104,9 +166,43 @@ const RegisterAccordian = () => {
   const removeUpload = () => {
     setBase64Image("");
   };
+  const validateInput = (e) => {
+    let { name, value } = e.target;
+    setError((prev) => {
+      const stateObj = { ...prev, [name]: "" };
+      switch (name) {
+        case "password":
+          if (!value) {
+            stateObj[name] = "Please enter Password.";
+          } else if (
+            registerForm.confrimPassword &&
+            value !== registerForm.confrimPassword
+          ) {
+            stateObj["confirmPassword"] =
+              "Password and Confirm Password does not match.";
+          } else {
+            stateObj["confirmPassword"] = registerForm.confrimPassword
+              ? ""
+              : error.confirmPassword;
+          }
+          break;
+        case "confirmPassword":
+          if (!value) {
+            stateObj[name] = "Please enter Confirm Password.";
+          } else if (input.password && value !== input.password) {
+            stateObj[name] = "Password and Confirm Password does not match.";
+          }
+          break;
+      }
+      return stateObj;
+    });
+  };
   return (
     <>
-      <form onSubmit={_handleRegistrationForm}>
+      <form
+        onSubmit={_handleRegistrationForm}
+        className="Form_register_section"
+      >
         <div className="row second_row">
           <div className="col-lg-12 p-0">
             <div className="accordion" id="accordionExample">
@@ -141,13 +237,17 @@ const RegisterAccordian = () => {
                           </h6>
                         </div>
                       </div>
-                      <div className="col-lg-7 col-md-8 col-sm-12">
+                      <div className="col-lg-7 col-md-8 col-sm-12 has-validation">
                         <input
+                          id="validationCustomUsername"
                           className="form-control"
                           value={registerForm.userName}
                           onChange={_handleChange}
                           name="userName"
                         />
+                        {errors.userName && (
+                          <span className="errorss">{errors.userName}</span>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -162,6 +262,9 @@ const RegisterAccordian = () => {
                           onChange={_handleChange}
                           name="firstName"
                         />
+                        {errors.firstName && (
+                          <span className="errorss">{errors.firstName}</span>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -177,6 +280,9 @@ const RegisterAccordian = () => {
                           onChange={_handleChange}
                           name="lastName"
                         />
+                        {errors.lastName && (
+                          <span className="errorss">{errors.lastName}</span>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -206,6 +312,9 @@ const RegisterAccordian = () => {
                           onChange={_handleChange}
                           name="email"
                         />
+                        {errors.email && (
+                          <span className="errorss">{errors.email}</span>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -241,8 +350,13 @@ const RegisterAccordian = () => {
                           className="form-control"
                           value={registerForm.password}
                           onChange={_handleChange}
+                          onBlur={validateInput}
                           name="password"
+                          type="password"
                         />
+                        {error.password && (
+                          <span className="err">{error.password}</span>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -257,7 +371,12 @@ const RegisterAccordian = () => {
                           value={registerForm.confrimPassword}
                           onChange={_handleChange}
                           name="confrimPassword"
+                          type="password"
+                          onBlur={validateInput}
                         />
+                        {error.confirmPassword && (
+                          <span className="err">{error.confirmPassword}</span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -333,7 +452,7 @@ const RegisterAccordian = () => {
                         </h6>
                       </div>
                       <div className="col-lg-7 col-md-8 col-sm-12">
-                        <div className="image_section">
+                        <div className="image_section ">
                           {base64Image ? (
                             <Image
                               src={base64Image}
@@ -510,10 +629,10 @@ const RegisterAccordian = () => {
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseThree"
-                    aria-expanded="true"
+                    aria-expanded="false"
                     aria-controls="collapseThree"
                   >
-                    Profile Detail
+                    Social Details
                   </button>
                 </h2>
                 <div
@@ -606,7 +725,7 @@ const RegisterAccordian = () => {
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="buttonsss">
-                          <button>Register</button>
+                          <button type="submit">Register</button>
                           <button>Login</button>
                         </div>
                       </div>
@@ -617,8 +736,8 @@ const RegisterAccordian = () => {
             </div>
           </div>
         </div>
-        <ToastContainer />
       </form>
+      <ToastContainer />
     </>
   );
 };
