@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./TagsItem.css";
 import Image from "next/image";
+import axios from "axios";
 const TagsItem = ({ item }) => {
-  let name = item.name.split(" ").join("-").toLowerCase();
+  let name = item.slug.split(" ").join("-").toLowerCase();
+
+  console.log(item);
+  const [tagsId, setTagsId] = useState("");
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}api/post/${item.slug}`)
+      .then((resp) => setTagsId(resp.data.data.post.slug))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
       <div className="image-side w-25">
         <a href={`/blog/${name}`} className="img-side-link">
-          <Image src={item.img} alt="img1" className="img-fluid" />
+          <Image
+            src={item.featured_image.image_url}
+            alt="img1"
+            className="img-fluid"
+            width="100"
+            height="100"
+          />
           <div className="img-side-overlay"></div>
         </a>
         <div className="img-side-linkss ">
@@ -21,7 +37,7 @@ const TagsItem = ({ item }) => {
         </div>
       </div>
       <div className="content-side">
-        <a href={`/blog/${name}`} className="title-content">
+        <a href={`/blog/${tagsId}`} className="title-content">
           {item.name}{" "}
         </a>
         <p>{item.desc}</p>
@@ -33,7 +49,7 @@ const TagsItem = ({ item }) => {
             </span>
             <span>
               <i className="fa-regular fa-file-lines" />
-              <a href={`/blog/${name}/#comments`}>read more</a>
+              <a href={`/blog/${tagsId}/#comments`}>read more</a>
             </span>
           </div>
         </div>
