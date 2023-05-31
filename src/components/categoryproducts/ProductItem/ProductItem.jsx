@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import "./producitem.css";
 import Image from "next/image";
 import marsa from "../../../assets/images/products/mrsa-test-service.jpg";
+import { useProduct } from "@/hooks/product";
+import { ToastContainer } from "react-toastify";
 const ProductItem = ({ item }) => {
   const [loadging, setLoaging] = useState(false);
-  const hanldeAddToCart = () => {
-    console.log("working");
+  const hanldeAddToCart = (pra) => {
+    useProduct(1, pra);
     setLoaging(true);
+    // toast.success("Successfully Update ");
   };
   setTimeout(() => {
     setLoaging(false);
-  }, 5000);
+  }, 3000);
   return (
     <>
       <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 product__item">
@@ -39,10 +42,23 @@ const ProductItem = ({ item }) => {
                 <div className="product-loader"></div>
               </span>
             ) : (
-              <span onClick={hanldeAddToCart}>
+              <span
+                onClick={() =>
+                  hanldeAddToCart({
+                    _id: item._id,
+                    sale_price: item.sale_price,
+                    regular_price: item.regular_price,
+                  })
+                }
+              >
                 <i className="fa-solid fa-cart-shopping"></i>
               </span>
             )}
+            <ToastContainer
+              style={{
+                fontSize: "15px",
+              }}
+            />
             <a href={`/product-detail/${item._id}`}>
               <i className="fa-solid fa-link"></i>
             </a>

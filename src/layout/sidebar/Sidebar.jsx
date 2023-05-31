@@ -1,20 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import "./sidebar.css";
 import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg";
 import myacount from "../../assets/images/side-bar-my-account-img.png";
 import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { product } from "@/redux/slices/productSlice";
+import { cartItem } from "@/redux/slices/cartItem";
 const Sidebar = () => {
   const { toggle } = useSelector((redux) => redux.menuReducer);
   const [DropDown, setDropDown] = useState(false);
+  const dispatch = useDispatch();
   const router = useRouter();
+  const state = useSelector((state) => state.cartItem.data);
+
   const handleDropDown = (event) => {
     event.preventDefault();
-    console.log("asdf");
     setDropDown(!DropDown);
   };
 
@@ -23,6 +27,22 @@ const Sidebar = () => {
     localStorage.removeItem("token");
     router.push("/login");
   };
+  useEffect(() => {
+    dispatch(product());
+    dispatch(cartItem());
+  }, []);
+
+  const qty = state.reduce((t, c, i, ar) => t + c.quantity, 0);
+  const TotalPrice = () => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(totalprice);
+  };
+
+  const totalprice = state.reduce((total, curValue, curIndex, arr) => {
+    return (total += curValue.sub_total);
+  }, 0);
 
   return (
     <>
@@ -167,9 +187,9 @@ const Sidebar = () => {
               <Link href="/cart" className="bottom--cart">
                 <div className="bottom--cart--icon">
                   <i className="fa-solid fa-basket-shopping"></i>
-                  <span> 2</span>
+                  <span> {qty}</span>
                 </div>
-                <div className="bottom--cart--price">$0.00</div>
+                <div className="bottom--cart--price">{TotalPrice()}</div>
               </Link>
             </div>
             <div className="bottom--search">

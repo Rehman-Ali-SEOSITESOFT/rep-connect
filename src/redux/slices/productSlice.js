@@ -15,6 +15,14 @@ export const product = createAsyncThunk("product", async () => {
 export const productSlice = createSlice({
   name: "product",
   initialState: productState,
+  reducers: {
+    increment: (state, action) => {
+      console.log(state.data);
+    },
+    decrement: (state, action) => {
+      console.log(state, action);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(product.pending, (state, action) => {
       state.loading = true;
@@ -30,4 +38,5 @@ export const productSlice = createSlice({
   },
 });
 
+export const { increment, decrement } = productSlice.actions;
 export default productSlice.reducer;
