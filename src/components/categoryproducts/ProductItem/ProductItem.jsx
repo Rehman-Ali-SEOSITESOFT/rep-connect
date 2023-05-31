@@ -54,7 +54,11 @@ const ProductItem = ({ item }) => {
                 <i className="fa-solid fa-cart-shopping"></i>
               </span>
             )}
-            <ToastContainer />
+            <ToastContainer
+              style={{
+                fontSize: "15px",
+              }}
+            />
             <a href={`/product-detail/${item._id}`}>
               <i className="fa-solid fa-link"></i>
             </a>

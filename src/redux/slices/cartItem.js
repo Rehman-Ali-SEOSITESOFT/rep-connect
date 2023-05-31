@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// const token = JSON.parse(localStorage.getItem("token"));
 import { token } from "@/hooks/token";
 const initialState = {
   loading: true,

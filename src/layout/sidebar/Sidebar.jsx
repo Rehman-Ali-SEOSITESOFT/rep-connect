@@ -15,9 +15,10 @@ const Sidebar = () => {
   const [DropDown, setDropDown] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+  const state = useSelector((state) => state.cartItem.data);
+
   const handleDropDown = (event) => {
     event.preventDefault();
-    console.log("asdf");
     setDropDown(!DropDown);
   };
 
@@ -30,6 +31,18 @@ const Sidebar = () => {
     dispatch(product());
     dispatch(cartItem());
   }, []);
+
+  const qty = state.reduce((t, c, i, ar) => t + c.quantity, 0);
+  const TotalPrice = () => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(totalprice);
+  };
+
+  const totalprice = state.reduce((total, curValue, curIndex, arr) => {
+    return (total += curValue.sub_total);
+  }, 0);
 
   return (
     <>
@@ -174,9 +187,9 @@ const Sidebar = () => {
               <Link href="/cart" className="bottom--cart">
                 <div className="bottom--cart--icon">
                   <i className="fa-solid fa-basket-shopping"></i>
-                  <span> 2</span>
+                  <span> {qty}</span>
                 </div>
-                <div className="bottom--cart--price">$0.00</div>
+                <div className="bottom--cart--price">{TotalPrice()}</div>
               </Link>
             </div>
             <div className="bottom--search">

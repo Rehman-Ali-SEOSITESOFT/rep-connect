@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import "./CartPricingDetail.css";
-const CartPricingDetail = ({ totalPriceCart }) => {
+import Link from "next/link";
+import { useSelector } from "react-redux";
+const CartPricingDetail = () => {
   const [shippingAddress, setShippingAddres] = useState(false);
   const [updateShipping, setUpdateShipping] = useState({
     shipping_county: "",
@@ -23,12 +25,19 @@ const CartPricingDetail = ({ totalPriceCart }) => {
     });
   };
 
+  const state = useSelector((state) => state.cartItem.data);
+
   const TotalPrice = () => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-    }).format(totalPriceCart);
+    }).format(totalprice);
   };
+
+  const totalprice = state.reduce((total, curValue, curIndex, arr) => {
+    return (total += curValue.sub_total);
+  }, 0);
+
   return (
     <aside className="cart-sidebar">
       <div className="cart--pricing--detail">
@@ -120,12 +129,12 @@ const CartPricingDetail = ({ totalPriceCart }) => {
           </h5>
         </div>
         <div className="shipping_proceed_btns">
-          <a href="/checkout" className="processed_btn">
+          <Link href="/checkout" className="processed_btn">
             Proceed to checkout
-          </a>
-          <a href="/shop" className="continue_shopping">
+          </Link>
+          <Link href="/shop" className="continue_shopping">
             Continue shopping
-          </a>
+          </Link>
         </div>
       </div>
     </aside>

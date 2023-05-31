@@ -149,7 +149,11 @@ const ProductDetail = (props) => {
                             </>
                           ) : null}
                         </button>
-                        <ToastContainer />
+                        <ToastContainer
+                          style={{
+                            fontSize: "15px",
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="single--product--detail--tabs">

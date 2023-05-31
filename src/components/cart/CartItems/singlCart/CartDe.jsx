@@ -1,9 +1,5 @@
-import { cartItem } from "@/redux/slices/cartItem";
-import { deleteCart } from "@/hooks/deleteSlice";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { increment } from "@/redux/slices/productSlice";
 import Link from "next/link";
 
 const CartDe = ({
@@ -12,11 +8,13 @@ const CartDe = ({
   hanldeIncreasedQty,
   hanldeDecreasedQty,
 }) => {
-  const dispatch = useDispatch();
-  const [qty, setQty] = useState(item.quantity);
-  // const hanldeDecreasedQty = (id) => {
-  //   dispatch(increment(id));
-  // };
+  const TotalPrice = (total) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(total);
+  };
+
   return (
     <>
       <tr className="cart--item--row">
@@ -35,9 +33,7 @@ const CartDe = ({
           </Link>
         </td>
         <td className="product-price" data-title="Price">
-          <span className="amount">
-            <bdi>$</bdi>: {item.price}{" "}
-          </span>
+          <span className="amount">{TotalPrice(item.price)}</span>
         </td>
         <td className="product-quantity" data-title="Quantity">
           <div className="quantity">
@@ -62,17 +58,13 @@ const CartDe = ({
         </td>
         <td className="product-subtotal" data-title="Total">
           <span className="amount">
-            <bdi>$</bdi>:{/* {item.qty * item.price} */}
-            {/* {item.sub_total} */}
-            {/* {item.sale_price === 0 } */}
             {item.sale_price === 0
-              ? item.price * item.quantity
-              : item.sale_price * item.quantity}
+              ? TotalPrice(item.price * item.quantity)
+              : TotalPrice(item.sale_price * item.quantity)}
           </span>
         </td>
         <td
           className="product-remove"
-          //   onClick={() => hanldeRemove(item._id)}
           onClick={() => hanldeDeleted(item.product_detail._id)}
         >
           <span>
