@@ -1,17 +1,37 @@
-import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { token } from "./token";
+export function useProduct(qty, para) {
+  const { _id, sale_price, regular_price } = para;
+  fetch(`${process.env.NEXT_PUBLIC_URL}api/cart`, {
+    headers: {
+      "x-auth-token": token,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      productid: _id,
+      quantity: qty,
+      price: regular_price,
+      sale_price: sale_price,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success === 1) {
+        toast.success();
+        toast.success(`${data.message} 👌🏻`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    });
 
-export function useProduct() {
-  const [product, setProduct] = useState([]);
-  const [productLoading, setProductLoaing] = useState(true);
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_URL}api/product`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.success === 1) setProductLoaing(false);
-        setProduct(data.data.products);
-      });
-  }, []);
-  return { product, productLoading };
+  return;
 }

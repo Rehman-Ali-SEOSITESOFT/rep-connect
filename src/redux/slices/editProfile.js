@@ -4,9 +4,6 @@ const profileState = {
   profileImg: null,
 };
 
-
-
-
 export const editProfile = createSlice({
   name: "profileImage",
   initialState: profileState,

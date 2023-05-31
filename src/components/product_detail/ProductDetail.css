@@ -334,12 +334,12 @@
   object-fit: cover;
 }
 
-.deail--product--image img {
+/* .deail--product--image img {
   height: 100% !important;
-}
+} */
 @media screen and (max-width: 1025px) {
   .ProductDetail {
-    width: 70%;
+    width: 100%;
   }
 }
 
@@ -400,9 +400,15 @@
   }
   .deail--product--image div img {
     height: 100% !important;
-    object-fit: contain;
+    object-fit: cover;
     width: fit-content;
     max-width: fit-content;
     margin: auto;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .deail--product--image {
+    height: 230px;
   }
 }

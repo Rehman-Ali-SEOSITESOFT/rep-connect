@@ -15,6 +15,7 @@ import img from "./favicon21.png";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { product } from "@/redux/slices/productSlice";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RootLayout({ children }) {
   const path = usePathname();
@@ -59,7 +60,9 @@ export default function RootLayout({ children }) {
                   : "main--content--wrapper"
               }
             >
-              <div className="d-flex flex-column conte-min-height">{children}</div>
+              <div className="d-flex flex-column conte-min-height">
+                {children}
+              </div>
 
               {path === "/employee-connect" || path === "/login" ? null : (
                 <Footer />

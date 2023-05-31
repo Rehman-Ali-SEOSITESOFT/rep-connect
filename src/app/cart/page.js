@@ -2,7 +2,7 @@
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import CartItems from "@/components/cart/CartItems/CartItems";
 import CartPricingDetail from "@/components/cart/CartPricingDetail/CartPricingDetail";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./cart.module.css";
 import img1 from "../../assets/images/products/afb-sputum-4.jpg";
 import img2 from "../../assets/images/products/basicSTI-provider-22.jpg";
@@ -11,7 +11,11 @@ import BreadCrumCart from "@/components/cart/CartBreakCrum/BreadCrumCart";
 import Image from "next/image";
 import emptyshoppingcart from "../../assets/images/empty-shopping-cart.png";
 import withAuth from "@/utils/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { cartItem } from "@/redux/slices/cartItem";
+import Link from "next/link";
 const page = () => {
+  const state = useSelector((data) => data.cartItem);
   const [listItem, setListItem] = useState([
     {
       name: "Are Cultures Reliable Card - 0066",
@@ -32,20 +36,23 @@ const page = () => {
       img: img3,
     },
   ]);
-
+  const dispatch = useDispatch();
   const hanldeRemove = (index) => {
     const reminingItem = listItem.filter((curvalue, ind) => index !== ind);
     setListItem(reminingItem);
   };
   const hanldeIncreasedQty = (index) => {
-    let items = [...listItem];
-    listItem.filter((ls, i) => index === i && ls.qty++);
-    setListItem(items);
+    console.log(copyOfItem);
+    // let items = [...listItem];
+    // listItem.filter((ls, i) => index === i && ls.qty++);
+    // setListItem(items);
   };
   const hanldeDecreasedQty = (index) => {
-    let items = [...listItem];
-    listItem.filter((ls, i) => (index === i && ls.qty > 1 ? ls.qty-- : 1));
-    setListItem(items);
+    console.log(copyOfItem);
+
+    // let items = [...listItem];
+    // listItem.filter((ls, i) => (index === i && ls.qty > 1 ? ls.qty-- : 1));
+    // setListItem(items);
   };
 
   const hanldeChanged = (index, event) => {
@@ -58,15 +65,21 @@ const page = () => {
     });
     setListItem(items);
   };
+
   const hanldeSubmit = (event) => {
     event.preventDefault();
-    console.log("hanldeSubmit", listItem);
+    console.log("hanldeSubmit", state);
   };
 
   const totalPriceCart = listItem.reduce(
     (t, c, i, a) => t + c.qty * c.price,
     0
   );
+
+  useEffect(() => {
+    dispatch(cartItem());
+  }, []);
+
   return (
     <>
       <BreadCrum
@@ -93,19 +106,16 @@ const page = () => {
           <div
             className={`row  justify-content-between ${style.cart_items__wrapper}`}
           >
-            {/* <div className="col-xl-8 col-md-8 col-8"> */}
-            {/* <CartItems hanldeTotal={hanldeTotal} /> */}
-
-            {listItem.length >= 1 ? (
+            {state.data.length >= 1 ? (
               <>
-                {" "}
                 <CartItems
-                  listItem={listItem}
-                  hanldeRemove={hanldeRemove}
-                  hanldeIncreasedQty={hanldeIncreasedQty}
-                  hanldeDecreasedQty={hanldeDecreasedQty}
-                  hanldeChanged={hanldeChanged}
-                  hanldeSubmit={hanldeSubmit}
+                  // listItem={listItem}
+                  item={state.data}
+                  // hanldeRemove={hanldeRemove}
+                  // hanldeIncreasedQty={hanldeIncreasedQty}
+                  // hanldeDecreasedQty={hanldeDecreasedQty}
+                  // hanldeChanged={hanldeChanged}
+                  // hanldeSubmit={hanldeSubmit}
                 />
                 <CartPricingDetail totalPriceCart={totalPriceCart} />
               </>
@@ -114,10 +124,10 @@ const page = () => {
                 <div className={style.empty_cart}>
                   <Image src={emptyshoppingcart} alt="Empty Shopping Cart" />
                   <p>Your cart is currently empty.</p>
-                  <a href="/shop" className={style.returntoshop}>
+                  <Link href="/shop" className={style.returntoshop}>
                     {" "}
                     Return to shop
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}

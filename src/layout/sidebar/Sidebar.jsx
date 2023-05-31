@@ -1,16 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import "./sidebar.css";
 import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg";
 import myacount from "../../assets/images/side-bar-my-account-img.png";
 import repconnect from "../../assets/images/logo/Rep-Connect-Logo-2021-2.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { product } from "@/redux/slices/productSlice";
+import { cartItem } from "@/redux/slices/cartItem";
 const Sidebar = () => {
   const { toggle } = useSelector((redux) => redux.menuReducer);
   const [DropDown, setDropDown] = useState(false);
+  const dispatch = useDispatch();
   const router = useRouter();
   const handleDropDown = (event) => {
     event.preventDefault();
@@ -23,6 +26,10 @@ const Sidebar = () => {
     localStorage.removeItem("token");
     router.push("/login");
   };
+  useEffect(() => {
+    dispatch(product());
+    dispatch(cartItem());
+  }, []);
 
   return (
     <>
