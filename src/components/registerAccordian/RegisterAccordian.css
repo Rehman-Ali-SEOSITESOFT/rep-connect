@@ -1,7 +1,6 @@
 .second_row .accordion-button:not(.collapsed),
 .third_row .accordion-button:not(.collapsed) {
   background: #666 !important;
-  /* height: 20px !important;s */
   padding: 10px 20px !important;
   font-size: 13px;
   line-height: 18px;
@@ -70,6 +69,12 @@ button.accordion-button.third_row_button.collapsed {
   padding: 0 8px !important;
   height: 30px !important;
 }
+.second_row input:focus,
+.fourth input:focus,
+.display_name:focus {
+  background-color: white !important;
+  color: black !important;
+}
 .second_row .row {
   margin-top: 15px;
 }
@@ -87,6 +92,7 @@ button.accordion-button.third_row_button.collapsed {
 }
 .image_section img {
   border-radius: 50%;
+  margin-bottom: 12px;
 }
 .upload_pic {
   cursor: pointer;
@@ -151,7 +157,8 @@ button.accordion-button.third_row_button.collapsed {
 .accordion-button::after {
   display: none;
 }
-.accordion-button::before {
+.third_row .accordion-button::before,
+.second_row .accordion-button::before {
   content: "\01F893";
   top: 20px;
   position: absolute;
@@ -160,7 +167,8 @@ button.accordion-button.third_row_button.collapsed {
   width: 16px;
   height: 16px;
 }
-.accordion-button:not(.collapsed)::before {
+.second_row .accordion-button:not(.collapsed)::before,
+.third_row .accordion-button:not(.collapsed)::before {
   content: "\01F893";
   top: 10px;
   position: absolute;
@@ -239,6 +247,11 @@ button.accordion-button.third_row_button.collapsed {
   border: none;
   padding: 2px 10px;
   margin-right: 10px;
+}
+.errorss,
+.err {
+  font-size: 12px;
+  color: red;
 }
 @media screen and (max-width: 576px) {
   .iconss {

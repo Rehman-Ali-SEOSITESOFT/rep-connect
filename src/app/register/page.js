@@ -15,7 +15,7 @@ const page = () => {
         ]}
       />
       <section className={style.registation_wrapper}>
-        <div className={`container-xxl ${style.first_section}`}>
+        <div className={`container-xxl ${style.first_section} `}>
           <div className="row ">
             <div className="col-lg-12 p-0">
               <div className={style.account_details}>
