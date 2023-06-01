@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./AuthorsItem.css";
 import Image from "next/image";
+import axios from "axios";
 const AuthorsItem = ({ item }) => {
   let name = item.name.split(" ").join("-").toLowerCase();
+  console.log(item);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_URL}api/post/${item.slug}`)
+  //     .then((resp) => console.log(resp.data.data.post.slug))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">

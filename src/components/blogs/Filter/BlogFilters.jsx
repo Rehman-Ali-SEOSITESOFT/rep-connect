@@ -1,9 +1,42 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./blogfilter.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import axios from "axios";
 const BlogFilters = () => {
+  const [dynamicName, setDynamicName] = useState([]);
+  const [dynamicTags, setDynamicTags] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}/api/category`)
+      .then((resp) => {
+        setDynamicName(resp.data.data.category);
+        // console.log(resp.data.data.category);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}api/tag`)
+      .then((resp) => {
+        setDynamicTags(resp.data.data.tag);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}api/author/`)
+      .then((resp) => {
+        setAuthors(resp.data.data.author);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const [tabs, setTab] = useState(0);
   const pathname = usePathname();
   const activePath = pathname.split("/");
@@ -16,23 +49,29 @@ const BlogFilters = () => {
           <i className="fa-solid fa-caret-down" />
         </React.Fragment>
       ),
+      // data: dynamicName?.map((e) => {
       data: [
-        "Advisory Board Presentations Podcast",
-        "Announcements",
-        "Compliance",
-        "Daily Sample Numbers",
-        "MicroGenDX Insider",
-        "MicroGenDX Round Table Podcasts",
-        "Rick Talk Podcast",
-        "Ricks Topic of the Week",
-        "Uncategorized",
-        "Teleconferences",
-        "The Listen and Learn Podcast",
-        "The Preceptorship Podcast",
-        "Urology Team",
-        "Using Sales Material Effectively with Rick Martin",
+        "AAHKS COMMITTEE",
+        "AMERICAN ASSOCIATION OF HIP AND KNEE SURGEONS",
+        "AUA NEWS",
+        "bacteria",
+        "Consensus Guidelines Book",
+        "Curtis Nickels",
+        "Dr. Nickels",
+        "hear from your peers",
+        "orthopedics",
+        "Outages",
+        "Parvizi",
+        "Pugliese",
+        "quorum sensing",
+        "sales",
+        "sales materials",
+        "sample goals",
+        "trifolds",
+        "urology",
+        "urology journals",
       ].map((e) => {
-        let nameOfCategegory = `${e.toLowerCase().split(" ").join("-")}`;
+        let nameOfCategegory = e;
         return (
           <li
             key={e}
@@ -147,13 +186,65 @@ const BlogFilters = () => {
           <div className="col">
             <div className="d-flex justify-content-between">
               <div className="filter-tabs">
-                {filterTabs.map((elem, ind) => {
-                  return tabs === ind + 1 ? (
-                    <ul className="align-items-center filter-listeed" key={ind}>
-                      {elem.data}
-                    </ul>
-                  ) : null;
-                })}
+                {tabs === 1 ? (
+                  <ul className="align-items-center filter-listeed">
+                    {dynamicName?.map((item, index) => (
+                      <li
+                        key={index}
+                        className={item.name === activePath[2] ? "active" : ""}
+                      >
+                        <Link
+                          href={`/category/${item.name
+                            .toLowerCase()
+                            .split(" ")
+                            .join("-")}`}
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : tabs === 2 ? (
+                  <ul className="align-items-center filter-listeed">
+                    {dynamicTags?.map((e, idx) => {
+                      return (
+                        <li
+                          key={idx}
+                          className={e.name === activePath[2] ? "active" : null}
+                        >
+                          <Link
+                            href={`/tag/${e.name
+                              .toLowerCase()
+                              .split(" ")
+                              .join("-")}`}
+                          >
+                            {e.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : tabs === 3 ? (
+                  <ul className="align-items-center filter-listeed">
+                    {authors.map((e, idx) => {
+                      return (
+                        <li
+                          key={idx}
+                          className={e.name === activePath[2] ? "active" : null}
+                        >
+                          <Link
+                            href={`/aurthor/${e.name
+                              .toLowerCase()
+                              .split(" ")
+                              .join("-")}`}
+                          >
+                            {e.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : null}
               </div>
               {tabs === 0 ? null : (
                 <div className="close-colum-filter" onClick={() => setTab(0)}>
