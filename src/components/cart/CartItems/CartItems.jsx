@@ -30,7 +30,7 @@ const CartItems = (props) => {
     const resp = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart`, {
       method: "PUT",
       headers: {
-        "x-auth-token": token,
+        "x-auth-token": token(),
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -78,7 +78,7 @@ const CartItems = (props) => {
   const hanldeDeleted = (id) => {
     fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/${id}`, {
       headers: {
-        "x-auth-token": token,
+        "x-auth-token": token(),
       },
       method: "DELETE",
     })
