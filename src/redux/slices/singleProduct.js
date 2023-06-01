@@ -24,7 +24,7 @@ export const single_product_slice = createSlice({
     });
     builder.addCase(product_api.fulfilled, (state, action) => {
       state.loading = false;
-      state.data = action.payload.data.product;
+      state.data = action.payload.data?.product;
     });
     builder.addCase(product_api.rejected, (state, action) => {
       state.loading = true;

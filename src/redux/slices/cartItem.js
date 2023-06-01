@@ -26,7 +26,7 @@ export const cartItemSlice = createSlice({
     });
     builder.addCase(cartItem.fulfilled, (state, action) => {
       state.loading = false;
-      state.data = action.payload.data.carts;
+      state.data = action.payload.data?.carts;
     });
     builder.addCase(cartItem.rejected, (state, action) => {
       state.loading = true;
