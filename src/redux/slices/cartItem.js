@@ -29,7 +29,7 @@ export const cartItemSlice = createSlice({
       state.data = action.payload.data?.carts;
     });
     builder.addCase(cartItem.rejected, (state, action) => {
-      state.loading = true;
+      state.loading = false;
       state.error = true;
     });
   },
