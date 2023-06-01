@@ -10,7 +10,6 @@ const CategoryItem = ({ item }) => {
       .then((resp) => setId(resp.data.data.post.slug))
       .catch((err) => console.log(err));
   }, []);
-
   let name = item.slug.split(" ").join("-").toLowerCase();
   return (
     <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
@@ -36,9 +35,9 @@ const CategoryItem = ({ item }) => {
       </div>
       <div className="content-side">
         <a href={`/blog/${id}`} className="title-content">
-          {item.author.name}
+          {item.title}
         </a>
-        <p>{item.author.description}</p>
+        <p>{item.description}</p>
         <div className="post-footer">
           <div className="post-links">
             <span>

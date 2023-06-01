@@ -8,7 +8,6 @@ const BlogFilters = () => {
   const [dynamicName, setDynamicName] = useState([]);
   const [dynamicTags, setDynamicTags] = useState([]);
   const [authors, setAuthors] = useState([]);
-  console.log(dynamicName);
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/post-category/`)
@@ -37,6 +36,14 @@ const BlogFilters = () => {
       .catch((err) => {
         console.log(err);
       });
+  }, []);
+  useEffect(() => {
+    axios
+      .post(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
+        name: "all",
+      })
+      .then((resp) => console.log(resp.data.data))
+      .catch((err) => console.log(err));
   }, []);
   const [tabs, setTab] = useState(0);
   const pathname = usePathname();
@@ -195,7 +202,7 @@ const BlogFilters = () => {
                         className={item.name === activePath[2] ? "active" : ""}
                       >
                         <Link
-                          href={`/category/${item.name
+                          href={`/category/${item.slug
                             .toLowerCase()
                             .split(" ")
                             .join("-")}`}
@@ -214,7 +221,7 @@ const BlogFilters = () => {
                           className={e.name === activePath[2] ? "active" : null}
                         >
                           <Link
-                            href={`/tag/${e.name
+                            href={`/tag/${e.slug
                               .toLowerCase()
                               .split(" ")
                               .join("-")}`}
@@ -234,7 +241,7 @@ const BlogFilters = () => {
                           className={e.name === activePath[2] ? "active" : null}
                         >
                           <Link
-                            href={`/aurthor/${e.name
+                            href={`/author/${e.slug
                               .toLowerCase()
                               .split(" ")
                               .join("-")}`}

@@ -49,7 +49,7 @@ const page = () => {
           >
             {state.loading ? (
               <Loading />
-            ) : state.data.length >= 1 ? (
+            ) : state.data?.length >= 1 ? (
               <>
                 <CartItems item={state.data} />
                 <CartPricingDetail />

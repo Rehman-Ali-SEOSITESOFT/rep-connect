@@ -4,16 +4,15 @@ import Image from "next/image";
 import axios from "axios";
 const TagsItem = ({ item }) => {
   let name = item.slug.split(" ").join("-").toLowerCase();
+  // const [tagsId, setTagsId] = useState("");
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_URL}api/post/${item.slug}`)
+  //     .then((resp) => setTagsId(resp.data.data.post.slug))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   console.log(item);
-  const [tagsId, setTagsId] = useState("");
-  useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/post/${item.slug}`)
-      .then((resp) => setTagsId(resp.data.data.post.slug))
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
     <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
       <div className="image-side w-25">
