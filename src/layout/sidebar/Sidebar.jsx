@@ -40,7 +40,7 @@ const Sidebar = () => {
     }).format(totalprice);
   };
 
-  const totalprice = state.reduce((total, curValue, curIndex, arr) => {
+  const totalprice = state?.reduce((total, curValue, curIndex, arr) => {
     return (total += curValue.sub_total);
   }, 0);
 
