@@ -27,17 +27,15 @@ const CartPricingDetail = () => {
 
   const state = useSelector((state) => state.cartItem.data);
 
+  const totalprice = state?.reduce((total, curValue, curIndex, arr) => {
+    return (total += curValue.sub_total);
+  }, 0);
   const TotalPrice = () => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(totalprice);
   };
-
-  const totalprice = state.reduce((total, curValue, curIndex, arr) => {
-    return (total += curValue.sub_total);
-  }, 0);
-
   return (
     <aside className="cart-sidebar">
       <div className="cart--pricing--detail">

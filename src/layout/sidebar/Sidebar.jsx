@@ -33,17 +33,16 @@ const Sidebar = () => {
   }, []);
 
   const qty = state.reduce((t, c, i, ar) => t + c.quantity, 0);
+
+  const totalprice = state?.reduce((total, curValue, curIndex, arr) => {
+    return (total += curValue.sub_total);
+  }, 0);
   const TotalPrice = () => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(totalprice);
   };
-
-  const totalprice = state?.reduce((total, curValue, curIndex, arr) => {
-    return (total += curValue.sub_total);
-  }, 0);
-
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
