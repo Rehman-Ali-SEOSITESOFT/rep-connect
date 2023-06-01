@@ -8,9 +8,10 @@ const BlogFilters = () => {
   const [dynamicName, setDynamicName] = useState([]);
   const [dynamicTags, setDynamicTags] = useState([]);
   const [authors, setAuthors] = useState([]);
+  console.log(dynamicName);
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}/api/category`)
+      .get(`${process.env.NEXT_PUBLIC_URL}api/post-category/`)
       .then((resp) => {
         setDynamicName(resp.data.data.category);
         // console.log(resp.data.data.category);
@@ -29,7 +30,7 @@ const BlogFilters = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/author/`)
+      .get(`${process.env.NEXT_PUBLIC_URL}api/author`)
       .then((resp) => {
         setAuthors(resp.data.data.author);
       })
