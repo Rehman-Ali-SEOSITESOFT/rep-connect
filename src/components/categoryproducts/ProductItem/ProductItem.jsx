@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import "./producitem.css";
 import Image from "next/image";
-import marsa from "../../../assets/images/products/mrsa-test-service.jpg";
 import { useProduct } from "@/hooks/product";
 import { ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { updatingState } from "@/redux/slices/updateCart";
 const ProductItem = ({ item }) => {
   const [loadging, setLoaging] = useState(false);
+  const dispatch = useDispatch();
   const hanldeAddToCart = (pra) => {
     useProduct(1, pra);
     setLoaging(true);
+    dispatch(updatingState());
+
     // toast.success("Successfully Update ");
   };
   setTimeout(() => {

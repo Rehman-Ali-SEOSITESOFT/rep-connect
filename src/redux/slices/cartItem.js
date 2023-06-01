@@ -9,7 +9,7 @@ const initialState = {
 export const cartItem = createAsyncThunk("cartItem", async () => {
   const resp = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart`, {
     headers: {
-      "x-auth-token": token,
+      "x-auth-token": token(),
     },
     method: "GET",
   });
@@ -23,13 +23,14 @@ export const cartItemSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(cartItem.pending, (state, action) => {
       state.loading = true;
+      state.updating = false;
     });
     builder.addCase(cartItem.fulfilled, (state, action) => {
       state.loading = false;
-      state.data = action.payload.data?.carts;
+      state.data = action.payload.data.carts;
     });
     builder.addCase(cartItem.rejected, (state, action) => {
-      state.loading = false;
+      state.loading = true;
       state.error = true;
     });
   },

@@ -5,7 +5,7 @@ const initial = {
 };
 
 export const toggleSlice = createSlice({
-  name: "productslice",
+  name: "toggleslice",
   initialState: initial,
   reducers: {
     toggleMenu: (state) => {

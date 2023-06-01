@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import "./checkout.css";
+import Link from "next/link";
 const CheckoutBillingDetail = () => {
   const [err, setErr] = useState([]);
   const [address, setAddress] = useState(false);
@@ -622,10 +623,13 @@ const CheckoutBillingDetail = () => {
                 <p>Pay with cash upon delivery.</p>
               </div>
               <div className="order-checkout-btns">
-                <button className="place-order"> Place order</button>
-                <a href="/shop" className="return-to-cart">
+                <button className="place-order" type="submit">
+                  {" "}
+                  Place order
+                </button>
+                <Link href="/cart" className="return-to-cart">
                   Return to cart
-                </a>
+                </Link>
               </div>
             </aside>
           </div>

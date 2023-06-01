@@ -3,7 +3,7 @@ import "./loading.css";
 const Loading = () => {
   return (
     <div className="col">
-      <span class="cart-loading">Loading</span>
+      <span className="cart-loading">Loading</span>
     </div>
   );
 };

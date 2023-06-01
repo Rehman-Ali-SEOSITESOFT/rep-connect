@@ -7,6 +7,7 @@ const CartDe = ({
   hanldeDeleted,
   hanldeIncreasedQty,
   hanldeDecreasedQty,
+  hanldeChanged,
 }) => {
   const TotalPrice = (total) => {
     return new Intl.NumberFormat("en-US", {

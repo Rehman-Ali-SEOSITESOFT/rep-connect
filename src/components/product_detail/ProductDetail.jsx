@@ -10,6 +10,8 @@ import img3 from "../../assets/images/download-category/COVIDFLURSV-Pediatrics-0
 import dynamic from "next/dynamic";
 import { useProduct } from "@/hooks/product";
 import { ToastContainer } from "react-toastify";
+import { updatingState } from "@/redux/slices/updateCart";
+import { useDispatch } from "react-redux";
 const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
   ssr: false,
 });
@@ -19,6 +21,7 @@ const ProductDetail = (props) => {
   const [qty, setQty] = useState(1);
   const [defalutLoading, setDefaultLoading] = useState(false);
   const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
   const [productList, setProductList] = useState([
     {
       img: img4,
@@ -44,13 +47,14 @@ const ProductDetail = (props) => {
     useProduct(qty, item.data);
     setDefaultLoading(true);
     setloading(true);
+    dispatch(updatingState());
   };
 
   const [loadging, setLoaging] = useState(false);
   // SETIME OUT FUNCTION LOADING FALSE
   setTimeout(() => {
     setloading(false);
-  }, [6000]);
+  }, [3000]);
 
   return (
     <>
@@ -135,6 +139,7 @@ const ProductDetail = (props) => {
                           style={{
                             opacity: loading ? "0.5" : 1,
                           }}
+                          disabled={loading ? true : false}
                         >
                           Add to cart
                           {defalutLoading ? (

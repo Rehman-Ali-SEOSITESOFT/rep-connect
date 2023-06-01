@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { token } from "./token";
+import { useDispatch } from "react-redux";
 export function useProduct(qty, para) {
   const { _id, sale_price, regular_price } = para;
   fetch(`${process.env.NEXT_PUBLIC_URL}api/cart`, {
@@ -19,10 +20,9 @@ export function useProduct(qty, para) {
     .then((res) => res.json())
     .then((data) => {
       if (data.success === 1) {
-        toast.success();
         toast.success(`${data.message} 👌🏻`, {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

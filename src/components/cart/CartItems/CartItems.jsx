@@ -94,6 +94,21 @@ const CartItems = (props) => {
       });
   };
 
+  const hanldeChanged = (id, event) => {
+    let arr = [...upadateItem];
+    let changedProcduct = arr.filter((item) => item._id === id);
+    let obj = {
+      ...changedProcduct[0],
+      quantity: event.target.value,
+    };
+
+    let index = arr.findIndex(function (i) {
+      return i._id === id;
+    });
+    let addAndRemoveCurrenProduct = [...arr];
+    addAndRemoveCurrenProduct[index] = obj;
+    setUpdateItem(addAndRemoveCurrenProduct);
+  };
   return (
     <div className="cart-items">
       <form onSubmit={hanldeSubmit}>
@@ -116,6 +131,7 @@ const CartItems = (props) => {
                   item={element}
                   hanldeDeleted={hanldeDeleted}
                   hanldeIncreasedQty={hanldeIncreasedQty}
+                  hanldeChanged={hanldeChanged}
                   hanldeDecreasedQty={hanldeDecreasedQty}
                 />
               );

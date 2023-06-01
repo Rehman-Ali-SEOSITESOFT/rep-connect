@@ -15,7 +15,8 @@ const Sidebar = () => {
   const [DropDown, setDropDown] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  const state = useSelector((state) => state.cartItem.data);
+  const state = useSelector((state) => state.cartItem);
+  const updating = useSelector((state) => state.updatingCart.updating);
 
   const handleDropDown = (event) => {
     event.preventDefault();
@@ -29,12 +30,14 @@ const Sidebar = () => {
   };
   useEffect(() => {
     dispatch(product());
-    dispatch(cartItem());
   }, []);
 
-  const qty = state?.reduce((t, c, i, ar) => t + c.quantity, 0);
+  useEffect(() => {
+    dispatch(cartItem());
+  }, [updating]);
 
-  const totalprice = state?.reduce((total, curValue, curIndex, arr) => {
+  const qty = state?.data.reduce((t, c, i, ar) => t + c.quantity, 0);
+  const totalprice = state?.data.reduce((total, curValue, i, arr) => {
     return (total += curValue.sub_total);
   }, 0);
   const TotalPrice = () => {
@@ -43,6 +46,7 @@ const Sidebar = () => {
       currency: "USD",
     }).format(totalprice);
   };
+
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
@@ -210,7 +214,7 @@ const Sidebar = () => {
         >
           <ul>
             <li>
-              <Link href="/product-category/sales-material/">
+              <Link href="/product-category/sales-material-680623061/">
                 <span>Order Printed Sales Materials</span>
               </Link>
             </li>

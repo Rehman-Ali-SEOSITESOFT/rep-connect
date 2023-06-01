@@ -9,6 +9,10 @@ import img6 from "../../assets/images/download-category/Healthcare-COVID-19-Test
 import img7 from "../../assets/images/download-category/Patient-COVID-Portal-Instructions-Tear-Off-0144.png";
 import ProductItem from "./ProductItem/ProductItem";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import Loading from "../cart/CartItems/Loading/Loading";
+import NoProduct from "./norpoduct/NoProduct";
+
 const CategoryProducts = () => {
   const [productList, setProductList] = useState([
     {
@@ -60,54 +64,23 @@ const CategoryProducts = () => {
       name: "ENT CRS NGS vs Culture Study – 0093",
     },
   ]);
+
+  const state = useSelector((state) => state.categoryWisePro);
   return (
     <div className="product_listing">
       <div className="container-xxl">
         <div className="row product--items--wrapper">
-          {productList.map((item, index) => {
-            return (
-              <React.Fragment key={index}>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 product__item">
-                  <div className="product_gr__items">
-                    <a
-                      href={`/product-detail/productimage`}
-                      className="product--gr--link position-relative d-block"
-                    >
-                      <Image
-                        // src={marsa}
-                        src={item.img}
-                        alt="product"
-                        className="img-fluid object-fit-cover"
-                      />
-                      <div className="product_overlay_mask"></div>
-                      {/* {loadging && (
-                        <div className="product--loadig--style">
-                          <div className="loading"></div>
-                        </div>
-                      )} */}
-                    </a>
-                    <div className="product_links">
-                      {/* {loadging ? (
-                        <span>
-                          <div className="product-loader"></div>
-                        </span>
-                      ) : (
-                        <span onClick={hanldeAddToCart}>
-                          <i className="fa-solid fa-cart-shopping"></i>
-                        </span>
-                      )}
-                      <a href={`/product-detail/${item._id}`}>
-                        <i className="fa-solid fa-link"></i>
-                      </a> */}
-                    </div>
-                  </div>
-                  <div className="product--gr--title">
-                    <a href={`/product-detail/${item.name}`}>{item.name}</a>
-                  </div>
-                </div>
-              </React.Fragment>
-            );
-          })}
+          {state.loading ? (
+            <div className="col text-center">
+              <Loading />
+            </div>
+          ) : state.data.length >= 1 ? (
+            state.data.map((item, index) => {
+              return <ProductItem item={item} key={index} />;
+            })
+          ) : (
+            <NoProduct />
+          )}
         </div>
       </div>
     </div>
