@@ -32,7 +32,7 @@ const Sidebar = () => {
     dispatch(cartItem());
   }, []);
 
-  const qty = state.reduce((t, c, i, ar) => t + c.quantity, 0);
+  const qty = state?.reduce((t, c, i, ar) => t + c.quantity, 0);
 
   const totalprice = state?.reduce((total, curValue, curIndex, arr) => {
     return (total += curValue.sub_total);
