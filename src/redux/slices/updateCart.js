@@ -8,7 +8,7 @@ export const updatingSlice = createSlice({
   name: "updateingSlice",
   initialState: initialState,
   reducers: {
-    updatingState: (state, action) => {
+    updatingState: (state) => {
       state.updating = !state.updating;
     },
   },
