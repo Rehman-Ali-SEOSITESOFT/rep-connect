@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 .image_wrapper img {
-  width: 100%;
+  width: 60%;
   transition: transform 0.5s, filter 1.5s ease-in-out;
   /* filter: grayscale(100%); */
 }

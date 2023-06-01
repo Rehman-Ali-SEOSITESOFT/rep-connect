@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styless from "../blog.module.css";
 import blog from "../../../assets/images/singleproductsimages/blogImagess.png";
@@ -19,9 +19,11 @@ import comment2 from "../../../assets/images/singleproductsimages/comment2.jpg";
 import comment3 from "../../../assets/images/singleproductsimages/comment3.png";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import withAuth from "@/utils/auth";
+import axios from "axios";
 const page = ({ params }) => {
   let { id } = params;
   const withoutdash = id.split("-").join(" ");
+  console.log(id, "idd");
   const [formData, setFormData] = useState({
     commentDetail: "",
   });
@@ -102,14 +104,23 @@ const page = ({ params }) => {
     setCheckBox(!checkBox);
     // console.log(checkBox)
   };
+
+  const [singlePostData, setSinglePostData] = useState([]);
   const _handleBlogDetails = (e) => {
     e.preventDefault();
-    console.log("form data get", image, formData.commentDetail);
+
     // console.log(formData.checkBox)
-    console.log("image", image);
-    console.log(checkBox, "check box value is here");
+    // console.log("image", image);
+    // console.log(checkBox, "check box value is here");
   };
 
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}api/post/${id}`)
+      .then((resp) => setSinglePostData(resp.data.data.post))
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(singlePostData);
   return (
     <>
       <BreadCrum
@@ -134,7 +145,13 @@ const page = ({ params }) => {
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div className={styless.image_wrapper}>
-                <Image src={blog} alt="image" className="img-fluid" />
+                <Image
+                  src={singlePostData.category?.cover_image.image_url}
+                  alt="image"
+                  className="img-fluid"
+                  width="100"
+                  height="100"
+                />
               </div>
             </div>
           </div>
@@ -142,7 +159,7 @@ const page = ({ params }) => {
             <div className="col-lg-12">
               <div className={styless.second_row_blog}>
                 <p> {id}</p>
-                <p>Hi Sales Team</p>
+                <p>{singlePostData.description}</p>
                 <p>
                   Candida auris is a great opportunity for us. When speaking
                   with potential organizations about our screening test please
@@ -179,7 +196,9 @@ const page = ({ params }) => {
                 >
                   {" "}
                 </button>
-                <span className={styless.likes_number}>+16</span>
+                <span className={styless.likes_number}>
+                  +{singlePostData.post_liked?.length}
+                </span>
               </div>
               <div className={styless.liked_by_people}>
                 {likes.map((e, idx) => {
