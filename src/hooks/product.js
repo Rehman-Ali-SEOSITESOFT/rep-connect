@@ -5,7 +5,7 @@ export function useProduct(qty, para) {
   const { _id, sale_price, regular_price } = para;
   fetch(`${process.env.NEXT_PUBLIC_URL}api/cart`, {
     headers: {
-      "x-auth-token": token,
+      "x-auth-token": token(),
       "Content-Type": "application/json",
     },
     method: "POST",
