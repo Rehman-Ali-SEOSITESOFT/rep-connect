@@ -29,10 +29,10 @@ const Sidebar = () => {
     localStorage.removeItem("token");
     router.push("/login");
   };
-  const qty = state?.data.reduce((t, c, i, ar) => t + c.quantity, 0);
-
+  // const state = useSelector((state) => state.cartItem);
+  const qty = state.data.reduce((t, c, i, ar) => t + c.quantity, 0);
   // TOTAL PRICE
-  const totalprice = state?.data.reduce((total, curValue, i, arr) => {
+  const totalprice = state.data.reduce((total, curValue, i, arr) => {
     return (total += curValue.sub_total);
   }, 0);
   const TotalPrice = () => {
@@ -41,6 +41,7 @@ const Sidebar = () => {
       currency: "USD",
     }).format(totalprice);
   };
+
   useEffect(() => {
     dispatch(product());
     dispatch(cartItem());
@@ -48,9 +49,11 @@ const Sidebar = () => {
 
   // useMemo(() => {}, [updating.updating]);
   // TOTAL QTY CHECK
-  useEffect(() => {
+  useMemo(() => {
     dispatch(cartItem());
   }, [updating.updating]);
+  // console.log(state);
+
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
