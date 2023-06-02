@@ -146,7 +146,7 @@ const page = ({ params }) => {
             <div className="col-lg-8">
               <div className={styless.image_wrapper}>
                 <Image
-                  src={singlePostData.category?.cover_image.image_url}
+                  src={singlePostData.featured_image?.image_url}
                   alt="image"
                   className="img-fluid"
                   width="100"

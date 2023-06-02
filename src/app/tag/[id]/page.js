@@ -13,14 +13,15 @@ const page = ({ params }) => {
   // const withoutdash = id.split("-").join(" ");
 
   const [blog, setBlogs] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
-  //     .then((resp) => {
-  //       setBlogs(resp.data.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
+      .then((resp) => {
+        console.log(resp.data.data.post);
+        setBlogs(resp.data.data.post);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <BreadCrum

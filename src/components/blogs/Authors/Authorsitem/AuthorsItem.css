@@ -150,6 +150,14 @@
 .post-footer .post-links span {
   padding-left: 10px;
 }
+.sr-only,
+.spinner-border {
+  display: none !important;
+}
+.sr-only:first-child,
+.spinner-border:first-child {
+  display: block !important;
+}
 
 @media screen and (max-width: 1025px) {
   .item-category-blog .image-side {

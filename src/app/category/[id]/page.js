@@ -18,6 +18,7 @@ const page = ({ params }) => {
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
       .then((resp) => {
+        console.log(resp.data.data.post);
         setBlogs(resp.data.data.post);
       })
       .catch((err) => console.log(err));

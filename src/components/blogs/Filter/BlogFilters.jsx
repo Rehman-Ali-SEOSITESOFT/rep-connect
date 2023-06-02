@@ -8,43 +8,56 @@ const BlogFilters = () => {
   const [dynamicName, setDynamicName] = useState([]);
   const [dynamicTags, setDynamicTags] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    //////////category get api
+    setLoading(true);
+
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/post-category/`)
       .then((resp) => {
         setDynamicName(resp.data.data.category);
+        setLoading(false);
+
         // console.log(resp.data.data.category);
       })
       .catch((err) => console.log(err));
-  }, []);
-  useEffect(() => {
+
+    //////////tag get api
+
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/tag`)
       .then((resp) => {
+        console.log(resp.data.data.tag);
         setDynamicTags(resp.data.data.tag);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-  useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/author`)
-      .then((resp) => {
-        setAuthors(resp.data.data.author);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  useEffect(() => {
+
+    //////////filter get api
+
     axios
       .post(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
         name: "all",
       })
       .then((resp) => console.log(resp.data.data))
       .catch((err) => console.log(err));
+
+    //////////author get api
+
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}api/author`)
+      .then((resp) => {
+        console.log(resp);
+        setAuthors(resp.data.data.author);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
+
   const [tabs, setTab] = useState(0);
   const pathname = usePathname();
   const activePath = pathname.split("/");
@@ -240,6 +253,7 @@ const BlogFilters = () => {
                           key={idx}
                           className={e.name === activePath[2] ? "active" : null}
                         >
+                          {/* <Link href={`/author/${e.slug}`}>{e.name}</Link> */}
                           <Link
                             href={`/author/${e.slug
                               .toLowerCase()
