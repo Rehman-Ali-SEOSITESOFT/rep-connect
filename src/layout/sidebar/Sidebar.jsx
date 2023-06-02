@@ -43,12 +43,12 @@ const Sidebar = () => {
   };
   useEffect(() => {
     dispatch(product());
-    // dispatch(cartItem());
+    dispatch(cartItem());
   }, []);
 
   // useMemo(() => {}, [updating.updating]);
   // TOTAL QTY CHECK
-  useMemo(() => {
+  useEffect(() => {
     dispatch(cartItem());
   }, [updating.updating]);
   return (
