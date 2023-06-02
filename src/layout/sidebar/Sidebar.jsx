@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./sidebar.css";
 import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg";
 import myacount from "../../assets/images/side-bar-my-account-img.png";
@@ -43,15 +43,14 @@ const Sidebar = () => {
   };
   useEffect(() => {
     dispatch(product());
-    dispatch(cartItem());
+    // dispatch(cartItem());
   }, []);
 
+  // useMemo(() => {}, [updating.updating]);
+  // TOTAL QTY CHECK
   useMemo(() => {
-    console.log("he");
     dispatch(cartItem());
   }, [updating.updating]);
-  // TOTAL QTY CHECK
-
   return (
     <>
       <aside className={toggle ? "side--bar" : "side--bar hide"}>
