@@ -29,6 +29,17 @@ const Sidebar = () => {
     localStorage.removeItem("token");
     router.push("/login");
   };
+
+  
+  useEffect(() => {
+    dispatch(product());
+    dispatch(cartItem());
+  }, []);
+
+  useMemo(() => {
+    dispatch(cartItem());
+  }, [updating.updating]);
+
   // const state = useSelector((state) => state.cartItem);
   const qty = state.data.reduce((t, c, i, ar) => t + c.quantity, 0);
   // TOTAL PRICE
@@ -42,16 +53,9 @@ const Sidebar = () => {
     }).format(totalprice);
   };
 
-  useEffect(() => {
-    dispatch(product());
-    dispatch(cartItem());
-  }, []);
-
   // useMemo(() => {}, [updating.updating]);
   // TOTAL QTY CHECK
-  useMemo(() => {
-    dispatch(cartItem());
-  }, [updating.updating]);
+
   // console.log(state);
 
   return (
