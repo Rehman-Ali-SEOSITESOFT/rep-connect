@@ -229,7 +229,7 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/product-category/branded-merchandise/">
+              <Link href="/product-category/branded-merchandise-364989543/">
                 <span>Order Branded Merchandise</span>
               </Link>
             </li>
