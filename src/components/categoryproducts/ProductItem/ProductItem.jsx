@@ -14,7 +14,7 @@ const ProductItem = ({ item }) => {
     useProduct(1, pra);
     setLoaging(true);
     dispatch(updatingState());
-    // dispatch(cartItem());
+    dispatch(cartItem());
 
     // toast.success("Successfully Update ");
   };
