@@ -17,20 +17,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const updating = useSelector((state) => state.updatingCart);
-  const state = useSelector((state) => state.cartItem);
 
-  const handleDropDown = (event) => {
-    event.preventDefault();
-    setDropDown(!DropDown);
-  };
-
-  const onClickLogout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    router.push("/login");
-  };
-
-  
   useEffect(() => {
     dispatch(product());
     dispatch(cartItem());
@@ -40,6 +27,7 @@ const Sidebar = () => {
     dispatch(cartItem());
   }, [updating.updating]);
 
+  const state = useSelector((state) => state.cartItem);
   // const state = useSelector((state) => state.cartItem);
   const qty = state.data.reduce((t, c, i, ar) => t + c.quantity, 0);
   // TOTAL PRICE
@@ -51,6 +39,17 @@ const Sidebar = () => {
       style: "currency",
       currency: "USD",
     }).format(totalprice);
+  };
+
+  const handleDropDown = (event) => {
+    event.preventDefault();
+    setDropDown(!DropDown);
+  };
+
+  const onClickLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    router.push("/login");
   };
 
   // useMemo(() => {}, [updating.updating]);
