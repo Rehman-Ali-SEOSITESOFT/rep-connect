@@ -10,13 +10,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { product } from "@/redux/slices/productSlice";
 import { cartItem } from "@/redux/slices/cartItem";
+import { useMemo } from "react";
 const Sidebar = () => {
   const { toggle } = useSelector((redux) => redux.menuReducer);
   const [DropDown, setDropDown] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+  const updating = useSelector((state) => state.updatingCart);
   const state = useSelector((state) => state.cartItem);
-  const updating = useSelector((state) => state.updatingCart.updating);
 
   const handleDropDown = (event) => {
     event.preventDefault();
@@ -28,15 +29,9 @@ const Sidebar = () => {
     localStorage.removeItem("token");
     router.push("/login");
   };
-  useEffect(() => {
-    dispatch(product());
-  }, []);
-
-  useEffect(() => {
-    dispatch(cartItem());
-  }, [updating]);
-
   const qty = state?.data.reduce((t, c, i, ar) => t + c.quantity, 0);
+
+  // TOTAL PRICE
   const totalprice = state?.data.reduce((total, curValue, i, arr) => {
     return (total += curValue.sub_total);
   }, 0);
@@ -46,6 +41,16 @@ const Sidebar = () => {
       currency: "USD",
     }).format(totalprice);
   };
+  useEffect(() => {
+    dispatch(product());
+    dispatch(cartItem());
+  }, []);
+
+  useMemo(() => {
+    console.log("he");
+    dispatch(cartItem());
+  }, [updating.updating]);
+  // TOTAL QTY CHECK
 
   return (
     <>
