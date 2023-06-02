@@ -12,6 +12,7 @@ import { useProduct } from "@/hooks/product";
 import { ToastContainer } from "react-toastify";
 import { updatingState } from "@/redux/slices/updateCart";
 import { useDispatch } from "react-redux";
+import { cartItem } from "@/redux/slices/cartItem";
 const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
   ssr: false,
 });
@@ -48,6 +49,7 @@ const ProductDetail = (props) => {
     setDefaultLoading(true);
     setloading(true);
     dispatch(updatingState());
+    dispatch(cartItem());
   };
 
   const [loadging, setLoaging] = useState(false);

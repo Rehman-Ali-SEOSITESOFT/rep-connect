@@ -5,6 +5,8 @@ import { useProduct } from "@/hooks/product";
 import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { updatingState } from "@/redux/slices/updateCart";
+import Link from "next/link";
+import { cartItem } from "@/redux/slices/cartItem";
 const ProductItem = ({ item }) => {
   const [loadging, setLoaging] = useState(false);
   const dispatch = useDispatch();
@@ -12,6 +14,7 @@ const ProductItem = ({ item }) => {
     useProduct(1, pra);
     setLoaging(true);
     dispatch(updatingState());
+    dispatch(cartItem());
 
     // toast.success("Successfully Update ");
   };
@@ -22,7 +25,7 @@ const ProductItem = ({ item }) => {
     <>
       <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 product__item">
         <div className="product_gr__items">
-          <a
+          <Link
             href={`/product-detail/${item._id}`}
             className="product--gr--link position-relative d-block"
           >
@@ -39,7 +42,7 @@ const ProductItem = ({ item }) => {
                 <div className="loading"></div>
               </div>
             )}
-          </a>
+          </Link>
           <div className="product_links">
             {loadging ? (
               <span>
