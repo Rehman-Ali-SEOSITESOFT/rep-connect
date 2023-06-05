@@ -10,7 +10,9 @@ import NewAccordion from "@/components/accordoin/newAccordion";
 import CourseContent from "@/components/courseContent/CourseContent";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 function Profile() {
+  const router = useRouter();
   const [expand, setExpand] = useState(true);
   const [editDetail, setEditDetail] = useState([]);
   const expandAll = (e) => {
@@ -51,11 +53,10 @@ function Profile() {
   }, []);
 
   const _handleLogout = () => {
-    localStorage.clear("/");
-    console.log("logout is clicked");
+    localStorage.clear();
+    router.push("/login");
   };
 
-  console.log(editDetail, "<==========================");
   return (
     <div>
       <BreadCrum

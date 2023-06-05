@@ -13,8 +13,9 @@ import { CountyList } from "@/data/countylist/CountyList";
 import Link from "next/link";
 import ViewProfile from "@/components/viewProfile/ViewProfile";
 import Spinner from "@/components/spinner/Spinner";
-
+import { useRouter } from "next/navigation";
 const EditProfile = () => {
+  const router = useRouter();
   const [getImage, setGetImage] = useState("");
   const [base64Image, setBase64Image] = useState("");
   const [loading, setLoading] = useState(true);
@@ -177,6 +178,12 @@ const EditProfile = () => {
     setEditProfile(!editProfile);
     console.log(editProfile, "toggle profile");
   };
+
+  const _handleLogout = () => {
+    localStorage.clear();
+    router.push('/login')
+    console.log("edit profile logout is clickeds");
+  };
   return (
     <>
       <BreadCrum
@@ -196,19 +203,23 @@ const EditProfile = () => {
             <div className={styles.profile_container}>
               <div className={styles.profile_area}>
                 <div className={styles.btn_span}>
-                  <button className={styles.logout_btn}> logout </button>
+                  <button className={styles.logout_btn} onClick={_handleLogout}>
+                    {" "}
+                    logout{" "}
+                  </button>
                 </div>
                 <div className={styles.loginAreaDetails}>
                   <div>
                     <Image
                       height={80}
                       className={styles.logImg}
-                      src={Member}
-                      alt="logo"
+                      src={entries.profile_picture}
+                      alt="User Image"
+                      width={80}
                     />
                   </div>
                   <div>
-                    <span className={styles.para}>grtesting</span>
+                    <span className={styles.para}>{entries.username}</span>
                   </div>
                   <div>
                     {editProfile ? (
