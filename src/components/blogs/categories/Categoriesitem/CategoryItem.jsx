@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CategoryItem.css";
 import Image from "next/image";
 import axios from "axios";
+import Link from "next/link";
 const CategoryItem = ({ item }) => {
   const [loading, setLoading] = useState(true);
   console.log(item);
@@ -17,58 +18,53 @@ const CategoryItem = ({ item }) => {
       .catch((err) => console.log(err));
   }, []);
   let name = item.slug.split(" ").join("-").toLowerCase();
+  console.log(id, "<================");
   return (
     <>
-      {loading ? (
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      ) : (
-        <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
-          <div className="image-side w-25">
-            <a className="img-side-link">
-              <Image
-                src={item.featured_image.image_url}
-                alt="img1"
-                className="img-fluid"
-                width="100"
-                height="100"
-              />
-              <div className="img-side-overlay"></div>
+      <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
+        <div className="image-side w-25">
+          <a className="img-side-link">
+            <Image
+              src={item.featured_image.image_url}
+              alt="img1"
+              className="img-fluid"
+              width="100"
+              height="100"
+            />
+            <div className="img-side-overlay"></div>
+          </a>
+          <div className="img-side-linkss ">
+            <span className="d-inline-block w-50">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <a className="d-inline-block w-50">
+              <i className="fa-solid fa-link"></i>
             </a>
-            <div className="img-side-linkss ">
-              <span className="d-inline-block w-50">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </span>
-              <a className="d-inline-block w-50">
-                <i className="fa-solid fa-link"></i>
-              </a>
-            </div>
           </div>
-          <div className="content-side">
-            <a href={`/blog/${id}`} className="title-content">
-              {item.title}
-            </a>
-            <p>{item.description}</p>
-            <div className="post-footer">
-              <div className="post-links">
-                <span>
-                  <i className="fa-regular fa-comment" />
-                  <a href={`/blog/${name}/#likes`}>0</a>
-                </span>
-                <span>
-                  <i className="fa-regular fa-file-lines" />
-                  {/* <a
+        </div>
+        <div className="content-side">
+          <Link href={`/blog/${id}`} className="title-content">
+            {item.title}
+          </Link>
+          <p>{item.description}</p>
+          <div className="post-footer">
+            <div className="post-links">
+              <span>
+                <i className="fa-regular fa-comment" />
+                <a href={`/blog/${name}/#likes`}>0</a>
+              </span>
+              <span>
+                <i className="fa-regular fa-file-lines" />
+                {/* <a
               href={`/blog/${name}/#comments`}
               onClick={_handleSingleProduct}
             > */}
-                  <a href={`/blog/${id}`}>read more</a>
-                </span>
-              </div>
+                <Link href={`/blog/${id}`}>read more</Link>
+              </span>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };
