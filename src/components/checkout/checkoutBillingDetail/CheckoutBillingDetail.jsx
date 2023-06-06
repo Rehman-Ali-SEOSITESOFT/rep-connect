@@ -2,9 +2,13 @@
 import React, { useEffect, useState } from "react";
 import "./checkout.css";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/cart/CartItems/Loading/Loading";
+import { ToastContainer, toast } from "react-toastify";
+import { token } from "@/hooks/token";
+import { cartItem } from "@/redux/slices/cartItem";
+
 const CheckoutBillingDetail = () => {
   const router = useRouter();
   const [err, setErr] = useState([]);
@@ -48,6 +52,26 @@ const CheckoutBillingDetail = () => {
     ship_statecountry: "",
     ship_postcode: "",
   });
+  const dispatch = useDispatch();
+
+  const deletProduct = () => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/orderd`, {
+      headers: {
+        "x-auth-token": token(),
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        toast("Order Placed Successfully");
+        dispatch(cartItem());
+        router.push("/order-received");
+      });
+  };
+
   const hanldeChange = (event) => {
     const { name, value } = event.target;
     setOrderForm({ ...orderForm, [name]: value });
@@ -119,16 +143,18 @@ const CheckoutBillingDetail = () => {
           orderForm.ship_statecountry &&
           orderForm.ship_postcode
         ) {
-          console.log("DIFFERENET SHIPPING ADDRESS", orderForm);
-          setTimeout(() => {
-            router.push("/order-received");
-          }, 1500);
+          console.log(" SHIPPING ADDRESS", orderForm);
+          // setTimeout(() => {
+          //   router.push("/order-received");
+          // }, 1500);
+          deletProduct();
         }
       } else {
         console.log("DIFFERENET SHIPPING ADDRESS", orderForm);
-        setTimeout(() => {
-          router.push("/order-received");
-        }, 1500);
+        // setTimeout(() => {
+        //   router.push("/order-received");
+        // }, 1500);
+        deletProduct();
       }
     }
 
@@ -720,6 +746,7 @@ const CheckoutBillingDetail = () => {
                     <Link href="/cart" className="return-to-cart">
                       Return to cart
                     </Link>
+                    <ToastContainer />
                   </div>
                 </aside>
               </div>

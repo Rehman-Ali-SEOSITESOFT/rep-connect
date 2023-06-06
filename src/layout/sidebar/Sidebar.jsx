@@ -27,13 +27,14 @@ const Sidebar = () => {
     dispatch(cartItem());
   }, [updating.updating]);
 
-  const state = useSelector((state) => state.cartItem);
+  const state = useSelector((state) => state.cartItem.data);
   // const state = useSelector((state) => state.cartItem);
-  const qty = state.data.reduce((t, c, i, ar) => t + c.quantity, 0);
+  const qty = state.reduce((t, c, i, ar) => t + c.quantity, 0);
   // TOTAL PRICE
-  const totalprice = state.data.reduce((total, curValue, i, arr) => {
+  const totalprice = state.reduce((total, curValue, i, arr) => {
     return (total += curValue.sub_total);
   }, 0);
+
   const TotalPrice = () => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
