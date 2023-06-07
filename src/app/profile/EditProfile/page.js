@@ -169,20 +169,17 @@ const EditProfile = () => {
       setBase64Image(reader.result);
     };
     reader.readAsDataURL(event.target.files[0]);
-    console.log(base64Image, "<==================");
   };
   const removeUpload = () => {
     setBase64Image("");
   };
   const _handleEditProfile = () => {
     setEditProfile(!editProfile);
-    console.log(editProfile, "toggle profile");
   };
 
   const _handleLogout = () => {
     localStorage.clear();
-    router.push('/login')
-    console.log("edit profile logout is clickeds");
+    router.push("/login");
   };
   return (
     <>
@@ -267,11 +264,9 @@ const EditProfile = () => {
                             >
                               {changeIcon[0] ? (
                                 <div className={styles.icons}>
-                                  {" "}
                                   <span>
-                                    {" "}
-                                    <i className="fa-solid fa-angle-right"></i>{" "}
-                                  </span>{" "}
+                                    <i className="fa-solid fa-angle-right"></i>
+                                  </span>
                                 </div>
                               ) : (
                                 <div className={styles.icons}>
@@ -310,7 +305,6 @@ const EditProfile = () => {
                                     }`}
                                     value={entries.username}
                                     onChange={handleChange}
-                                    // onClick={_handleChangeInputs}
                                   />
                                 </div>
                               </div>
@@ -458,7 +452,6 @@ const EditProfile = () => {
                                     className={`w-100 ${
                                       active ? styles.input : styles.secondInput
                                     }`}
-                                    // onClick={_handleChangeInputs}
                                   />
                                 </div>
                               </div>
@@ -476,7 +469,6 @@ const EditProfile = () => {
                                     className={`w-100 ${
                                       active ? styles.input : styles.secondInput
                                     }`}
-                                    // onClick={_handleChangeInputs}
                                   />
                                 </div>
                               </div>
@@ -518,7 +510,6 @@ const EditProfile = () => {
                                         name="gender"
                                         id="exampleRadios1"
                                         value="Male"
-                                        // checked={entries.gender === "Male"}
                                         onChange={handleChange}
                                       />
                                       <label
@@ -543,7 +534,6 @@ const EditProfile = () => {
                                       >
                                         Female
                                       </label>
-                                      {/* </div> */}
                                     </div>
                                   </div>
                                 </div>
@@ -620,11 +610,10 @@ const EditProfile = () => {
                                 <div className="col-lg-4 col-md-12 p-2">
                                   <div className={styles.profilePic}>
                                     <div className={styles.camIcon}>
-                                      <i className="fa-brands fa-facebook-f"></i>{" "}
+                                      <i className="fa-brands fa-facebook-f"></i>
                                     </div>
                                     <div className={styles.iconLabel}>
-                                      {" "}
-                                      <label> Facebook Page </label>{" "}
+                                      <label> Facebook Page </label>
                                     </div>
                                   </div>
                                 </div>
@@ -640,7 +629,6 @@ const EditProfile = () => {
                                             ? styles.input
                                             : styles.secondInput
                                         }`}
-                                        // onClick={_handleChangeInputs}
                                       />
                                     </div>
                                   </div>
@@ -650,11 +638,10 @@ const EditProfile = () => {
                                 <div className="col-lg-4 col-md-12 p-2">
                                   <div className={styles.profilePic}>
                                     <div className={styles.camIcon}>
-                                      <i className="fa-brands fa-twitter"></i>{" "}
+                                      <i className="fa-brands fa-twitter"></i>
                                     </div>
                                     <div className={styles.iconLabel}>
-                                      {" "}
-                                      <label> Twitter </label>{" "}
+                                      <label> Twitter </label>
                                     </div>
                                   </div>
                                 </div>
@@ -669,7 +656,6 @@ const EditProfile = () => {
                                             ? styles.input
                                             : styles.secondInput
                                         }`}
-                                        // onClick={_handleChangeInputs}
                                         value={entries.twitter}
                                       />
                                     </div>
@@ -680,11 +666,10 @@ const EditProfile = () => {
                                 <div className="col-lg-4 col-md-12 p-2">
                                   <div className={styles.profilePic}>
                                     <div className={styles.camIcon}>
-                                      <i className="fa-brands fa-google-plus-g"></i>{" "}
+                                      <i className="fa-brands fa-google-plus-g"></i>
                                     </div>
                                     <div className={styles.iconLabel}>
-                                      {" "}
-                                      Google+{" "}
+                                      Google+
                                     </div>
                                   </div>
                                 </div>
@@ -698,7 +683,6 @@ const EditProfile = () => {
                                             ? styles.input
                                             : styles.secondInput
                                         }`}
-                                        // onClick={_handleChangeInputs}
                                         value={entries.google_plus}
                                         name="google_plus"
                                       />
@@ -710,11 +694,10 @@ const EditProfile = () => {
                                 <div className="col-lg-4 col-md-12 p-2">
                                   <div className={styles.profilePic}>
                                     <div className={styles.camIcon}>
-                                      <i className="fa-solid fa-house"></i>{" "}
+                                      <i className="fa-solid fa-house"></i>
                                     </div>
                                     <div className={styles.iconLabel}>
-                                      {" "}
-                                      Website(URL){" "}
+                                      Website(URL)
                                     </div>
                                   </div>
                                 </div>
@@ -727,7 +710,6 @@ const EditProfile = () => {
                                             ? styles.input
                                             : styles.secondInput
                                         }`}
-                                        // onClick={_handleChangeInputs}
                                         value={entries.websiteUrl}
                                         name="websiteUrl"
                                         onChange={handleChange}
@@ -758,11 +740,9 @@ const EditProfile = () => {
                             >
                               {changeIcon[2] ? (
                                 <div className={styles.icons}>
-                                  {" "}
                                   <span>
-                                    {" "}
-                                    <i className="fa-solid fa-angle-right"></i>{" "}
-                                  </span>{" "}
+                                    <i className="fa-solid fa-angle-right"></i>
+                                  </span>
                                 </div>
                               ) : (
                                 <div className={styles.icons}>
@@ -790,7 +770,6 @@ const EditProfile = () => {
                                     className={`w-100 ${
                                       active ? styles.input : styles.secondInput
                                     }`}
-                                    // onClick={_handleChangeInputs}
                                     value={entries.mobile}
                                     type="number"
                                     name="mobile"
@@ -802,11 +781,10 @@ const EditProfile = () => {
                                 <div className="col-lg-4 col-md-12 p-2">
                                   <div className={styles.profilePic}>
                                     <div className={styles.camIcon}>
-                                      <i className="fa-regular fa-envelope"></i>{" "}
+                                      <i className="fa-regular fa-envelope"></i>
                                     </div>
                                     <div className={styles.iconLabel}>
-                                      {" "}
-                                      E-mail Address{" "}
+                                      E-mail Address
                                     </div>
                                   </div>
                                 </div>
@@ -819,7 +797,6 @@ const EditProfile = () => {
                                             ? styles.input
                                             : styles.secondInput
                                         }`}
-                                        // onClick={_handleChangeInputs}
                                         value={entries.email}
                                         name="email"
                                         onChange={handleChange}
@@ -829,8 +806,7 @@ const EditProfile = () => {
                                         <span
                                           className={styles.check_box_label}
                                         >
-                                          {" "}
-                                          MAKE THIS FIELD HIDDEN FROM PUBLIC{" "}
+                                          MAKE THIS FIELD HIDDEN FROM PUBLIC
                                         </span>
                                       </span>
                                     </div>
@@ -841,7 +817,7 @@ const EditProfile = () => {
                                 <div className="col-lg-4 col-md-12 p-2">
                                   <div className={styles.profilePic}>
                                     <div className={styles.camIcon}>
-                                      <i className="fa-solid fa-lock"></i>{" "}
+                                      <i className="fa-solid fa-lock"></i>
                                     </div>
                                     <div className={styles.iconLabel}>
                                       Password
@@ -869,7 +845,7 @@ const EditProfile = () => {
                                         onBlur={validateInput}
                                       />
                                       <span className={`${styles.tickIcon01}`}>
-                                        <i className="fa-solid fa-check"></i>{" "}
+                                        <i className="fa-solid fa-check"></i>
                                       </span>
                                       {error.password && (
                                         <span className={styles.err}>
