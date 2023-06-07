@@ -26,8 +26,7 @@ export const cartItemSlice = createSlice({
     });
     builder.addCase(cartItem.fulfilled, (state, action) => {
       state.loading = false;
-      console.log("just update for testing perpose");
-      state.data = action.payload.data.carts;
+      state.data = action.payload.data.carts ? action.payload.data.carts : [];
     });
     builder.addCase(cartItem.rejected, (state, action) => {
       state.loading = true;

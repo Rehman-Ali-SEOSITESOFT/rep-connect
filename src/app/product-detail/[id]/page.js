@@ -23,6 +23,12 @@ const page = ({ params }) => {
         breadHeading="Shop"
         pagess={[
           { page: "Home", link: "/" },
+          {
+            page: state.loading ? null : state.data.category.name,
+            link: state.loading
+              ? null
+              : `/product-category/${state.data.category.slug}`,
+          },
           { page: state.loading ? null : state.data.name, link: "/" },
         ]}
       />

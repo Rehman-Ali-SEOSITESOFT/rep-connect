@@ -330,10 +330,19 @@
 .deail--product--image div:first-child {
   cursor: auto !important;
   overflow: hidden;
-  height: 300px !important;
+  /* height: 300px !important; */
   object-fit: cover;
 }
 
+.pricing-check .price {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Poppins";
+  margin: 20px 0;
+}
+.pricing-check .price span {
+  color: #2754a4;
+}
 /* .deail--product--image img {
   height: 100% !important;
 } */

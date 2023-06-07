@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import img1 from "../../assets/images/download-category/MicroGenDX-COVID-19-Testing-Icon.png";
 import Image from "next/image";
@@ -7,15 +7,14 @@ import ProductItem from "../categoryproducts/ProductItem/ProductItem";
 import img4 from "../../assets/images/download-category/ABD-Labs-General-0131-Icon.png";
 import img2 from "../../assets/images/download-category/ABD-Labs-Urology-0132-Icon.png";
 import img3 from "../../assets/images/download-category/COVIDFLURSV-Pediatrics-0177-Icon.png";
-import dynamic from "next/dynamic";
+
 import { useProduct } from "@/hooks/product";
 import { ToastContainer } from "react-toastify";
 import { updatingState } from "@/redux/slices/updateCart";
 import { useDispatch } from "react-redux";
 import { cartItem } from "@/redux/slices/cartItem";
-const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
-  ssr: false,
-});
+import Loading from "../cart/CartItems/Loading/Loading";
+import ImageGallary from "./images/ImageGallary";
 
 const ProductDetail = (props) => {
   const item = props.item;
@@ -57,57 +56,48 @@ const ProductDetail = (props) => {
   setTimeout(() => {
     setloading(false);
   }, [3000]);
+  const [coverImage, setCoverImage] = useState(null);
+
+  const TotalPrice = (total) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(total);
+  };
 
   return (
     <>
       {item.loading ? (
-        <h1>Loading Data Please Wait</h1>
+        <Loading />
       ) : (
         <section>
           <div className="ProductDetail">
             <div className="container-xxl">
               <div className="row">
                 <div className="col-xl-3 col-md-4 col-12">
-                  <figure className="deail--product">
-                    <div className="deail--product--image">
-                      <ReactImageMagnify
-                        {...{
-                          className: "magnify-image-small-image",
-                          smallImage: {
-                            alt: "Wristwatch by Ted Baker London",
-                            isFluidWidth: true,
-                            src: item.data.cover_image.image_url,
-                          },
-                          largeImage: {
-                            src: item.data.cover_image.image_url,
-                            width: 1426,
-                            height: 2000,
-                          },
-
-                          enlargedImagePosition: "over",
-                        }}
-                      />
-                    </div>
-                  </figure>
+                  <ImageGallary item={item.data} />
                 </div>
                 <div className="col-xl-9 col-md-8 col-12">
                   <div className="deail--product--desc">
                     <h4 className="title--clas">{item.data.name}</h4>
-                    <div>
-                      <p className="price">
-                        Price : <span>{item.data.regular_price}</span>
-                      </p>
-                      <p className="price">
-                        Price : <span>{item.data.sale_price}</span>
-                      </p>
+                    <div className="pricing-check">
+                      <h5 className="price regular">
+                        Price :{" "}
+                        <span>{TotalPrice(item.data.regular_price)}</span>
+                      </h5>
+                      <h5 className="price sale">
+                        Sale Price :{" "}
+                        <span>{TotalPrice(item.data.sale_price)}</span>
+                      </h5>
                     </div>
                     <p>
-                      This test service is available to United States residents
+                      {item.data.short_disc}
+                      {/* This test service is available to United States residents
                       only. All submitted lab requisition forms must have a
                       qualified* physician’s signature on the lab requisition
                       form or the submitted sample will not be run/processed at
                       the MicroGenDX Laboratory. To learn more
-                      <a href="#">CLICK HERE</a>
+                      <a href="#">CLICK HERE</a> */}
                     </p>
                     {/* <p className="stock out-of-stock">
                     This product is currently out of stock and unavailable.
