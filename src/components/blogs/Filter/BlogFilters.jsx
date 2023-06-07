@@ -19,8 +19,6 @@ const BlogFilters = () => {
       .then((resp) => {
         setDynamicName(resp.data.data.category);
         setLoading(false);
-
-        // console.log(resp.data.data.category);
       })
       .catch((err) => console.log(err));
 
@@ -29,7 +27,6 @@ const BlogFilters = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/tag`)
       .then((resp) => {
-        console.log(resp.data.data.tag);
         setDynamicTags(resp.data.data.tag);
       })
       .catch((err) => {
@@ -50,7 +47,6 @@ const BlogFilters = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/author`)
       .then((resp) => {
-        console.log(resp);
         setAuthors(resp.data.data.author);
       })
       .catch((err) => {
@@ -212,7 +208,7 @@ const BlogFilters = () => {
                     {dynamicName?.map((item, index) => (
                       <li
                         key={index}
-                        className={item.name === activePath[2] ? "active" : ""}
+                        className={item.slug === activePath[2] ? "active" : ""}
                       >
                         <Link
                           href={`/category/${item.slug
@@ -231,7 +227,7 @@ const BlogFilters = () => {
                       return (
                         <li
                           key={idx}
-                          className={e.name === activePath[2] ? "active" : null}
+                          className={e.slug === activePath[2] ? "active" : null}
                         >
                           <Link
                             href={`/tag/${e.slug
@@ -251,7 +247,7 @@ const BlogFilters = () => {
                       return (
                         <li
                           key={idx}
-                          className={e.name === activePath[2] ? "active" : null}
+                          className={e.slug === activePath[2] ? "active" : null}
                         >
                           {/* <Link href={`/author/${e.slug}`}>{e.name}</Link> */}
                           <Link

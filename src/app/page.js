@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import mdx from "../assets/images/singleproductsimages/mdxhomepagepost.jpg";
 import salepiece from "../assets/images/singleproductsimages/newSaleImage.png";
 import HomePagePosts from "@/components/homePagePosts/HomePagePosts";
@@ -23,70 +23,11 @@ import ann4 from "../assets/images/singleproductsimages/ann4.png";
 import ann5 from "../assets/images/singleproductsimages/ann5.png";
 import Pagination from "@/components/pagination/Pagination";
 import withAuth from "@/utils/auth";
+import axios from "axios";
 
-const Home =  () => {
-  const [postData, setPostData] = useState([
-    {
-      postImage: salepiece,
-      postHeading: "Candida auris Sales Piece",
-      postDetail:
-        "Candida Auris Sales Piece  Hi Sales Team, Candida auris is a great opportunity for us. When speaking with potential organizations about our screening test please make [...]",
-      likes: "+15",
-      postcomment: "3",
-      readmore: "Read More",
-      link: "candida-auris-sales-piece/",
-    },
-    {
-      postImage: micro,
-      postHeading: "Do Not Use Anything with Old Branding",
-      postDetail:
-        "Hi Sales Team, Please DO NOT use any sales piece, information piece, form, webpage, Lab Req or other item with either of the below logos [...]",
-      likes: "17",
-      postcomment: "1",
-      readmore: "Read More",
-      link: "do-not-use-anything-with-old-branding/",
-    },
-    {
-      postImage: newAccount,
-      postHeading: "REMINDER: New Website Sign-Up Procedure",
-      postDetail:
-        "Hi Sales Team, Just a reminder on how the new account sign-up procedure works. Please note that the website IS NOT the lab portal. You still [...]",
-      likes: "19",
-      postcomment: "5",
-      readmore: "Read More",
-      link: "reminder-new-account-sign-up-procedure/",
-    },
-    {
-      postImage: localtion,
-      postHeading: "Candida Auris: An Inroads into Hospitals",
-      postDetail:
-        "Hi Sales Team, Candida auris causes serious infections, and cases are rising across the U.S. The CDC has put out an alert on this.  MicroGenDX provides [...]",
-      likes: "19",
-      postcomment: "5",
-      readmore: "Read More",
-      link: "candida-auris-an-inroads-into-hospitals/",
-    },
-    {
-      postImage: newSalep,
-      postHeading: "Osteodiscitis: Intro to a New ID Opportunity",
-      postDetail:
-        "Hi Sales Team, As discussed on the State of the Union on June 27th, and by Alisina Shahi in the new sales piece uploaded to Rep [...]",
-      likes: "21",
-      postcomment: "2",
-      readmore: "Read More",
-      link: "osteodiscitis-intro-to-a-new-id-opportunity/",
-    },
-    {
-      postImage: mba,
-      postHeading: "Dr. Clifford Martin Consulting Requests",
-      postDetail:
-        "Hi Everyone, Recently there has been an influx of requests to Dr. Clifford Martin for consulting services. Moving forward I want to establish a procedure for [...]",
-      likes: "17",
-      postcomment: "2",
-      readmore: "Read moore",
-      link: "dr-clifford-martin-consulting-requests/",
-    },
-  ]);
+const Home = () => {
+  const [loading, setLoading] = useState(true);
+  const [postData, setPostData] = useState([]);
   const [annList, setAnnList] = useState([
     {
       image: ann1,
@@ -147,6 +88,16 @@ const Home =  () => {
     // this.setState({ volume: value })
     setVolume(value);
   };
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
+      .then((resp) => {
+        setPostData(resp.data.data.post);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <BreadCrum
@@ -221,7 +172,7 @@ const Home =  () => {
                 <Image src={mdx} alt="image" className="img-fluid banner_img" />
               </div>
               <div>
-                {postData.map((e, idx) => {
+                {postData?.map((e, idx) => {
                   return <HomePagePosts key={idx} item={e} />;
                 })}
               </div>
@@ -333,7 +284,6 @@ const Home =  () => {
       </section>
     </>
   );
-}
-
+};
 
 export default withAuth(Home);

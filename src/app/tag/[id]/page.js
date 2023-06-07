@@ -13,15 +13,17 @@ const page = ({ params }) => {
   const { id } = params;
   const [loading, setLoading] = useState(true);
   // const withoutdash = id.split("-").join(" ");
-
+  console.log(id, "<======");
   const [blog, setBlogs] = useState([]);
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
+      .post(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
+        name: "tag",
+        slug: id,
+      })
       .then((resp) => {
-        console.log(resp.data.data.post);
-        setBlogs(resp.data.data.post);
+        setBlogs(resp.data.data);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -52,9 +54,13 @@ const page = ({ params }) => {
               <div className="row">
                 <div className="col">
                   <div className="categores-blog-wrapper">
-                    {blog?.map((e, i) => {
-                      return <TagsItem key={i} item={e} />;
-                    })}
+                    {blog.length > 0 ? (
+                      blog?.map((e, i) => {
+                        return <TagsItem key={i} item={e} />;
+                      })
+                    ) : (
+                      <p>Nothing to show</p>
+                    )}
                   </div>
                 </div>
               </div>

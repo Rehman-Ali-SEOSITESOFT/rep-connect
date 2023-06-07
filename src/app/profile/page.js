@@ -11,6 +11,7 @@ import CourseContent from "@/components/courseContent/CourseContent";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 function Profile() {
   const router = useRouter();
   const [expand, setExpand] = useState(true);
@@ -136,8 +137,8 @@ function Profile() {
                   <div className={styles.loginArea}>
                     <span className={styles.btnspan}>
                       <button className={styles.logout} onClick={_handleLogout}>
-                        {" "}
-                        logout{" "}
+                  
+                        logout
                       </button>
                     </span>
                     <div className={styles.loginAreaDetails}>
@@ -158,7 +159,9 @@ function Profile() {
                         </button>
                       </div>
                       <div className={styles.email}>
-                        <i className="fa-regular fa-envelope"></i>
+                        <Link href="mailto:seositesoft5@gmail.com">
+                          <i className="fa-regular fa-envelope"></i>
+                        </Link>
                       </div>
                     </div>
                   </div>

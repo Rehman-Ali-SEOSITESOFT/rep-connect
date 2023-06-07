@@ -44,6 +44,7 @@
   height: 100%;
   object-fit: cover;
   transition: all 0.3s ease-in-out;
+  width: fit-content !important;
 }
 .image-side:hover .img-side-link img {
   transition: all 0.3s ease-in-out;

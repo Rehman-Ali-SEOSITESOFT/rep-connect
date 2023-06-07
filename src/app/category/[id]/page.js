@@ -8,21 +8,27 @@ import CategoryItem from "@/components/blogs/categories/Categoriesitem/CategoryI
 import withAuth from "@/utils/auth";
 import axios from "axios";
 import Spinner from "@/components/spinner/Spinner";
+import { useDispatch, useSelector } from "react-redux";
+import categoryFilter from "@/redux/slices/categoryFilter";
 
 const page = ({ params }) => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.categoryFilter);
   const [loading, setLoading] = useState(true);
   const { id } = params;
-
   // const withoutdash = id.split("-").join(" ");
 
   const [blog, setBlogs] = useState([]);
   useEffect(() => {
     setLoading(true);
+    // dispatch(categoryFilter);
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
+      .post(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
+        name: "category",
+        slug: id,
+      })
       .then((resp) => {
-        console.log(resp.data.data.post);
-        setBlogs(resp.data.data.post);
+        setBlogs(resp.data.data);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -53,9 +59,13 @@ const page = ({ params }) => {
               <div className="row">
                 <div className="col">
                   <div className="categores-blog-wrapper">
-                    {blog?.map((e, i) => {
-                      return <CategoryItem key={i} item={e} />;
-                    })}
+                    {blog.length > 0 ? (
+                      blog.map((e, i) => {
+                        return <CategoryItem key={i} item={e} />;
+                      })
+                    ) : (
+                      <p>Nothing to Show</p>
+                    )}
                   </div>
                 </div>
               </div>

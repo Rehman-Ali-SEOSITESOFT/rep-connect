@@ -1,8 +1,9 @@
-import React from "react"
-import Image from "next/image"
-import "./HomePagePosts.css"
-import Link from "next/link"
+import React from "react";
+import Image from "next/image";
+import "./HomePagePosts.css";
+import Link from "next/link";
 const HomePagePosts = ({ item, index }) => {
+  console.log(item, "items for home page");
   return (
     <>
       <div className="post_wrapper">
@@ -11,33 +12,35 @@ const HomePagePosts = ({ item, index }) => {
             <div className="overlay"></div>
             <Link href={{ pathname: `/${item.link}` }}>
               <Image
-                src={item.postImage}
+                src={item.featured_image?.image_url}
                 alt="post image"
                 className="img-fluid "
+                width={100}
+                height={100}
               />
             </Link>
             <div className="image_links double">
-              <a href="#">
+              <Link href="#">
                 <i className="fa-solid fa-magnifying-glass"></i>
-              </a>
-              <Link href={{ pathname: `/blog/${item.link}` }}>
+              </Link>
+              <Link href={{ pathname: `/blog/${item.slug}` }}>
                 <i className="fa-solid fa-link"></i>
               </Link>
             </div>
           </div>
           <div className="post_details_section">
             <h2>
-              <Link href={{ pathname: `/blog/${item.link}` }}>
-                {item.postHeading}
+              <Link href={{ pathname: `/blog/${item.slug}` }}>
+                {item.title}
               </Link>
             </h2>
-            <p>{item.postDetail}</p>
+            <p>{item.description}</p>
           </div>
         </div>
         <div className="post_footer">
           <div className="like">
             <i className="fa-regular fa-thumbs-up"></i>
-            <a href="#">{item.likes}</a>
+            <Link href="#">{item.post_liked.length}</Link>
           </div>
           <div className="comment">
             <i className="fa-regular fa-comment"></i>
@@ -45,12 +48,12 @@ const HomePagePosts = ({ item, index }) => {
           </div>
           <div className="read_more">
             <i className="fa-solid fa-book"></i>
-            <Link href={{ pathname: `/blog/${item.link}` }}>{item.readmore}</Link>
+            <Link href={{ pathname: `/blog/${item.slug}` }}>Read More</Link>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default HomePagePosts
+export default HomePagePosts;
