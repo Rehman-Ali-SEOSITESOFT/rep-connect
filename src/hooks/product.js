@@ -20,7 +20,7 @@ export function useProduct(qty, para) {
     .then((res) => res.json())
     .then((data) => {
       if (data.success === 1) {
-        toast.success(`${data.message} 👌🏻`, {
+        toast.success(`Add to Cart 👌🏻`, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
