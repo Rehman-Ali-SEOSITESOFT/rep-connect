@@ -5,7 +5,6 @@ import axios from "axios";
 import Link from "next/link";
 const CategoryItem = ({ item }) => {
   const [loading, setLoading] = useState(true);
-  console.log(item);
   const [id, setId] = useState("");
   useEffect(() => {
     setLoading(true);
@@ -18,7 +17,6 @@ const CategoryItem = ({ item }) => {
       .catch((err) => console.log(err));
   }, []);
   let name = item.slug.split(" ").join("-").toLowerCase();
-  console.log(id, "<================");
   return (
     <>
       <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">

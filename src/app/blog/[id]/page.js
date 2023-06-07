@@ -24,7 +24,7 @@ import Spinner from "@/components/spinner/Spinner";
 const page = ({ params }) => {
   let { id } = params;
   const withoutdash = id.split("-").join(" ");
-  console.log(id, "idd");
+
   const [formData, setFormData] = useState({
     commentDetail: "",
   });
@@ -103,29 +103,26 @@ const page = ({ params }) => {
   };
   const _handleCheckBox = (e) => {
     setCheckBox(!checkBox);
-    // console.log(checkBox)
   };
 
   const [singlePostData, setSinglePostData] = useState([]);
   const _handleBlogDetails = (e) => {
     e.preventDefault();
-
-    // console.log(formData.checkBox)
-    // console.log("image", image);
-    // console.log(checkBox, "check box value is here");
   };
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/post/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
       .then((resp) => {
-        setSinglePostData(resp.data.data.post);
+        setSinglePostData(resp.data.data.post[0]);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   }, []);
-  console.log(singlePostData);
   return (
     <>
       <BreadCrum
@@ -136,7 +133,7 @@ const page = ({ params }) => {
             link: "/",
           },
           {
-            page: "Categoryname",
+            page: "blog",
             link: "/",
           },
           {
