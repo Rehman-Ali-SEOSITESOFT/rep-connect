@@ -17,25 +17,13 @@
   height: 250px;
   display: block;
 }
+
 .product_gr__items .product--gr--link img {
   transition: all 0.3s ease-in-out;
-  /* position: relative;
-  top: 0;
-
-  width: auto;
-  padding: 10px;
-  object-fit: cover;
-  object-position: center;
-  overflow: hidden;
-  padding-bottom: 10px;
-  height: 100%;
-  margin: auto;
-  text-align: center;
-  display: block; */
 }
 .product_gr__items:hover .product--gr--link img {
-  /* top: -15px;
-  transition: all 0.3s ease-in-out; */
+  margin-top: -15px;
+  transition: all 0.3s ease-in-out;
 }
 
 .product_gr__items .product_overlay_mask::after {
