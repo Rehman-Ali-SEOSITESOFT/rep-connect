@@ -247,18 +247,7 @@ const Home = () => {
                           />
                         );
                       })}
-                      {/* <HomePageInsiderBtn
-                    title="Customer Survey"
-                    link="https://airtable.com/shrQBdi4M4bj5Ch2U "
-                  />
-                  <HomePageInsiderBtn
-                    title="Physician Consulting Agreement"
-                    link="https://airtable.com/shr35R1fL083YmR54"
-                  />
-                  <HomePageInsiderBtn
-                    title="Conference Leads Follow-Up"
-                    link="https://microgendx.quickbase.com/db/bp26g4yrf?a=nwr"
-                  /> */}
+                 
                     </div>
                     <div className={styles.media_video}>
                       <h3>

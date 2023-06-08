@@ -6,7 +6,7 @@ const HomePagePosts = ({ item, index }) => {
   return (
     <>
       <div className="post_wrapper_inner">
-        <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
+        <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column align-items-center">
           <div className="image-side ">
             <Link href={`/blog/${item.slug}`} className="img-side-link">
               <Image

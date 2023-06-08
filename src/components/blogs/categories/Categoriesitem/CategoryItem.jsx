@@ -23,7 +23,7 @@ const CategoryItem = ({ item }) => {
     <>
       <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
         <div className="image-side w-25">
-          <a className="img-side-link">
+          <a className="img-side-link" href={`/blog/${id}`}>
             <Image
               src={item.featured_image.image_url}
               alt="img1"
