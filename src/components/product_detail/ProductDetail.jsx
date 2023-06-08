@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { cartItem } from "@/redux/slices/cartItem";
 import Loading from "../cart/CartItems/Loading/Loading";
 import ImageGallary from "./images/ImageGallary";
+import Link from "next/link";
 
 const ProductDetail = (props) => {
   const item = props.item;
@@ -69,6 +70,8 @@ const ProductDetail = (props) => {
     <>
       {item.loading ? (
         <Loading />
+      ) : item.data.length < 1 ? (
+        <h2>Worng product id </h2>
       ) : (
         <section>
           <div className="ProductDetail">
@@ -345,15 +348,15 @@ const ProductDetail = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="col-12">
+                {/* <div className="col-12">
                   <div className="related-product-single-page">
                     <h3 className="title">Related products</h3>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
-          <div className="container-xxl">
+          {/* <div className="container-xxl">
             <div className="row pt-4">
               {productList.map((item, index) => {
                 return (
@@ -362,9 +365,8 @@ const ProductDetail = (props) => {
                     key={index}
                   >
                     <div className="product_gr__items">
-                      <a
-                        target="_blank"
-                        href={`/product-detail/demo`}
+                      <Link
+                        href={`/product-detail/fortest-purpose`}
                         className="product--gr--link"
                       >
                         <Image
@@ -378,7 +380,7 @@ const ProductDetail = (props) => {
                             <div className="loading"></div>
                           </div>
                         )}
-                      </a>
+                      </Link>
                       <div className="product_links">
                         {loadging ? (
                           <span>
@@ -403,7 +405,7 @@ const ProductDetail = (props) => {
                 );
               })}
             </div>
-          </div>
+          </div> */}
         </section>
       )}
     </>
