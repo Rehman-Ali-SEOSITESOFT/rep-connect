@@ -11,7 +11,7 @@ const page = () => {
   useEffect(() => {
     setTimeout(() => {
       router.push("/");
-    }, 1500);
+    }, 3500);
   }, []);
   return (
     <>
