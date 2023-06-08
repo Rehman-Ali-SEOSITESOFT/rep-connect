@@ -13,7 +13,6 @@ const page = ({ params }) => {
   const { id } = params;
   const [loading, setLoading] = useState(true);
   // const withoutdash = id.split("-").join(" ");
-  console.log(id, "<======");
   const [blog, setBlogs] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -31,14 +30,14 @@ const page = ({ params }) => {
   return (
     <>
       <BreadCrum
-        breadHeading={"tags"}
+        breadHeading={id}
         pagess={[
           {
             page: "Home",
             link: "/",
           },
           {
-            page: "tags",
+            page: id,
             link: "/",
           },
         ]}

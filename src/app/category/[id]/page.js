@@ -17,7 +17,6 @@ const page = ({ params }) => {
   const [loading, setLoading] = useState(true);
   const { id } = params;
   // const withoutdash = id.split("-").join(" ");
-
   const [blog, setBlogs] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -31,19 +30,22 @@ const page = ({ params }) => {
         setBlogs(resp.data.data);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
   return (
     <>
       <BreadCrum
-        breadHeading={"anncouncement"}
+        breadHeading={id}
         pagess={[
           {
             page: "Home",
             link: "/",
           },
           {
-            page: "anncouncement",
+            page: id,
             link: "/",
           },
         ]}

@@ -28,8 +28,7 @@ const AuthorsItem = ({ item }) => {
                 src={item.featured_image.image_url}
                 alt="img1"
                 className="img-fluid"
-                width="100"
-                height="100"
+                fill
               />
               <div className="img-side-overlay"></div>
             </a>

@@ -4,11 +4,13 @@ import "./blogfilter.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import axios from "axios";
+import CategoryItem from "../categories/Categoriesitem/CategoryItem";
 const BlogFilters = () => {
   const [dynamicName, setDynamicName] = useState([]);
   const [dynamicTags, setDynamicTags] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [all, setAll] = useState([]);
 
   useEffect(() => {
     //////////category get api
@@ -31,6 +33,7 @@ const BlogFilters = () => {
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
 
     //////////filter get api
@@ -39,8 +42,14 @@ const BlogFilters = () => {
       .post(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
         name: "all",
       })
-      .then((resp) => console.log(resp.data.data))
-      .catch((err) => console.log(err));
+      .then((resp) => {
+        setAll(resp.data.data);
+        console.log(resp.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
 
     //////////author get api
 
@@ -167,6 +176,7 @@ const BlogFilters = () => {
       }),
     },
   ]);
+  console.log(pathname, "<===========");
 
   return (
     <section className="custom-filters-tab">
@@ -272,6 +282,15 @@ const BlogFilters = () => {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            {pathname === "/category"
+              ? all.map((e, idx) => {
+                  return <CategoryItem key={idx} item={e} />;
+                })
+              : null}
           </div>
         </div>
       </div>

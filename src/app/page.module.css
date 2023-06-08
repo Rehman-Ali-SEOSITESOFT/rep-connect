@@ -132,14 +132,31 @@
   cursor: pointer;
   width: 100%;
   text-align: center;
+  position: relative;
 }
 .question_section a span {
   margin-right: 10px;
 }
+.question_section a:hover:after {
+  width: 100%;
+}
+.question_section a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  transition: width 0.2s ease-in-out;
+}
 .announcement_list ul {
   padding-left: 0px;
 }
-
+.question_section a:hover {
+  color: white;
+}
 @media screen and (max-width: 768px) {
   .social_media_icon {
     text-align: center;

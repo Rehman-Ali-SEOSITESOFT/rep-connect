@@ -20,7 +20,22 @@
   font-weight: 700;
   text-align: center;
   border: none;
+  position: relative;
 }
 .surver_btn:hover {
   color: #ffffff;
+}
+.surver_btn:hover:after {
+  width: 100%;
+}
+.surver_btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  transition: width 0.2s ease-in-out;
 }

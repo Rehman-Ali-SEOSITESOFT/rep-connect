@@ -24,7 +24,6 @@ import Spinner from "@/components/spinner/Spinner";
 const page = ({ params }) => {
   let { id } = params;
   const withoutdash = id.split("-").join(" ");
-
   const [formData, setFormData] = useState({
     commentDetail: "",
   });
@@ -113,9 +112,9 @@ const page = ({ params }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/post`)
+      .get(`${process.env.NEXT_PUBLIC_URL}api/post/${id}`)
       .then((resp) => {
-        setSinglePostData(resp.data.data.post[0]);
+        setSinglePostData(resp.data.data.post);
         setLoading(false);
       })
       .catch((err) => {
@@ -133,8 +132,8 @@ const page = ({ params }) => {
             link: "/",
           },
           {
-            page: "blog",
-            link: "/",
+            page: singlePostData.category?.name,
+            link: "/category",
           },
           {
             page: withoutdash,
@@ -156,8 +155,7 @@ const page = ({ params }) => {
                       src={singlePostData.featured_image?.image_url}
                       alt="image"
                       className="img-fluid"
-                      width="100"
-                      height="100"
+                      fill
                     />
                   </div>
                 </div>

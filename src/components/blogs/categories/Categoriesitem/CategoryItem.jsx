@@ -17,6 +17,8 @@ const CategoryItem = ({ item }) => {
       .catch((err) => console.log(err));
   }, []);
   let name = item.slug.split(" ").join("-").toLowerCase();
+
+  console.log(item);
   return (
     <>
       <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
@@ -26,8 +28,7 @@ const CategoryItem = ({ item }) => {
               src={item.featured_image.image_url}
               alt="img1"
               className="img-fluid"
-              width="100"
-              height="100"
+              fill
             />
             <div className="img-side-overlay"></div>
           </a>

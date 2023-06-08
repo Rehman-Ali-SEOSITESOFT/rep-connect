@@ -3,20 +3,62 @@ import Image from "next/image";
 import "./HomePagePosts.css";
 import Link from "next/link";
 const HomePagePosts = ({ item, index }) => {
-  console.log(item, "items for home page");
   return (
     <>
-      <div className="post_wrapper">
+      <div className="post_wrapper_inner">
+        <div className="item-category-blog d-flex overflow-hidden flex-lg-row flex-md-row flex-sm-row flex-column">
+          <div className="image-side ">
+            <Link href={`/blog/${item.slug}`} className="img-side-link">
+              <Image
+                src={item.featured_image?.image_url}
+                alt="img1"
+                className="img-fluid"
+                fill
+              />
+              <div className="img-side-overlay"></div>
+            </Link>
+            <div className="img-side-linkss ">
+              <span className="d-inline-block w-50">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </span>
+              <a href={`/blog/${item.slug}`} className="d-inline-block w-50">
+                <i className="fa-solid fa-link"></i>
+              </a>
+            </div>
+          </div>
+          <div className="content-side">
+            <a href={`/blog/${item.slug}`} className="title-content">
+              {item.title}
+            </a>
+            <p>{item.description}</p>
+            <div className="post-footer">
+              <div className="post-links">
+                <span>
+                  <i className="fa-regular fa-comment" />
+                  <a href={`/blog/${item.slug}/#likes`}>0</a>
+                </span>
+                <span>
+                  <i className="fa-regular fa-file-lines" />
+                  <a href={`/blog/${item.slug}/#comments`}>read more</a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="post_wrapper">
         <div className="post_wrapper_inner">
           <div className="image_wrapper">
             <div className="overlay"></div>
-            <Link href={{ pathname: `/${item.link}` }}>
+            <Link
+              href={{ pathname: `/blog/${item.slug}` }}
+              className="setImage_zindex"
+            >
               <Image
                 src={item.featured_image?.image_url}
                 alt="post image"
                 className="img-fluid "
-                width={100}
-                height={100}
+                fill
               />
             </Link>
             <div className="image_links double">
@@ -51,7 +93,7 @@ const HomePagePosts = ({ item, index }) => {
             <Link href={{ pathname: `/blog/${item.slug}` }}>Read More</Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
