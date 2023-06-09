@@ -46,6 +46,22 @@ html {
   padding: 80px 0;
 }
 
+/*  admin-content */
+
+.admin-sidebar {
+  width: 100%;
+  max-width: 250px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid yellow;
+}
+.admin-content {
+  max-width: calc(100% - 250px);
+  width: 100%;
+  float: right;
+}
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
