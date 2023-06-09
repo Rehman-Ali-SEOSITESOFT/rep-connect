@@ -22,8 +22,6 @@ import Admin_sidebar from "@/layout/admin/sidebar/Admin_sidebar";
 export default function RootLayout({ children }) {
   const path = usePathname();
 
-  console.log(path.split("/")[1]);
-
   return (
     <Provider store={store}>
       <html lang="en">
