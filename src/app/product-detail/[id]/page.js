@@ -17,21 +17,27 @@ const page = ({ params }) => {
     dispatch(product_api(id));
   }, []);
 
+  console.log(state);
+
   return (
     <>
-      <BreadCrum
-        breadHeading="Shop"
-        pagess={[
-          { page: "Home", link: "/" },
-          {
-            page: state.loading ? null : state.data.category.name,
-            link: state.loading
-              ? null
-              : `/product-category/${state.data.category.slug}`,
-          },
-          { page: state.loading ? null : state.data.name, link: "/" },
-        ]}
-      />
+      {state.data.length > 1 ? (
+        <BreadCrum
+          breadHeading="Shop"
+          pagess={[
+            { page: "Home", link: "/" },
+            {
+              page: state.loading ? null : state.data?.category.name,
+              link: state.loading
+                ? null
+                : `/product-category/${state.data?.category.slug}`,
+            },
+            { page: state.loading ? null : state.data?.name, link: "/" },
+          ]}
+        />
+      ) : (
+        <BreadCrum breadHeading="Shop" pagess={[{ page: "Home", link: "/" }]} />
+      )}
 
       <section className={style.product_deail_page}>
         <div className="container-xxl">
