@@ -65,10 +65,9 @@ html {
   max-width: 300px;
   position: fixed;
   inset: 0;
-  background-color: #1d2327;
+  background-color: #111c43;
   overflow-x: hidden;
   z-index: 10;
-  padding: 2rem;
 }
 .admin-content {
   max-width: calc(100% - 300px);
