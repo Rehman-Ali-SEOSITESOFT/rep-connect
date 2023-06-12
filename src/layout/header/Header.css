@@ -1,4 +1,4 @@
-header {
+.clinet-header {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   /* padding: 15px; */
 
@@ -127,13 +127,13 @@ header .header--logo img {
   color: white;
 }
 
-ul > li > a {
+/* ul > li > a {
   text-decoration: none;
   color: black;
-}
+} */
 
 @media screen and (max-width: 1240px) {
-  header {
+  .clinet-header {
     display: block;
   }
 }

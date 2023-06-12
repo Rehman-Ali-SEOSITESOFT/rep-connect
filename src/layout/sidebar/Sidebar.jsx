@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./sidebar.css";
 import mircogendx from "../../assets/images/logo/MicroGenDX-2020-logo.svg";
 import myacount from "../../assets/images/side-bar-my-account-img.png";
@@ -17,7 +17,30 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const updating = useSelector((state) => state.updatingCart);
-  const state = useSelector((state) => state.cartItem);
+
+  useEffect(() => {
+    dispatch(product());
+    dispatch(cartItem());
+  }, []);
+
+  useMemo(() => {
+    dispatch(cartItem());
+  }, [updating.updating]);
+
+  const state = useSelector((state) => state.cartItem.data);
+  // const state = useSelector((state) => state.cartItem);
+  const qty = state.reduce((t, c, i, ar) => t + c.quantity, 0);
+  // TOTAL PRICE
+  const totalprice = state.reduce((total, curValue, i, arr) => {
+    return (total += curValue.sub_total);
+  }, 0);
+
+  const TotalPrice = () => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(totalprice);
+  };
 
   const handleDropDown = (event) => {
     event.preventDefault();
@@ -29,28 +52,11 @@ const Sidebar = () => {
     localStorage.removeItem("token");
     router.push("/login");
   };
-  const qty = state?.data.reduce((t, c, i, ar) => t + c.quantity, 0);
 
-  // TOTAL PRICE
-  const totalprice = state?.data.reduce((total, curValue, i, arr) => {
-    return (total += curValue.sub_total);
-  }, 0);
-  const TotalPrice = () => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(totalprice);
-  };
-  useEffect(() => {
-    dispatch(product());
-    dispatch(cartItem());
-  }, []);
-
-  useMemo(() => {
-    console.log("he");
-    dispatch(cartItem());
-  }, [updating.updating]);
+  // useMemo(() => {}, [updating.updating]);
   // TOTAL QTY CHECK
+
+  // console.log(state);
 
   return (
     <>
@@ -229,7 +235,7 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/product-category/branded-merchandise/">
+              <Link href="/product-category/branded-merchandise-364989543/">
                 <span>Order Branded Merchandise</span>
               </Link>
             </li>

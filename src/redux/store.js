@@ -7,6 +7,7 @@ import single_product_slice from "./slices/singleProduct";
 import cartItemSlice from "./slices/cartItem";
 import productCateWisSlice from "./slices/productCategoryWise";
 import updatingSlice from "./slices/updateCart";
+import catItemSlice from "./slices/categoryFilter";
 export const store = configureStore({
   reducer: {
     menuReducer: menuReducer,
@@ -17,5 +18,6 @@ export const store = configureStore({
     cartItem: cartItemSlice,
     categoryWisePro: productCateWisSlice,
     updatingCart: updatingSlice,
+    categoryFilter: catItemSlice,
   },
 });

@@ -20,10 +20,10 @@ import comment3 from "../../../assets/images/singleproductsimages/comment3.png";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import withAuth from "@/utils/auth";
 import axios from "axios";
+import Spinner from "@/components/spinner/Spinner";
 const page = ({ params }) => {
   let { id } = params;
   const withoutdash = id.split("-").join(" ");
-  console.log(id, "idd");
   const [formData, setFormData] = useState({
     commentDetail: "",
   });
@@ -31,7 +31,7 @@ const page = ({ params }) => {
   const [checkBox, setCheckBox] = useState(false);
   const [image, setImage] = useState([]);
   const [isLiked, setIsLiked] = useState(true);
-
+  const [loading, setLoading] = useState(true);
   const [likes, setLikes] = useState([
     {
       img: like1,
@@ -102,25 +102,26 @@ const page = ({ params }) => {
   };
   const _handleCheckBox = (e) => {
     setCheckBox(!checkBox);
-    // console.log(checkBox)
   };
 
   const [singlePostData, setSinglePostData] = useState([]);
   const _handleBlogDetails = (e) => {
     e.preventDefault();
-
-    // console.log(formData.checkBox)
-    // console.log("image", image);
-    // console.log(checkBox, "check box value is here");
   };
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/post/${id}`)
-      .then((resp) => setSinglePostData(resp.data.data.post))
-      .catch((err) => console.log(err));
+      .then((resp) => {
+        setSinglePostData(resp.data.data.post);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   }, []);
-  console.log(singlePostData);
   return (
     <>
       <BreadCrum
@@ -131,8 +132,8 @@ const page = ({ params }) => {
             link: "/",
           },
           {
-            page: "Categoryname",
-            link: "/",
+            page: singlePostData.category?.name,
+            link: "/category",
           },
           {
             page: withoutdash,
@@ -140,165 +141,172 @@ const page = ({ params }) => {
           },
         ]}
       />
-      <section className={styless.main_blog_wrappper}>
-        <div className="container-xxl">
-          <div className="row justify-content-center">
-            <div className="col-lg-8">
-              <div className={styless.image_wrapper}>
-                <Image
-                  src={singlePostData.category?.cover_image.image_url}
-                  alt="image"
-                  className="img-fluid"
-                  width="100"
-                  height="100"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className={styless.second_row_blog}>
-                <p> {id}</p>
-                <p>{singlePostData.description}</p>
-                <p>
-                  Candida auris is a great opportunity for us. When speaking
-                  with potential organizations about our screening test please
-                  make use of this{" "}
-                  <span>
-                    <a href="#">sales piece.</a>
-                  </span>{" "}
-                </p>
-                <a
-                  href="https://www.newswire.com/news/microgendx-provides-rapid-screening-for-candida-auris-to-help-avoid-21736993?_ga=2.20744701.498954283.1654877679-1169054282.1654010273"
-                  target="_blank"
-                >
-                  We also have a press release.
-                </a>
-                <p>
-                  As a reminder we can pick up C. auris in NGS but if your
-                  accounts want fast C. auris testing, or an option for
-                  pre-screening, we can do C. auris as a PCR panel for $50.
-                </p>
-                <p>Thanks</p>
-                <p>James Compagno</p>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className={styless.like_section}>
-                {/* <button className={styless.likebtn}> </button> */}
-                <button
-                  className={`${
-                    isLiked ? `${styless.likebtn}` : `${styless.isNotLiked}`
-                  }`}
-                  onClick={_handleUnLiked}
-                >
-                  {" "}
-                </button>
-                <span className={styless.likes_number}>
-                  +{singlePostData.post_liked?.length}
-                </span>
-              </div>
-              <div className={styless.liked_by_people}>
-                {likes.map((e, idx) => {
-                  return (
-                    <div key={idx}>
-                      <LikedBypeople img={e.img} />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className={styless.comment_section}>
-                <h3>3 Comments</h3>
-                {comments.map((e, idx) => {
-                  return (
-                    <div key={idx}>
-                      <BlogComments
-                        id={idx}
-                        idx={idx}
-                        userIcon={e.userIcon}
-                        usertitle={e.usertitle}
-                        dates={e.dates}
-                        para={e.para}
-                        isLiked
-                        inddex={idx}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className={styless.leave_replay_section}>
-                <h3>Leave a Reply</h3>
-                <p>
-                  Logged in as grtesting. <a href="#">Edit your profile.</a>{" "}
-                  &nbsp;
-                  <a href="#">Logout?</a> Required fields are marked *{" "}
-                </p>
-                <div className={styless.uploadImage_section}>
-                  <p>
-                    Upload attachment
-                    <span>
-                      (Allowed file types: <strong> jpg, gif, png,</strong>
-                      maximum file size:<strong> 60MB</strong>)
-                    </span>
-                    .
-                  </p>
-                  <p>
-                    {" "}
-                    <input
-                      type="file"
-                      name="files"
-                      onChange={handleFileSelect}
+
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <section className={styless.main_blog_wrappper}>
+            <div className="container-xxl">
+              <div className="row justify-content-center">
+                <div className="col-lg-8">
+                  <div className={styless.image_wrapper}>
+                    <Image
+                      src={singlePostData.featured_image?.image_url}
+                      alt="image"
+                      className="img-fluid"
+                      fill
                     />
-                  </p>
+                  </div>
                 </div>
-                <div className={styless.commentArea}>
-                  <label className={styless.label_input}>Comment *</label>
-                  <form onSubmit={_handleBlogDetails}>
-                    <textarea
-                      name="commentDetail"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="center"
-                      title="Please fill out this field"
-                      className="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="6"
-                      value={formData.commentDetail}
-                      onChange={(e) => handleInput(e)}
-                    ></textarea>
+              </div>
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className={styless.second_row_blog}>
+                    <p> {id}</p>
+                    <p>{singlePostData.description}</p>
                     <p>
-                      <label>
-                        <input
-                          type="checkbox"
-                          value={checkBox}
-                          onChange={(e) => _handleCheckBox(e)}
-                        />
-                        Notify me of followup comments via e-mail. You can also{" "}
-                        <a href="#">subscribe</a> &nbsp; without commenting
-                      </label>
+                      Candida auris is a great opportunity for us. When speaking
+                      with potential organizations about our screening test
+                      please make use of this{" "}
+                      <span>
+                        <a href="#">sales piece.</a>
+                      </span>{" "}
                     </p>
-                    <input
-                      type="submit"
-                      name="Post Comment"
-                      value="Post Comment"
-                      className={styless.button_submit}
-                    />
-                  </form>
+                    <a
+                      href="https://www.newswire.com/news/microgendx-provides-rapid-screening-for-candida-auris-to-help-avoid-21736993?_ga=2.20744701.498954283.1654877679-1169054282.1654010273"
+                      target="_blank"
+                    >
+                      We also have a press release.
+                    </a>
+                    <p>
+                      As a reminder we can pick up C. auris in NGS but if your
+                      accounts want fast C. auris testing, or an option for
+                      pre-screening, we can do C. auris as a PCR panel for $50.
+                    </p>
+                    <p>Thanks</p>
+                    <p>James Compagno</p>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className={styless.like_section}>
+                    {/* <button className={styless.likebtn}> </button> */}
+                    <button
+                      className={`${
+                        isLiked ? `${styless.likebtn}` : `${styless.isNotLiked}`
+                      }`}
+                      onClick={_handleUnLiked}
+                    >
+                      {" "}
+                    </button>
+                    <span className={styless.likes_number}>
+                      +{singlePostData.post_liked?.length}
+                    </span>
+                  </div>
+                  <div className={styless.liked_by_people}>
+                    {likes.map((e, idx) => {
+                      return (
+                        <div key={idx}>
+                          <LikedBypeople img={e.img} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className={styless.comment_section}>
+                    <h3>3 Comments</h3>
+                    {comments.map((e, idx) => {
+                      return (
+                        <div key={idx}>
+                          <BlogComments
+                            id={idx}
+                            idx={idx}
+                            userIcon={e.userIcon}
+                            usertitle={e.usertitle}
+                            dates={e.dates}
+                            para={e.para}
+                            isLiked
+                            inddex={idx}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className={styless.leave_replay_section}>
+                    <h3>Leave a Reply</h3>
+                    <p>
+                      Logged in as grtesting. <a href="#">Edit your profile.</a>{" "}
+                      &nbsp;
+                      <a href="#">Logout?</a> Required fields are marked *{" "}
+                    </p>
+                    <div className={styless.uploadImage_section}>
+                      <p>
+                        Upload attachment
+                        <span>
+                          (Allowed file types: <strong> jpg, gif, png,</strong>
+                          maximum file size:<strong> 60MB</strong>)
+                        </span>
+                        .
+                      </p>
+                      <p>
+                        {" "}
+                        <input
+                          type="file"
+                          name="files"
+                          onChange={handleFileSelect}
+                        />
+                      </p>
+                    </div>
+                    <div className={styless.commentArea}>
+                      <label className={styless.label_input}>Comment *</label>
+                      <form onSubmit={_handleBlogDetails}>
+                        <textarea
+                          name="commentDetail"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="center"
+                          title="Please fill out this field"
+                          className="form-control"
+                          id="exampleFormControlTextarea1"
+                          rows="6"
+                          value={formData.commentDetail}
+                          onChange={(e) => handleInput(e)}
+                        ></textarea>
+                        <p>
+                          <label>
+                            <input
+                              type="checkbox"
+                              value={checkBox}
+                              onChange={(e) => _handleCheckBox(e)}
+                            />
+                            Notify me of followup comments via e-mail. You can
+                            also <a href="#">subscribe</a> &nbsp; without
+                            commenting
+                          </label>
+                        </p>
+                        <input
+                          type="submit"
+                          name="Post Comment"
+                          value="Post Comment"
+                          className={styless.button_submit}
+                        />
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
     </>
   );
 };

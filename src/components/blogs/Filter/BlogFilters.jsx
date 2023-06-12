@@ -4,20 +4,28 @@ import "./blogfilter.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import axios from "axios";
+import CategoryItem from "../categories/Categoriesitem/CategoryItem";
 const BlogFilters = () => {
   const [dynamicName, setDynamicName] = useState([]);
   const [dynamicTags, setDynamicTags] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [all, setAll] = useState([]);
+
   useEffect(() => {
+    //////////category get api
+    setLoading(true);
+
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/post-category/`)
       .then((resp) => {
         setDynamicName(resp.data.data.category);
-        // console.log(resp.data.data.category);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, []);
-  useEffect(() => {
+
+    //////////tag get api
+
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/tag`)
       .then((resp) => {
@@ -25,9 +33,26 @@ const BlogFilters = () => {
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
-  }, []);
-  useEffect(() => {
+
+    //////////filter get api
+
+    axios
+      .post(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
+        name: "all",
+      })
+      .then((resp) => {
+        setAll(resp.data.data);
+        console.log(resp.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+
+    //////////author get api
+
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}api/author`)
       .then((resp) => {
@@ -37,14 +62,7 @@ const BlogFilters = () => {
         console.log(err);
       });
   }, []);
-  useEffect(() => {
-    axios
-      .post(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
-        name: "all",
-      })
-      .then((resp) => console.log(resp.data.data))
-      .catch((err) => console.log(err));
-  }, []);
+
   const [tabs, setTab] = useState(0);
   const pathname = usePathname();
   const activePath = pathname.split("/");
@@ -158,6 +176,7 @@ const BlogFilters = () => {
       }),
     },
   ]);
+  console.log(pathname, "<===========");
 
   return (
     <section className="custom-filters-tab">
@@ -199,7 +218,7 @@ const BlogFilters = () => {
                     {dynamicName?.map((item, index) => (
                       <li
                         key={index}
-                        className={item.name === activePath[2] ? "active" : ""}
+                        className={item.slug === activePath[2] ? "active" : ""}
                       >
                         <Link
                           href={`/category/${item.slug
@@ -218,7 +237,7 @@ const BlogFilters = () => {
                       return (
                         <li
                           key={idx}
-                          className={e.name === activePath[2] ? "active" : null}
+                          className={e.slug === activePath[2] ? "active" : null}
                         >
                           <Link
                             href={`/tag/${e.slug
@@ -238,8 +257,9 @@ const BlogFilters = () => {
                       return (
                         <li
                           key={idx}
-                          className={e.name === activePath[2] ? "active" : null}
+                          className={e.slug === activePath[2] ? "active" : null}
                         >
+                          {/* <Link href={`/author/${e.slug}`}>{e.name}</Link> */}
                           <Link
                             href={`/author/${e.slug
                               .toLowerCase()
@@ -262,6 +282,15 @@ const BlogFilters = () => {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            {pathname === "/category"
+              ? all.map((e, idx) => {
+                  return <CategoryItem key={idx} item={e} />;
+                })
+              : null}
           </div>
         </div>
       </div>

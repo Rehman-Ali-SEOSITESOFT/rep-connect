@@ -1,0 +1,61 @@
+.admin-sidebar .menu-list ul,
+.admin-sidebar .menu-list ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar .menu-list {
+  padding-top: 8px;
+}
+.admin-sidebar .logoo {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.813rem 1.25rem;
+}
+.admin-sidebar .logoo img {
+  max-height: 50px;
+}
+
+.admin-sidebar ul li {
+  padding: 0 0.75rem;
+}
+
+/* .admin-sidebar ul li .more-list li {
+  padding: 0 0;
+} */
+.admin-sidebar li.short-head {
+  color: #a3aed1;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.065rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.5;
+  position: relative;
+  padding: 0.75rem 1.65rem;
+}
+
+.admin-sidebar li span.title-name,
+.admin-sidebar li a {
+  padding: 0.75rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.78rem;
+  color: #a3aed1;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.admin-sidebar li a.active,
+.admin-sidebar li a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.menu-list .span.d-icon {
+  margin-right: 10px;
+  font-size: 17px;
+}

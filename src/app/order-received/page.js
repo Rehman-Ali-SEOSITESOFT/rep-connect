@@ -2,10 +2,17 @@
 
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import BreadCrumCart from "@/components/cart/CartBreakCrum/BreadCrumCart";
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./style.module.css";
 import withAuth from "@/utils/auth";
+import { useRouter } from "next/navigation";
 const page = () => {
+  const router = useRouter();
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/");
+    }, 3500);
+  }, []);
   return (
     <>
       <BreadCrum

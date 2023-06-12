@@ -42,8 +42,9 @@
 }
 .image-side .img-side-link img {
   height: 100%;
-  object-fit: cover;
+  object-fit: initial;
   transition: all 0.3s ease-in-out;
+  width: fit-content !important;
 }
 .image-side:hover .img-side-link img {
   transition: all 0.3s ease-in-out;

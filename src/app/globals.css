@@ -46,6 +46,34 @@ html {
   padding: 80px 0;
 }
 
+/*  admin-content */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.admin-sidebar {
+  max-width: 300px;
+  position: fixed;
+  inset: 0;
+  background-color: #111c43;
+  overflow-x: hidden;
+  z-index: 10;
+}
+.admin-content {
+  max-width: calc(100% - 300px);
+  width: 100%;
+  float: right;
+}
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
