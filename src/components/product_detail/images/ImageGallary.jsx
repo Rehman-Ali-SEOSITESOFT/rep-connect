@@ -10,9 +10,6 @@ const ImageGallary = ({ item }) => {
   const [coverImage, setCoverImage] = useState(item.gallary[0].image_url);
   const [index, setIndex] = useState(0);
 
-  const handleChangedImage = (path) => {
-    console.log(path);
-  };
   return (
     <figure className="deail--product">
       <div className="deail--product--image">

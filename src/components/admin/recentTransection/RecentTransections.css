@@ -1,0 +1,33 @@
+.transectionCardWrapper .card-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 16px;
+  color: #333335;
+  margin-bottom: 0px;
+}
+.transectionCardWrapper .trasns_heading {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333335;
+  line-height: 20px;
+}
+.transectionCardWrapper .main__links {
+  text-decoration: none;
+}
+.transectionCardWrapper .mini_texyted,
+.transectionCardWrapper .date {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  color: #8c9097;
+  font-weight: 400;
+}
+.transectionCardWrapper .amount {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: #e6533c;
+  font-weight: 400;
+}

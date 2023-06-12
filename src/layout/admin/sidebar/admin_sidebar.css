@@ -1,0 +1,7 @@
+.admin-sidebar .menu-list ul,
+.admin-sidebar .menu-list ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: white;
+}

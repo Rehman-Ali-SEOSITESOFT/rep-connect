@@ -17,11 +17,11 @@ const page = ({ params }) => {
     dispatch(product_api(id));
   }, []);
 
-  console.log(state);
-
   return (
     <>
-      {state.data.length > 1 ? (
+      {state.data.length < 1 ? (
+        <BreadCrum breadHeading="Shop" pagess={[{ page: "Home", link: "/" }]} />
+      ) : (
         <BreadCrum
           breadHeading="Shop"
           pagess={[
@@ -35,8 +35,6 @@ const page = ({ params }) => {
             { page: state.loading ? null : state.data?.name, link: "/" },
           ]}
         />
-      ) : (
-        <BreadCrum breadHeading="Shop" pagess={[{ page: "Home", link: "/" }]} />
       )}
 
       <section className={style.product_deail_page}>

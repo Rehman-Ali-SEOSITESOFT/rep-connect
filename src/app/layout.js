@@ -22,8 +22,6 @@ import Admin_sidebar from "@/layout/admin/sidebar/Admin_sidebar";
 export default function RootLayout({ children }) {
   const path = usePathname();
 
-  console.log(path.split("/")[1]);
-
   return (
     <Provider store={store}>
       <html lang="en">
@@ -46,6 +44,10 @@ export default function RootLayout({ children }) {
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossOrigin="anonymous"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          ></link>
 
           <title>MicroGenDX Rep Connect – Connect Through Communication</title>
 
