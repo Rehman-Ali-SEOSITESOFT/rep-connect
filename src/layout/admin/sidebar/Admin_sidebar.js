@@ -5,11 +5,15 @@ import "./admin_sidebar.css";
 const Admin_sidebar = () => {
   return (
     <aside className="admin-sidebar">
+      <div className="logoo"></div>
       <div className="menu-list">
         <ul>
           <li>
-            post
-            <ol>
+            <Link href="/admin">Dashboard</Link>
+          </li>
+          <li>
+            <span> post</span>
+            <ol className="more-list">
               <li>
                 <Link href="/admin/post/addnew"> Add New Post </Link>
               </li>
@@ -25,8 +29,8 @@ const Admin_sidebar = () => {
             </ol>
           </li>
           <li>
-            product
-            <ol>
+            <span> product</span>
+            <ol className="more-list">
               <li>
                 <Link href="/admin/product/addnew"> Add New product </Link>
               </li>

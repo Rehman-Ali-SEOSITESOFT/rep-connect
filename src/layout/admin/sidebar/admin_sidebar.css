@@ -5,3 +5,20 @@
   margin: 0;
   color: white;
 }
+.admin-sidebar .menu-list ol.more-list {
+  padding-left: 20px;
+}
+
+.admin-sidebar .menu-list a {
+  text-decoration: none;
+  display: block;
+  color: #8e8b8b;
+  padding: 5px 0 5px 10px;
+  background-color: #555555;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.admin-sidebar .menu-list a:hover {
+  color: #dddbdb;
+  background-color: #555555;
+}

@@ -56,10 +56,9 @@ export default function RootLayout({ children }) {
           <main className="microgen_dx">
             {path.split("/")[1] === "admin" ? (
               <>
-                <>
-                  {/* <Admin_Header /> */}
-                  <Admin_sidebar />
-                </>
+                {/* <Admin_Header /> */}
+                <Admin_sidebar />
+
                 <div className="admin-content">{children}</div>
               </>
             ) : (

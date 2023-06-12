@@ -127,10 +127,10 @@ header .header--logo img {
   color: white;
 }
 
-ul > li > a {
+/* ul > li > a {
   text-decoration: none;
   color: black;
-}
+} */
 
 @media screen and (max-width: 1240px) {
   .clinet-header {
