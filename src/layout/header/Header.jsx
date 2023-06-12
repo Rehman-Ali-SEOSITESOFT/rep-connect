@@ -22,7 +22,7 @@ const Header = () => {
     setCollapse01(!collapse01);
   }
   return (
-    <header>
+    <header className="clinet-header">
       {/* <nav className="navbar navbar-expand-lg bg-body-tertiary"> */}
       <div className="container-fluid">
         <div className="row align-items-center" style={{ padding: '15px' }}>

@@ -45,7 +45,6 @@ const BlogFilters = () => {
       })
       .then((resp) => {
         setAll(resp.data.data);
-        console.log(resp.data.data);
       })
       .catch((err) => {
         console.log(err);
