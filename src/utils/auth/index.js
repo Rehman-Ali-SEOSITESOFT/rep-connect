@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Loader from '../../assets/images/loader.gif';
 const withAuth = (Component) => {
   const Auth = (props) => {
     const router = useRouter();
