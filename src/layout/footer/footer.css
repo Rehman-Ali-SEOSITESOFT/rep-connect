@@ -1,8 +1,8 @@
-footer {
+.client-side-footer {
   background-color: #1790d0;
   padding: 30px 0;
 }
-footer .copyright p {
+.client-side-footer .copyright p {
   font-weight: 400;
   font-size: 16px;
   color: #333333;
@@ -10,7 +10,7 @@ footer .copyright p {
   margin-bottom: 0;
 }
 
-footer .down-arrow {
+.client-side-footer .down-arrow {
   background-color: #f7f7f7;
   color: #747474;
   border-radius: 5px;
@@ -20,7 +20,7 @@ footer .down-arrow {
   cursor: pointer;
   position: relative;
 }
-footer .down-arrow::after {
+.client-side-footer .down-arrow::after {
   content: "";
   position: absolute;
   left: 0;
@@ -31,20 +31,20 @@ footer .down-arrow::after {
   z-index: 1;
   transition: width 0.2s ease-in-out;
 }
-footer .down-arrow:hover:after {
+.client-side-footer .down-arrow:hover:after {
   width: 100%;
   transition: width 0.2s ease-in-out;
 }
 @media screen and (max-width: 1200px) {
-  footer {
+  .client-side-footer {
     padding: 20px 15px;
   }
-  footer .copyright p {
+  .client-side-footer .copyright p {
     font-size: 15px;
   }
 }
 @media screen and (max-width: 768px) {
-  footer .down-arrow {
+  .client-side-footer .down-arrow {
     padding: 5px 12px;
   }
 }

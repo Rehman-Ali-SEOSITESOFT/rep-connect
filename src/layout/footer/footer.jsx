@@ -2,7 +2,7 @@ import React from "react";
 import "./footer.css";
 const Footer = () => {
   return (
-    <footer>
+    <footer className="client-side-footer">
       <div className="container-xxl">
         <div className="row align-items-center">
           <div className="col-8">

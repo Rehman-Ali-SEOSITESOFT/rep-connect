@@ -62,3 +62,13 @@
   margin-right: 10px;
   font-size: 15px;
 }
+
+@media screen and (max-width: 768px) {
+  .admin-header {
+    padding: 0.8rem 10px 0.8rem 0;
+  }
+  .admin-left-side .head-icon {
+    font-size: 20px;
+    padding-left: 5px;
+  }
+}

@@ -73,3 +73,18 @@
 .menu-list li span.right-side-icon {
   font-size: 15px;
 }
+
+@media screen and (max-width: 1024px) {
+  .side-bar-overlay-admin.overlay-open {
+    position: fixed;
+    inset: 0;
+    transition: all 0.5s ease-in-out;
+    background-color: rgba(15, 23, 42, 0.5);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin-sidebar .logoo img {
+    max-height: 35px;
+  }
+}

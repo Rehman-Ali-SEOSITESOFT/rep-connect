@@ -94,6 +94,7 @@ html {
 }
 .admin-content .admin-children {
   padding: 1rem;
+  min-height: calc(100vh - 7.5rem);
 }
 @keyframes rotation {
   0% {
@@ -126,5 +127,17 @@ html {
   }
   .admin-content.side-bar {
     max-width: 100%;
+  }
+  .admin-sidebar.opend {
+    transform: translateX(-300px);
+  }
+  .admin-sidebar.closed {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin-sidebar {
+    width: 250px;
   }
 }

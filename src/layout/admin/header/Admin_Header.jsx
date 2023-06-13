@@ -17,7 +17,7 @@ const Admin_Header = () => {
     <header className="admin-header">
       <div className="container-fluid">
         <div className="row align-items-center">
-          <div className="col-md-4 admin-left-side">
+          <div className="col-md-4 col-4 admin-left-side">
             {opend ? (
               <span className="head-icon" onClick={hanldeOpendSidrbar}>
                 <i className="fa-solid fa-xmark"></i>
@@ -28,7 +28,7 @@ const Admin_Header = () => {
               </span>
             )}
           </div>
-          <div className="col-md-8 text-md-end admin-right-side">
+          <div className="col-md-8 col-8 text-md-end admin-right-side">
             <ul className="d-flex justify-content-end align-items-center">
               <li>
                 <h4 className="title">Ghulam Rasool</h4>
