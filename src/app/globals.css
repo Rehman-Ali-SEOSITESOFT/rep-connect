@@ -94,7 +94,7 @@ html {
 }
 .admin-content .admin-children {
   padding: 1rem;
-  min-height: calc(100vh - 7.5rem);
+  min-height: calc(100vh - 8rem);
 }
 @keyframes rotation {
   0% {
