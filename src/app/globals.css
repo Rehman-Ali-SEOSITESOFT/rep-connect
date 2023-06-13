@@ -48,24 +48,6 @@ html {
 
 /*  admin-content */
 
-.admin-sidebar {
-  /* width: 100%;
-  max-width: 300px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  border-right: 1px solid black;
-  overflow-y: scroll; */
-
-  max-width: 300px;
-  position: fixed;
-  inset: 0;
-  background-color: #1d2327;
-  overflow-x: hidden;
-  z-index: 10;
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -77,6 +59,15 @@ html {
 ::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+
+.admin-sidebar {
+  max-width: 300px;
+  position: fixed;
+  inset: 0;
+  background-color: #111c43;
+  overflow-x: hidden;
+  z-index: 10;
 }
 .admin-content {
   max-width: calc(100% - 300px);

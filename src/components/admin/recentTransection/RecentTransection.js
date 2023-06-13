@@ -4,8 +4,7 @@ const RecentTransection = (props) => {
   const { transectionCategoryTitle, miniTransTitle, amount, date } = props;
   return (
     <>
-     
-      <div className="card-body p-0">
+      <div className="card-body p-0 cards_bodyes">
         <div className="list-group">
           <a href="#" className="border-0 main__links">
             <div className="list-group-item border-0">

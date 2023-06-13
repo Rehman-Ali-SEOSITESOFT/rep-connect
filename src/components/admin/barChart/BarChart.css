@@ -1,14 +1,19 @@
 .card_Bar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  padding: 0.75rem 1.25rem;
+  padding: 12px 20px;
 }
 .card_Bar h5 {
-  font-family: "Source Sans Pro", sans-serif;
-  float: left;
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin: 0;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0px;
+  font-size: 15px;
+  line-height: 23px;
+  color: #333335;
+  font-weight: 700;
 }
 .p-chart {
-  padding: 20px 15px;
+  padding: 30px 15px;
+}
+
+.card {
+  border: none !important;
 }

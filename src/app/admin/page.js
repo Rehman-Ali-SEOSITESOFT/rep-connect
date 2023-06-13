@@ -5,6 +5,15 @@ import style from "./dashboard.module.css";
 import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
 import RecentTransection from "@/components/admin/recentTransection/RecentTransection";
 import BarChart from "@/components/admin/barChart/BarChart";
+import customer1 from "../../assets/images/admindashboard/customer1.jpg";
+import customer2 from "../../assets/images/admindashboard/customer2.jpg";
+import customer3 from "../../assets/images/admindashboard/customer3.jpg";
+import customer4 from "../../assets/images/admindashboard/customer4.jpg";
+import customer5 from "../../assets/images/admindashboard/customer5.jpg";
+import customer6 from "../../assets/images/admindashboard/customer6.jpg";
+import DashboardCustomer from "@/components/admin/dashBoardCustomer/DashboardCustomer";
+import DashBoardBilling from "@/components/admin/dashBoardBilling/DashBoardBilling";
+import SalesValue from "@/components/admin/salesValue/SalesValue";
 const Page = () => {
   const [transection, setTranestion] = useState([
     {
@@ -30,6 +39,56 @@ const Page = () => {
       miniTransTitle: "transfer",
       amount: "256.99",
       date: "May 18,2022",
+    },
+    {
+      transectionCategoryTitle: "Business",
+      miniTransTitle: "transfer",
+      amount: "256.99",
+      date: "May 18,2022",
+    },
+    {
+      transectionCategoryTitle: "Business",
+      miniTransTitle: "transfer",
+      amount: "256.99",
+      date: "May 18,2022",
+    },
+  ]);
+  const [customers, setCustomer] = useState([
+    {
+      icon: customer1,
+      customerName: "Samantha Melon",
+      username: "User ID:1234",
+      time: "11.43am",
+    },
+    {
+      icon: customer2,
+      customerName: "Alloe Grater",
+      username: "User ID:1234",
+      time: "12.35pm",
+    },
+    {
+      icon: customer3,
+      customerName: "Gabe Lackmen",
+      username: "User ID:1234",
+      time: "Yesterday",
+    },
+    {
+      icon: customer4,
+      customerName: "Manuel Laber",
+      username: "User ID:1234",
+      time: "24 Mar 2022",
+    },
+    {
+      icon: customer5,
+      customerName: "Hercules Bing",
+      username: "User ID:1234",
+      time: "18 Mar 2022",
+    },
+    {
+      icon: customer6,
+      customerName: "Manuel Labor",
+      username: "User ID:1234",
+      time: "15 Mar 2022",
     },
   ]);
   return (
@@ -283,10 +342,12 @@ const Page = () => {
 
         {/* second row starts here */}
         <div className="row">
-          <div class="col-lg-3 col-md-12">
-            <div className="transectionCardWrapper card custom-card recent-transactions-card overflow-hidden">
-              <div className="card-header justify-content-between">
-                <div className="card-title">Recent Transactions</div>
+          <div className="col-lg-6 col-md-12">
+            <div
+              className={`${style.transectionCardWrapper}  card custom-card recent-transactions-card overflow-hidden`}
+            >
+              <div className={`${style.card_header} justify-content-between`}>
+                <div className={style.card_title}>Recent Transactions</div>
               </div>
 
               {transection.map((e, idx) => {
@@ -303,26 +364,27 @@ const Page = () => {
               })}
             </div>
           </div>
-          <div className="col-lg-6 col-md-12 col-sm-12 col-md-6 col-xxl-6 col-xl-8">
-            {/* <div className="card custom-card ">
-              <div className="card-header">
-                <div className={style.sales_overview}>
-                  <h2>Sales Overview</h2>
-                </div>
-              </div>
-              <div className="card-body"> */}
+          <div className="col-lg-6 col-md-12 col-sm-12  ">
             <BarChart />
-            {/* </div>
-            </div> */}
           </div>
-          <div className="col-lg-3  col-sm-12 col-md-6 col-xxl-3 col-xl-4">
-            <div className="card custom-card">
-              <div className="card-header justify-content-between">
-                <div className="card-title">Activities</div>
+        </div>
+
+        {/* second row ends here */}
+
+        {/* third row starts here */}
+        <div className="row">
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <div className="card custom-card border-none">
+              <div
+                className={`${style.card_header} d-flex justify-content-between align-items-center`}
+              >
+                <div className="card-title m-0">
+                  <h4 className={style.customer_heading}>Customers</h4>
+                </div>
                 <div className="dropdown">
                   <a
-                    href="javascript:void(0);"
-                    className="p-2 fs-12 text-muted"
+                    href="#"
+                    className={`p-2 fs-12 text-muted ${style.viewAll}`}
                     data-bs-toggle="dropdown"
                   >
                     View All
@@ -330,134 +392,193 @@ const Page = () => {
                   </a>
                   <ul className="dropdown-menu" role="menu">
                     <li>
-                      <a className="dropdown-item" href="javascript:void(0);">
+                      <a className="dropdown-item" href="#">
                         Download
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="javascript:void(0);">
+                      <a className="dropdown-item" href="#">
                         Import
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="javascript:void(0);">
+                      <a className="dropdown-item" href="#">
                         Export
                       </a>
                     </li>
                   </ul>
                 </div>
               </div>
-              <div
-                className="card-body mt-0 latest-timeline"
-                id="latest-timeline"
-              >
-                <ul className="timeline-main mb-0 list-unstyled">
-                  <li>
-                    <div className="featured_icon1 featured-danger"></div>
-                  </li>
-                  <li className="mt-0 activity">
-                    <a href="javascript:void(0);" className="fs-12">
-                      <p className="mb-0">
-                        <span className="fw-semibold">#Anita</span>
-                        <span className="ms-2 fs-12">
-                          Lorem ipsum dolor, sit amet consectetur adipisicing .
-                        </span>
-                      </p>
-                    </a>
-                    <small className="text-muted mt-0 mb-0 fs-10">
-                      12 mins ago.
-                    </small>
-                  </li>
-                  <li>
-                    <div className="featured_icon1 featured-success"></div>
-                  </li>
-                  <li className="mt-0 activity">
-                    <a href="javascript:void(0);" className="fs-12">
-                      <p className="mb-0">
-                        <span className="me-2 fs-12">
-                          New Product reveived.
-                        </span>
-                        <span className="fw-semibold">#FX-321</span>
-                      </p>
-                    </a>
-                    <small className="text-muted mt-0 mb-0 fs-10">
-                      28 mins ago.
-                    </small>
-                  </li>
-                  <li>
-                    <div className="featured_icon1 featured-danger"></div>
-                  </li>
-                  <li className="mt-0 activity">
-                    <div className="fs-12">
-                      <p className="mb-0">
-                        <span className="fw-semibold text-primary">
-                          #Zlatan
-                        </span>
-                        <span className="ms-2 fs-12">
-                          shared a page.
-                          <a
-                            href="https://themeforest.net/user/spruko/portfolio"
-                            target="_blank"
-                            className="text-success underlined fs-11"
-                          >
-                            https://themeforest.net/user/spruko/portfolio
-                          </a>
-                        </span>
-                      </p>
-                    </div>
-                    <small className="text-muted mt-0 mb-0 fs-10">
-                      37 mins ago.
-                    </small>
-                  </li>
-                  <li>
-                    <div className="featured_icon1 featured-success"></div>
-                  </li>
-                  <li className="mt-0 activity">
-                    <div className="fs-12">
-                      <p className="mb-0">
-                        <span className="fw-semibold text-primary">
-                          #Hussain
-                        </span>
-                        <span className="ms-2 fs-12">shared a file. </span>
-                      </p>
-                      <small className="text-muted mt-0 mb-0 fs-10">
-                        1 day ago.
-                      </small>
-                      <p className="p-1 border border-dotted wp-50 br-5 mb-0">
-                        <a href="javascript:void(0);">
-                          <span className="badge bg-success text-fixed-white me-2">
-                            PPT
-                          </span>
-                          <span className="fs-11">Project_discussion</span>
-                        </a>
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="featured_icon1 featured-danger"></div>
-                  </li>
-                  <li className="mt-0 activity">
-                    <a href="javascript:void(0);" className="fs-12">
-                      <p className="mb-0">
-                        <span className="fw-semibold">#Emiley</span>
-                        <span className="ms-2 fs-12">
-                          Lorem ipsum dolor, sit amet consectetur adipisicing
-                          ipsum dolor...
-                        </span>
-                        <span className="fw-semibold ms-2">More</span>
-                      </p>
-                    </a>
-                    <small className="text-muted mt-0 mb-0 fs-10">
-                      14 Mar 2022.
-                    </small>
-                  </li>
+              <div className={`${style.customersss}  card-body  p-0 `}>
+                <ul className="list-group my-2">
+                  {customers.map((e, idx) => {
+                    return (
+                      <li
+                        className={` ${style.list_group_item} border-0`}
+                        key={idx}
+                      >
+                        <DashboardCustomer
+                          icon={e.icon}
+                          customerName={e.customerName}
+                          username={e.username}
+                          time={e.time}
+                        />
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
           </div>
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <DashBoardBilling />
+          </div>
+          <div className="col-xxl-3 col-xl-6"></div>
+          {/*    <div class="col-xxl-3 col-xl-6">
+          <div class="card custom-card">
+            <div class="card-header justify-content-between">
+              <div class="card-title">Profitable Categories</div>
+              <div class="dropdown">
+                <a
+                  aria-label="anchor"
+                  href="javascript:void(0);"
+                  class="btn btn-icon btn-sm btn-light"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="fe fe-more-vertical"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul class="list-group mb-0">
+                <li class="list-group-item">
+                  <div class="d-flex align-items-center">
+                    <div class="me-2">
+                      <span class="avatar avatar-sm bg-light text-default fw-semibold">
+                        1
+                      </span>
+                    </div>
+                    <div class="flex-fill">
+                      <p class="mb-0 fw-semibold">Clothing</p>
+                    </div>
+                    <div>
+                      <span class="text-success">$123.45M</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex align-items-center">
+                    <div class="me-2">
+                      <span class="avatar avatar-sm bg-light text-default fw-semibold">
+                        2
+                      </span>
+                    </div>
+                    <div class="flex-fill">
+                      <p class="mb-0 fw-semibold">Electronics</p>
+                    </div>
+                    <div>
+                      <span class="text-success">$765.89K</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex align-items-center">
+                    <div class="me-2">
+                      <span class="avatar avatar-sm bg-light text-default fw-semibold">
+                        3
+                      </span>
+                    </div>
+                    <div class="flex-fill">
+                      <p class="mb-0 fw-semibold">Grocery</p>
+                    </div>
+                    <div>
+                      <span class="text-success">$289.00M</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex align-items-center">
+                    <div class="me-2">
+                      <span class="avatar avatar-sm bg-light text-default fw-semibold">
+                        4
+                      </span>
+                    </div>
+                    <div class="flex-fill">
+                      <p class="mb-0 fw-semibold">Mobiles</p>
+                    </div>
+                    <div>
+                      <span class="text-success">$662.97K</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex align-items-center">
+                    <div class="me-2">
+                      <span class="avatar avatar-sm bg-light text-default fw-semibold">
+                        5
+                      </span>
+                    </div>
+                    <div class="flex-fill">
+                      <p class="mb-0 fw-semibold">Kitchen Appliances</p>
+                    </div>
+                    <div>
+                      <span class="text-success">$1.2B</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex align-items-center">
+                    <div class="me-2">
+                      <span class="avatar avatar-sm bg-light text-default fw-semibold">
+                        6
+                      </span>
+                    </div>
+                    <div class="flex-fill">
+                      <p class="mb-0 fw-semibold">Automobiles</p>
+                    </div>
+                    <div>
+                      <span class="text-success">$109.23k</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item text-center">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-primary-light btn-wave"
+                  >
+                    See All Activity
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> */}
         </div>
-
-        {/* second row ends here */}
+        <div className={`row ${style.row_mar}`}>
+          <div className="col-lg-6 col-md-6 col-sm-12">
+            <div>
+              <SalesValue />
+            </div>
+          </div>
+        </div>
+        {/* third row ends here */}
       </div>
     </div>
   );

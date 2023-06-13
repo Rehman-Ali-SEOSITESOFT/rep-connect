@@ -110,7 +110,7 @@ const BarChart = ({ montlyUser, totalUsers }) => {
     const options = {
       scales: {
         y: {
-          beginAtZero: true,
+          beginAtZero: false,
         },
       },
     };
@@ -121,7 +121,7 @@ const BarChart = ({ montlyUser, totalUsers }) => {
   return (
     <>
       <div className="aw_line_chart_wrap">
-        <div className="card">
+        <div className="card border-none">
           <div className="card_Bar">
             <h5>Sales Overview</h5>
           </div>

@@ -1,4 +1,4 @@
-.transectionCardWrapper .card-title {
+.cards_bodyes .card-title {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   line-height: 24px;
@@ -6,25 +6,25 @@
   color: #333335;
   margin-bottom: 0px;
 }
-.transectionCardWrapper .trasns_heading {
+.cards_bodyes .trasns_heading {
   font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #333335;
   line-height: 20px;
 }
-.transectionCardWrapper .main__links {
+.cards_bodyes .main__links {
   text-decoration: none;
 }
-.transectionCardWrapper .mini_texyted,
-.transectionCardWrapper .date {
+.cards_bodyes .mini_texyted,
+.cards_bodyes .date {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   line-height: 18px;
   color: #8c9097;
   font-weight: 400;
 }
-.transectionCardWrapper .amount {
+.cards_bodyes .amount {
   font-family: "Inter", sans-serif;
   font-size: 13px;
   line-height: 20px;
