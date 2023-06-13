@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./admin-header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { adminSideBarOpned } from "@/redux/slices/adminSidebar";
+import Link from "next/link";
 const Admin_Header = () => {
   const dispatch = useDispatch();
   const { opend } = useSelector((state) => state.adminSideBarOpned);
@@ -49,12 +50,12 @@ const Admin_Header = () => {
                 </span>
                 <ul className="dropdown-menu profile-drop-down-menu">
                   <li>
-                    <a href="##" className="menu-list">
+                    <Link href="/admin/profile" className="menu-list">
                       <span className="icon">
                         <i className="fa-regular fa-circle-user"></i>
                       </span>
                       <span className="text">Profie</span>
-                    </a>
+                    </Link>
                   </li>
 
                   <li>
