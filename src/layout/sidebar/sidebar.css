@@ -214,6 +214,7 @@ li.drop-menu--side--bar {
   text-align: left !important;
   cursor: pointer;
   width: 100%;
+  text-decoration: none;
 }
 
 .layout {
