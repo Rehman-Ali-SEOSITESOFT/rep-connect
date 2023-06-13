@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
                   <Admin_Header />
                   <div className="admin-children">{children}</div>
                 </div> */}
-                <AdminChildren />
+                <AdminChildren children={children} />
               </>
             ) : (
               <>
