@@ -62,17 +62,38 @@ html {
 }
 
 .admin-sidebar {
-  max-width: 300px;
   position: fixed;
   inset: 0;
   background-color: #111c43;
   overflow-x: hidden;
   z-index: 10;
+  transition: all 0.5s;
+  width: 300px;
 }
+
+/* SIDE BAR OPEN CLOSE */
+.admin-sidebar.opend {
+  transform: translateX(0);
+}
+.admin-sidebar.closed {
+  transform: translateX(-300px);
+}
+
+/*  CONTENT */
 .admin-content {
-  max-width: calc(100% - 300px);
   width: 100%;
   float: right;
+  transition: all 0.5s;
+}
+
+.admin-content.side-bar {
+  max-width: calc(100% - 300px);
+}
+.admin-content.no-side-bar {
+  max-width: 100%;
+}
+.admin-content .admin-children {
+  padding: 1rem;
 }
 @keyframes rotation {
   0% {
@@ -87,6 +108,12 @@ html {
   .main--content--wrapper {
     width: 100%;
   }
+  /* .admin-sidebar {
+    max-width: 250px;
+  }
+  .admin-content.side-bar {
+    max-width: calc(100% - 250px);
+  } */
 }
 
 @media screen and (max-width: 1024px) {
@@ -96,5 +123,8 @@ html {
   }
   .my-account {
     padding: 50px 15px;
+  }
+  .admin-content.side-bar {
+    max-width: 100%;
   }
 }

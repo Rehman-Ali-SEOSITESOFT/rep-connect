@@ -6,7 +6,7 @@ import logo from "../../../assets/images/logo/Rep-Connect-Logo-2021-02-admin.svg
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const Admin_sidebar = () => {
+const Admin_sidebar = ({ opend }) => {
   const pathname = usePathname();
   const [postMenu, setPostMenu] = useState([
     {
@@ -45,10 +45,25 @@ const Admin_sidebar = () => {
     },
   ]);
 
-  const path = pathname.split("/");
+  const path = pathname.split("/")[3];
+  const dashboardActive =
+    pathname.split("/").length <= 2 && pathname.split("/")[1] === "admin"
+      ? "active"
+      : null;
+
+  const [dropdown1, setDropDown1] = useState(false);
+  const [dropdown2, setDropDown2] = useState(false);
+  const hanldeDropwDown1 = () => {
+    setDropDown1(!dropdown1);
+    setDropDown2(false);
+  };
+  const hanldeDropwDown2 = () => {
+    setDropDown2(!dropdown2);
+    setDropDown1(false);
+  };
 
   return (
-    <aside className="admin-sidebar">
+    <aside className={`admin-sidebar ${opend ? "closed" : "opend"}`}>
       <div className="logoo">
         <Image src={logo} alt="rep-coonect" className="img-fluid" />
       </div>
@@ -58,7 +73,7 @@ const Admin_sidebar = () => {
             <span>Main</span>
           </li>
           <li>
-            <Link href="/admin">
+            <Link href="/admin" className={dashboardActive}>
               <span className="d-icon">
                 <i className="fa-solid fa-gauge"></i>
               </span>
@@ -68,103 +83,131 @@ const Admin_sidebar = () => {
           <li className="short-head">
             <span>Pages</span>
           </li>
-          <li>
-            <span className="title-name">
+          <li className="list-menu">
+            <span
+              className={`title-name ${dropdown1 ? "active" : null}`}
+              onClick={hanldeDropwDown1}
+            >
               <span className="d-icon">
                 <i className="fa-solid fa-eye-dropper"></i>
               </span>
               <span> post</span>
-              <span className="d-icon w-100 text-end">
-                <i className="fa-solid fa-angle-down"></i>
-              </span>
-              <span className="d-icon  w-100 text-end">
-                <i className="fa-solid fa-angle-up"></i>
-              </span>
+              {dropdown1 ? (
+                <span className=" right-side-icon w-100 text-end">
+                  <i className="fa-solid fa-angle-up"></i>
+                </span>
+              ) : (
+                <span className=" right-side-icon w-100 text-end">
+                  <i className="fa-solid fa-angle-right"></i>
+                </span>
+              )}
             </span>
+            {dropdown1 && (
+              <ol className="more-list ">
+                <li>
+                  <Link
+                    href={`/admin/post/post-addnew`}
+                    className={`${path === "post-addnew" ? "active" : null}`}
+                  >
+                    add new
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/admin/post/post-categories`}
+                    className={`${
+                      path === "post-categories" ? "active" : null
+                    }`}
+                  >
+                    category
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/admin/post/post-tags`}
+                    className={`${path === "post-tags" ? "active" : null}`}
+                  >
+                    tags
+                  </Link>
+                </li>
 
-            <ol className="more-list ">
-              <li>
-                <Link
-                  href={`/admin/post/post-addnew`}
-                  className={`${path === "post-addnew" ? "active" : null}`}
-                >
-                  add new
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/admin/post/post-categories`}
-                  className={`${path === "post-categories" ? "active" : null}`}
-                >
-                  category
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/admin/post/post-tags`}
-                  className={`${path === "post-tags" ? "active" : null}`}
-                >
-                  tags
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href={`/admin/post/`}
-                  className={`${path === undefined ? "active" : null}`}
-                >
-                  all post
-                </Link>
-              </li>
-
-              {/* {postMenu.map((elem, index) => {
-                return (
-                  <li key={index}> */}
-              {/* <Link href={`/admin/post/`}>{elem.name}</Link> */}
-              {/* </li>
-                );
-              })} */}
-            </ol>
+                <li>
+                  <Link
+                    href={`/admin/post/`}
+                    className={`${
+                      pathname.split("/")[2] === "post" && path === undefined
+                        ? "active"
+                        : null
+                    }`}
+                  >
+                    all post
+                  </Link>
+                </li>
+              </ol>
+            )}
           </li>
-          <li>
-            <span className="title-name">
+          <li className="list-menu">
+            <span
+              className={`title-name ${dropdown2 ? "active" : null}`}
+              onClick={hanldeDropwDown2}
+            >
               <span className="d-icon">
                 <i className="fa-brands fa-product-hunt"></i>
               </span>
               <span>product</span>
-              <span className="d-icon w-100 text-end">
-                <i className="fa-solid fa-angle-down"></i>
-              </span>
-              <span className="d-icon  w-100 text-end">
-                <i className="fa-solid fa-angle-up"></i>
-              </span>
+              {dropdown2 ? (
+                <span className=" right-side-icon w-100 text-end">
+                  <i className="fa-solid fa-angle-up"></i>
+                </span>
+              ) : (
+                <span className=" right-side-icon w-100 text-end">
+                  <i className="fa-solid fa-angle-right"></i>
+                </span>
+              )}
             </span>
+            {dropdown2 && (
+              <ol className="more-list ">
+                <li>
+                  <Link
+                    href={`/admin/product/product-addnew`}
+                    className={`${path === "product-addnew" ? "active" : null}`}
+                  >
+                    add new
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/admin/product/product-categories`}
+                    className={`${
+                      path === "product-categories" ? "active" : null
+                    }`}
+                  >
+                    category
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/admin/product/product-tags`}
+                    className={`${path === "product-tags" ? "active" : null}`}
+                  >
+                    tags
+                  </Link>
+                </li>
 
-            <ol className="more-list">
-              {productMenu.map((elem, index) => {
-                console.log(
-                  path[2] === "product"
-                    ? path[3] === elem.link
-                      ? "active"
-                      : null
-                    : null
-                );
-                console.log(elem.link);
-                return (
-                  <li key={index}>
-                    <Link
-                      href={`/admin/product/${elem.link}`}
-                      // className={`${
-                      //   path[2] === "product" || path[3] === elem.link
-                      // }`}
-                    >
-                      {" "}
-                      {elem.name}{" "}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ol>
+                <li>
+                  <Link
+                    href={`/admin/product/`}
+                    className={`${
+                      pathname.split("/")[2] === "product" && path === undefined
+                        ? "active"
+                        : null
+                    }`}
+                  >
+                    all Product
+                  </Link>
+                </li>
+              </ol>
+            )}
           </li>
         </ul>
       </div>
