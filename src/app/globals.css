@@ -64,6 +64,10 @@ html {
 .admin-sidebar {
   position: fixed;
   inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
   background-color: #111c43;
   overflow-x: hidden;
   z-index: 10;
@@ -139,5 +143,8 @@ html {
 @media screen and (max-width: 768px) {
   .admin-sidebar {
     width: 250px;
+  }
+  .admin-content .admin-children {
+    min-height: calc(100vh - 8rem);
   }
 }
