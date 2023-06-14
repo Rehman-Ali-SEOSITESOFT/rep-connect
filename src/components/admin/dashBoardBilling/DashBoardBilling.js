@@ -75,7 +75,7 @@ const DashBoardBilling = () => {
   ]);
   return (
     <>
-      <div className="card custom-card ">
+      <div className="card custom-card billing_wrapper">
         <div className="card_header">
           <div className="card-title m-0">
             <h4 className="customer_heading">Billing</h4>

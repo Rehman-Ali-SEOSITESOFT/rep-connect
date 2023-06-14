@@ -1,6 +1,6 @@
 .card_Bar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  padding: 12px 20px;
+  padding: 16px 20px;
 }
 .card_Bar h5 {
   font-family: "Inter", sans-serif;
@@ -11,7 +11,7 @@
   font-weight: 700;
 }
 .p-chart {
-  padding: 30px 15px;
+  padding: 0px 15px;
 }
 
 .card {
