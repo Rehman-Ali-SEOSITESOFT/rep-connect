@@ -99,6 +99,7 @@ html {
 .admin-content .admin-children {
   padding: 1rem;
   min-height: calc(100vh - 8rem);
+  background-color: #f0f1f7;
 }
 @keyframes rotation {
   0% {

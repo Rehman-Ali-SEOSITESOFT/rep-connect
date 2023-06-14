@@ -1,3 +1,4 @@
+"use client";
 import Admin_Footer from "@/layout/admin/footer/Admin_Footer";
 import Admin_Header from "@/layout/admin/header/Admin_Header";
 import Admin_sidebar from "@/layout/admin/sidebar/Admin_sidebar";
