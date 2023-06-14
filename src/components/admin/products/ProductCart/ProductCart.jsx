@@ -16,7 +16,16 @@ import { TablePagination, Paper } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
-import Loader from "../../../../assets/images/admin/product-loader.gif";
+import { useLayoutEffect } from "react";
+
+import img1 from "../../../../assets/images/podcasts/podcasr01.png";
+import img2 from "../../../../assets/images/podcasts/podcast02.png";
+import Image from "next/image";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { product } from "@/redux/slices/productSlice";
+import moment from "moment/moment";
+
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -39,69 +48,98 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
+
 const ProductCart = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const tableRef = useRef(null);
+
+  const state = useSelector((state) => state.product);
+
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
-      title: "Id",
-      field: "id",
+      title: "Sr",
+      field: "_id",
+      render: (item, index, i) => {
+        return <p>{i + 1}</p>;
+      },
     },
-    { title: "Product", field: "title" },
+    {
+      title: "Image",
+      field: "cover_image",
+      render: (item) => {
+        return (
+          <Image
+            src={item.cover_image.image_url}
+            alt={item.name}
+            height={60}
+            width={60}
+          />
+        );
+      },
+    },
+    { title: "Product", field: "name" },
     {
       title: "Category",
-      field: "slug",
+      field: "category.name",
     },
     {
-      title: "Price",
-      field: "userNicename",
+      title: "Quantity",
+      filed: "stock_quantity",
+      render: (item) => {
+        return item.stock_quantity;
+      },
+    },
+    {
+      title: "Regular Price",
+      field: "regular_price",
+    },
+    {
+      title: "Sale Price",
+      field: "sale_price",
     },
     {
       title: "Published",
-      field: "featured_image",
-      // render: (rowData) => (
-      //   <img src={rowData.featured_image.medium} height={100} width={100} />
-      // ),
+      field: "createdAt",
+      render: (item) => {
+        return moment(item.createdAt).format("LL");
+      },
     },
   ];
 
-  const [entries, setEnteries] = useState();
-  const DeleteHandler = (data, id) => {};
-  const Updatehandler = (data, id) => {};
-  const Viewhandler = (data) => {};
+  const [entries, setEnteries] = useState([]);
+  const hanldeDeleted = (event, data) => {
+    console.log("Delete Handler", data);
+  };
+  const hanldeUpdated = (event, data) => {
+    console.log("Updated Handler", event, data);
+  };
+
+  useEffect(() => {
+    let arr = JSON.parse(JSON.stringify(state.data));
+    setEnteries(arr);
+  }, []);
 
   return (
     <>
       <ThemeProvider theme={defaultMaterialTheme}>
         <MaterialTable
-          tableRef={tableRef}
+          title="Product"
           icons={tableIcons}
           columns={columns}
           data={entries}
           actions={[
             {
               icon: () => <DeleteIcon />,
-              tooltip: "Remove",
-              onClick: (event, data) => DeleteHandler(data),
+              // tooltip: "Remove",
+              onClick: (event, data) => hanldeDeleted(event, data),
             },
             {
               icon: () => <Edit />,
-              tooltip: "Change Status",
-              onClick: (event, data) =>
-                Updatehandler({
-                  e: event,
-                  d: data,
-                }),
-            },
-
-            {
-              icon: () => <VisibilityOutlinedIcon />,
-              tooltip: "View",
-              onClick: (event, data) => Viewhandler(data),
+              // tooltip: "Change Status",
+              onClick: (event, data) => hanldeUpdated(event, data),
             },
           ]}
-          isLoading={isLoading}
+          isLoading={state.loading}
           options={{
             // pageSize: 10,
             // pageSizeOptions: [5, 10, 15, 20],
@@ -117,15 +155,7 @@ const ProductCart = () => {
           }}
           components={{
             Pagination: (props) => <TablePagination {...props} />,
-            OverlayLoading: (props) => (
-              <div className="custom-loaderp">
-                <img
-                  className="img-fluid-logoop"
-                  src={Loader.src}
-                  alt="loading"
-                />
-              </div>
-            ),
+
             Container: (props) => <Paper {...props} elevation={0} />,
           }}
         />
