@@ -247,7 +247,6 @@ const Home = () => {
                           />
                         );
                       })}
-                 
                     </div>
                     <div className={styles.media_video}>
                       <h3>

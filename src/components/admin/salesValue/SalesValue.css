@@ -1,0 +1,22 @@
+.card_header {
+  padding: 16px 20px;
+  background-color: transparent !important;
+  -webkit-border-after: 1px solid #f3f3f3;
+  border-block-end: 1px solid #f3f3f3;
+  display: flex !important;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.card-title {
+  margin-bottom: 0px;
+}
+.card-title h4 {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  line-height: 23px;
+  color: #333335;
+  font-weight: 700;
+  margin-bottom: 0px;
+}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import axios from "axios";
 import CategoryItem from "../categories/Categoriesitem/CategoryItem";
+import Spinner from "@/components/spinner/Spinner";
 const BlogFilters = () => {
   const [dynamicName, setDynamicName] = useState([]);
   const [dynamicTags, setDynamicTags] = useState([]);
@@ -44,7 +45,6 @@ const BlogFilters = () => {
       })
       .then((resp) => {
         setAll(resp.data.data);
-        console.log(resp.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -284,15 +284,21 @@ const BlogFilters = () => {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col">
-            {pathname === "/category"
-              ? all.map((e, idx) => {
-                  return <CategoryItem key={idx} item={e} />;
-                })
-              : null}
-          </div>
-        </div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <div className="row">
+              <div className="col">
+                {pathname === "/category"
+                  ? all.map((e, idx) => {
+                      return <CategoryItem key={idx} item={e} />;
+                    })
+                  : null}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
