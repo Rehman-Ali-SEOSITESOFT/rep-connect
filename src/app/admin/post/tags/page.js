@@ -1,7 +1,8 @@
 import React from "react";
 
 const Page = () => {
-  return <div> Tage post</div>;
+  return <div> Tag 
+    post</div>;
 };
 
 export default Page;
