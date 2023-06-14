@@ -1,5 +1,4 @@
 .dashboard_wrapper {
-  padding: 24px 0px;
   background-color: #f0f1f7;
 }
 .custom_card {
@@ -140,4 +139,26 @@
 .list____ .activity_button:hover {
   background: #845adf !important;
   color: #fff !important;
+}
+@media screen and (max-width: 1400px) {
+  .card_heading {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .numbers {
+    font-size: 22px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .row_spacing {
+    margin-bottom: 24px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .custoner_left {
+    margin-bottom: 24px;
+  }
+  .profit_mar {
+    margin-top: 24px !important ;
+  }
 }

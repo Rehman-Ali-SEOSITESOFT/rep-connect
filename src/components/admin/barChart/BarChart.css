@@ -13,7 +13,10 @@
 .p-chart {
   padding: 0px 15px;
 }
-
+.p-chart canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
 .card {
   border: none !important;
 }
