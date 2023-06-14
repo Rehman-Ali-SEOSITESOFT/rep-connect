@@ -17,6 +17,7 @@ import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
 import Loader from "../../../../assets/images/admin/product-loader.gif";
+import { useLayoutEffect } from "react";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -71,6 +72,9 @@ const ProductCart = () => {
   const Updatehandler = (data, id) => {};
   const Viewhandler = (data) => {};
 
+  useLayoutEffect(() => {
+    setIsLoading(false);
+  }, []);
   return (
     <>
       <ThemeProvider theme={defaultMaterialTheme}>
@@ -117,15 +121,7 @@ const ProductCart = () => {
           }}
           components={{
             Pagination: (props) => <TablePagination {...props} />,
-            OverlayLoading: (props) => (
-              <div className="custom-loaderp">
-                <img
-                  className="img-fluid-logoop"
-                  src={Loader.src}
-                  alt="loading"
-                />
-              </div>
-            ),
+
             Container: (props) => <Paper {...props} elevation={0} />,
           }}
         />
