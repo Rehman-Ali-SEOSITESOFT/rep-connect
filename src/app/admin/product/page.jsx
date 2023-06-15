@@ -46,7 +46,7 @@ const Page = () => {
       </div>
       <div className="row">
         <div className="col">
-          <ProductCart />
+          {state.loading ? <h1>Loading</h1> : <ProductCart />}
         </div>
       </div>
     </div>
