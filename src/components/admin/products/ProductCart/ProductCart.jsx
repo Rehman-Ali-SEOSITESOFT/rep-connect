@@ -118,9 +118,9 @@ const ProductCart = () => {
   useEffect(() => {
     let arr = JSON.parse(JSON.stringify(state.data));
     setEnteries(arr);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1500);
   }, []);
 
   return (
@@ -143,7 +143,7 @@ const ProductCart = () => {
               onClick: (event, data) => hanldeUpdated(event, data),
             },
           ]}
-          isLoading={isLoading}
+          // isLoading={isLoading}
           options={{
             // pageSize: 10,
             // pageSizeOptions: [5, 10, 15, 20],
