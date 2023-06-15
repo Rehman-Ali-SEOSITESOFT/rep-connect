@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { product } from "@/redux/slices/productSlice";
 import Link from "next/link";
 import style from "./style.module.css";
+import { useSelector } from "react-redux";
 const ProductCart = dynamic(
   () => import("@/components/admin/products/ProductCart/ProductCart"),
   {
@@ -18,6 +19,8 @@ const Page = () => {
   useEffect(() => {
     dispatch(product());
   }, []);
+
+  const state = useSelector((state) => state.product);
 
   return (
     <div className={`container-fluid ${style.adminproduct}`}>

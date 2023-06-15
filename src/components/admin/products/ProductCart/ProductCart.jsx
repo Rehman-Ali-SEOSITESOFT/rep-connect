@@ -59,8 +59,9 @@ const ProductCart = () => {
     {
       title: "Sr",
       field: "_id",
-      render: (item, index, i) => {
-        return <p>{i + 1}</p>;
+
+      render: (item, index, val, i, e) => {
+        return <p>1</p>;
       },
     },
     {
@@ -90,7 +91,7 @@ const ProductCart = () => {
       },
     },
     {
-      title: "Regular Price",
+      title: "Price",
       field: "regular_price",
     },
     {
@@ -117,6 +118,9 @@ const ProductCart = () => {
   useEffect(() => {
     let arr = JSON.parse(JSON.stringify(state.data));
     setEnteries(arr);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
   }, []);
 
   return (
@@ -139,7 +143,7 @@ const ProductCart = () => {
               onClick: (event, data) => hanldeUpdated(event, data),
             },
           ]}
-          // isLoading={state.loading}
+          isLoading={isLoading}
           options={{
             // pageSize: 10,
             // pageSizeOptions: [5, 10, 15, 20],
@@ -148,7 +152,7 @@ const ProductCart = () => {
             sorting: true,
             search: true,
             paging: true,
-            debounceInterval: 1500,
+            debounceInterval: 100,
             headerStyle: {
               fontWeight: "bold",
             },
