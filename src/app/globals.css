@@ -107,6 +107,40 @@ html {
 .row-title-equal-spacing {
   padding: 20px 0 35px 0;
 }
+.form-add-product-btn,
+.add_new_btn,
+a.back-to-product {
+  font-size: 15px;
+  border-radius: 0.35rem;
+  padding: 0.5rem 1rem;
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 500;
+  background: rgb(132 90 223 / 28%);
+  text-decoration: none;
+  transition: all 0.5s ease-in-out;
+  text-transform: capitalize;
+}
+.form-add-product-btn:hover,
+.add_new_btn:hover,
+a.back-to-product:hover {
+  background-color: rgb(130 87 225);
+  color: #fff;
+}
+
+.form-add-product-btn {
+  border: none;
+}
+.form-add-product-btn span,
+.back-to-product span,
+.add_new_btn span {
+  margin-right: 10px;
+}
+.add_new_btn:hover {
+  background-color: rgb(130 87 225);
+  color: #fff;
+  border-color: 132, 90, 223;
+}
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

@@ -20,7 +20,6 @@ const Page = () => {
     dispatch(product());
   }, []);
 
-
   return (
     <div className={`container-fluid ${style.adminproduct}`}>
       <div className={`row row-title-equal-spacing`}>
@@ -33,19 +32,19 @@ const Page = () => {
           <div className=" text-end d-block">
             <Link
               href="/admin/product/product-addnew/"
-              className={`${style.add_new_btn}`}
+              className={`add_new_btn`}
             >
-              Add New Product
               <span>
                 <i className="fa-solid fa-plus"></i>
               </span>
+              Add New Product
             </Link>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col">
-        <ProductCart />
+          <ProductCart />
         </div>
       </div>
     </div>

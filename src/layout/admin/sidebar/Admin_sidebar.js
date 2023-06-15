@@ -7,7 +7,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { adminSideBarOpned } from "@/redux/slices/adminSidebar";
-
+import { productCategoy } from "@/redux/slices/productCategory";
 const Admin_sidebar = ({ opend }) => {
   const pathname = usePathname();
   const [postMenu, setPostMenu] = useState([
@@ -66,6 +66,9 @@ const Admin_sidebar = ({ opend }) => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(productCategoy());
+  }, []);
   return (
     <>
       <div
