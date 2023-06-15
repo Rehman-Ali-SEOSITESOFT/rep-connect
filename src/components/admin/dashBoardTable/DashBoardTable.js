@@ -73,29 +73,33 @@ const DashBoardTable = () => {
     },
     {
       title: "Actions",
-      field: "Actions",
+      field: "actions",
     },
   ];
   const [entries, setEnteries] = useState([
     {
       id: 1,
       title: "test",
-      post: "gallary_name",
+      qty: 10,
       image: pika,
-      content: "price",
+      price: 20,
       created: "created",
+      date: " 14/4/2023",
       status: "status",
-      action: "action",
+      actions: "action",
     },
     {
       id: 2,
       title: "Ghulam Rasool",
       post: "gh@gmail.com",
+      qty: 10,
       image: sale,
+      price: 20,
       content: "price",
       created: "created",
+      date: " 14/4/2023",
       status: "status",
-      action: "action",
+      actions: "action",
     },
   ]);
   return (

@@ -145,7 +145,7 @@ const Page = () => {
             <div className={` ${style.custom_card}  card `}>
               <div className="card-body">
                 <div className="row">
-                  <div className="col-6 pe-0">
+                  <div className="col-8 pe-0">
                     <p className="mb-2">
                       <span className={`fs-16   ${style.card_heading}`}>
                         Sales Statistics
@@ -168,7 +168,7 @@ const Page = () => {
                       <i className="ti ti-chevron-right ms-1"></i>
                     </a>
                   </div>
-                  <div className="col-6 d-flex align-items-end justify-content-end">
+                  <div className="col-4 d-flex align-items-end justify-content-end">
                     <p className="badge bg-success-transparent float-end d-inline-flex">
                       <i className="ti ti-caret-up me-1"></i>42%
                     </p>
@@ -184,7 +184,7 @@ const Page = () => {
             <div className={` ${style.custom_card}  card `}>
               <div className="card-body">
                 <div className="row">
-                  <div className="col-6 pe-0">
+                  <div className="col-8 pe-0">
                     <p className="mb-2">
                       <span className={`fs-16   ${style.card_heading}`}>
                         Total Revenue
@@ -207,7 +207,7 @@ const Page = () => {
                       <i className="ti ti-chevron-right ms-1"></i>
                     </a>
                   </div>
-                  <div className="col-6 d-flex align-items-end justify-content-end">
+                  <div className="col-4 d-flex align-items-end justify-content-end">
                     <p className="badge bg-danger-transparent float-end d-inline-flex">
                       <i className="ti ti-caret-down me-1"></i>12%
                     </p>
@@ -223,7 +223,7 @@ const Page = () => {
             <div className={` ${style.custom_card}  card `}>
               <div className="card-body">
                 <div className="row">
-                  <div className="col-6 pe-0">
+                  <div className="col-8 pe-0">
                     <p className="mb-2">
                       <span className={`fs-16   ${style.card_heading}`}>
                         Page Views
@@ -246,7 +246,7 @@ const Page = () => {
                       <i className="ti ti-chevron-right ms-1"></i>
                     </a>
                   </div>
-                  <div className="col-6 d-flex align-items-end justify-content-end">
+                  <div className="col-4 d-flex align-items-end justify-content-end">
                     <p className="badge bg-success-transparent float-end d-inline-flex">
                       <i className="ti ti-caret-up me-1"></i>27%
                     </p>
@@ -262,7 +262,7 @@ const Page = () => {
             <div className={` ${style.custom_card}  card `}>
               <div className="card-body">
                 <div className="row">
-                  <div className="col-6 pe-0">
+                  <div className="col-8 pe-0">
                     <p className="mb-2">
                       <span className={`fs-16   ${style.card_heading}`}>
                         Profit By Sale
@@ -285,7 +285,7 @@ const Page = () => {
                       <i className="ti ti-chevron-right ms-1"></i>
                     </a>
                   </div>
-                  <div className="col-6 d-flex align-items-end justify-content-end">
+                  <div className="col-4 d-flex align-items-end justify-content-end">
                     <p className="badge bg-success-transparent float-end d-inline-flex">
                       <i className="ti ti-caret-up me-1"></i>32.5%
                     </p>
@@ -302,7 +302,7 @@ const Page = () => {
         {/* one row ends here */}
 
         {/* second row starts here */}
-        <div className="row">
+        <div className={`row ${style.row_spacing}`}>
           <div className="col-lg-6 col-md-12">
             <div
               className={`${style.transectionCardWrapper}  card custom-card recent-transactions-card overflow-hidden`}
@@ -333,8 +333,8 @@ const Page = () => {
         {/* second row ends here */}
 
         {/* third row starts here */}
-        <div className="row">
-          <div className="col-lg-6 col-md-6 col-sm-12">
+        <div className={`row `}>
+          <div className={`col-lg-6 col-md-6 col-sm-12 ${style.custoner_left}`}>
             <div className="card custom-card border-none">
               <div
                 className={`${style.card_header} d-flex justify-content-between align-items-center`}
@@ -401,7 +401,7 @@ const Page = () => {
               <SalesValue />
             </div>
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12">
+          <div className={`col-lg-6 col-md-6 col-sm-12  ${style.profit_mar}`}>
             <div className="card custom-card">
               <div
                 className={`card-header justify-content-between ${style.card_header}`}
