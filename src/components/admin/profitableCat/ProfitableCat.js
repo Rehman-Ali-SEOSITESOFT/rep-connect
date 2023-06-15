@@ -9,7 +9,7 @@ const ProfitableCat = (props) => {
           <span className=" listing_number">{numbering}</span>
         </div>
         <div className="flex-fill">
-          <p className="mb-0 fw-semibold">{categiryName}</p>
+          <p className="mb-0 fw-semibold cateeegoryName">{categiryName}</p>
         </div>
         <div>
           <span className="text-success">{profits}</span>

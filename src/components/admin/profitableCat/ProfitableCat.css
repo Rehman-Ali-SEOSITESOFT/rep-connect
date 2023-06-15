@@ -13,3 +13,12 @@
   border-radius: 5px;
   padding: 5px 20px;
 }
+@media screen and (max-width: 768px) {
+  .profite_wrapper .cateeegoryName {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    color: #333335;
+    font-weight: 600;
+  }
+}

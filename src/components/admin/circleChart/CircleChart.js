@@ -10,7 +10,7 @@ const CircleChart = () => {
             percentage={70}
             strokeWidth={10}
             secondaryColor=" #ECF5FF"
-            primaryColor={["#3479FB", "#845adf"]}
+            // primaryColor={["#3479FB", "#845adf"]}
           />
         </div>
       </div>

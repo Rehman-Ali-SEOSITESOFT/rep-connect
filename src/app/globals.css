@@ -73,6 +73,7 @@ html {
   z-index: 10;
   transition: all 0.5s;
   width: 300px;
+  z-index: 15;
 }
 
 /* SIDE BAR OPEN CLOSE */

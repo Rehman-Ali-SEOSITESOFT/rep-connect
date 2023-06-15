@@ -90,7 +90,7 @@ const ProductCart = () => {
       },
     },
     {
-      title: "Regular Price",
+      title: "Price",
       field: "regular_price",
     },
     {
@@ -120,6 +120,9 @@ const ProductCart = () => {
     // if(arr.length > 0){
     //   setIsLoading(false)
     //     }
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1500);
   }, []);
 
   return (
@@ -151,7 +154,7 @@ const ProductCart = () => {
             sorting: true,
             search: true,
             paging: true,
-            debounceInterval: 1500,
+            debounceInterval: 100,
             headerStyle: {
               fontWeight: "bold",
             },
