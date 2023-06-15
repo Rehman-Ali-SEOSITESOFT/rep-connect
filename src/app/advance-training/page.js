@@ -5,6 +5,7 @@ import withAuth from "@/utils/auth";
 import React, { useState } from "react";
 import styless from "./advanceTrain.module.css";
 const page = () => {
+
   const [kristineList, setKristineList] = useState([
     {
       fullerTitle: "Welcome to MicroGenDX!",
@@ -47,6 +48,8 @@ const page = () => {
       fullerTitle: "Addressing Antibiotic Sensitivity Objections",
     },
   ]);
+  
+
   const [additionalSale, setAdditionalSale] = useState([
     { fullerTitle: "Addressing Next-Gen Sequencing info to Physicians" },
     {
@@ -62,6 +65,7 @@ const page = () => {
       fullerTitle: "NGS and Infectious Disease Doctors",
     },
   ]);
+
   const [secondAddition, setSecondAddition] = useState([
     {
       fullerTitle: "Identifying the Causative Microbes of Infections with NGS",
@@ -77,6 +81,7 @@ const page = () => {
       fullerTitle: "Advancements in MicroGenDX",
     },
   ]);
+  
   return (
     <>
       <BreadCrum

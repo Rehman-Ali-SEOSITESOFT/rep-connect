@@ -57,11 +57,10 @@ const ProductCart = () => {
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
-      title: "Sr",
+      title: "SR",
       field: "_id",
-
-      render: (item, index, val, i, e) => {
-        return <p>1</p>;
+      render: (rowData) => {
+        return <p>{rowData.tableData.id + 1}</p>;
       },
     },
     {
@@ -118,6 +117,9 @@ const ProductCart = () => {
   useEffect(() => {
     let arr = JSON.parse(JSON.stringify(state.data));
     setEnteries(arr);
+    // if(arr.length > 0){
+    //   setIsLoading(false)
+    //     }
     // setTimeout(() => {
     //   setIsLoading(false);
     // }, 1500);

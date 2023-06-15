@@ -20,7 +20,6 @@ const Page = () => {
     dispatch(product());
   }, []);
 
-  const state = useSelector((state) => state.product);
 
   return (
     <div className={`container-fluid ${style.adminproduct}`}>
@@ -46,7 +45,7 @@ const Page = () => {
       </div>
       <div className="row">
         <div className="col">
-          {state.loading ? <h1>Loading</h1> : <ProductCart />}
+        <ProductCart />
         </div>
       </div>
     </div>
