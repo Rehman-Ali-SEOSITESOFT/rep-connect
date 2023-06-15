@@ -24,10 +24,10 @@ const Page = () => {
 
   return (
     <div className={`container-fluid ${style.adminproduct}`}>
-      <div className="row">
+      <div className={`row row-title-equal-spacing`}>
         <div className="col-6">
           <div className="left">
-            <h4>Product</h4>
+            <h4 className="product-title">Product List</h4>
           </div>
         </div>
         <div className="col-6">

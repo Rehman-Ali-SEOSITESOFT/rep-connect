@@ -1,3 +1,7 @@
+.adminproduct .title_row {
+  padding: 20px 0 35px 0;
+}
+
 .add_new_btn {
   font-size: 0.85rem;
   border-radius: 0.35rem;
@@ -7,6 +11,7 @@
   font-weight: 500;
   background: rgb(132 90 223 / 28%);
   text-decoration: none;
+  transition: all 0.5s ease-in-out;
 }
 
 .add_new_btn span {

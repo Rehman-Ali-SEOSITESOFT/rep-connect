@@ -4,6 +4,7 @@ import Admin_Header from "@/layout/admin/header/Admin_Header";
 import Admin_sidebar from "@/layout/admin/sidebar/Admin_sidebar";
 import React from "react";
 import { useSelector } from "react-redux";
+import "./AdminStyle.css";
 
 const AdminChildren = ({ children }) => {
   const { opend } = useSelector((state) => state.adminSideBarOpned);

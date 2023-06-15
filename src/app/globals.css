@@ -102,6 +102,11 @@ html {
   min-height: calc(100vh - 8rem);
   background-color: #f0f1f7;
 }
+
+/* /// ADMIN PRODUCT  */
+.row-title-equal-spacing {
+  padding: 20px 0 35px 0;
+}
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
