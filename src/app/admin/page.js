@@ -303,7 +303,7 @@ const Page = () => {
 
         {/* second row starts here */}
         <div className={`row ${style.row_spacing}`}>
-          <div className="col-lg-6 col-md-12">
+          <div className="col-xl-6 col-lg-12 col-md-12">
             <div
               className={`${style.transectionCardWrapper}  card custom-card recent-transactions-card overflow-hidden`}
             >
@@ -325,7 +325,7 @@ const Page = () => {
               })}
             </div>
           </div>
-          <div className="col-lg-6 col-md-12 col-sm-12  ">
+          <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12  ">
             <BarChart />
           </div>
         </div>

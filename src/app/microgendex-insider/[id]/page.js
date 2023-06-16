@@ -143,9 +143,9 @@ const page = ({ params }) => {
               </aside>
               <div className="row">
                 <div className="col pt-2">
-                  <div class="like_sections">
-                    <button class="likebtn"> </button>
-                    <span class="likes_number">+{likes.length}</span>
+                  <div className="like_sections">
+                    <button className="likebtn"> </button>
+                    <span className="likes_number">+{likes.length}</span>
                   </div>
                   <div
                     className={`pt-3 d-flex flex-wrap   ${styles.links_box}`}
