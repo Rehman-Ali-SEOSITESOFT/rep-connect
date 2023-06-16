@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./dashboard.module.css";
 import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
 import RecentTransection from "@/components/admin/recentTransection/RecentTransection";
@@ -15,6 +15,7 @@ import DashBoardBilling from "@/components/admin/dashBoardBilling/DashBoardBilli
 import SalesValue from "@/components/admin/salesValue/SalesValue";
 import ProfitableCat from "@/components/admin/profitableCat/ProfitableCat";
 import DashBoardTable from "@/components/admin/dashBoardTable/DashBoardTable";
+
 const Page = () => {
   const [transection, setTranestion] = useState([
     {
@@ -124,6 +125,9 @@ const Page = () => {
       profits: "$765.45M",
     },
   ]);
+
+  // const dispatch = useDispatch();
+
   return (
     <div className={style.dashboard_wrapper}>
       <div className="container-fluid">

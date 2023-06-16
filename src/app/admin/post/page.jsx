@@ -1,7 +1,55 @@
-import React from "react";
-
+"use client";
+import React, { useEffect } from "react";
+import { Style } from "@material-ui/icons";
+import style from "./AllPost.module.css";
+import { useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
+import PostTableList from "@/components/admin/postListTable/PostTableList";
 const Page = () => {
-  return <div>all post page</div>;
+  const ProductCart = dynamic(
+    () => import("@/components/admin/products/ProductCart/ProductCart"),
+    {
+      ssr: false,
+    }
+  );
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(product());
+  // }, []);
+
+  return (
+    <>
+      <section className={Style.allPostWrapper}>
+        <div className="container-fluid">
+          <div className={`row ${style.title_row} my-4`}>
+            <div className="col-6">
+              <div className="left">
+                <h4 className="product-title">Post List</h4>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className=" text-end d-block">
+                <Link href="/admin/post/post-addnew/" className={`add_new_btn`}>
+                  <span>
+                    <i className="fa-solid fa-plus"></i>
+                  </span>
+                  Add New Post
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              {/* <ProductCart /> */}
+              <PostTableList />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default Page;
