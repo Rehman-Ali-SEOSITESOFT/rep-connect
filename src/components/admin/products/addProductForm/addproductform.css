@@ -75,3 +75,7 @@ form.add-product-form {
 .product-long-desction .sun-editor .se-wrapper .se-wrapper-inner {
   min-height: 400px;
 }
+
+.form-add-product-btn {
+  margin-top: 30px;
+}
