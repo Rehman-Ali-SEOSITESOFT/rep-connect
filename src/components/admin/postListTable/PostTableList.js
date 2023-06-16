@@ -16,16 +16,6 @@ import { TablePagination, Paper } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { useLayoutEffect } from "react";
-import img1 from "../../../../assets/images/podcasts/podcasr01.png";
-import img2 from "../../../../assets/images/podcasts/podcast02.png";
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { product } from "@/redux/slices/productSlice";
-import { useRouter } from "next/navigation";
-import moment from "moment/moment";
-
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -48,13 +38,15 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
-
-const ProductCart = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-
-  const state = useSelector((state) => state.product);
+const PostTableList = () => {
   const defaultMaterialTheme = createTheme();
+  const [entries, setEnteries] = useState([]);
+  const hanldeDeleted = (event, data) => {
+    console.log("Delete Handler", data);
+  };
+  const hanldeUpdated = (event, data) => {
+    console.log("Updated Handler", event, data);
+  };
   const columns = [
     {
       title: "SR",
@@ -105,34 +97,6 @@ const ProductCart = () => {
       },
     },
   ];
-
-  const [entries, setEnteries] = useState([]);
-  const hanldeDeleted = (event, data) => {
-    console.log("Delete Handler", data);
-  };
-  const hanldeUpdated = (event, id) => {
-    router.push(`/admin/product/view-product/${id}`);
-  };
-
-  useEffect(() => {
-    let arr = JSON.parse(JSON.stringify(state.data));
-    setEnteries(arr);
-    if(arr.length > 0){
-      setIsLoading(false);
-    }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    console.log("test working on thsi project", arr)
-    // if(arr.length > 0){
-    //   setIsLoading(false)
-    //     }
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 1500);
-  }, []);
-
   return (
     <>
       <ThemeProvider theme={defaultMaterialTheme}>
@@ -150,7 +114,7 @@ const ProductCart = () => {
             {
               icon: () => <Edit />,
               // tooltip: "Change Status",
-              onClick: (event, data) => hanldeUpdated(event, data._id),
+              onClick: (event, data) => hanldeUpdated(event, data),
             },
           ]}
           // isLoading={isLoading}
@@ -178,4 +142,4 @@ const ProductCart = () => {
   );
 };
 
-export default ProductCart;
+export default PostTableList;

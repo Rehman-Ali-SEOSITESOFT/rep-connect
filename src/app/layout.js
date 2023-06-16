@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Admin_Header from "@/layout/admin/header/Admin_Header";
 import Admin_sidebar from "@/layout/admin/sidebar/Admin_sidebar";
 import AdminChildren from "@/components/admin/AdminChildren";
+import "suneditor/dist/css/suneditor.min.css";
 
 export default function RootLayout({ children }) {
   const path = usePathname();

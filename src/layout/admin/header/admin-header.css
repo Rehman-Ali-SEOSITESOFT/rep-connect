@@ -1,6 +1,10 @@
 .admin-header {
   padding: 1.1rem 25px 1.1rem 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 11;
+  background-color: white;
 }
 
 /* LEFT SIDE HEADER */

@@ -19,7 +19,7 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import pika from "../../../assets/images/admin/user-default.jpg";
 import sale from "../../../assets/images/admin/user-default.jpg";
 import Image from "next/image";
-
+import "./DashBoardTable.css";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -113,7 +113,7 @@ const DashBoardTable = () => {
                   <MaterialTable
                     tableRef={tableRef}
                     icons={tableIcons}
-                    title="Posts "
+                    title="Orders "
                     columns={columns}
                     data={entries}
                     options={{

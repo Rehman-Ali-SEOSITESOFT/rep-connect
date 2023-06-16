@@ -15,8 +15,14 @@
 }
 .p-chart canvas {
   width: 100% !important;
-  height: 100% !important;
+  height: 360px !important;
 }
 .card {
   border: none !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .p-chart canvas {
+    height: 100% !important;
+  }
 }

@@ -120,9 +120,9 @@ const DashBoardBilling = () => {
           </div>
         </div>
         <div className="card-body p-0 my-2">
-          <div class="tab-content" id="pills-tabContent">
+          <div className="tab-content" id="pills-tabContent">
             <div
-              class="tab-pane fade show active"
+              className="tab-pane fade show active"
               id="pills-home"
               role="tabpanel"
               aria-labelledby="pills-home-tab"
@@ -144,7 +144,7 @@ const DashBoardBilling = () => {
               </div>
             </div>
             <div
-              class="tab-pane fade"
+              className="tab-pane fade"
               id="pills-profile"
               role="tabpanel"
               aria-labelledby="pills-profile-tab"

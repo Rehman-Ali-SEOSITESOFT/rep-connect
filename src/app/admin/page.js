@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./dashboard.module.css";
 import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
 import RecentTransection from "@/components/admin/recentTransection/RecentTransection";
@@ -14,7 +14,14 @@ import DashboardCustomer from "@/components/admin/dashBoardCustomer/DashboardCus
 import DashBoardBilling from "@/components/admin/dashBoardBilling/DashBoardBilling";
 import SalesValue from "@/components/admin/salesValue/SalesValue";
 import ProfitableCat from "@/components/admin/profitableCat/ProfitableCat";
-import DashBoardTable from "@/components/admin/dashBoardTable/DashBoardTable";
+import dynamic from "next/dynamic";
+
+const DashBoardTable = dynamic(
+  () => import("@/components/admin/dashBoardTable/DashBoardTable"),
+  {
+    ssr: false,
+  }
+);
 const Page = () => {
   const [transection, setTranestion] = useState([
     {
@@ -124,6 +131,9 @@ const Page = () => {
       profits: "$765.45M",
     },
   ]);
+
+  // const dispatch = useDispatch();
+
   return (
     <div className={style.dashboard_wrapper}>
       <div className="container-fluid">
@@ -303,7 +313,7 @@ const Page = () => {
 
         {/* second row starts here */}
         <div className={`row ${style.row_spacing}`}>
-          <div className="col-lg-6 col-md-12">
+          <div className="col-xl-6 col-lg-12 col-md-12">
             <div
               className={`${style.transectionCardWrapper}  card custom-card recent-transactions-card overflow-hidden`}
             >
@@ -325,7 +335,7 @@ const Page = () => {
               })}
             </div>
           </div>
-          <div className="col-lg-6 col-md-12 col-sm-12  ">
+          <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12  ">
             <BarChart />
           </div>
         </div>
