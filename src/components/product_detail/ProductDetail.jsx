@@ -85,13 +85,13 @@ const ProductDetail = (props) => {
                     <h4 className="title--clas">{item.data.name}</h4>
                     <div className="pricing-check">
                       <h5 className="price regular">
-                        Price :{" "}
-                        <span>{TotalPrice(item.data.regular_price)}</span>
+                        Price :
+                        <span>{ TotalPrice(item.data.sale_price) === 0  ? TotalPrice(item.data.regular_price) : TotalPrice(item.data.sale_price)}</span>
                       </h5>
-                      <h5 className="price sale">
+                      {/* <h5 className="price sale">
                         Sale Price :{" "}
                         <span>{TotalPrice(item.data.sale_price)}</span>
-                      </h5>
+                      </h5> */}
                     </div>
                     <p>
                       {item.data.short_disc}

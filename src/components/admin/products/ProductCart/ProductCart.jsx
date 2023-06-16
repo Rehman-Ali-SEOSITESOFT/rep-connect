@@ -17,7 +17,6 @@ import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { useLayoutEffect } from "react";
-
 import img1 from "../../../../assets/images/podcasts/podcasr01.png";
 import img2 from "../../../../assets/images/podcasts/podcast02.png";
 import Image from "next/image";
@@ -55,7 +54,6 @@ const ProductCart = () => {
   const router = useRouter();
 
   const state = useSelector((state) => state.product);
-
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
@@ -119,6 +117,14 @@ const ProductCart = () => {
   useEffect(() => {
     let arr = JSON.parse(JSON.stringify(state.data));
     setEnteries(arr);
+    if(arr.length > 0){
+      setIsLoading(false);
+    }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    console.log("test working on thsi project", arr)
     // if(arr.length > 0){
     //   setIsLoading(false)
     //     }
