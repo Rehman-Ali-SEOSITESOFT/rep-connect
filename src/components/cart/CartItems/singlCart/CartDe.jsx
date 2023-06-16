@@ -34,7 +34,7 @@ const CartDe = ({
           </Link>
         </td>
         <td className="product-price" data-title="Price">
-          <span className="amount">{TotalPrice(item.price)}</span>
+          <span className="amount">{TotalPrice(item.sale_price) === 0 ?  TotalPrice(item.price) : TotalPrice(item.sale_price)}</span>
         </td>
         <td className="product-quantity" data-title="Quantity">
           <div className="quantity">
