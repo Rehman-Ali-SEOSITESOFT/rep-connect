@@ -4,6 +4,7 @@ form.add-product-form {
   border-radius: 5px;
 }
 
+.add-product-form .pro-form-row-cate,
 .add-product-form .pro-form-row-files,
 .add-product-form .pro-form-row {
   display: flex;
@@ -12,6 +13,7 @@ form.add-product-form {
 .add-product-form .form-col {
   width: 48%;
 }
+.add-product-form .name_pro .form-col,
 .add-product-form .disc-form-row .form-col {
   width: 100%;
 }
@@ -30,11 +32,16 @@ form.add-product-form {
 .pro-form-row .form-col input {
   color: #8c9097;
   background-color: rgba(255, 255, 255, 1);
-  border-color: #cdcdcd;
+  border-color: #ced4da99;
   padding: 8px 1rem;
   font-size: 15px;
   margin-bottom: 20px;
   border-radius: 0.35rem;
+}
+.add-product-form select::placeholder,
+.add-product-form textarea::placeholder,
+.add-product-form input::placeholder {
+  color: #d3d3d3;
 }
 .pro-form-row .form-col select:focus,
 .disc-form-row .form-col textarea:focus,
@@ -53,9 +60,18 @@ form.add-product-form {
   padding: 20px 0 10px 0;
 }
 
-.product-categories {
-  margin: 10px 0 20px;
-}
 .product-categories .loading {
   width: 50px;
+}
+.pro-form-row-cate {
+  margin-bottom: 20px;
+}
+/*  PRODUCT CATEGORY */
+
+.product-long-desction .sun-editor {
+  min-height: 400px;
+  /* overflow-x: hidden; */
+}
+.product-long-desction .sun-editor .se-wrapper .se-wrapper-inner {
+  min-height: 400px;
 }

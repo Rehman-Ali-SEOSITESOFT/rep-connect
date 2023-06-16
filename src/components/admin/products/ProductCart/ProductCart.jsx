@@ -24,6 +24,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { product } from "@/redux/slices/productSlice";
+import { useRouter } from "next/navigation";
 import moment from "moment/moment";
 
 const tableIcons = {
@@ -51,6 +52,7 @@ const tableIcons = {
 
 const ProductCart = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const state = useSelector((state) => state.product);
 
@@ -110,8 +112,8 @@ const ProductCart = () => {
   const hanldeDeleted = (event, data) => {
     console.log("Delete Handler", data);
   };
-  const hanldeUpdated = (event, data) => {
-    console.log("Updated Handler", event, data);
+  const hanldeUpdated = (event, id) => {
+    router.push(`/admin/product/view-product/${id}`);
   };
 
   useEffect(() => {
@@ -142,7 +144,7 @@ const ProductCart = () => {
             {
               icon: () => <Edit />,
               // tooltip: "Change Status",
-              onClick: (event, data) => hanldeUpdated(event, data),
+              onClick: (event, data) => hanldeUpdated(event, data._id),
             },
           ]}
           // isLoading={isLoading}

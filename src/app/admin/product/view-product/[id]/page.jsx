@@ -1,11 +1,8 @@
-"use client";
-import AddProductForm from "@/components/admin/products/addProductForm/AddProductForm";
 import Link from "next/link";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 
-const Page = () => {
-  const state = useSelector((state) => state.productCategory);
+const page = ({ params }) => {
+  const { id } = params;
 
   return (
     <section className="add-product">
@@ -13,7 +10,7 @@ const Page = () => {
         <div className={`row row-title-equal-spacing`}>
           <div className="col-6">
             <div className="left">
-              <h4 className="product-title">Add New Product</h4>
+              <h4 className="product-title">View Product</h4>
             </div>
           </div>
           <div className="col-6 text-end">
@@ -29,7 +26,7 @@ const Page = () => {
         </div>
         <div className="row">
           <div className="col">
-            <AddProductForm data={state} />
+            <h1>{id}</h1>
           </div>
         </div>
       </div>
@@ -37,4 +34,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

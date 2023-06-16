@@ -3,8 +3,11 @@ import "./addproductform.css";
 import loader from "../../../../assets/images/admin/product-loader.gif";
 import Image from "next/image";
 import Multiselect from "multiselect-react-dropdown";
+import SunEditor from "suneditor-react";
+
 const AddProductForm = ({ data }) => {
   const item = data;
+  const [discription, setDiscription] = useState("");
   const [addProduct, setAddProduct] = useState({
     product_name: "",
     quantity: "",
@@ -13,6 +16,8 @@ const AddProductForm = ({ data }) => {
     short_description: "",
   });
   const [categories, setCategories] = useState([]);
+  const [productProfile, setProductProfile] = useState("");
+  const [productGallary, sePproductGallary] = useState([]);
 
   const hanldeChanged = (event) => {
     const name = event.target.name;
@@ -21,7 +26,15 @@ const AddProductForm = ({ data }) => {
   };
   const hanldeSubmit = (e) => {
     e.preventDefault();
-    console.log("ADD TO PRODUCT FORM", categories);
+
+    const detail = {
+      ...addProduct,
+      category: categories,
+      product_profile: productProfile,
+      gallary: productGallary,
+      disc: discription,
+    };
+    console.log(detail);
   };
 
   // FILTER GETEGORY ID
@@ -43,9 +56,74 @@ const AddProductForm = ({ data }) => {
   // setCategories(newarr);
   // };
 
+  const hanldeChangedImages = (event) => {
+    if (event.target.name === "product_image") {
+      setProductProfile(event.target.files[0]);
+    } else {
+      sePproductGallary(event.target.files);
+    }
+  };
+  const option = {
+    mode: "classic",
+    rtl: false,
+    katex: "window.katex",
+    fontSizeUnit: "16",
+    imageHeightShow: false,
+    imageAlignShow: false,
+    imageFileInput: false,
+    imageUrlInput: false,
+
+    videoFileInput: false,
+    tableCellControllerPosition: "",
+    tabDisable: false,
+    buttonList: [
+      [
+        "undo",
+        "redo",
+        "font",
+        "fontSize",
+        "formatBlock",
+        "paragraphStyle",
+        "blockquote",
+        "bold",
+        "underline",
+        "italic",
+        "strike",
+        "subscript",
+        "superscript",
+        "fontColor",
+        "hiliteColor",
+        "textStyle",
+        "removeFormat",
+        "outdent",
+        "indent",
+        "align",
+        "horizontalRule",
+        "list",
+        "lineHeight",
+        "table",
+        "link",
+        "image",
+        "video",
+        "audio",
+        "math",
+        "imageGallery",
+        "fullScreen",
+        "showBlocks",
+        "codeView",
+        "preview",
+        "print",
+        "save",
+        "template",
+      ],
+    ],
+    lang: "en",
+    "lang(In nodejs)": "en",
+  };
+
   return (
     <form onSubmit={hanldeSubmit} className="add-product-form">
-      <div className="pro-form-row">
+      <div className="pro-form-row name_pro">
         <div className="form-col">
           <label htmlFor="product_name" className="form-label">
             Product name
@@ -57,20 +135,6 @@ const AddProductForm = ({ data }) => {
             placeholder="Product Name"
             name="product_name"
             value={addProduct.product_name}
-            onChange={hanldeChanged}
-          />
-        </div>
-        <div className="form-col">
-          <label htmlFor="quantity" className="form-label">
-            quantity
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="quantity"
-            placeholder="Quantity"
-            name="quantity"
-            value={addProduct.quantity}
             onChange={hanldeChanged}
           />
         </div>
@@ -171,6 +235,20 @@ const AddProductForm = ({ data }) => {
             </div> */}
           </div>
         </div>
+        <div className="form-col">
+          <label htmlFor="quantity" className="form-label">
+            quantity
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="quantity"
+            placeholder="Quantity"
+            name="quantity"
+            value={addProduct.quantity}
+            onChange={hanldeChanged}
+          />
+        </div>
       </div>
       <div className="pro-form-row-files">
         <div className="form-col">
@@ -182,6 +260,7 @@ const AddProductForm = ({ data }) => {
             className="form-control"
             id="product_image"
             name="product_image"
+            onChange={hanldeChangedImages}
           />
         </div>
         <div className="form-col">
@@ -194,6 +273,7 @@ const AddProductForm = ({ data }) => {
             id="product_gallary"
             name="product_gallary"
             multiple
+            onChange={hanldeChangedImages}
           />
         </div>
       </div>
@@ -219,7 +299,50 @@ const AddProductForm = ({ data }) => {
           <label htmlFor="product_description" className="form-label">
             Product description
           </label>
-          <textarea className="form-control" id="product_description" />
+          {/* <textarea className="form-control" id="product_description" /> */}
+          <div className="product-long-desction">
+            <SunEditor
+              onChange={setDiscription}
+              setOptions={{
+                font: [
+                  "Poppins",
+                  "Arial",
+                  "Comic Sans MS",
+                  "Courier New",
+                  "Impact",
+                  "Georgia",
+                  "tahoma",
+                  "Trebuchet MS",
+                  "Verdana",
+                ],
+                fontSize: [
+                  8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72,
+                ],
+                height: 300, // Set the desired height of the editor
+                imageHeightShow: false,
+                imageAlignShow: false,
+                imageFileInput: false,
+                imageUrlInput: false,
+                buttonList: [
+                  ["undo", "redo"],
+                  ["font", "fontSize", "formatBlock"],
+                  [
+                    "bold",
+                    "underline",
+                    "italic",
+                    "strike",
+                    "subscript",
+                    "superscript",
+                  ],
+                  ["removeFormat"],
+                  ["fontColor", "hiliteColor", "outdent", "indent"],
+                  ["align", "horizontalRule", "list", "table"],
+                  ["link", "image", "video"],
+                  ["fullScreen", "showBlocks", "codeView"],
+                ],
+              }}
+            />
+          </div>
         </div>
       </div>
       <div className="form-col">
