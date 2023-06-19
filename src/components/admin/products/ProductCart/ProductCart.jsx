@@ -52,12 +52,11 @@ const tableIcons = {
 const ProductCart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-
   const state = useSelector((state) => state.product);
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
-      title: "SR",
+      title: "Sr",
       field: "_id",
       render: (rowData) => {
         return <p>{rowData.tableData.id + 1}</p>;
@@ -110,6 +109,7 @@ const ProductCart = () => {
   const hanldeDeleted = (event, data) => {
     console.log("Delete Handler", data);
   };
+
   const hanldeUpdated = (event, id) => {
     router.push(`/admin/product/view-product/${id}`);
   };
@@ -132,6 +132,10 @@ const ProductCart = () => {
         });
     }
   }, []);
+
+  const clickHandler = () =>{
+    console.log("A life is sure to want to work.");
+  }
 
   return (
     <>
@@ -169,7 +173,6 @@ const ProductCart = () => {
           }}
           components={{
             Pagination: (props) => <TablePagination {...props} />,
-
             Container: (props) => <Paper {...props} elevation={0} />,
           }}
         />
