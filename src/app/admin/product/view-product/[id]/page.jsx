@@ -1,19 +1,24 @@
 "use client";
-import AddProductForm from "@/components/admin/products/addProductForm/AddProductForm";
+import ViewProduct from "@/components/admin/products/ViewProduct/ViewProduct";
+import { product_api } from "@/redux/slices/singleProduct";
 import Link from "next/link";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-const Page = () => {
-  const state = useSelector((state) => state.productCategory);
+const page = ({ params }) => {
+  const { id } = params;
 
+  const disptch = useDispatch();
+  useEffect(() => {
+    disptch(product_api(id));
+  }, []);
   return (
     <section className="add-product">
       <div className="container-fluid">
         <div className={`row row-title-equal-spacing`}>
           <div className="col-6">
             <div className="left">
-              <h4 className="product-title">Add New Product</h4>
+              <h4 className="product-title">View Product</h4>
             </div>
           </div>
           <div className="col-6 text-end">
@@ -29,7 +34,7 @@ const Page = () => {
         </div>
         <div className="row">
           <div className="col">
-            <AddProductForm data={state} />
+            <ViewProduct />
           </div>
         </div>
       </div>
@@ -37,4 +42,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

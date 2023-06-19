@@ -14,8 +14,14 @@ import DashboardCustomer from "@/components/admin/dashBoardCustomer/DashboardCus
 import DashBoardBilling from "@/components/admin/dashBoardBilling/DashBoardBilling";
 import SalesValue from "@/components/admin/salesValue/SalesValue";
 import ProfitableCat from "@/components/admin/profitableCat/ProfitableCat";
-import DashBoardTable from "@/components/admin/dashBoardTable/DashBoardTable";
+import dynamic from "next/dynamic";
 
+const DashBoardTable = dynamic(
+  () => import("@/components/admin/dashBoardTable/DashBoardTable"),
+  {
+    ssr: false,
+  }
+);
 const Page = () => {
   const [transection, setTranestion] = useState([
     {

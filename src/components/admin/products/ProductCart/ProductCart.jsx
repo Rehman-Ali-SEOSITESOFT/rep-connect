@@ -17,14 +17,16 @@ import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { useLayoutEffect } from "react";
-
 import img1 from "../../../../assets/images/podcasts/podcasr01.png";
 import img2 from "../../../../assets/images/podcasts/podcast02.png";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { product } from "@/redux/slices/productSlice";
+import { useRouter } from "next/navigation";
 import moment from "moment/moment";
+
+import { ToastContainer, toast } from "react-toastify";
 
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
@@ -51,9 +53,9 @@ const tableIcons = {
 
 const ProductCart = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const state = useSelector((state) => state.product);
-
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
@@ -108,21 +110,60 @@ const ProductCart = () => {
 
   const [entries, setEnteries] = useState([]);
   const hanldeDeleted = (event, data) => {
-    console.log("Delete Handler", data);
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product/${data._id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === 1) {
+          toast.success("Product Detail Success fully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          toast.warn("Product not Detail successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
   };
-  const hanldeUpdated = (event, data) => {
-    console.log("Updated Handler", event, data);
+  const hanldeUpdated = (event, id) => {
+    router.push(`/admin/product/view-product/${id}`);
   };
 
   useEffect(() => {
     let arr = JSON.parse(JSON.stringify(state.data));
     setEnteries(arr);
-    // if(arr.length > 0){
-    //   setIsLoading(false)
-    //     }
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 1500);
+    if (arr.length > 0) {
+      setIsLoading(false);
+    } else {
+      fetch(`${process.env.NEXT_PUBLIC_URL}api/product`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setEnteries(data.data.product);
+        });
+    }
   }, []);
 
   return (
@@ -142,7 +183,7 @@ const ProductCart = () => {
             {
               icon: () => <Edit />,
               // tooltip: "Change Status",
-              onClick: (event, data) => hanldeUpdated(event, data),
+              onClick: (event, data) => hanldeUpdated(event, data._id),
             },
           ]}
           // isLoading={isLoading}
@@ -166,6 +207,7 @@ const ProductCart = () => {
           }}
         />
       </ThemeProvider>
+      <ToastContainer />
     </>
   );
 };

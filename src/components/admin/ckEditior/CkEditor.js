@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import "suneditor/dist/css/suneditor.min.css";
+// import "suneditor/dist/css/suneditor.min.css";
 import SunEditor from "suneditor-react";
 import "./CkEditor.css";
 const CkEditior = () => {
