@@ -117,20 +117,20 @@ const ProductCart = () => {
   useEffect(() => {
     let arr = JSON.parse(JSON.stringify(state.data));
     setEnteries(arr);
-    if(arr.length > 0){
+    if (arr.length > 0) {
       setIsLoading(false);
+    } else {
+      fetch(`${process.env.NEXT_PUBLIC_URL}api/product`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setEnteries(data.data.product);
+        });
     }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    console.log("test working on thsi project", arr)
-    // if(arr.length > 0){
-    //   setIsLoading(false)
-    //     }
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 1500);
   }, []);
 
   return (
