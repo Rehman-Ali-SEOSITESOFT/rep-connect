@@ -26,6 +26,8 @@ import { product } from "@/redux/slices/productSlice";
 import { useRouter } from "next/navigation";
 import moment from "moment/moment";
 
+import { ToastContainer, toast } from "react-toastify";
+
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -108,8 +110,38 @@ const ProductCart = () => {
 
   const [entries, setEnteries] = useState([]);
   const hanldeDeleted = (event, data) => {
-    console.log("Delete Handler", data);
-    const deleteproduct = fetch(``)
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product/${data._id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === 1) {
+          toast.success("Product Detail Success fully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          toast.warn("Product not Detail successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
   };
   const hanldeUpdated = (event, id) => {
     router.push(`/admin/product/view-product/${id}`);
@@ -120,17 +152,18 @@ const ProductCart = () => {
     setEnteries(arr);
     if (arr.length > 0) {
       setIsLoading(false);
+    } else {
+      fetch(`${process.env.NEXT_PUBLIC_URL}api/product`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setEnteries(data.data.product);
+        });
     }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    // if(arr.length > 0){
-    //   setIsLoading(false)
-    //     }
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 1500);
   }, []);
 
   return (
@@ -174,6 +207,7 @@ const ProductCart = () => {
           }}
         />
       </ThemeProvider>
+      <ToastContainer />
     </>
   );
 };
