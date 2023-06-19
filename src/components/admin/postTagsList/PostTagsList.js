@@ -17,9 +17,8 @@ import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
 import axios from "axios";
-import Image from "next/image";
+import "./PostTagsList.css";
 import Spinner from "@/components/spinner/Spinner";
-import "./PostTableList.css";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -42,10 +41,10 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
-const PostTableList = () => {
-  const [loading, setLoading] = useState(true);
+const PostTagsList = () => {
   const defaultMaterialTheme = createTheme();
   const [entries, setEnteries] = useState([]);
+  const [loading, setLoading] = useState(true);
   const hanldeDeleted = (event, data) => {
     console.log("Delete Handler", data);
   };
@@ -60,49 +59,20 @@ const PostTableList = () => {
         return <p>{rowData.tableData.id + 1}</p>;
       },
     },
+
+    { title: "Tag", field: "name" },
     {
-      title: "Image",
-      field: "cover_image",
-      render: (item) => {
-        return (
-          <Image
-            src={item.featured_image.image_url}
-            alt={item.title}
-            height={60}
-            width={60}
-          />
-        );
-      },
-    },
-    { title: "Product", field: "title" },
-    {
-      title: "Description",
+      title: "Discription",
       field: "description",
     },
-    // {
-    //   title: "Quantity",
-    //   filed: "stock_quantity",
-    //   render: (item) => {
-    //     return item.stock_quantity;
-    //   },
-    // },
-    // {
-    //   title: "Price",
-    //   field: "regular_price",
-    // },
-    // {
-    //   title: "Sale Price",
-    //   field: "sale_price",
-    // },
   ];
-
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://anxious-foal-shift.cyclic.app/api/post")
+      .get("https://anxious-foal-shift.cyclic.app/api/tag")
       .then((resp) => {
-        console.log(resp.data.data.post);
-        setEnteries(resp.data.data.post);
+        console.log(resp.data.data.tag);
+        setEnteries(resp.data.data.tag);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -113,10 +83,10 @@ const PostTableList = () => {
         <Spinner />
       ) : (
         <>
-          <div className="allPosts_wrapper">
+          <div className="table_tag_wrapper">
             <ThemeProvider theme={defaultMaterialTheme}>
               <MaterialTable
-                title="Product"
+                title="Post Tags"
                 icons={tableIcons}
                 columns={columns}
                 data={entries}
@@ -160,4 +130,4 @@ const PostTableList = () => {
   );
 };
 
-export default PostTableList;
+export default PostTagsList;

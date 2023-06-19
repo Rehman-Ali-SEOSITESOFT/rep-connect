@@ -6,14 +6,13 @@ import { useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
-import PostTableList from "@/components/admin/postListTable/PostTableList";
+const PostTableList = dynamic(
+  () => import("@/components/admin/postListTable/PostTableList"),
+  {
+    ssr: false,
+  }
+);
 const Page = () => {
-  const ProductCart = dynamic(
-    () => import("@/components/admin/products/ProductCart/ProductCart"),
-    {
-      ssr: false,
-    }
-  );
   const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(product());
@@ -42,7 +41,6 @@ const Page = () => {
           </div>
           <div className="row">
             <div className="col">
-              {/* <ProductCart /> */}
               <PostTableList />
             </div>
           </div>
