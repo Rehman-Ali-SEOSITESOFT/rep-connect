@@ -27,14 +27,40 @@ const AddProductForm = ({ data }) => {
   const hanldeSubmit = (e) => {
     e.preventDefault();
 
-    const detail = {
-      ...addProduct,
-      category: categories,
-      product_profile: productProfile,
-      gallary: productGallary,
-      disc: discription,
-    };
-    console.log(detail);
+    // const detail = {
+    //   ...addProduct,
+    //   category: categories,
+    //   product_profile: productProfile,
+    //   gallary: productGallary,
+    //   disc: discription,
+    // };
+
+    const formData = new FormData();
+    formData.append("name", addProduct.product_name);
+    formData.append("stock_quantity", addProduct.quantity);
+    formData.append("regular_price", addProduct.price);
+    formData.append("sale_price", addProduct.sale_price);
+    formData.append("short_disc", addProduct.short_description);
+    formData.append("disc", discription);
+    formData.append("product_profile", productProfile);
+    formData.append("category", categories[0]);
+    for (let i = 0; i < productGallary.length; i++) {
+      formData.append("gallary", productGallary[i]);
+    }
+
+    fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
+      method: "POST",
+      headers: {
+        // "Content-Type": "application/json",
+      },
+      body: formData,
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   // FILTER GETEGORY ID
@@ -62,63 +88,6 @@ const AddProductForm = ({ data }) => {
     } else {
       sePproductGallary(event.target.files);
     }
-  };
-  const option = {
-    mode: "classic",
-    rtl: false,
-    katex: "window.katex",
-    fontSizeUnit: "16",
-    imageHeightShow: false,
-    imageAlignShow: false,
-    imageFileInput: false,
-    imageUrlInput: false,
-
-    videoFileInput: false,
-    tableCellControllerPosition: "",
-    tabDisable: false,
-    buttonList: [
-      [
-        "undo",
-        "redo",
-        "font",
-        "fontSize",
-        "formatBlock",
-        "paragraphStyle",
-        "blockquote",
-        "bold",
-        "underline",
-        "italic",
-        "strike",
-        "subscript",
-        "superscript",
-        "fontColor",
-        "hiliteColor",
-        "textStyle",
-        "removeFormat",
-        "outdent",
-        "indent",
-        "align",
-        "horizontalRule",
-        "list",
-        "lineHeight",
-        "table",
-        "link",
-        "image",
-        "video",
-        "audio",
-        "math",
-        "imageGallery",
-        "fullScreen",
-        "showBlocks",
-        "codeView",
-        "preview",
-        "print",
-        "save",
-        "template",
-      ],
-    ],
-    lang: "en",
-    "lang(In nodejs)": "en",
   };
 
   return (
@@ -304,25 +273,7 @@ const AddProductForm = ({ data }) => {
             <SunEditor
               onChange={setDiscription}
               setOptions={{
-                font: [
-                  "Poppins",
-                  "Arial",
-                  "Comic Sans MS",
-                  "Courier New",
-                  "Impact",
-                  "Georgia",
-                  "tahoma",
-                  "Trebuchet MS",
-                  "Verdana",
-                ],
-                fontSize: [
-                  8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72,
-                ],
                 height: 300, // Set the desired height of the editor
-                imageHeightShow: false,
-                imageAlignShow: false,
-                imageFileInput: false,
-                imageUrlInput: false,
                 buttonList: [
                   ["undo", "redo"],
                   ["font", "fontSize", "formatBlock"],
