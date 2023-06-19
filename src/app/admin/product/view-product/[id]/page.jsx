@@ -1,11 +1,17 @@
 "use client";
 import ViewProduct from "@/components/admin/products/ViewProduct/ViewProduct";
+import { product_api } from "@/redux/slices/singleProduct";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const page = ({ params }) => {
   const { id } = params;
 
+  const disptch = useDispatch();
+  useEffect(() => {
+    disptch(product_api(id));
+  }, []);
   return (
     <section className="add-product">
       <div className="container-fluid">

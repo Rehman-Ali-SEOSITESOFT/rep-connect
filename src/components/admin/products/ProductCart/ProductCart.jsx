@@ -109,6 +109,7 @@ const ProductCart = () => {
   const [entries, setEnteries] = useState([]);
   const hanldeDeleted = (event, data) => {
     console.log("Delete Handler", data);
+    const deleteproduct = fetch(``)
   };
   const hanldeUpdated = (event, id) => {
     router.push(`/admin/product/view-product/${id}`);
@@ -117,14 +118,13 @@ const ProductCart = () => {
   useEffect(() => {
     let arr = JSON.parse(JSON.stringify(state.data));
     setEnteries(arr);
-    if(arr.length > 0){
+    if (arr.length > 0) {
       setIsLoading(false);
     }
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
 
-    console.log("test working on thsi project", arr)
     // if(arr.length > 0){
     //   setIsLoading(false)
     //     }

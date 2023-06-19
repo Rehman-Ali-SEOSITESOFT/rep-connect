@@ -1,0 +1,32 @@
+/*  */
+/* view-left */
+
+.view-left .view-image {
+  height: 300px;
+  overflow: hidden;
+  max-width: 300px;
+  position: relative;
+}
+
+.view-left .view-gallary {
+  display: flex;
+  margin-top: 20px;
+}
+
+.view-gallary .gallary-item {
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #cdcdcd;
+  cursor: pointer;
+}
+.view-gallary .gallary-item {
+  min-height: 100%;
+}
+.view-gallary .gallary-item img {
+  min-height: 100%;
+}
+.view-gallary .gallary-item.active {
+  border-color: #2754a4;
+}
