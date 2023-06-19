@@ -1,0 +1,15 @@
+.view-left .view-image {
+  height: 300px;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.view-left .view-gallary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.view-gallary .gallary-item {
+  width: 150px;
+}

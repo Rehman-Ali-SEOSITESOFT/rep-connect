@@ -1,3 +1,5 @@
+"use client";
+import ViewProduct from "@/components/admin/products/ViewProduct/ViewProduct";
 import Link from "next/link";
 import React from "react";
 
@@ -26,7 +28,7 @@ const page = ({ params }) => {
         </div>
         <div className="row">
           <div className="col">
-            <h1>{id}</h1>
+            <ViewProduct />
           </div>
         </div>
       </div>
