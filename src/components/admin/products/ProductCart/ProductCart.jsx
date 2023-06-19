@@ -26,6 +26,8 @@ import { product } from "@/redux/slices/productSlice";
 import { useRouter } from "next/navigation";
 import moment from "moment/moment";
 
+import { ToastContainer, toast } from "react-toastify";
+
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -107,7 +109,38 @@ const ProductCart = () => {
 
   const [entries, setEnteries] = useState([]);
   const hanldeDeleted = (event, data) => {
-    console.log("Delete Handler", data);
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product/${data._id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === 1) {
+          toast.success("Product Detail Success fully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          toast.warn("Product not Detail successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
   };
 
   const hanldeUpdated = (event, id) => {
@@ -177,6 +210,7 @@ const ProductCart = () => {
           }}
         />
       </ThemeProvider>
+      <ToastContainer />
     </>
   );
 };
