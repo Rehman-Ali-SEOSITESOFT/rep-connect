@@ -55,6 +55,7 @@ const ProductCart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const state = useSelector((state) => state.product);
+  const dispatch = useDispatch();
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
@@ -109,6 +110,7 @@ const ProductCart = () => {
 
   const [entries, setEnteries] = useState([]);
   const hanldeDeleted = (event, data) => {
+    setIsLoading(true);
     fetch(`${process.env.NEXT_PUBLIC_URL}api/product/${data._id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -118,7 +120,7 @@ const ProductCart = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success === 1) {
-          toast.success("Product Detail Success fully", {
+          toast.success("Product delete Success fully", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -128,8 +130,12 @@ const ProductCart = () => {
             progress: undefined,
             theme: "colored",
           });
+
+          dispatch(product());
+          let arr = JSON.parse(JSON.stringify(state.data));
+          setEnteries(arr);
         } else {
-          toast.warn("Product not Detail successfully", {
+          toast.warn("Product not delete successfully", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -142,8 +148,7 @@ const ProductCart = () => {
         }
       });
   };
-
-  const hanldeUpdated = (event, id) => {
+  const hanldeViewd = (event, id) => {
     router.push(`/admin/product/view-product/${id}`);
   };
 
@@ -166,9 +171,9 @@ const ProductCart = () => {
     }
   }, []);
 
-  const clickHandler = () =>{
-    console.log("A life is sure to want to work.");
-  }
+  const hanldeUpdated = (event, id) => {
+    router.push(`/admin/product/product-update/${id}`);
+  };
 
   return (
     <>
@@ -188,6 +193,11 @@ const ProductCart = () => {
               icon: () => <Edit />,
               // tooltip: "Change Status",
               onClick: (event, data) => hanldeUpdated(event, data._id),
+            },
+            {
+              icon: () => <VisibilityOutlinedIcon />,
+              // tooltip: "Change Status",
+              onClick: (event, data) => hanldeViewd(event, data._id),
             },
           ]}
           // isLoading={isLoading}

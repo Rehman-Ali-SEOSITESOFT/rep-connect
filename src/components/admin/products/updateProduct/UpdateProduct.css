@@ -1,0 +1,81 @@
+form.add-product-form {
+  background: white;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.add-product-form .pro-form-row-cate,
+.add-product-form .pro-form-row-files,
+.add-product-form .pro-form-row {
+  display: flex;
+  justify-content: space-between;
+}
+.add-product-form .form-col {
+  width: 48%;
+}
+.add-product-form .name_pro .form-col,
+.add-product-form .disc-form-row .form-col {
+  width: 100%;
+}
+
+.add-product-form label.form-label {
+  font-weight: 400;
+  color: #8c9097;
+  font-size: 15px;
+  line-height: 20px;
+  text-transform: capitalize;
+  margin-bottom: 6px;
+}
+
+.pro-form-row .form-col select,
+.disc-form-row .form-col textarea,
+.pro-form-row .form-col input {
+  color: #8c9097;
+  background-color: rgba(255, 255, 255, 1);
+  border-color: #ced4da99;
+  padding: 8px 1rem;
+  font-size: 15px;
+  margin-bottom: 20px;
+  border-radius: 0.35rem;
+}
+.add-product-form select::placeholder,
+.add-product-form textarea::placeholder,
+.add-product-form input::placeholder {
+  color: #d3d3d3;
+}
+.pro-form-row .form-col select:focus,
+.disc-form-row .form-col textarea:focus,
+.pro-form-row .form-col input:focus {
+  color: #333333;
+  border-color: #1790d0;
+  box-shadow: none;
+}
+
+.disc-form-row .form-col textarea {
+  height: 150px;
+  resize: none;
+}
+
+.disc-form-row label.short_description {
+  padding: 20px 0 10px 0;
+}
+
+.product-categories .loading {
+  width: 50px;
+}
+.pro-form-row-cate {
+  margin-bottom: 20px;
+}
+/*  PRODUCT CATEGORY */
+
+.product-long-desction .sun-editor {
+  min-height: 400px;
+  /* overflow-x: hidden; */
+}
+.product-long-desction .sun-editor .se-wrapper .se-wrapper-inner {
+  min-height: 400px;
+}
+
+.form-add-product-btn {
+  margin-top: 30px;
+}
