@@ -19,7 +19,7 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import axios from "axios";
 import Image from "next/image";
 import Spinner from "@/components/spinner/Spinner";
-import "./PostTableList.css";
+import "./PostCategoryList.css";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -42,8 +42,9 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
-const PostTableList = () => {
+const PostCategoryList = () => {
   const [loading, setLoading] = useState(true);
+
   const defaultMaterialTheme = createTheme();
   const [entries, setEnteries] = useState([]);
   const hanldeDeleted = (event, data) => {
@@ -66,43 +67,30 @@ const PostTableList = () => {
       render: (item) => {
         return (
           <Image
-            src={item.featured_image.image_url}
-            alt={item.title}
+            src={item.cover_image.image_url}
+            alt={item.name}
             height={60}
             width={60}
           />
         );
       },
     },
-    { title: "Product", field: "title" },
-    {
-      title: "Description",
-      field: "description",
-    },
-    // {
-    //   title: "Quantity",
-    //   filed: "stock_quantity",
-    //   render: (item) => {
-    //     return item.stock_quantity;
-    //   },
-    // },
-    // {
-    //   title: "Price",
-    //   field: "regular_price",
-    // },
-    // {
-    //   title: "Sale Price",
-    //   field: "sale_price",
-    // },
-  ];
+    { title: "Product", field: "name" },
 
+    {
+      title: "Published",
+      field: "createdAt",
+      // render: (item) => {
+      //   return moment(item.createdAt).format("LL");
+      // },
+    },
+  ];
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://anxious-foal-shift.cyclic.app/api/post")
+      .get("https://anxious-foal-shift.cyclic.app/api/post-category")
       .then((resp) => {
-        console.log(resp.data.data.post);
-        setEnteries(resp.data.data.post);
+        setEnteries(resp.data.data.category);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -113,10 +101,10 @@ const PostTableList = () => {
         <Spinner />
       ) : (
         <>
-          <div className="allPosts_wrapper">
+          <div className="table_wrapper">
             <ThemeProvider theme={defaultMaterialTheme}>
               <MaterialTable
-                title="Product"
+                title="Post Category"
                 icons={tableIcons}
                 columns={columns}
                 data={entries}
@@ -160,4 +148,4 @@ const PostTableList = () => {
   );
 };
 
-export default PostTableList;
+export default PostCategoryList;

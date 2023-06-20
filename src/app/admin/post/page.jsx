@@ -41,7 +41,6 @@ const Page = () => {
           </div>
           <div className="row">
             <div className="col">
-              {/* <ProductCart /> */}
               <PostTableList />
             </div>
           </div>
