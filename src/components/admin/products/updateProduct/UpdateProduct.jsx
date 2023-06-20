@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./addproductform.css";
+import React, { useEffect, useState } from "react";
+import "./UpdateProduct.css";
 import loader from "../../../../assets/images/admin/product-loader.gif";
 import Image from "next/image";
 import Multiselect from "multiselect-react-dropdown";
@@ -7,9 +7,11 @@ import SunEditor from "suneditor-react";
 import { ToastContainer, toast } from "react-toastify";
 import { product } from "@/redux/slices/productSlice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-const AddProductForm = ({ data }) => {
-  const dispatch = useDispatch();
+const UpdateProduct = ({ data }) => {
+  const state = useSelector((state) => state.singleproduct);
+  console.log(state);
   const item = data;
   const [discription, setDiscription] = useState("");
   const [addProduct, setAddProduct] = useState({
@@ -31,54 +33,54 @@ const AddProductForm = ({ data }) => {
   const hanldeSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("name", addProduct.product_name);
-    formData.append("stock_quantity", addProduct.quantity);
-    formData.append("regular_price", addProduct.price);
-    formData.append("sale_price", addProduct.sale_price);
-    formData.append("short_disc", addProduct.short_description);
-    formData.append("disc", discription);
-    formData.append("product_profile", productProfile);
-    formData.append("category", categories[0]);
-    for (let i = 0; i < productGallary.length; i++) {
-      formData.append("gallary", productGallary[i]);
-    }
+    // const formData = new FormData();
+    // formData.append("name", addProduct.product_name);
+    // formData.append("stock_quantity", addProduct.quantity);
+    // formData.append("regular_price", addProduct.price);
+    // formData.append("sale_price", addProduct.sale_price);
+    // formData.append("short_disc", addProduct.short_description);
+    // formData.append("disc", discription);
+    // formData.append("product_profile", productProfile);
+    // formData.append("category", categories[0]);
+    // for (let i = 0; i < productGallary.length; i++) {
+    //   formData.append("gallary", productGallary[i]);
+    // }
 
-    fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
-      method: "POST",
-      headers: {
-        // "Content-Type": "application/json",
-      },
-      body: formData,
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.success === 1) {
-          dispatch(product());
-          toast.success("Product add successfully", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+    // fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
+    //   method: "POST",
+    //   headers: {
+    //     // "Content-Type": "application/json",
+    //   },
+    //   body: formData,
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     if (data.success === 1) {
+    //       dispatch(product());
+    //       toast.success("Product add successfully", {
+    //         position: "top-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //       });
 
-          setAddProduct({
-            product_name: "",
-            quantity: "",
-            price: "",
-            sale_price: "",
-            short_description: "",
-          });
-          setDiscription(null);
-          setCategories("");
-        }
-      });
+    //       setAddProduct({
+    //         product_name: "",
+    //         quantity: "",
+    //         price: "",
+    //         sale_price: "",
+    //         short_description: "",
+    //       });
+    //       setDiscription(null);
+    //       setCategories("");
+    //     }
+    //   });
   };
 
   // FILTER GETEGORY ID
@@ -87,18 +89,6 @@ const AddProductForm = ({ data }) => {
     arr.filter((p_item) => newarr.push(p_item._id));
     setCategories(newarr);
   };
-  // const hanldeCategory = (arr, item) => {
-  // let newarr = [];
-  // arr.filter((p_item) => newarr.push(p_item._id));
-  // setCategories(newarr);
-  //   filterChategoryFuction(arr);
-  // };
-  // const hanldeRemove = (arr, item) => {
-  //   filterChategoryFuction(arr);
-  // let newarr = [];
-  // arr.filter((p_item) => newarr.push(p_item._id));
-  // setCategories(newarr);
-  // };
 
   const hanldeChangedImages = (event) => {
     if (event.target.name === "product_image") {
@@ -107,6 +97,13 @@ const AddProductForm = ({ data }) => {
       sePproductGallary(event.target.files);
     }
   };
+  useEffect(() => {
+    if (state.loading) {
+      console.log("false", state.data);
+    } else {
+      console.log("else condtiion", state.data);
+    }
+  }, []);
 
   return (
     <form onSubmit={hanldeSubmit} className="add-product-form">
@@ -162,7 +159,6 @@ const AddProductForm = ({ data }) => {
             product categories
           </label>
           <div className="product-categories">
-            {/* <Multiselect showArrow options={item.data.name} isObject={false} /> */}
             {item.loading ? (
               <div className="loading">
                 <Image src={loader} alt="Loading" className="img-fluid" />
@@ -170,8 +166,6 @@ const AddProductForm = ({ data }) => {
             ) : item.data.length < 0 ? (
               <h2>No categores</h2>
             ) : (
-              // item.data.map((data, index) => {
-              //   return (
               <Multiselect
                 showArrow
                 options={item.data}
@@ -179,47 +173,7 @@ const AddProductForm = ({ data }) => {
                 onSelect={filterChategoryFuction}
                 onRemove={filterChategoryFuction}
               />
-              // <div className="form-check form-check-inline" key={index}>
-              //   <input
-              //     className="form-check-input"
-              //     type="checkbox"
-              //     id={`inlineCheckbox${index}`}
-              //     name={`${data.name}`}
-              //     value={data._id}
-              //     onClick={(event) => hanldeCategory(event, data)}
-              //   />
-              //   <label
-              //     className="form-check-label"
-              //     htmlFor={`inlineCheckbox${index}`}
-              //   >
-              //     {data.name}
-              //   </label>
-              // </div>
-              //   );
-              // })
             )}
-            {/* <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox2"
-                value="option2"
-              />
-              <label className="form-check-label" htmlFor="inlineCheckbox2">
-                2
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox3"
-                value="option3"
-              />
-              <label className="form-check-label" htmlFor="inlineCheckbox3">
-                3 (disabled)
-              </label>
-            </div> */}
           </div>
         </div>
         <div className="form-col">
@@ -286,7 +240,7 @@ const AddProductForm = ({ data }) => {
           <label htmlFor="product_description" className="form-label">
             Product description
           </label>
-          {/* <textarea className="form-control" id="product_description" /> */}
+
           <div className="product-long-desction">
             <SunEditor
               onChange={setDiscription}
@@ -319,7 +273,7 @@ const AddProductForm = ({ data }) => {
           <span>
             <i className="fa-solid fa-plus"></i>
           </span>
-          add product
+          Update Product
         </button>
       </div>
       <ToastContainer />
@@ -327,4 +281,4 @@ const AddProductForm = ({ data }) => {
   );
 };
 
-export default AddProductForm;
+export default UpdateProduct;
