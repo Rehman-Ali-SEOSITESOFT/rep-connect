@@ -5,7 +5,7 @@ import SunEditor from "suneditor-react";
 import "./CkEditor.css";
 const CkEditior = () => {
   const [content, setContent] = useState("");
-  console.log(content, "<=============");
+
   return (
     <>
       <SunEditor

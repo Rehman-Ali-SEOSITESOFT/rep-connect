@@ -1,8 +1,9 @@
 "use client";
 import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Addpost.module.css";
 import CkEditior from "@/components/admin/ckEditior/CkEditor";
+import axios from "axios";
 
 const Page = () => {
   const [postData, setPostData] = useState({
@@ -10,12 +11,16 @@ const Page = () => {
     category: "",
     tag: "",
     author: "",
-    publish: "",
     format: "",
     discription: "",
+    postRedirect: "",
+    url: "",
   });
+  const [category, setCategory] = useState([]);
+  const [tag, setTag] = useState([]);
+  const [image, setImage] = useState(null);
   const [base64Image, setBase64Image] = useState("");
-
+  const [author, setAuthor] = useState([]);
   const handleChange = (e) => {
     setPostData({
       ...postData,
@@ -24,6 +29,7 @@ const Page = () => {
     console.log(e.target.value, "<=========== value");
   };
   const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
       setBase64Image(reader.result);
@@ -38,8 +44,29 @@ const Page = () => {
     e.preventDefault();
     console.log(postData, "post data");
     console.log(subscribe, "subcribe");
-    console.log(base64Image, "<========== base 64 image");
+    console.log(image, "image");
   };
+  useEffect(() => {
+    axios
+      .get("https://anxious-foal-shift.cyclic.app/api/post-category")
+      .then((resp) => {
+        setCategory(resp.data.data.category);
+      })
+      .catch((err) => console.log(err));
+    axios
+      .get("https://anxious-foal-shift.cyclic.app/api/tag")
+      .then((resp) => {
+        setTag(resp.data.data.tag);
+      })
+      .catch((err) => console.log(err));
+    axios
+      .get("https://anxious-foal-shift.cyclic.app/api/author")
+      .then((resp) => {
+        setAuthor(resp.data.data.author);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <section>
@@ -83,25 +110,9 @@ const Page = () => {
                                 onChange={handleChange}
                                 name="category"
                               >
-                                <option value="">Category</option>
-                                <option value="Clothing">Clothing</option>
-                                <option value="Footwear">Footwear</option>
-                                <option value="Accesories">Accesories</option>
-                                <option value="Grooming">Grooming</option>
-                                <option value="Ethnic & Festive">
-                                  Ethnic & Festive
-                                </option>
-                                <option value="Jewellery">Jewellery</option>
-                                <option value="Toys & Babycare">
-                                  Toys & Babycare
-                                </option>
-                                <option value="Festive Gifts">
-                                  Festive Gifts
-                                </option>
-                                <option value="Kitchen">Kitchen</option>
-                                <option value="Dining">Dining</option>
-                                <option value="Home Decors">Home Decors</option>
-                                <option value="Stationery">Stationery</option>
+                                {category.map((e, idx) => {
+                                  return <option key={idx}>{e.name}</option>;
+                                })}
                               </select>
                             </div>
                             <div className="col-xl-6">
@@ -112,11 +123,9 @@ const Page = () => {
                                 onChange={handleChange}
                                 name="tag"
                               >
-                                <option value="">Select</option>
-                                <option value="All">All</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Others">Others</option>
+                                {tag.map((e, idx) => {
+                                  return <option key={idx}>{e.name}</option>;
+                                })}
                               </select>
                             </div>
                             <div className="col-xl-6">
@@ -127,33 +136,12 @@ const Page = () => {
                                 onChange={handleChange}
                                 name="author"
                               >
-                                <option value="">Select</option>
-                                <option value="Extra Small">Extra Small</option>
-                                <option value="Small">Small</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Large">Large</option>
-                                <option value="Extra Large">Extra Large</option>
+                                {author.map((e, idx) => {
+                                  return <option key={idx}>{e.name}</option>;
+                                })}
                               </select>
                             </div>
-                            <div className="col-xl-6">
-                              <label className="form-label">Publish</label>
-                              <select
-                                className="form-control"
-                                data-trigger
-                                onChange={handleChange}
-                                name="publish"
-                              >
-                                <option value="">Select</option>
-                                <option value="Armani">Armani</option>
-                                <option value="Lacoste">Lacoste</option>
-                                <option value="Puma">Puma</option>
-                                <option value="Spykar">Spykar</option>
-                                <option value="Mufti">Mufti</option>
-                                <option value="Home Town">Home Town</option>
-                                <option value="Arrabi">Arrabi</option>
-                              </select>
-                            </div>
-                            <div className="col-xl-12 color-selection">
+                            <div className="col-xl-6 color-selection">
                               <label className="form-label">Image</label>
                               <input
                                 type="file"
@@ -161,6 +149,38 @@ const Page = () => {
                                 onChange={handleImageChange}
                               />
                             </div>
+                            <div className="col-xl-12">
+                              <label
+                                className={`form-label ${style.postRedirection}`}
+                              >
+                                Post Redirection
+                              </label>
+                              <div className="row">
+                                <div className="col-lg-4">
+                                  <label>Post Redirect</label>
+                                  <input
+                                    className="form-control"
+                                    value={postData.postRedirect}
+                                    onChange={handleChange}
+                                    name="postRedirect"
+                                  />
+                                </div>
+                                <div className="col-lg-4">
+                                  <label>URL</label>
+                                  <input
+                                    className="form-control"
+                                    value={postData.url}
+                                    onChange={handleChange}
+                                    name="url"
+                                  />
+                                </div>
+                                <div className="col-lg-4">
+                                  <label>Redirection Type</label>
+                                  <input className="form-control" />
+                                </div>
+                              </div>
+                            </div>
+
                             <div className="col-xl-12">
                               <label className="form-label">Format</label>
 

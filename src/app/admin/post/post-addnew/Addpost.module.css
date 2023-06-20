@@ -78,3 +78,8 @@
 .editing .ck-blurred {
   height: 125px !important;
 }
+.postRedirection {
+  font-size: 16px !important;
+  color: #333333 !important;
+  font-weight: 600 !important ;
+}
