@@ -37,13 +37,12 @@ const AddProductForm = ({ data }) => {
     formData.append("regular_price", addProduct.price);
     formData.append("sale_price", addProduct.sale_price);
     formData.append("short_disc", addProduct.short_description);
-    // formData.append("disc", discription);
+    formData.append("disc", discription);
     formData.append("product_profile", productProfile);
     formData.append("category", categories[0]);
     for (let i = 0; i < productGallary.length; i++) {
       formData.append("gallary", productGallary[i]);
     }
-
     fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
       method: "POST",
       headers: {
@@ -67,7 +66,6 @@ const AddProductForm = ({ data }) => {
             progress: undefined,
             theme: "colored",
           });
-
           setAddProduct({
             product_name: "",
             quantity: "",
