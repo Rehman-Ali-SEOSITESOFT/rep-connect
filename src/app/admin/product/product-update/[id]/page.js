@@ -43,7 +43,7 @@ const page = ({ params }) => {
                 <Image src={loader} alt="is loading" width={70} height={70} />
               </div>
             ) : state.singleproduct.data.length !== undefined ? (
-              <h4>Invalid Id = {id}</h4>
+              <h4>Invalid Id {id}</h4>
             ) : (
               <UpdateProduct
                 data={state.productCategory}
