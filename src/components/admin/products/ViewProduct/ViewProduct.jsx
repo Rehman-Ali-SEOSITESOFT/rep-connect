@@ -37,7 +37,7 @@ const ViewProduct = () => {
                     </p>
 
                     <p className="price">
-                      <span className="ttt">Quantity :</span>{" "}
+                      <span className="ttt">stock Quantity :</span>{" "}
                       <span className="q">{state.data.stock_quantity}</span>
                     </p>
 

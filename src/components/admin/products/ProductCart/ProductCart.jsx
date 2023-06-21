@@ -86,7 +86,7 @@ const ProductCart = () => {
       field: "category.name",
     },
     {
-      title: "Quantity",
+      title: "Stock Quantity",
       filed: "stock_quantity",
       render: (item) => {
         return item.stock_quantity;

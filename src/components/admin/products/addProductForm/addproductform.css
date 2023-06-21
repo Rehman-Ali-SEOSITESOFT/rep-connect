@@ -1,9 +1,28 @@
+.add-product {
+  position: relative;
+}
 form.add-product-form {
   background: white;
   padding: 1rem;
   border-radius: 5px;
 }
 
+.adding-produt-loader {
+  position: absolute;
+  background: #00000096;
+  inset: 0;
+  z-index: 12;
+}
+
+img.adding-imag {
+  color: transparent;
+  position: absolute;
+  margin: auto;
+  text-align: center;
+  inset: 0;
+  width: 80px;
+  height: 80px;
+}
 .add-product-form .pro-form-row-cate,
 .add-product-form .pro-form-row-files,
 .add-product-form .pro-form-row {
