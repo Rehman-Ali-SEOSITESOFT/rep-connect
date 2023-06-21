@@ -54,13 +54,12 @@ const tableIcons = {
 const ProductCart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-
   const state = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
-      title: "SR",
+      title: "Sr",
       field: "_id",
       render: (rowData) => {
         return <p>{rowData.tableData.id + 1}</p>;
@@ -217,7 +216,6 @@ const ProductCart = () => {
           }}
           components={{
             Pagination: (props) => <TablePagination {...props} />,
-
             Container: (props) => <Paper {...props} elevation={0} />,
           }}
         />

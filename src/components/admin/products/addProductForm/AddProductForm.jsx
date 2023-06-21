@@ -47,7 +47,6 @@ const AddProductForm = ({ data }) => {
     for (let i = 0; i < productGallary.length; i++) {
       formData.append("gallary", productGallary[i]);
     }
-
     fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
       method: "POST",
       headers: {
@@ -71,7 +70,6 @@ const AddProductForm = ({ data }) => {
             progress: undefined,
             theme: "colored",
           });
-
           setAddProduct({
             product_name: "",
             quantity: "",
