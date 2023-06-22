@@ -18,8 +18,9 @@
   height: 70px;
   padding: 5px;
   border-radius: 3px;
-  border: 1px solid #cdcdcd;
   cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 1px solid white;
 }
 .view-gallary .gallary-item {
   min-height: 100%;
