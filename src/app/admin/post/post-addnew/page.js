@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import style from "./Addpost.module.css";
 import CkEditior from "@/components/admin/ckEditior/CkEditor";
 import axios from "axios";
-
+import SunEditor from "suneditor-react";
 const Page = () => {
   const [postData, setPostData] = useState({
     productTitle: "",
@@ -21,6 +21,7 @@ const Page = () => {
   const [image, setImage] = useState(null);
   const [base64Image, setBase64Image] = useState("");
   const [author, setAuthor] = useState([]);
+  const [content, setContent] = useState("");
   const handleChange = (e) => {
     setPostData({
       ...postData,
@@ -42,9 +43,27 @@ const Page = () => {
   };
   const _handleFormSubmitting = (e) => {
     e.preventDefault();
-    console.log(postData, "post data");
-    console.log(subscribe, "subcribe");
-    console.log(image, "image");
+    let data = JSON.stringify({
+      post_redirect: postData.postRedirect,
+      url: postData.url,
+    });
+
+    const formData = new FormData();
+    formData.append("title", postData.productTitle);
+    formData.append("description", postData.discription);
+    formData.append("format", content);
+    formData.append("category", postData.category);
+    formData.append("tag", postData.tag);
+    formData.append("featured_image", image);
+
+    formData.append("post_redirection", data);
+
+    axios
+      .post(`https://anxious-foal-shift.cyclic.app/api/post`, formData)
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => console.log(err));
   };
   useEffect(() => {
     axios
@@ -184,7 +203,41 @@ const Page = () => {
                             <div className="col-xl-12">
                               <label className="form-label">Format</label>
 
-                              <CkEditior />
+                              <div className="formatdataEditor">
+                                <SunEditor
+                                  onChange={setContent}
+                                  setOptions={{
+                                    height: 300, // Set the desired height of the editor
+                                    buttonList: [
+                                      ["undo", "redo"],
+                                      ["font", "fontSize", "formatBlock"],
+                                      [
+                                        "bold",
+                                        "underline",
+                                        "italic",
+                                        "strike",
+                                        "subscript",
+                                        "superscript",
+                                      ],
+                                      ["removeFormat"],
+                                      [
+                                        "fontColor",
+                                        "hiliteColor",
+                                        "outdent",
+                                        "indent",
+                                      ],
+                                      [
+                                        "align",
+                                        "horizontalRule",
+                                        "list",
+                                        "table",
+                                      ],
+                                      ["link", "image", "video"],
+                                      ["fullScreen", "showBlocks", "codeView"],
+                                    ],
+                                  }}
+                                />
+                              </div>
                             </div>
                             <div className="col-xl-12">
                               <label className="form-label">
