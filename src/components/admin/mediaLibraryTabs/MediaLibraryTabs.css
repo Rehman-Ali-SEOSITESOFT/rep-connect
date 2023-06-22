@@ -1,0 +1,68 @@
+.image_ {
+  height: 138px;
+  max-width: 138px;
+  margin: 8px;
+}
+.tabs_menu_ {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  border: 1px solid #c3c4c7;
+  padding: 10px 10px !important;
+}
+.nav-pills .nav-link.active {
+  background: #2271b1 !important;
+  color: #f6f7f7 !important;
+}
+.nav-pills .nav-link {
+  padding: 4px 8px;
+  text-decoration: none;
+  border: 1px solid #2271b1 !important;
+  border-radius: 2px;
+  text-shadow: none;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: normal;
+  color: #2271b1 !important;
+  background: #f6f7f7 !important;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.tabs_number {
+  font-size: 13px;
+  line-height: 20px;
+  color: #3c434a;
+  font-weight: 400;
+  text-align: center;
+}
+.loadMOre {
+  background: #2271b1;
+  border-color: #2271b1;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+  border: none;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 3px;
+}
+.tab_content {
+  margin-top: 20px;
+}
+.viewLess_btn {
+  font-size: 13px;
+  padding: 7px 10px;
+  color: #2271b1;
+  border: 1px solid #2271b1;
+  background: #f6f7f7;
+  vertical-align: top;
+  border-radius: 3px;
+  margin-left: 8px;
+}
+@media screen and (max-width: 1200px) {
+  .image_ {
+    height: 165px;
+    max-width: 165px;
+    margin: 8px;
+  }
+}

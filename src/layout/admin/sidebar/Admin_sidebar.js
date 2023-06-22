@@ -55,6 +55,7 @@ const Admin_sidebar = ({ opend }) => {
 
   const [dropdown1, setDropDown1] = useState(false);
   const [dropdown2, setDropDown2] = useState(false);
+  const [dropdown3, setDropDowm3] = useState(false);
   const hanldeDropwDown1 = () => {
     setDropDown1(!dropdown1);
     setDropDown2(false);
@@ -63,7 +64,11 @@ const Admin_sidebar = ({ opend }) => {
     setDropDown2(!dropdown2);
     setDropDown1(false);
   };
-
+  const handleDropDown3 = () => {
+    setDropDowm3(!dropdown3);
+    setDropDown1(false);
+    setDropDown2(false);
+  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -221,6 +226,41 @@ const Admin_sidebar = ({ opend }) => {
                       }`}
                     >
                       all Product
+                    </Link>
+                  </li>
+                </ol>
+              )}
+            </li>
+
+            <li className="list-menu">
+              <span
+                className={`title-name ${dropdown3 ? "active" : null}`}
+                onClick={handleDropDown3}
+              >
+                <span className="d-icon">
+                  <i className="fa-solid fa-camera"></i>
+                </span>
+                <span>Media</span>
+                {dropdown3 ? (
+                  <span className=" right-side-icon w-100 text-end">
+                    <i className="fa-solid fa-angle-up"></i>
+                  </span>
+                ) : (
+                  <span className=" right-side-icon w-100 text-end">
+                    <i className="fa-solid fa-angle-right"></i>
+                  </span>
+                )}
+              </span>
+              {dropdown3 && (
+                <ol className="more-list ">
+                  <li>
+                    <Link
+                      href={`/admin/media/liberay`}
+                      className={`${
+                        path === "product-addnew" ? "active" : null
+                      }`}
+                    >
+                      Liberay
                     </Link>
                   </li>
                 </ol>
