@@ -48,7 +48,7 @@ html {
 
 /*  admin-content */
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -59,7 +59,7 @@ html {
 ::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
-}
+} */
 
 .admin-sidebar {
   position: fixed;

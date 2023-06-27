@@ -1,12 +1,26 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
+import "./MediaLibContent.css";
 const MediaLibContent = (props) => {
-  const { image } = props;
+  const { image, id, _handleGettingId, selectedImage } = props;
+
   return (
-    <Link href="#" className="image_section">
-      <Image src={image} alt="" className="image_" />
-    </Link>
+    <div
+      className={`image_section   ${
+        selectedImage.filter((item) => item === id).length > 0
+          ? "addBorder"
+          : ""
+      }`}
+    >
+      <Image
+        src={image}
+        alt=""
+        className={`image_`}
+        width={138}
+        height={138}
+        onClick={() => _handleGettingId(id)}
+      />
+    </div>
   );
 };
 

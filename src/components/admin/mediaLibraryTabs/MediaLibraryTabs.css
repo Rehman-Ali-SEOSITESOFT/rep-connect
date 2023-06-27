@@ -1,14 +1,30 @@
 .image_ {
   height: 138px;
   max-width: 138px;
-  margin: 8px;
+  padding: 8px;
+  cursor: pointer;
 }
 .tabs_menu_ {
+  flex-wrap: nowrap !important;
+  overflow-x: scroll;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   border: 1px solid #c3c4c7;
   padding: 10px 10px !important;
+}
+.tabs_sectons_wrapper ::-webkit-scrollbar {
+  width: 5px !important ;
+  height: 8px;
+}
+.tabs_sectons_wrapper ::-webkit-scrollbar-thumb {
+  background-color: #2271b1;
+  border-radius: 20px !important;
+  border: 1px solid #2271b1 !important;
+}
+.tabs_sectons_wrapper ::-webkit-scrollbar-track {
+  background: transparent;
+  height: 5px !important; /* color of the tracking area */
 }
 .nav-pills .nav-link.active {
   background: #2271b1 !important;
@@ -59,10 +75,51 @@
   border-radius: 3px;
   margin-left: 8px;
 }
+.liberay_wrapper {
+  position: relative;
+}
+.addNewButton {
+  padding: 4px 8px;
+  text-decoration: none;
+  border: 1px solid #2271b1;
+  border-radius: 2px;
+  text-shadow: none;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: normal;
+  color: #2271b1;
+  background: #f6f7f7;
+  cursor: pointer;
+}
+.tabs_menu_ {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  border: 1px solid #c3c4c7;
+  padding: 10px 10px;
+}
+.image_wrapper {
+  justify-content: space-between;
+}
+.deletebtn {
+  margin-right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+}
 @media screen and (max-width: 1200px) {
   .image_ {
     height: 165px;
     max-width: 165px;
-    margin: 8px;
+    padding: 8px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .image_wrapper {
+    justify-content: center;
+  }
+  .image_ {
+    height: 115px;
+    max-width: 115px;
   }
 }

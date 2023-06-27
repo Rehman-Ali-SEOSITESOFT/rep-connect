@@ -10,6 +10,9 @@ import updatingSlice from "./slices/updateCart";
 import catItemSlice from "./slices/categoryFilter";
 import adminSideBarOpned from "./slices/adminSidebar";
 import productCategorySlice from "./slices/productCategory";
+import tagsSlice from "./slices/tagLibrary";
+import tagsDataAllSlice from "./slices/tagsDataAll";
+
 export const store = configureStore({
   reducer: {
     menuReducer: menuReducer,
@@ -23,5 +26,7 @@ export const store = configureStore({
     categoryFilter: catItemSlice,
     adminSideBarOpned: adminSideBarOpned,
     productCategory: productCategorySlice,
+    tags: tagsSlice,
+    tagsData: tagsDataAllSlice,
   },
 });

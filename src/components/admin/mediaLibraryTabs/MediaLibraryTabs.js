@@ -5,9 +5,34 @@ import womenkey from "../../../assets/images/mediaLibrary/womensKEY-provider-22-
 import men from "../../../assets/images/mediaLibrary/mensKEY-provider-22-300x300.jpg";
 import uroKey from "../../../assets/images/mediaLibrary/uroKEY-provider-22-300x300.jpg";
 import MediaLibContent from "../mediaLibContent/MediaLibContent";
-
+import AddNew from "@/components/admin/addNew/AddNew";
+import NavTabs from "../addNew/navTabs/NavTabs";
+import axios from "axios";
+import Spinner from "@/components/spinner/Spinner";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getTags } from "@/redux/slices/tagLibrary";
+import { tagsDataAll } from "@/redux/slices/tagsDataAll";
 const MediaLibraryTabs = () => {
+  const state = useSelector((state) => state.tags);
+  const [addItem, setAddItem] = useState(false);
+  const dispatch = useDispatch();
+  const tagss = useSelector((state) => state.tags.data);
+  const tagsData = useSelector((state) => state.tagsData.data);
+  const [delBtn, setDelBtn] = useState(false);
   const firstRender = useRef(true);
+  const [selectedImage, setSelectedImage] = useState([]);
+  const tagsLoading = useSelector((state) => state.tagsData.loading);
+
+  const _handleAddNew = () => {
+    setAddItem(true);
+  };
+ 
+  const _hndleClsosee = () => {
+    setAddItem(false);
+  };
+
+  const _handleDeleteButton = () => {};
   const [tabs1, setTab1] = useState([
     {
       image: uroKey,
@@ -125,28 +150,103 @@ const MediaLibraryTabs = () => {
       image: womenkey,
     },
   ]);
-  const [loadMoree, setLoadMoree] = useState(6);
+  const [tabsNames, setTabsNames] = useState([
+    // {
+    //   tabName: "Home",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+    // {
+    //   tabName: "Home",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+    // {
+    //   tabName: "Home",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+    // {
+    //   tabName: "Home",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+    // {
+    //   tabName: "Contact",
+    // },
+    // {
+    //   tabName: "Services",
+    // },
+  ]);
+  const [loadMoree, setLoadMoree] = useState(30);
   const [loadMore2, setLoadMore2] = useState(6);
   const [loadMore3, setLoadMore3] = useState(6);
   const [toggleBtn, setToggleBtn] = useState(false);
-  let tabsNumer = tabs1.length;
-  let tabsNumer2 = tabs2.length;
-  let tabsNumer3 = tabs3.length;
+  const [loading, setLoading] = useState(false);
+  let tabsNumer = tagsData.length;
+
   const _handleLoadMore = () => {
-    setLoadMoree(loadMoree + 3);
-    setToggleBtn(true);
+    if (loadMoree < tabsNumer) {
+      setLoadMoree(loadMoree + 10);
+      setToggleBtn(true);
+    } else {
+      setToggleBtn(true);
+    }
+    // if (loadMoree < tagsData) {
+    //   setLoadMoree(loadMoree + 3);
+    // }
+    // setToggleBtn(true);
+    // console.log(loadMoree);
   };
-  const _handleLoadMore2 = () => {
-    setLoadMore2(loadMore2 + 3);
-    setToggleBtn(true);
-  };
-  const _handleLoadMore3 = () => {
-    setLoadMore3(loadMore3 + 3);
-    setToggleBtn(true);
-  };
+  // const _handleLoadMore2 = () => {
+  //   if (loadMore2 < tabsNumer2) {
+  //     setLoadMore2(loadMore2 + 3);
+  //   }
+  //   setToggleBtn(true);
+  // };
+  // const _handleLoadMore3 = () => {
+  //   if (loadMore3 < tabsNumer3) {
+  //     setLoadMore3(loadMore3 + 3);
+  //   }
+  //   setToggleBtn(true);
+  // };
   const _handleViewLesss = () => {
-    if (loadMoree > 6) {
-      setLoadMoree(loadMoree - 3);
+    if (loadMoree > 30) {
+      setLoadMoree(loadMoree - 10);
     } else {
       setLoadMoree(loadMoree);
       setToggleBtn(false);
@@ -169,138 +269,113 @@ const MediaLibraryTabs = () => {
     }
     console.log(loadMore3);
   };
+  const getMediaTagData = () => {
+    axios
+      .get("https://anxious-foal-shift.cyclic.app/api/mediatag")
+      .then((resp) => {
+        setTabsNames(resp.data.data.tags);
+
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
   useEffect(() => {
-    firstRender.current = false;
-  }, [toggleBtn]);
+    setLoading(false);
+    dispatch(getTags());
+    dispatch(tagsDataAll());
+  }, []);
+  const _handleImageId = (id) => {
+    console.log(id, "id of image");
+    const selectImage = id;
+    if (selectedImage.filter((item) => item === id).length > 0) {
+      let arr = [...selectedImage];
+      setSelectedImage(arr.filter((item) => item !== id));
+    } else {
+      setSelectedImage((prevImage) => [...prevImage, selectImage]);
+    }
+  };
+
   return (
     <>
-      <ul className="nav nav-pills tabs_menu_" id="pills-tab" role="tablist">
-        <li className="nav-item" role="presentation">
-          <button
-            className="nav-link active "
-            id="pills-home-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-home"
-            type="button"
-            role="tab"
-            aria-controls="pills-home"
-            aria-selected="true"
-          >
-            Home
-          </button>
-        </li>
-        <li className="nav-item" role="presentation">
-          <button
-            className="nav-link"
-            id="pills-profile-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-profile"
-            type="button"
-            role="tab"
-            aria-controls="pills-profile"
-            aria-selected="false"
-          >
-            Profile
-          </button>
-        </li>
-        <li className="nav-item" role="presentation">
-          <button
-            className="nav-link"
-            id="pills-contact-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-contact"
-            type="button"
-            role="tab"
-            aria-controls="pills-contact"
-            aria-selected="false"
-          >
-            Contact
-          </button>
-        </li>
-      </ul>
-      <div className="tab-content tab_content" id="pills-tabContent">
-        <div
-          className="tab-pane fade show active "
-          id="pills-home"
-          role="tabpanel"
-          aria-labelledby="pills-home-tab"
-        >
-          {tabs1.slice(0, loadMoree).map((e, idx) => {
-            return (
-              <span key={idx}>
-                <MediaLibContent image={e.image} />
-              </span>
-            );
-          })}
-          <div className="text-center">
-            <p className="tabs_number"> Showing {tabsNumer} media items </p>
-            <button onClick={_handleLoadMore} className="loadMOre">
-              Load More
-            </button>
-            {toggleBtn ? (
-              <button onClick={_handleViewLesss} className="viewLess_btn">
-                View Less
-              </button>
-            ) : (
-              ""
-            )}
+      {tagsLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <div className="row">
+            <div className="col-6"></div>
+            <div className="col-6 text-end">
+              <div className="right mt-2">
+                {selectedImage.length > 0 && (
+                  <button
+                    onClick={_handleDeleteButton}
+                    className="addNewButton   deletebtn"
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-        <div
-          className="tab-pane fade"
-          id="pills-profile"
-          role="tabpanel"
-          aria-labelledby="pills-profile-tab"
-        >
-          {tabs2.slice(0, loadMore2).map((e, idx) => {
-            return (
-              <span key={idx}>
-                <MediaLibContent image={e.image} />
-              </span>
-            );
-          })}
-          <div className="text-center">
-            <p className="tabs_number">Showing {tabsNumer2} media items</p>
-            <button onClick={_handleLoadMore2} className="loadMOre">
-              Load More
-            </button>
-            {toggleBtn ? (
-              <button onClick={_handleViewLess} className="viewLess_btn">
-                View Less
-              </button>
-            ) : (
-              ""
-            )}
+
+          <div className="tabs_sectons_wrapper">
+            <ul
+              className="nav nav-pills tabs_menu_"
+              id="pills-tab"
+              role="tablist"
+            >
+              {tagss?.map((e, idx) => {
+                return (
+                  <li className="nav-item" role="presentation" key={idx}>
+                    <NavTabs tabName={e.name} />
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="tab-content tab_content" id="pills-tabContent">
+              <div
+                className="tab-pane fade  show active"
+                id="pills-home"
+                role="tabpanel"
+                aria-labelledby="pills-home-tab"
+              >
+                <div className="d-flex flex-wrap position-relative image_wrapper">
+                  {tagsData?.slice(0, loadMoree).map((e, idx) => {
+                    return (
+                      // <span key={idx}>
+                      <MediaLibContent
+                        image={e.image.url}
+                        key={idx}
+                        id={e.image.id}
+                        _handleGettingId={_handleImageId}
+                        selectedImage={selectedImage}
+                      />
+                      // </span>
+                    );
+                  })}
+                </div>
+                <div className="text-center">
+                  <p className="tabs_number">
+                    Showing {loadMoree} of {tabsNumer} media items
+                  </p>
+                  {loadMoree < tabsNumer && (
+                    <button onClick={_handleLoadMore} className="loadMOre">
+                      Load More
+                    </button>
+                  )}
+
+                  {toggleBtn ? (
+                    <button onClick={_handleViewLesss} className="viewLess_btn">
+                      View Less
+                    </button>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div
-          className="tab-pane fade"
-          id="pills-contact"
-          role="tabpanel"
-          aria-labelledby="pills-contact-tab"
-        >
-          {tabs3.slice(0, loadMore3).map((e, idx) => {
-            return (
-              <span key={idx}>
-                <MediaLibContent image={e.image} />
-              </span>
-            );
-          })}
-          <div className="text-center">
-            <p className="tabs_number">Showing {tabsNumer3} media items</p>
-            <button onClick={_handleLoadMore3} className="loadMOre">
-              Load More
-            </button>
-            {toggleBtn ? (
-              <button onClick={_handleJumpLoaded} className="viewLess_btn">
-                View Less
-              </button>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };

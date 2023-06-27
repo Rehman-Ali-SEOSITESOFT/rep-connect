@@ -1,5 +1,6 @@
 .images___ {
   margin-top: 15px;
+  flex-wrap: wrap;
 }
 .images___ img {
   width: 50px;
@@ -15,4 +16,9 @@
   top: -6px;
   color: red;
   cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: tan;
 }
