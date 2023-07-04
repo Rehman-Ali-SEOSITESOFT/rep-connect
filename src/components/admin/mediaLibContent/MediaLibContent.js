@@ -6,7 +6,7 @@ const MediaLibContent = (props) => {
 
   return (
     <div
-      className={`image_section   ${
+      className={`image_section ${
         selectedImage.filter((item) => item === id).length > 0
           ? "addBorder"
           : ""
