@@ -3,6 +3,8 @@ import ViewOrder from "@/components/admin/orders/view/ViewOrder";
 import { token } from "@/hooks/token";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import loader from "../../../../../assets/images/admin/product-loader.gif";
+import Image from "next/image";
 
 const page = ({ params }) => {
   const { id } = params;
@@ -35,7 +37,7 @@ const page = ({ params }) => {
   }, []);
 
   return (
-    <div className="order-view">
+    <div className="order-view pb-4">
       <div className="container-fluid">
         <div className={`row row-title-equal-spacing`}>
           <div className="col-6">
@@ -54,9 +56,11 @@ const page = ({ params }) => {
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row position-relative">
           {isloading ? (
-            <h1> Ladoing</h1>
+            <div className="">
+              <Image src={loader} width={50} height={50} alt="loader" />
+            </div>
           ) : isError ? (
             <p>{isErrorMessage}</p>
           ) : (

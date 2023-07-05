@@ -61,6 +61,9 @@ const OrderCart = () => {
     {
       title: "Order #",
       field: "order_id",
+      render: (rowData, rowCol) => {
+        return `order#${rowData.order_id}`;
+      },
     },
     {
       title: "Order Status",
@@ -96,9 +99,6 @@ const OrderCart = () => {
   const defaultMaterialTheme = createTheme();
   const [entries, setEnteries] = useState([]);
 
-  const hanldeDeleted = (event, data) => {
-    console.log("hanlde delete", data);
-  };
   const hanldeUpdated = (event, data) => {
     router.push(`/admin/order/update/${data._id}`);
   };
@@ -145,11 +145,6 @@ const OrderCart = () => {
               columns={columns}
               data={entries}
               actions={[
-                {
-                  icon: () => <DeleteIcon />,
-                  // tooltip: "Remove",
-                  onClick: (event, data) => hanldeDeleted(event, data),
-                },
                 {
                   icon: () => <Edit />,
                   // tooltip: "Change Status",

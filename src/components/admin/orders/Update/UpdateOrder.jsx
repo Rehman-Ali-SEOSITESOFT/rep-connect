@@ -1,9 +1,8 @@
 import React from "react";
-import "./vieworder.css";
+import "./UpdateOrder.css";
 import Image from "next/image";
 import moment from "moment";
-const ViewOrder = ({ data }) => {
-  console.log(data);
+const UpdateOrder = ({ data }) => {
   const {
     first_name,
     last_name,
@@ -27,7 +26,7 @@ const ViewOrder = ({ data }) => {
     <>
       <div className="col-lg-6">
         <div className="order">
-          <div className="a-view-product-detail">
+          <div className="a-update-product-detail">
             <div className="view-titles d-flex justify-content-between">
               <h4 className="order-no">
                 Order No - <span>{data.order_id}</span>{" "}
@@ -89,7 +88,7 @@ const ViewOrder = ({ data }) => {
       </div>
       <div className="col-lg-6">
         <div className="user-detail">
-          <div className="user-detail-view">
+          <div className="user-detail-update">
             <h4 className="user-name">user detail</h4>
 
             <div className="user-info">
@@ -205,4 +204,4 @@ const ViewOrder = ({ data }) => {
   );
 };
 
-export default ViewOrder;
+export default UpdateOrder;
