@@ -75,7 +75,7 @@ const page = ({ params }) => {
           <>
             <div className="row">
               <div className="col">
-                <label htmlFor="form-label" className="fs-5  mb-2 fw-bolder">
+                <label htmlFor="form-label" className="fs-5  mb-2 fw-">
                   {" "}
                   Order Status
                 </label>
