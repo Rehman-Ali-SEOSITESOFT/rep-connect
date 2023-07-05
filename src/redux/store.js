@@ -12,6 +12,7 @@ import adminSideBarOpned from "./slices/adminSidebar";
 import productCategorySlice from "./slices/productCategory";
 import tagsSlice from "./slices/tagLibrary";
 import tagsDataAllSlice from "./slices/tagsDataAll";
+import postTagsSlice from "./slices/postGetTags";
 
 export const store = configureStore({
   reducer: {
@@ -28,5 +29,6 @@ export const store = configureStore({
     productCategory: productCategorySlice,
     tags: tagsSlice,
     tagsData: tagsDataAllSlice,
+    postTags: postTagsSlice,
   },
 });

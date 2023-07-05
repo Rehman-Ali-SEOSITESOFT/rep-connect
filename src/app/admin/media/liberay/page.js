@@ -4,7 +4,6 @@ import style from "./liberay.module.css";
 import Link from "next/link";
 import MediaLibraryTabs from "@/components/admin/mediaLibraryTabs/MediaLibraryTabs";
 import AddNew from "@/components/admin/addNew/AddNew";
-import axios from "axios";
 import { useSelector } from "react-redux";
 
 const page = () => {

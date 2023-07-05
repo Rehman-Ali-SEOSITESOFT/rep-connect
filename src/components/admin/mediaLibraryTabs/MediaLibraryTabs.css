@@ -63,7 +63,7 @@
   border-radius: 3px;
 }
 .tab_content {
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .viewLess_btn {
   font-size: 13px;
@@ -99,7 +99,7 @@
   padding: 10px 10px;
 }
 .image_wrapper {
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .deletebtn {
   margin-right: 10px;

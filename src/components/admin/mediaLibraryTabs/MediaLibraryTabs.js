@@ -5,7 +5,6 @@ import womenkey from "../../../assets/images/mediaLibrary/womensKEY-provider-22-
 import men from "../../../assets/images/mediaLibrary/mensKEY-provider-22-300x300.jpg";
 import uroKey from "../../../assets/images/mediaLibrary/uroKEY-provider-22-300x300.jpg";
 import MediaLibContent from "../mediaLibContent/MediaLibContent";
-import AddNew from "@/components/admin/addNew/AddNew";
 import NavTabs from "../addNew/navTabs/NavTabs";
 import axios from "axios";
 import Spinner from "@/components/spinner/Spinner";
@@ -13,12 +12,14 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getTags } from "@/redux/slices/tagLibrary";
 import { tagsDataAll } from "@/redux/slices/tagsDataAll";
+import { usePathname } from "next/navigation";
 const MediaLibraryTabs = () => {
+  const path = usePathname();
   const state = useSelector((state) => state.tags);
   const [addItem, setAddItem] = useState(false);
   const dispatch = useDispatch();
   const tagss = useSelector((state) => state.tags.data);
-  const tagsData = useSelector((state) => state.tagsData.data);
+  const tagsData = useSelector((state) => state.tagsData);
   const [delBtn, setDelBtn] = useState(false);
   const firstRender = useRef(true);
   const [selectedImage, setSelectedImage] = useState([]);
@@ -27,12 +28,11 @@ const MediaLibraryTabs = () => {
   const _handleAddNew = () => {
     setAddItem(true);
   };
- 
+
   const _hndleClsosee = () => {
     setAddItem(false);
   };
 
-  const _handleDeleteButton = () => {};
   const [tabs1, setTab1] = useState([
     {
       image: uroKey,
@@ -217,7 +217,8 @@ const MediaLibraryTabs = () => {
   const [loadMore3, setLoadMore3] = useState(6);
   const [toggleBtn, setToggleBtn] = useState(false);
   const [loading, setLoading] = useState(false);
-  let tabsNumer = tagsData.length;
+
+  let tabsNumer = tagsData.data.length;
 
   const _handleLoadMore = () => {
     if (loadMoree < tabsNumer) {
@@ -279,13 +280,43 @@ const MediaLibraryTabs = () => {
       })
       .catch((err) => console.log(err));
   };
+  const [newData, setNewData] = useState("all");
+  const _handletagsName = (id) => {
+    setNewData(id);
+    // dispatch(tagsDataAll(id));
+    if (id === id) {
+      console.log(id);
+    }
+  };
+  const getAllDataTags = () => {
+    const queryParam = newData;
+    const apiEndpoint = `https://anxious-foal-shift.cyclic.app/api/media/${queryParam}`;
+    dispatch(tagsDataAll(apiEndpoint));
+  };
   useEffect(() => {
+    const queryParam = newData;
+    const apiEndpoint = `https://anxious-foal-shift.cyclic.app/api/media/${queryParam}`;
     setLoading(false);
     dispatch(getTags());
-    dispatch(tagsDataAll());
-  }, []);
+    dispatch(tagsDataAll(apiEndpoint));
+  }, [newData]);
+  const _handleDeleteButton = () => {
+    const body = {
+      media: selectedImage,
+    };
+    axios
+      .post(
+        `https://anxious-foal-shift.cyclic.app/api/media/delete_media`,
+        body
+      )
+      .then((resp) => {
+        getAllDataTags();
+        console.log(resp);
+      })
+      .catch((err) => console.log(err));
+    console.log("delete");
+  };
   const _handleImageId = (id) => {
-    console.log(id, "id of image");
     const selectImage = id;
     if (selectedImage.filter((item) => item === id).length > 0) {
       let arr = [...selectedImage];
@@ -297,85 +328,87 @@ const MediaLibraryTabs = () => {
 
   return (
     <>
-      {tagsLoading ? (
+      {/* {tagsLoading ? (
         <Spinner />
       ) : (
-        <>
-          <div className="row">
-            <div className="col-6"></div>
-            <div className="col-6 text-end">
-              <div className="right mt-2">
-                {selectedImage.length > 0 && (
-                  <button
-                    onClick={_handleDeleteButton}
-                    className="addNewButton   deletebtn"
-                  >
-                    Delete
-                  </button>
-                )}
-              </div>
+        <> */}
+      <div className="tabs_sectons_wrapper">
+        <ul className="nav nav-pills tabs_menu_" id="pills-tab" role="tablist">
+          {tagss?.map((e, idx) => {
+            return (
+              <li className="nav-item" role="presentation" key={idx}>
+                <NavTabs
+                  id={e.name}
+                  tabName={e.name}
+                  _handletagsName={_handletagsName}
+                />
+              </li>
+            );
+          })}
+        </ul>
+        <div className="row">
+          <div className="col-6"></div>
+          <div className="col-6 text-end">
+            <div className="right my-2 ">
+              {selectedImage.length > 0 && (
+                <button
+                  onClick={_handleDeleteButton}
+                  className="addNewButton   deletebtn"
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
-
-          <div className="tabs_sectons_wrapper">
-            <ul
-              className="nav nav-pills tabs_menu_"
-              id="pills-tab"
-              role="tablist"
-            >
-              {tagss?.map((e, idx) => {
-                return (
-                  <li className="nav-item" role="presentation" key={idx}>
-                    <NavTabs tabName={e.name} />
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="tab-content tab_content" id="pills-tabContent">
-              <div
-                className="tab-pane fade  show active"
-                id="pills-home"
-                role="tabpanel"
-                aria-labelledby="pills-home-tab"
-              >
-                <div className="d-flex flex-wrap position-relative image_wrapper">
-                  {tagsData?.slice(0, loadMoree).map((e, idx) => {
-                    return (
-                      // <span key={idx}>
-                      <MediaLibContent
-                        image={e.image.url}
-                        key={idx}
-                        id={e.image.id}
-                        _handleGettingId={_handleImageId}
-                        selectedImage={selectedImage}
-                      />
-                      // </span>
-                    );
-                  })}
-                </div>
-                <div className="text-center">
-                  <p className="tabs_number">
-                    Showing {loadMoree} of {tabsNumer} media items
-                  </p>
-                  {loadMoree < tabsNumer && (
-                    <button onClick={_handleLoadMore} className="loadMOre">
-                      Load More
-                    </button>
-                  )}
-
-                  {toggleBtn ? (
-                    <button onClick={_handleViewLesss} className="viewLess_btn">
-                      View Less
-                    </button>
-                  ) : (
-                    ""
-                  )}
-                </div>
+        </div>
+        <div className="tab-content tab_content" id="pills-tabContent">
+          <div
+            className="tab-pane fade  show active"
+            id="pills-home"
+            role="tabpanel"
+            aria-labelledby="pills-home-tab"
+          >
+            {tagsLoading ? (
+              <Spinner />
+            ) : (
+              <div className="d-flex flex-wrap position-relative image_wrapper">
+                {tagsData.data?.slice(0, loadMoree).map((e, idx) => {
+                  return (
+                    <MediaLibContent
+                      image={e.image.url}
+                      key={idx}
+                      id={e.image.id}
+                      _handleGettingId={_handleImageId}
+                      selectedImage={selectedImage}
+                    />
+                  );
+                })}
               </div>
+            )}
+
+            <div className="text-center">
+              <p className="tabs_number">
+                Showing {loadMoree} of {tabsNumer} media items
+              </p>
+              {loadMoree < tabsNumer && (
+                <button onClick={_handleLoadMore} className="loadMOre">
+                  Load More
+                </button>
+              )}
+
+              {toggleBtn ? (
+                <button onClick={_handleViewLesss} className="viewLess_btn">
+                  View Less
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
-        </>
-      )}
+        </div>
+      </div>
+      {/* </>
+      )} */}
     </>
   );
 };

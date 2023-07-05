@@ -6,16 +6,17 @@ const tagsDataAllState = {
   error: false,
   data: [],
 };
-export const tagsDataAll = createAsyncThunk("tagsDataAll", async () => {
-  try {
-    const response = await axios.get(
-      "https://anxious-foal-shift.cyclic.app/api/media/all"
-    );
-    return response.data;
-  } catch (error) {
-    console.log("Error", error);
+export const tagsDataAll = createAsyncThunk(
+  "tagsDataAll",
+  async (apiEndpoint, thunkAPI) => {
+    try {
+      const response = await axios.get(apiEndpoint);
+      return response.data;
+    } catch (error) {
+      console.log("Error", error);
+    }
   }
-});
+);
 
 export const tagsDataAllSlice = createSlice({
   name: "tagsDataAll",

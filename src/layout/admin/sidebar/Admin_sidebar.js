@@ -143,7 +143,7 @@ const Admin_sidebar = ({ opend }) => {
                   </li>
                   <li>
                     <Link
-                      href={`/admin/post/post-tags`}
+                      href={`/admin/post/tags`}
                       className={`${path === "post-tags" ? "active" : null}`}
                     >
                       tags
