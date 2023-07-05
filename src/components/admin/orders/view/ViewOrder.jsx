@@ -1,7 +1,16 @@
 import React from "react";
 import "./vieworder.css";
 import one from "../../../../assets/images/Courses/business-development.jpg";
-const ViewOrder = () => {
+import Image from "next/image";
+import moment from "moment";
+const ViewOrder = ({ data }) => {
+  console.log(data);
+  const currenyConvert = (e) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(e);
+  };
   return (
     <>
       <div className="col-lg-6">
@@ -9,10 +18,10 @@ const ViewOrder = () => {
           <div className="a-view-product-detail">
             <div className="view-titles d-flex justify-content-between">
               <h4 className="order-no">
-                Order No - <span>780</span>{" "}
+                Order No - <span>{data.order_id}</span>{" "}
               </h4>
               <h4 className="order-date">
-                Order Date - <span>12 july 2021</span>{" "}
+                Order Date - <span>{moment(data.createdAt).format("LL")}</span>{" "}
               </h4>
             </div>
             <table className="items-view-pro w-100">
@@ -22,51 +31,104 @@ const ViewOrder = () => {
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Total Price</th>
-                </tr>{" "}
+                </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div className="imgss me-3">
-                      <Image src={one} />
-                    </div>
-                    <div className="imgss me-3">
-                      <h2>titel </h2>
-                    </div>
-                  </td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                </tr>
+                {data.products.product_items.map((e, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>
+                        <div className="d-flex w-100 align-items-center">
+                          <div className="imgss-box d-inline-block me-3">
+                            <Image src={one} alt="ad" className="img-fluid" />
+                          </div>
+                          <div className="imgss-title d-inline-block">
+                            <h2 className="title">{e.name} </h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>{currenyConvert(e.price)}</td>
+                      <td>{e.quantity}</td>
+                      <td>{currenyConvert(e.price * e.quantity)}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
+              <tfoot>
+                {/* <tr>
+                  <td colSpan={2}></td>
+                  <td>items</td>
+                  <td>780</td>
+                </tr> */}
+                <tr>
+                  <td colSpan={2}></td>
+                  <td>Total Price</td>
+                  <td>{currenyConvert(data.products.total)}</td>
+                </tr>
+              </tfoot>
             </table>
-            {/* <div className="items">
-              <div className="item">
-                <div className="img-title">
-                  <div className="img-side"></div>
-                  <div className="title-side">
-                    <h3>this is title of item</h3>
-                  </div>
-                </div>
-                <div className="price">$233</div>
-                <div className="qty">33</div>
-                <div className="total-price">33</div>
-              </div>
-            </div> */}
-            <div className="more-detail">
-              <div className="more-row">
-                <h2>Total items</h2>
-                <h2>04</h2>
-              </div>
-              <div className="more-row">
-                <h2>Total Price</h2>
-                <h2>04</h2>
-              </div>
+          </div>
+        </div>
+      </div>
+      <div className="col-lg-6">
+        <div className="user-detail">
+          <div className="user-detail-view">
+            <h4 className="user-name">user detail</h4>
+
+            <div className="user-info">
+              <h3>Ghulam Rasool</h3>
+            </div>
+            <div className="ordr-detail">
+              <h4>
+                Order status : <strong> completed</strong>
+              </h4>
+              <h4>
+                Payment method <strong>COD</strong>{" "}
+              </h4>
+            </div>
+            <div className="address billing-address">
+              <h3 className="add-title">billing address</h3>
+
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
+            </div>
+            <div className="address shipping-address">
+              <h3 className="add-title">shipping address</h3>
+
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
+              <p className="col-row">
+                <strong>name : </strong>
+                <label> GR </label>
+              </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="col-lg-6"></div>
     </>
   );
 };

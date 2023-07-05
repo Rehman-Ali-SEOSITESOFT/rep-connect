@@ -3,16 +3,24 @@
   border-radius: 0.625rem;
 }
 .a-view-product-detail {
+  padding-bottom: 10px;
 }
 .view-titles {
   padding: 1rem 1.25rem;
+  border-bottom: 1px solid #00000014;
 }
+
+.user-detail-view .user-name,
 .view-titles .order-no {
   margin: 0;
   font-size: 0.9375rem;
   font-weight: 700;
   text-transform: capitalize;
   font-family: "poppins", sans-serif;
+}
+.user-detail-view .user-name {
+  padding: 0 0 1rem 0;
+  border-bottom: 1px solid #00000014;
 }
 .view-titles .order-no span {
   color: rgb(132, 90, 223);
@@ -36,6 +44,10 @@
   font-weight: 500;
 }
 
+.items-view-pro tfoot td,
+.items-view-pro th {
+  font-weight: 700;
+}
 .items-view-pro th:not(th:first-child),
 .items-view-pro td:not(td:first-child) {
   text-align: center;
@@ -46,4 +58,73 @@
   border-bottom-width: 1px;
   border-color: #00000014;
   box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+.items-view-pro .imgss-box {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+}
+.items-view-pro .imgss-box img {
+  border-radius: 5px;
+}
+.items-view-pro td,
+.items-view-pro th {
+  width: 20%;
+}
+.items-view-pro td:first-child,
+.items-view-pro th:first-child {
+  width: 40%;
+  padding-right: 0;
+}
+.items-view-pro .imgss-title .title {
+  color: #333335;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.462;
+}
+
+/*  USER DETAIL */
+.user-detail {
+  background-color: #fff;
+  border-radius: 0.625rem;
+  padding: 1rem;
+}
+
+.ordr-detail h4 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.address p.col-row {
+  color: #8c9097;
+  font-size: 15px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+}
+.address p.col-row strong {
+  color: #333335;
+  font-weight: 600;
+}
+
+.address .add-title {
+  font-size: 18px;
+  color: #333335;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+.user-info {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f3f3;
+}
+.user-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.ordr-detail {
+  padding: 1rem 0;
+  border-bottom: 1px solid #f3f3f3;
 }

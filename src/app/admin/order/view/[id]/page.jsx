@@ -9,6 +9,8 @@ const page = ({ params }) => {
 
   const [viewOrder, setViewOrder] = useState(null);
   const [isloading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(true);
+  const [isErrorMessage, setIsErrorMessage] = useState(null);
   const singleOrderGet = () => {
     fetch(`${process.env.NEXT_PUBLIC_URL}api/order/${id}`, {
       method: "GET",
@@ -18,7 +20,14 @@ const page = ({ params }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) setViewOrder(data.order.order);
+        if (data.success === 1) {
+          setViewOrder(data.order.order);
+          setIsLoading(false);
+          setIsError(false);
+        } else {
+          setIsLoading(false);
+          setIsErrorMessage(data.error.message);
+        }
       });
   };
   useEffect(() => {
@@ -38,7 +47,7 @@ const page = ({ params }) => {
             <div className="right">
               <Link className="back-to-product" href="/admin/order">
                 <span>
-                  <i class="fa-solid fa-arrow-left-long"></i>
+                  <i className="fa-solid fa-arrow-left-long"></i>
                 </span>
                 back to orders
               </Link>
@@ -46,7 +55,13 @@ const page = ({ params }) => {
           </div>
         </div>
         <div className="row">
-          <ViewOrder />
+          {isloading ? (
+            <h1> Ladoing</h1>
+          ) : isError ? (
+            <p>{isErrorMessage}</p>
+          ) : (
+            <ViewOrder data={viewOrder} />
+          )}
         </div>
       </div>
     </div>
