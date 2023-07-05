@@ -27,7 +27,7 @@ const Page = () => {
                   <span>
                     <i className="fa-solid fa-plus"></i>
                   </span>
-                  Add Tag
+                  Add New Tag
                 </Link>
               </div>
             </div>

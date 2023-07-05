@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./AddNew.css";
-
 import ImagesView from "./imagesView/ImagesView";
 import { TagsInput } from "react-tag-input-component";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,7 +8,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getTags } from "@/redux/slices/tagLibrary";
 import Spinner from "@/components/spinner/Spinner";
-
 const AddNew = ({ _hndleClsosee }) => {
   const dispatch = useDispatch();
   const [images, setImages] = useState([]);
