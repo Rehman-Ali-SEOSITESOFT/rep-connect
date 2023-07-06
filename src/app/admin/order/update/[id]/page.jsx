@@ -3,10 +3,11 @@
 import { token } from "@/hooks/token";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import loader from "../../../../../assets/images/admin/product-loader.gif";
+
 import Image from "next/image";
 import UpdateOrder from "@/components/admin/orders/Update/UpdateOrder";
 import { ToastContainer, toast } from "react-toastify";
+import Spinner from "@/components/spinner/Spinner";
 
 const page = ({ params }) => {
   const { id } = params;
@@ -101,9 +102,7 @@ const page = ({ params }) => {
           </div>
         </div>
         {isloading ? (
-          <div className="loader">
-            <Image src={loader} width={50} height={50} alt="loader" />
-          </div>
+          <Spinner />
         ) : isError ? (
           <p>{isErrorMessage}</p>
         ) : (
@@ -111,8 +110,13 @@ const page = ({ params }) => {
             <div className="row">
               <div className="col">
                 <label htmlFor="form-label" className="fs-5  mb-2 fw-">
-                  {" "}
-                  Order Status
+                  Order Status :
+                  {orderStatus === "completed" ||
+                  orderStatus === "cancelled" ? (
+                    <span className="order-message">
+                      Order can't be changed beacuse it's already {orderStatus}
+                    </span>
+                  ) : null}
                 </label>
                 <form
                   onSubmit={updateStatusForm}
@@ -125,9 +129,13 @@ const page = ({ params }) => {
                     onChange={(e) => setOrderStatus(e.target.value)}
                   >
                     {orderStatus === "cancelled" ? (
-                      <option value="cancelled">cancelled</option>
+                      <option value="cancelled" disabled>
+                        cancelled
+                      </option>
                     ) : orderStatus === "completed" ? (
-                      <option value="completed">completed</option>
+                      <option value="completed" disabled>
+                        completed
+                      </option>
                     ) : (
                       <>
                         <option value="pending">pending</option>
@@ -137,7 +145,15 @@ const page = ({ params }) => {
                       </>
                     )}
                   </select>
-                  <button type="submit" className="update-order-status-btn">
+                  <button
+                    type="submit"
+                    className="update-order-status-btn"
+                    disabled={
+                      orderStatus === "completed" || orderStatus === "cancelled"
+                        ? true
+                        : false
+                    }
+                  >
                     Update Order Status
                   </button>
                 </form>
