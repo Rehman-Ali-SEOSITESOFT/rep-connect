@@ -68,8 +68,7 @@ const page = ({ params }) => {
             progress: undefined,
             theme: "colored",
           });
-        }
-        if (data.success === 0) {
+        } else {
           toast.error(data.error.message, {
             position: "top-right",
             autoClose: 5000,
