@@ -56,8 +56,9 @@ const page = ({ params }) => {
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
+        singleOrderGet();
 
-        if (data.success === 1) {
+        if (data.success !== 0) {
           toast.success("Successfully Update order", {
             position: "top-right",
             autoClose: 5000,
@@ -72,15 +73,10 @@ const page = ({ params }) => {
           toast.error(data.error.message, {
             position: "top-right",
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
+            hideProgressBar: true,
             theme: "colored",
           });
         }
-        singleOrderGet();
       });
   };
 
@@ -145,7 +141,6 @@ const page = ({ params }) => {
                     Update Order Status
                   </button>
                 </form>
-                <ToastContainer />
               </div>
             </div>
             <div className="row position-relative">
@@ -154,6 +149,7 @@ const page = ({ params }) => {
           </>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

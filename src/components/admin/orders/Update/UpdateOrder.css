@@ -155,8 +155,8 @@
 }
 
 .ordr-detail .status {
-  display: inline-flex;
-  background: #f8dda7;
+  background: #c6c4c4;
+  color: #000000;
   color: #94660c;
   border-radius: 3px;
   padding: 3px 8px;
@@ -164,8 +164,8 @@
   text-transform: capitalize;
 }
 .ordr-detail .status.cancelled {
-  color: #777;
-  background: #e5e5e5;
+  color: #fff;
+  background: #ff8f00;
 }
 .ordr-detail .status.processing {
   background: #c6e1c6;
@@ -173,7 +173,7 @@
 }
 
 .ordr-detail .status.completed {
-  background-color: #00aa00;
+  background-color: #30f558;
   color: #022008;
 }
 
