@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import loader from "../../../../../assets/images/admin/product-loader.gif";
 import Image from "next/image";
 import UpdateOrder from "@/components/admin/orders/Update/UpdateOrder";
+import { ToastContainer, toast } from "react-toastify";
 
 const page = ({ params }) => {
   const { id } = params;
@@ -14,7 +15,6 @@ const page = ({ params }) => {
   const [isloading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(true);
   const [isErrorMessage, setIsErrorMessage] = useState(null);
-
   const [orderStatus, setOrderStatus] = useState(null);
   const singleOrderGet = () => {
     fetch(`${process.env.NEXT_PUBLIC_URL}api/order/${id}`, {
@@ -41,8 +41,48 @@ const page = ({ params }) => {
   }, []);
 
   const updateStatusForm = (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    console.log(orderStatus);
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/order/${id}`, {
+      method: "PUT",
+      headers: {
+        "x-auth-token": token(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        order_status: orderStatus,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false);
+
+        if (data.success === 1) {
+          toast.success("Successfully Update order", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+        if (data.success === 0) {
+          toast.error(data.error.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+        singleOrderGet();
+      });
   };
 
   return (
@@ -66,7 +106,7 @@ const page = ({ params }) => {
           </div>
         </div>
         {isloading ? (
-          <div className="">
+          <div className="loader">
             <Image src={loader} width={50} height={50} alt="loader" />
           </div>
         ) : isError ? (
@@ -89,15 +129,24 @@ const page = ({ params }) => {
                     value={orderStatus}
                     onChange={(e) => setOrderStatus(e.target.value)}
                   >
-                    <option value="pending">pending</option>
-                    <option value="processing">processing</option>
-                    <option value="completed">completed</option>
-                    <option value="cancelled">cancelled</option>
+                    {orderStatus === "cancelled" ? (
+                      <option value="cancelled">cancelled</option>
+                    ) : orderStatus === "completed" ? (
+                      <option value="completed">completed</option>
+                    ) : (
+                      <>
+                        <option value="pending">pending</option>
+                        <option value="processing">processing</option>
+                        <option value="cancelled">cancelled</option>
+                        <option value="completed">completed</option>
+                      </>
+                    )}
                   </select>
                   <button type="submit" className="update-order-status-btn">
                     Update Order Status
                   </button>
                 </form>
+                <ToastContainer />
               </div>
             </div>
             <div className="row position-relative">
