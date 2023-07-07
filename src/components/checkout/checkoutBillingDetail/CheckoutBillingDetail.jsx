@@ -24,7 +24,6 @@ const CheckoutBillingDetail = () => {
     postcode: false,
     phone: false,
     email: false,
-    ordernotes: false,
     address: false,
 
     // ordernotes: false,
@@ -40,7 +39,6 @@ const CheckoutBillingDetail = () => {
     postcode: "",
     phone: "",
     email: "",
-    ordernotes: "",
     address: "",
   });
   const [shippingValidated, setShippingValidated] = useState({
@@ -53,7 +51,6 @@ const CheckoutBillingDetail = () => {
     ship_postcode: false,
     ship_phone: false,
     ship_email: false,
-    ship_ordernotes: false,
     ship_address: false,
 
     // ordernotes: false,
@@ -68,7 +65,7 @@ const CheckoutBillingDetail = () => {
     ship_postcode: "",
     ship_phone: "",
     ship_email: "",
-    ship_ordernotes: "",
+    // ship_ordernotes: "",
     ship_address: "",
   });
   const dispatch = useDispatch();
@@ -112,211 +109,90 @@ const CheckoutBillingDetail = () => {
   const hanldesubmitorder = (e) => {
     e.preventDefault();
 
-    let orderAddress = {};
-    // if (address) {
-    //   orderAddress = {
-    //     billing_address: { ...billignAddress },
-    //     shipping_address: { ...shippingAddress },
-    //   };
-    // } else {
-    //   orderAddress = {
-    //     billing_address: { ...billignAddress },
-    //   };
-    // }
+    let error = [];
+    // STEP 1 : ERROR IS FILED IS EMPTY THEN SHOW ERROR MESSAGE
     let objeError = { ...billingValidated };
     for (const key in billignAddress) {
       if (!billignAddress[key]) {
         objeError[key] = true;
+        error.push(key);
       }
+      setErr(error);
       setBillingValidated(objeError);
     }
+
+    //// STEP 2 : IS SHIIPING ADDRESS IS TRUE THEN SHOW SHIPPING ADDRESS ERROR
     if (address) {
       let objeErrorShipp = { ...shippingValidated };
       for (const key in shippingAddress) {
         if (!shippingAddress[key]) {
           objeErrorShipp[key] = true;
+          error.push(key);
         }
+        setErr(error);
         setShippingValidated(objeErrorShipp);
       }
     }
+    // STEP 3 : THIS IS JUST FOR OBJECT TO BACKNED
+    let billing_address = {
+      first_name: billignAddress.firstname,
+      last_name: billignAddress.lastname,
+      country_region: billignAddress.countryregion,
+      company_name: billignAddress.company_name,
+      address: billignAddress.address,
+      city_town: billignAddress.towncity,
+      state_country: billignAddress.statecountry,
+      post_zip_code: billignAddress.postcode,
+      phone_no: billignAddress.phone,
+      email: billignAddress.email,
+    };
+    let shipping_address = {
+      first_name: shippingAddress.ship_firstname,
+      last_name: shippingAddress.ship_lastname,
+      country_region: shippingAddress.ship_countryregion,
+      company_name: shippingAddress.ship_company_name,
+      address: shippingAddress.ship_address,
+      city_town: shippingAddress.ship_towncity,
+      state_country: shippingAddress.ship_statecountry,
+      post_zip_code: shippingAddress.ship_postcode,
+      phone_no: shippingAddress.ship_phone,
+      email: shippingAddress.ship_email,
+    };
 
-    // if (!billignAddress.firstname) {
-    //   console.log("no value");
-    // } else {
-    //   console.log("value", billignAddress.firstname);
-    // }
-
-    // for (const [key, value] of Object.entries(billignAddress)) {
-    //   if (!billignAddress[key]) {
-    //     for (const [i, v] of Object.entries(billingValidated)) {
-    //       if (key === i) {
-    //         setBillingValidated({ ...billingValidated, [i]: true });
-    //       } else {
-    //         setBillingValidated({ ...billingValidated, [i]: false });
-    //       }
-    //     }
-    //     // if (key === billingValidated[key]) {
-    //     //   console.log(billignAddress);
-    //     //   // setBillingAddress({
-    //     //   //   ...billignAddress,
-    //     //   //   [billingValidated[key]]: false,
-    //     //   // });
-    //     // }
-    //   } else {
-    //     console.log(key, "=>", value);
-    //   }
-    // }
-
-    // for (const [key, value] of Object.entries(billignAddress)) {
-    //   if (
-    //     key === "firstname" ||
-    //     key === "lastname" ||
-    //     key === "company_name" ||
-    //     key === "countryregion" ||
-    //     key === "towncity" ||
-    //     key === "statecountry" ||
-    //     key === "postcode" ||
-    //     key === "phone" ||
-    //     key === "email"
-    //   ) {
-    //     console.log(`if condtiion {${key}: ${value}}`);
-    //   } else {
-    //     console.log(`else condtion {${key}: ${value}}`);
-    //   }
-    // }
-
-    /// THIS CODE IS OK FOR ADD TO ORDER TO BACKEND
-    // let orderAddress = {};
-    // if (address) {
-    //   orderAddress = {
-    //     billing_address: { ...billignAddress },
-    //     shipping_address: { ...shippingAddress },
-    //   };
-    // } else {
-    //   orderAddress = {
-    //     billing_address: { ...billignAddress },
-    //   };
-    // }
-
-    // let updatedObject = { ...validated };
-
-    // let error = [];
-    // for (let i in billignAddress) {
-    //   if (!billignAddress[i]) {
-    //     if (
-    //       i === "firstname" ||
-    //       i === "lastname" ||
-    //       i === "company_name" ||
-    //       i === "countryregion" ||
-    //       i === "towncity" ||
-    //       i === "statecountry" ||
-    //       i === "postcode" ||
-    //       i === "phone" ||
-    //       i === "email" ||
-    //       i === "address"
-    //     ) {
-    //       updatedObject[i] = true;
-    //       error.push(`${i} is a required field.`);
-    //     }
-    //   } else {
-    //     console.log(billignAddress);
-    //   }
-    // }
-    // if (address) {
-    //   for (let i in shippingAddress) {
-    //     if (!shippingAddress[i]) {
-    //       if (
-    //         i === "ship_firstname" ||
-    //         i === "ship_lastname" ||
-    //         i === "ship_company_name" ||
-    //         i === "ship_countryregion" ||
-    //         i === "ship_towncity" ||
-    //         i === "ship_statecountry" ||
-    //         i === "ship_postcode" ||
-    //         i === "ship_phone" ||
-    //         i === "ship_email" ||
-    //         i === "ship_address"
-    //       ) {
-    //         updatedObject[i] = true;
-    //         error.push(`${i} is a required field.`);
-    //       }
-    //     }
-    //   }
-    // }
-
-    // for (let key in billignAddress) {
-    //   if (!billignAddress[key]) {
-    //     if (
-    //       key === "firstname" ||
-    //       key === "lastname" ||
-    //       key === "company_name" ||
-    //       key === "countryregion" ||
-    //       key === "towncity" ||
-    //       key === "statecountry" ||
-    //       key === "postcode" ||
-    //       key === "phone" ||
-    //       key === "email"
-    //     ) {
-    //       updatedObject[key] = true;
-    //       error.push(`${key} is a required field.`);
-    //     } else if (address === true) {
-    //       if (
-    //         key === "ship_firstname" ||
-    //         key === "ship_lastname" ||
-    //         key === "ship_countryregion" ||
-    //         key === "ship_address" ||
-    //         key === "ship_towncity" ||
-    //         key === "ship_statecountry" ||
-    //         key === "ship_postcode"
-    //       ) {
-    //         updatedObject[key] = true;
-    //         error.push(`${key} is a required field.`);
-    //       }
-    //     }
-    //   }
-    // }
-
-    // if (
-    //   billignAddress.firstname &&
-    //   billignAddress.lastname &&
-    //   billignAddress.company_name &&
-    //   billignAddress.countryregion &&
-    //   billignAddress.towncity &&
-    //   billignAddress.statecountry &&
-    //   billignAddress.postcode &&
-    //   billignAddress.phone &&
-    //   billignAddress.email &&
-    //   billignAddress.address
-    // ) {
-    //   if (address === true) {
-    //     if (
-    //       billignAddress.ship_firstname &&
-    //       billignAddress.ship_lastname &&
-    //       billignAddress.ship_company_name &&
-    //       billignAddress.ship_countryregion &&
-    //       billignAddress.ship_towncity &&
-    //       billignAddress.ship_statecountry &&
-    //       billignAddress.ship_postcode
-    //     ) {
-    //       console.log(" SHIPPING ADDRESS", state.data);
-    //       hanleOrderd(state.data);
-    //       // setTimeout(() => {
-    //       //   router.push("/order-received");
-    //       // }, 1500);
-    //       // deletProduct();
-    //     }
-    //   } else {
-    //     console.log("DIFFERENET SHIPPING ADDRESS", state.data);
-    //     hanleOrderd(state.data);
-    //     // setTimeout(() => {
-    //     //   router.push("/order-received");
-    //     // }, 1500);
-    //     // deletProduct();
-    //   }
-    // }
-
-    // setErr(error);
-    // setValidated(updatedObject);
+    /// STEP 4 : IF SHIPING ADDRESS IS NOT THEN SEND ONLY BILLING ADDRESS
+    if (!address) {
+      if (
+        billignAddress.firstname &&
+        billignAddress.lastname &&
+        billignAddress.company_name &&
+        billignAddress.countryregion &&
+        billignAddress.towncity &&
+        billignAddress.statecountry &&
+        billignAddress.postcode &&
+        billignAddress.phone &&
+        billignAddress.email &&
+        billignAddress.address
+      ) {
+        hanldeOrdedConfrim({ shipping: 0, billing_address });
+      }
+    } else {
+      // STEP4 : IF SHIIPING ADDRES HAS THEN SEND BILLING AND SHIPPING BOTH ADDRESS
+      if (
+        shippingAddress.ship_firstname &&
+        shippingAddress.ship_lastname &&
+        shippingAddress.ship_company_name &&
+        shippingAddress.ship_countryregion &&
+        shippingAddress.ship_towncity &&
+        shippingAddress.ship_statecountry &&
+        shippingAddress.ship_postcode &&
+        shippingAddress.ship_phone &&
+        shippingAddress.ship_email &&
+        shippingAddress.ship_address
+      ) {
+        /// IS FUNCTION TO SEND DETAIL TO ADDRESS
+        hanldeOrdedConfrim({ shipping: 1, billing_address, shipping_address });
+      }
+    }
   };
 
   const handleCheckboxChange = (event) => {
@@ -333,27 +209,44 @@ const CheckoutBillingDetail = () => {
     }).format(totalprice);
   };
 
-  const hanleOrderd = (order) => {
-    console.log("", order);
+  const hanldeOrdedConfrim = (order) => {
+    let address;
+    if (order.shipping === 1) {
+      address = {
+        billing_address: order.billing_address,
+        shipping_address: order.billing_address,
+      };
+    } else {
+      address = {
+        billing_address: order.billing_address,
+      };
+    }
 
-    let orderdetail = {
-      billing_address: {
-        first_name: billignAddress.firstname,
-        last_name: billignAddress.lastname,
-        country_region: billignAddress.countryregion,
-        company_name: billignAddress.company_name,
-        address: billignAddress.address,
-        city_town: billignAddress.towncity,
-        state_country: billignAddress.statecountry,
-        post_zip_code: billignAddress.postcode,
-        phone_no: billignAddress.phone,
-        email: billignAddress.email,
+    let prod = [];
+    state.data.forEach((element) => {
+      prod.push({
+        name: element.product_detail.name,
+        image: {
+          id: element.product_detail.cover_image.id,
+          url: element.product_detail.cover_image.image_url,
+        },
+        quantity: element.quantity,
+        sub_total: element.sub_total,
+        price: element.price,
+        product_id: element.product_detail._id,
+      });
+    });
+
+    let orders = {
+      ...address,
+      products: {
+        product_items: prod,
+        total: totalprice,
       },
-      shipping_address: {},
-      products: {},
       payment_method: "COD",
     };
-    console.log(orderdetail);
+
+    console.log("Finnaly order completed", orders);
   };
 
   return (
@@ -366,17 +259,18 @@ const CheckoutBillingDetail = () => {
                 <div className="icon">
                   <i className="fa-solid fa-triangle-exclamation"></i>
                 </div>
-                <div className="error-list">
+                <ul className="error-list">
                   {err.map((err, index) => {
                     return (
-                      <div key={index}>
-                        <div>
-                          <li key={index}>{err}</li>
-                        </div>
-                      </div>
+                      <React.Fragment key={index}>
+                        <li key={index}>
+                          <span className="text-capitalize">{err}</span>
+                          <span className="pl-1"> is a required field</span>
+                        </li>
+                      </React.Fragment>
                     );
                   })}
-                </div>
+                </ul>
               </div>
             ) : (
               ""
@@ -441,7 +335,7 @@ const CheckoutBillingDetail = () => {
                   </div>
                   <div className="form-row">
                     <label htmlFor="company_name" className="form-label">
-                      Company name (optional)
+                      Company name
                     </label>
                     <input
                       type="text"
@@ -708,20 +602,20 @@ const CheckoutBillingDetail = () => {
                       </div>
                       <div className="form-row">
                         <label htmlFor="company_name" className="form-label">
-                          Company name (optional)
+                          Company name
                         </label>
                         <input
                           type="text"
                           className={`form-control ${
-                            shippingValidated.ship_companyname ? "invalid" : ""
+                            shippingValidated.ship_company_name ? "invalid" : ""
                           }`}
-                          id="company_name"
-                          name="ship_companyname"
+                          id="ship_company_name"
+                          name="ship_company_name"
                           placeholder="John"
-                          value={shippingAddress.ship_companyname}
+                          value={shippingAddress.ship_company_name}
                           onChange={hanldeShippingChange}
                         />
-                        {shippingValidated.ship_companyname && address ? (
+                        {shippingValidated.ship_company_name && address ? (
                           <div style={{ color: "red" }}>
                             Company Name can not be empty
                           </div>
@@ -861,6 +755,52 @@ const CheckoutBillingDetail = () => {
                         {shippingValidated.ship_postcode && address ? (
                           <div style={{ color: "red" }}>
                             Post Code can not be empty
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-row">
+                        <label htmlFor="phone" className="form-label">
+                          Phone <span className="required">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-control ${
+                            shippingValidated.ship_phone ? "invalid" : ""
+                          }`}
+                          name="ship_phone"
+                          id="ship_phone"
+                          placeholder="923001234567"
+                          value={shippingAddress.ship_phone}
+                          onChange={hanldeShippingChange}
+                        />
+                        {shippingValidated.ship_phone ? (
+                          <div style={{ color: "red" }}>
+                            Phone can not be empty
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-row">
+                        <label htmlFor="email" className="form-label">
+                          Email address <span className="required">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          className={`form-control ${
+                            shippingValidated.ship_email ? "invalid" : ""
+                          }`}
+                          name="ship_email"
+                          id="ship_email"
+                          placeholder="johndeo@gmail.com"
+                          value={shippingAddress.ship_email}
+                          onChange={hanldeShippingChange}
+                        />
+                        {shippingValidated.ship_email ? (
+                          <div style={{ color: "red" }}>
+                            Email can not be empty
                           </div>
                         ) : (
                           ""
