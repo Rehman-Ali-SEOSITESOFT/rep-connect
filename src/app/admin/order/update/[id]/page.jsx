@@ -111,10 +111,11 @@ const page = ({ params }) => {
               <div className="col">
                 <label htmlFor="form-label" className="fs-5  mb-2 fw-">
                   Order Status :
-                  {orderStatus === "completed" ||
-                  orderStatus === "cancelled" ? (
+                  {updateOrder.order_status === "completed" ||
+                  updateOrder.order_status === "cancelled" ? (
                     <span className="order-message">
-                      Order can't be changed beacuse it's already {orderStatus}
+                      Order can't be changed beacuse it's already{" "}
+                      {updateOrder.order_status}
                     </span>
                   ) : null}
                 </label>
@@ -128,11 +129,11 @@ const page = ({ params }) => {
                     value={orderStatus}
                     onChange={(e) => setOrderStatus(e.target.value)}
                   >
-                    {orderStatus === "cancelled" ? (
+                    {updateOrder.order_status === "cancelled" ? (
                       <option value="cancelled" disabled>
                         cancelled
                       </option>
-                    ) : orderStatus === "completed" ? (
+                    ) : updateOrder.order_status === "completed" ? (
                       <option value="completed" disabled>
                         completed
                       </option>
@@ -149,7 +150,8 @@ const page = ({ params }) => {
                     type="submit"
                     className="update-order-status-btn"
                     disabled={
-                      orderStatus === "completed" || orderStatus === "cancelled"
+                      updateOrder.order_status === "completed" ||
+                      updateOrder.order_status === "cancelled"
                         ? true
                         : false
                     }
