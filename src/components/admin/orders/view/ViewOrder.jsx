@@ -54,7 +54,7 @@ const ViewOrder = ({ data }) => {
                           <span className="d-inline pe-2">{i + 1}</span>
                           <div className="imgss-box position-relative d-inline-block me-3 ">
                             <Image
-                              src={e.image.url}
+                              src={e.image.image.url}
                               alt="ad"
                               className="img-fluid"
                               fill
@@ -90,6 +90,12 @@ const ViewOrder = ({ data }) => {
             </table>
           </div>
         </div>
+        {data.order_notes ? (
+          <div className="order mt-3 special-notes">
+            <h2 className="title">Specail notes</h2>
+            <p className="paraga">{data.order_notes}</p>
+          </div>
+        ) : null}
       </div>
       <div className="col-lg-6">
         <div className="user-detail">

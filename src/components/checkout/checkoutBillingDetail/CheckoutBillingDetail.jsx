@@ -14,6 +14,7 @@ const CheckoutBillingDetail = () => {
   const router = useRouter();
   const [err, setErr] = useState([]);
   const [address, setAddress] = useState(false);
+  const [orderNotes, setOrderNotes] = useState(null);
   const [orderCompleteLoading, setOrderCompleteLoading] = useState(false);
   const state = useSelector((state) => state.cartItem);
   const [billingValidated, setBillingValidated] = useState({
@@ -133,7 +134,7 @@ const CheckoutBillingDetail = () => {
         setShippingValidated(objeErrorShipp);
       }
     }
-    // STEP 3 : THIS IS JUST FOR OBJECT TO BACKNED
+    // STEP 3 : THIS IS OBJECT TO SEND BACKNED
     let billing_address = {
       first_name: billignAddress.firstname,
       last_name: billignAddress.lastname,
@@ -272,10 +273,11 @@ const CheckoutBillingDetail = () => {
     state.data.forEach((element) => {
       prod.push({
         name: element.product_detail.name,
-        image: {
-          id: element.product_detail.cover_image.id,
-          url: element.product_detail.cover_image.image_url,
-        },
+        image: "64a6aa2f0c324ff7ac98c1e9",
+        // image: {
+        //   id: element.product_detail.cover_image.id,
+        //   url: element.product_detail.cover_image.image_url,
+        // },
         quantity: element.quantity,
         sub_total: element.sub_total,
         price: element.price,
@@ -290,6 +292,7 @@ const CheckoutBillingDetail = () => {
         total: totalprice,
       },
       payment_method: "COD",
+      order_notes: orderNotes,
     };
 
     //   ORDER CREATED FETACH FUCTION
@@ -866,8 +869,8 @@ const CheckoutBillingDetail = () => {
                       className="form-control"
                       id="ordernotes"
                       name="ordernotes"
-                      value={shippingAddress.ordernotes}
-                      onChange={hanldeShippingChange}
+                      value={orderNotes}
+                      onChange={(e) => setOrderNotes(e.target.value)}
                     />
                     {/* {shippingValidated.ordernotes ? (
                       <div style={{ color: "red" }}>Notes can not be empty</div>
