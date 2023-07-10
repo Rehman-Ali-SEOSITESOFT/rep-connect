@@ -52,6 +52,8 @@ const tableIcons = {
 };
 
 const ProductCart = () => {
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const state = useSelector((state) => state.product);
@@ -67,11 +69,11 @@ const ProductCart = () => {
     },
     {
       title: "Image",
-      field: "cover_image",
+      field: "cover_image.image",
       render: (item) => {
         return (
           <Image
-            src={item.cover_image.image_url}
+            src={item.cover_image.image.url}
             alt={item.name}
             height={60}
             width={60}
@@ -152,23 +154,27 @@ const ProductCart = () => {
     router.push(`/admin/product/view-product/${id}`);
   };
 
+  const getAllProduct = () => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === 1) {
+          setEnteries(data.data.products);
+          setIsLoading(false);
+        } else {
+          setIsError(true);
+          setIsLoading(false);
+          setErrorMessage(data.message);
+        }
+      });
+  };
   useEffect(() => {
-    let arr = JSON.parse(JSON.stringify(state.data));
-    setEnteries(arr);
-    if (arr.length > 0) {
-      setIsLoading(false);
-    } else {
-      fetch(`${process.env.NEXT_PUBLIC_URL}api/product`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setEnteries(data.data.product);
-        });
-    }
+    getAllProduct();
   }, []);
 
   const hanldeUpdated = (event, id) => {
@@ -177,50 +183,56 @@ const ProductCart = () => {
 
   return (
     <>
-      <ThemeProvider theme={defaultMaterialTheme}>
-        <MaterialTable
-          title="Product"
-          icons={tableIcons}
-          columns={columns}
-          data={entries}
-          actions={[
-            {
-              icon: () => <DeleteIcon />,
-              // tooltip: "Remove",
-              onClick: (event, data) => hanldeDeleted(event, data),
-            },
-            {
-              icon: () => <Edit />,
-              // tooltip: "Change Status",
-              onClick: (event, data) => hanldeUpdated(event, data._id),
-            },
-            {
-              icon: () => <VisibilityOutlinedIcon />,
-              // tooltip: "Change Status",
-              onClick: (event, data) => hanldeViewd(event, data._id),
-            },
-          ]}
-          // isLoading={isLoading}
-          options={{
-            // pageSize: 10,
-            // pageSizeOptions: [5, 10, 15, 20],
-            actionsColumnIndex: -1,
-            exportButton: false,
-            sorting: true,
-            search: true,
-            paging: true,
-            debounceInterval: 100,
-            headerStyle: {
-              fontWeight: "bold",
-            },
-          }}
-          components={{
-            Pagination: (props) => <TablePagination {...props} />,
-            Container: (props) => <Paper {...props} elevation={0} />,
-          }}
-        />
-      </ThemeProvider>
-      <ToastContainer />
+      {isError ? (
+        <h2>{errorMessage}</h2>
+      ) : (
+        <React.Fragment>
+          <ThemeProvider theme={defaultMaterialTheme}>
+            <MaterialTable
+              title="Product"
+              icons={tableIcons}
+              columns={columns}
+              data={entries}
+              actions={[
+                {
+                  icon: () => <DeleteIcon />,
+                  // tooltip: "Remove",
+                  onClick: (event, data) => hanldeDeleted(event, data),
+                },
+                {
+                  icon: () => <Edit />,
+                  // tooltip: "Change Status",
+                  onClick: (event, data) => hanldeUpdated(event, data._id),
+                },
+                {
+                  icon: () => <VisibilityOutlinedIcon />,
+                  // tooltip: "Change Status",
+                  onClick: (event, data) => hanldeViewd(event, data._id),
+                },
+              ]}
+              isLoading={isLoading}
+              options={{
+                // pageSize: 10,
+                // pageSizeOptions: [5, 10, 15, 20],
+                actionsColumnIndex: -1,
+                exportButton: false,
+                sorting: true,
+                search: true,
+                paging: true,
+                debounceInterval: 100,
+                headerStyle: {
+                  fontWeight: "bold",
+                },
+              }}
+              components={{
+                Pagination: (props) => <TablePagination {...props} />,
+                Container: (props) => <Paper {...props} elevation={0} />,
+              }}
+            />
+          </ThemeProvider>
+          <ToastContainer />
+        </React.Fragment>
+      )}
     </>
   );
 };

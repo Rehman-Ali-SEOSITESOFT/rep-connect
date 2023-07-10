@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 import loader from "../../../../../assets/images/admin/product-loader.gif";
 import Image from "next/image";
+import Spinner from "@/components/spinner/Spinner";
 const page = ({ params }) => {
   const { id } = params;
   const disptch = useDispatch();
@@ -39,9 +40,7 @@ const page = ({ params }) => {
         <div className="row">
           <div className="col">
             {state.singleproduct.loading ? (
-              <div className="">
-                <Image src={loader} alt="is loading" width={70} height={70} />
-              </div>
+              <Spinner />
             ) : state.singleproduct.data.length !== undefined ? (
               <h4>Invalid Id {id}</h4>
             ) : (

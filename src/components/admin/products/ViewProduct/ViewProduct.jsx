@@ -2,19 +2,16 @@ import React from "react";
 import "./view.css";
 import Gallarys from "./Gallary/Gallarys";
 import { useSelector } from "react-redux";
-import loader from "../../../../assets/images/admin/product-loader.gif";
-import Image from "next/image";
+import Spinner from "@/components/spinner/Spinner";
 const ViewProduct = () => {
   const state = useSelector((state) => state.singleproduct);
 
   return (
     <div className="view-product-admin">
       {state.loading ? (
-        <div className="loading-spinner">
-          <Image src={loader} alt="" className="img-fluid" />
-        </div>
+        <Spinner />
       ) : state.data.length !== undefined ? (
-        <h1>Please Provide valid Id</h1>
+        <h2>Invalid Id</h2>
       ) : (
         <div className="container-fluid">
           <div className="row">
@@ -43,7 +40,7 @@ const ViewProduct = () => {
 
                     <p className="price">
                       <span className="ttt">Category :</span>{" "}
-                      <span className="q">{state.data.category.name}</span>
+                      <span className="q">{state.data.category?.name}</span>
                     </p>
                   </div>
                   <p className="short-discription">{state.data.short_disc}</p>

@@ -225,7 +225,6 @@ const CheckoutBillingDetail = () => {
         return resp.json();
       })
       .then((data) => {
-        setOrderCompleteLoading(false);
         if (data.success === 1) {
           toast.success("Order Placed", {
             position: "top-right",
@@ -237,6 +236,7 @@ const CheckoutBillingDetail = () => {
             progress: undefined,
             theme: "colored",
           });
+          setOrderCompleteLoading(false);
           deletProduct();
         } else {
           toast.error("Something went Wrong Please try again 🔥", {
@@ -253,7 +253,7 @@ const CheckoutBillingDetail = () => {
       });
   };
   const hanldeOrdedConfrim = (order) => {
-    // setOrderCompleteLoading(true);
+    setOrderCompleteLoading(true);
 
     /// CHECK SHIPPING ADDRESS IS EXISTED OR NOT
     let address;
@@ -273,11 +273,7 @@ const CheckoutBillingDetail = () => {
     state.data.forEach((element) => {
       prod.push({
         name: element.product_detail.name,
-        image: "64a6aa2f0c324ff7ac98c1e9",
-        // image: {
-        //   id: element.product_detail.cover_image.id,
-        //   url: element.product_detail.cover_image.image_url,
-        // },
+        image: element.product_detail.cover_image._id,
         quantity: element.quantity,
         sub_total: element.sub_total,
         price: element.price,
@@ -328,7 +324,7 @@ const CheckoutBillingDetail = () => {
             )}
           </div>
           {state.loading ? (
-            <Loading />
+            <Spinner />
           ) : (
             <>
               <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">

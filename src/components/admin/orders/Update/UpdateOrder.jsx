@@ -23,7 +23,6 @@ const UpdateOrder = ({ data }) => {
       currency: "USD",
     }).format(e);
   };
-  console.log(data);
   return (
     <>
       <div className="col-lg-6">

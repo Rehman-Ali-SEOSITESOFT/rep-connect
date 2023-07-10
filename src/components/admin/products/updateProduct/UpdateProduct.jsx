@@ -122,7 +122,7 @@ const UpdateProduct = ({ data, product }) => {
       sale_price: product.data.sale_price,
       short_description: product.data.short_disc,
     });
-    setPrfileImg(product.data.cover_image.image_url);
+    setPrfileImg(product.data.cover_image.image.url);
     setGallaryImages(product.data.gallary);
 
     setDiscription(product.data.disc);
@@ -277,7 +277,7 @@ const UpdateProduct = ({ data, product }) => {
                     <i className="fa-solid fa-trash-can"></i>
                   </div>
                   <Image
-                    src={e.image_url}
+                    src={e.image.url}
                     alt={e.id}
                     width={150}
                     height={150}

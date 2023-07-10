@@ -16,6 +16,7 @@ import { cartItem } from "@/redux/slices/cartItem";
 import Loading from "../cart/CartItems/Loading/Loading";
 import ImageGallary from "./images/ImageGallary";
 import Link from "next/link";
+import Spinner from "../spinner/Spinner";
 
 const ProductDetail = (props) => {
   const item = props.item;
@@ -69,7 +70,7 @@ const ProductDetail = (props) => {
   return (
     <>
       {item.loading ? (
-        <Loading />
+        <Spinner />
       ) : item.data.length < 1 ? (
         <h2>Worng product id </h2>
       ) : (
@@ -86,7 +87,11 @@ const ProductDetail = (props) => {
                     <div className="pricing-check">
                       <h5 className="price regular">
                         Price :
-                        <span>{ TotalPrice(item.data.sale_price) === 0  ? TotalPrice(item.data.regular_price) : TotalPrice(item.data.sale_price)}</span>
+                        <span>
+                          {TotalPrice(item.data.sale_price) === 0
+                            ? TotalPrice(item.data.regular_price)
+                            : TotalPrice(item.data.sale_price)}
+                        </span>
                       </h5>
                       {/* <h5 className="price sale">
                         Sale Price :{" "}

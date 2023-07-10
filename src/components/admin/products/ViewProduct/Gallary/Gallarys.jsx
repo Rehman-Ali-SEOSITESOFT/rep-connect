@@ -3,7 +3,7 @@ import viewimg from "../../../../../assets/images/products/covid-flu-22.jpg";
 import Image from "next/image";
 import "./gallary.css";
 const Gallarys = ({ data }) => {
-  const [coverImg, setCoverImg] = useState(data.cover_image.image_url);
+  const [coverImg, setCoverImg] = useState(data.cover_image.image.url);
   const [gallaryImg, setGallaryImg] = useState(data.gallary);
   const [active, setAcive] = useState(0);
 
@@ -29,10 +29,10 @@ const Gallarys = ({ data }) => {
               className={`gallary-item me-2 ${
                 active === index ? "active" : null
               }`}
-              onClick={() => hanldeActive(index, img.image_url)}
+              onClick={() => hanldeActive(index, img.image.url)}
             >
               <Image
-                src={img.image_url}
+                src={img.image.url}
                 width={70}
                 height={70}
                 alt="admin"
