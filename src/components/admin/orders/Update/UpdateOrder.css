@@ -114,6 +114,12 @@
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.462;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 0;
 }
 
 /*  USER DETAIL */
