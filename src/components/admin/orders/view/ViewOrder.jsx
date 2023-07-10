@@ -93,6 +93,7 @@ const ViewOrder = ({ data }) => {
         {data.order_notes ? (
           <div className="order mt-3 special-notes">
             <h2 className="title">Specail notes</h2>
+
             <p className="paraga">{data.order_notes}</p>
           </div>
         ) : null}
