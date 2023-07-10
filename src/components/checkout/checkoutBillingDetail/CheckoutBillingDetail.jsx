@@ -210,6 +210,7 @@ const CheckoutBillingDetail = () => {
     }).format(totalprice);
   };
 
+  // ORDER API DELETE FETCH FUNCTION
   const orderPostAPI = (body) => {
     fetch(`${process.env.NEXT_PUBLIC_URL}api/order`, {
       method: "POST",
