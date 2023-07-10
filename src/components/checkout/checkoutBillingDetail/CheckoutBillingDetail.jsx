@@ -8,49 +8,67 @@ import Loading from "@/components/cart/CartItems/Loading/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import { token } from "@/hooks/token";
 import { cartItem } from "@/redux/slices/cartItem";
+import Spinner from "@/components/spinner/Spinner";
 
 const CheckoutBillingDetail = () => {
   const router = useRouter();
   const [err, setErr] = useState([]);
   const [address, setAddress] = useState(false);
+  const [orderCompleteLoading, setOrderCompleteLoading] = useState(false);
   const state = useSelector((state) => state.cartItem);
-  const [validated, setValidated] = useState({
+  const [billingValidated, setBillingValidated] = useState({
     firstname: false,
-    ship_firstname: false,
     lastname: false,
-    ship_lastname: false,
-    // compnayname: false,
+    company_name: false,
     countryregion: false,
-    ship_countryregion: false,
     towncity: false,
-    ship_towncity: false,
     statecountry: false,
-    ship_statecountry: false,
     postcode: false,
-    ship_postcode: false,
     phone: false,
     email: false,
+    address: false,
+
     // ordernotes: false,
   });
-  const [orderForm, setOrderForm] = useState({
+
+  const [billignAddress, setBillingAddress] = useState({
     firstname: "",
     lastname: "",
-    compnayname: "",
+    company_name: "",
     countryregion: "",
     towncity: "",
     statecountry: "",
     postcode: "",
     phone: "",
     email: "",
-    ordernotes: "",
+    address: "",
+  });
+  const [shippingValidated, setShippingValidated] = useState({
+    ship_firstname: false,
+    ship_lastname: false,
+    ship_company_name: false,
+    ship_countryregion: false,
+    ship_towncity: false,
+    ship_statecountry: false,
+    ship_postcode: false,
+    ship_phone: false,
+    ship_email: false,
+    ship_address: false,
 
-    ship_lastname: "",
+    // ordernotes: false,
+  });
+  const [shippingAddress, setShippingAddress] = useState({
     ship_firstname: "",
-    ship_companyname: "",
+    ship_lastname: "",
+    ship_company_name: "",
     ship_countryregion: "",
     ship_towncity: "",
     ship_statecountry: "",
     ship_postcode: "",
+    ship_phone: "",
+    ship_email: "",
+    // ship_ordernotes: "",
+    ship_address: "",
   });
   const dispatch = useDispatch();
 
@@ -66,101 +84,118 @@ const CheckoutBillingDetail = () => {
         return res.json();
       })
       .then((data) => {
-        toast("Order Placed Successfully");
         dispatch(cartItem());
         router.push("/order-received");
       });
   };
 
-  const hanldeChange = (event) => {
+  const hanldeBillingChange = (event) => {
     const { name, value } = event.target;
-    setOrderForm({ ...orderForm, [name]: value });
+    setBillingAddress({ ...billignAddress, [name]: value });
     if (value.trim().length == 0) {
-      setValidated({ ...validated, [name]: true });
-      // setInputError({ ...inputError, [name]: `${name} can not be empty` });
+      setBillingValidated({ ...billingValidated, [name]: true });
     } else if (value.trim().length > 0) {
-      // console.log("Check")
-      // setInputError('');
-      setValidated({ ...validated, [name]: false });
+      setBillingValidated({ ...billingValidated, [name]: false });
+    }
+  };
+  const hanldeShippingChange = (event) => {
+    const { name, value } = event.target;
+    setShippingAddress({ ...shippingAddress, [name]: value });
+    if (value.trim().length == 0) {
+      setShippingValidated({ ...shippingValidated, [name]: true });
+    } else if (value.trim().length > 0) {
+      setShippingValidated({ ...shippingValidated, [name]: false });
     }
   };
   const hanldesubmitorder = (e) => {
     e.preventDefault();
-
-    let updatedObject = { ...validated };
-
     let error = [];
-    for (let key in orderForm) {
-      if (!orderForm[key]) {
-        if (
-          key === "firstname" ||
-          key === "lastname" ||
-          key === "compnayname" ||
-          key === "countryregion" ||
-          key === "towncity" ||
-          key === "statecountry" ||
-          key === "postcode" ||
-          key === "phone" ||
-          key === "email"
-        ) {
-          updatedObject[key] = true;
-          error.push(`${key} is a required field.`);
-        } else if (address === true) {
-          if (
-            key === "ship_firstname" ||
-            key === "ship_lastname" ||
-            key === "ship_companyname" ||
-            key === "ship_countryregion" ||
-            key === "ship_towncity" ||
-            key === "ship_statecountry" ||
-            key === "ship_postcode"
-          ) {
-            updatedObject[key] = true;
-            error.push(`${key} is a required field.`);
-          }
-        }
+    // STEP 1 : ERROR IS FILED IS EMPTY THEN SHOW ERROR MESSAGE
+    let objeError = { ...billingValidated };
+    for (const key in billignAddress) {
+      if (!billignAddress[key]) {
+        objeError[key] = true;
+        error.push(key);
       }
+      setErr(error);
+      setBillingValidated(objeError);
     }
 
-    if (
-      orderForm.firstname &&
-      orderForm.lastname &&
-      orderForm.compnayname &&
-      orderForm.countryregion &&
-      orderForm.towncity &&
-      orderForm.statecountry &&
-      orderForm.postcode &&
-      orderForm.phone &&
-      orderForm.email
-    ) {
-      if (address === true) {
-        if (
-          orderForm.ship_firstname &&
-          orderForm.ship_lastname &&
-          orderForm.ship_companyname &&
-          orderForm.ship_countryregion &&
-          orderForm.ship_towncity &&
-          orderForm.ship_statecountry &&
-          orderForm.ship_postcode
-        ) {
-          console.log(" SHIPPING ADDRESS", orderForm);
-          // setTimeout(() => {
-          //   router.push("/order-received");
-          // }, 1500);
-          deletProduct();
+    //// STEP 2 : IS SHIIPING ADDRESS IS TRUE THEN SHOW SHIPPING ADDRESS ERROR
+    if (address) {
+      let objeErrorShipp = { ...shippingValidated };
+      for (const key in shippingAddress) {
+        if (!shippingAddress[key]) {
+          objeErrorShipp[key] = true;
+          error.push(key);
         }
-      } else {
-        console.log("DIFFERENET SHIPPING ADDRESS", orderForm);
-        // setTimeout(() => {
-        //   router.push("/order-received");
-        // }, 1500);
-        deletProduct();
+        setErr(error);
+        setShippingValidated(objeErrorShipp);
       }
     }
+    // STEP 3 : THIS IS JUST FOR OBJECT TO BACKNED
+    let billing_address = {
+      first_name: billignAddress.firstname,
+      last_name: billignAddress.lastname,
+      country_region: billignAddress.countryregion,
+      company_name: billignAddress.company_name,
+      address: billignAddress.address,
+      city_town: billignAddress.towncity,
+      state_country: billignAddress.statecountry,
+      post_zip_code: billignAddress.postcode,
+      phone_no: billignAddress.phone,
+      email: billignAddress.email,
+    };
+    let shipping_address = {
+      first_name: shippingAddress.ship_firstname,
+      last_name: shippingAddress.ship_lastname,
+      country_region: shippingAddress.ship_countryregion,
+      company_name: shippingAddress.ship_company_name,
+      address: shippingAddress.ship_address,
+      city_town: shippingAddress.ship_towncity,
+      state_country: shippingAddress.ship_statecountry,
+      post_zip_code: shippingAddress.ship_postcode,
+      phone_no: shippingAddress.ship_phone,
+      email: shippingAddress.ship_email,
+    };
 
-    setErr(error);
-    setValidated(updatedObject);
+    /// STEP 4 : IF SHIPING ADDRESS IS NOT THEN SEND ONLY BILLING ADDRESS
+    if (!address) {
+      if (
+        billignAddress.firstname &&
+        billignAddress.lastname &&
+        billignAddress.company_name &&
+        billignAddress.countryregion &&
+        billignAddress.towncity &&
+        billignAddress.statecountry &&
+        billignAddress.postcode &&
+        billignAddress.phone &&
+        billignAddress.email &&
+        billignAddress.address
+      ) {
+        hanldeOrdedConfrim({ shipping: 0, billing_address });
+      }
+    } else {
+      // STEP4 : IF SHIIPING ADDRES HAS THEN SEND BILLING AND SHIPPING BOTH ADDRESS
+      if (
+        shippingAddress.ship_firstname &&
+        shippingAddress.ship_lastname &&
+        shippingAddress.ship_company_name &&
+        shippingAddress.ship_countryregion &&
+        shippingAddress.ship_towncity &&
+        shippingAddress.ship_statecountry &&
+        shippingAddress.ship_postcode &&
+        shippingAddress.ship_phone &&
+        shippingAddress.ship_email &&
+        shippingAddress.ship_address
+      ) {
+        /// IS FUNCTION TO SEND DETAIL TO ADDRESS
+        hanldeOrdedConfrim({ shipping: 1, billing_address, shipping_address });
+      }
+    }
+    if (error.length >= 1) window.scrollTo(0, 150);
   };
+
   const handleCheckboxChange = (event) => {
     setAddress(event.target.checked);
   };
@@ -175,8 +210,95 @@ const CheckoutBillingDetail = () => {
     }).format(totalprice);
   };
 
+  // ORDER API DELETE FETCH FUNCTION
+  const orderPostAPI = (body) => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token(),
+      },
+      body: JSON.stringify(body),
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        setOrderCompleteLoading(false);
+        if (data.success === 1) {
+          toast.success("Order Placed", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          deletProduct();
+        } else {
+          toast.error("Something went Wrong Please try again 🔥", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
+  };
+  const hanldeOrdedConfrim = (order) => {
+    // setOrderCompleteLoading(true);
+
+    /// CHECK SHIPPING ADDRESS IS EXISTED OR NOT
+    let address;
+    if (order.shipping === 1) {
+      address = {
+        billing_address: order.billing_address,
+        shipping_address: order.shipping_address,
+      };
+    } else {
+      address = {
+        billing_address: order.billing_address,
+        shipping_address: order.billing_address,
+      };
+    }
+
+    let prod = [];
+    state.data.forEach((element) => {
+      prod.push({
+        name: element.product_detail.name,
+        image: {
+          id: element.product_detail.cover_image.id,
+          url: element.product_detail.cover_image.image_url,
+        },
+        quantity: element.quantity,
+        sub_total: element.sub_total,
+        price: element.price,
+        product_id: element.product_detail._id,
+      });
+    });
+    // CREATE ORDER OBJECT TO SENT THE ORDER
+    let orders = {
+      ...address,
+      products: {
+        product_items: prod,
+        total: totalprice,
+      },
+      payment_method: "COD",
+    };
+
+    //   ORDER CREATED FETACH FUCTION
+    orderPostAPI(orders);
+  };
+
   return (
     <>
+      {orderCompleteLoading && <Spinner />}
       <form onSubmit={hanldesubmitorder} className="checkout--details">
         <div className="row main-row">
           <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -185,17 +307,18 @@ const CheckoutBillingDetail = () => {
                 <div className="icon">
                   <i className="fa-solid fa-triangle-exclamation"></i>
                 </div>
-                <div className="error-list">
+                <ul className="error-list">
                   {err.map((err, index) => {
                     return (
-                      <div key={index}>
-                        <div>
-                          <li key={index}>{err}</li>
-                        </div>
-                      </div>
+                      <React.Fragment key={index}>
+                        <li key={index}>
+                          <span className="text-capitalize">{err}</span>
+                          <span className="pl-1"> is a required field</span>
+                        </li>
+                      </React.Fragment>
                     );
                   })}
-                </div>
+                </ul>
               </div>
             ) : (
               ""
@@ -215,15 +338,15 @@ const CheckoutBillingDetail = () => {
                       <input
                         type="text"
                         className={`form-control ${
-                          validated.firstname ? "invalid" : ""
+                          billingValidated.firstname ? "invalid" : ""
                         }`}
                         id="firstname"
                         name="firstname"
                         placeholder="John"
-                        value={orderForm.firstname}
-                        onChange={hanldeChange}
+                        value={billignAddress.firstname}
+                        onChange={hanldeBillingChange}
                       />
-                      {validated.firstname ? (
+                      {billingValidated.firstname ? (
                         <div style={{ color: "red" }}>
                           First Name can not be empty
                         </div>
@@ -231,7 +354,9 @@ const CheckoutBillingDetail = () => {
                         ""
                       )}
                     </div>
-                    <div className={`form-row fullname-children ${validated}`}>
+                    <div
+                      className={`form-row fullname-children ${billingValidated}`}
+                    >
                       <label htmlFor="lastname" className="form-label">
                         {" "}
                         Last Name <span className="required">*</span>
@@ -239,15 +364,15 @@ const CheckoutBillingDetail = () => {
                       <input
                         type="text"
                         className={`form-control ${
-                          validated.lastname ? "invalid" : ""
+                          billingValidated.lastname ? "invalid" : ""
                         }`}
                         id="lastname"
                         name="lastname"
                         placeholder="Doe"
-                        value={orderForm.lastname}
-                        onChange={hanldeChange}
+                        value={billignAddress.lastname}
+                        onChange={hanldeBillingChange}
                       />
-                      {validated.lastname ? (
+                      {billingValidated.lastname ? (
                         <div style={{ color: "red" }}>
                           Last Name can not be empty
                         </div>
@@ -257,23 +382,46 @@ const CheckoutBillingDetail = () => {
                     </div>
                   </div>
                   <div className="form-row">
-                    <label htmlFor="compnayname" className="form-label">
-                      Company name (optional)
+                    <label htmlFor="company_name" className="form-label">
+                      Company name
                     </label>
                     <input
                       type="text"
                       className={`form-control ${
-                        validated.compnayname ? "invalid" : ""
+                        billingValidated.company_name ? "invalid" : ""
                       }`}
-                      id="compnayname"
-                      name="compnayname"
+                      id="company_name"
+                      name="company_name"
                       placeholder="John"
-                      value={orderForm.compnayname}
-                      onChange={hanldeChange}
+                      value={billignAddress.company_name}
+                      onChange={hanldeBillingChange}
                     />
-                    {validated.compnayname ? (
+                    {billingValidated.company_name ? (
                       <div style={{ color: "red" }}>
                         Company Name can not be empty
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="address" className="form-label">
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      className={`form-control ${
+                        billingValidated.address ? "invalid" : ""
+                      }`}
+                      id="address"
+                      name="address"
+                      placeholder="fsd .."
+                      value={billignAddress.address}
+                      onChange={hanldeBillingChange}
+                    />
+                    {billingValidated.company_name ? (
+                      <div style={{ color: "red" }}>
+                        Address Name can not be empty
                       </div>
                     ) : (
                       ""
@@ -287,10 +435,10 @@ const CheckoutBillingDetail = () => {
                       name="countryregion"
                       id="countryregion"
                       className={`form-select ${
-                        validated.countryregion ? "invalid" : ""
+                        billingValidated.countryregion ? "invalid" : ""
                       }`}
-                      value={orderForm.countryregion}
-                      onChange={hanldeChange}
+                      value={billignAddress.countryregion}
+                      onChange={hanldeBillingChange}
                     >
                       <option value="AF">Afghanistan</option>
                       <option value="AX">Åland Islands</option>
@@ -307,7 +455,7 @@ const CheckoutBillingDetail = () => {
                       <option value="AW">Aruba</option>
                       <option value="AU">Australia</option>
                     </select>
-                    {validated.countryregion ? (
+                    {billingValidated.countryregion ? (
                       <div style={{ color: "red" }}>
                         Country Name can not be empty
                       </div>
@@ -322,15 +470,15 @@ const CheckoutBillingDetail = () => {
                     <input
                       type="text"
                       className={`form-control ${
-                        validated.towncity ? "invalid" : ""
+                        billingValidated.towncity ? "invalid" : ""
                       }`}
                       name="towncity"
                       id="towncity"
                       placeholder="Town City"
-                      value={orderForm.towncity}
-                      onChange={hanldeChange}
+                      value={billignAddress.towncity}
+                      onChange={hanldeBillingChange}
                     />
-                    {validated.towncity ? (
+                    {billingValidated.towncity ? (
                       <div style={{ color: "red" }}>
                         Town/City Name can not be empty
                       </div>
@@ -346,10 +494,10 @@ const CheckoutBillingDetail = () => {
                       name="statecountry"
                       id="statecountry"
                       className={`form-select ${
-                        validated.statecountry ? "invalid" : ""
+                        billingValidated.statecountry ? "invalid" : ""
                       }`}
-                      value={orderForm.statecountry}
-                      onChange={hanldeChange}
+                      value={billignAddress.statecountry}
+                      onChange={hanldeBillingChange}
                     >
                       <option value="AGN">Agusan del Norte</option>
                       <option value="AGS">Agusan del Sur</option>
@@ -360,7 +508,7 @@ const CheckoutBillingDetail = () => {
                       <option value="AUR">Aurora</option>
                       <option value="BAS">Basilan</option>
                     </select>
-                    {validated.statecountry ? (
+                    {billingValidated.statecountry ? (
                       <div style={{ color: "red" }}>
                         State/Country can not be empty
                       </div>
@@ -375,15 +523,15 @@ const CheckoutBillingDetail = () => {
                     <input
                       type="text"
                       className={`form-control ${
-                        validated.postcode ? "invalid" : ""
+                        billingValidated.postcode ? "invalid" : ""
                       }`}
                       name="postcode"
                       id="postcode"
                       placeholder="Postcode / ZIP"
-                      value={orderForm.postcode}
-                      onChange={hanldeChange}
+                      value={billignAddress.postcode}
+                      onChange={hanldeBillingChange}
                     />
-                    {validated.postcode ? (
+                    {billingValidated.postcode ? (
                       <div style={{ color: "red" }}>
                         Post Code can not be empty
                       </div>
@@ -398,15 +546,15 @@ const CheckoutBillingDetail = () => {
                     <input
                       type="text"
                       className={`form-control ${
-                        validated.phone ? "invalid" : ""
+                        billingValidated.phone ? "invalid" : ""
                       }`}
                       name="phone"
                       id="phone"
                       placeholder="923001234567"
-                      value={orderForm.phone}
-                      onChange={hanldeChange}
+                      value={billignAddress.phone}
+                      onChange={hanldeBillingChange}
                     />
-                    {validated.phone ? (
+                    {billingValidated.phone ? (
                       <div style={{ color: "red" }}>Phone can not be empty</div>
                     ) : (
                       ""
@@ -419,15 +567,15 @@ const CheckoutBillingDetail = () => {
                     <input
                       type="email"
                       className={`form-control ${
-                        validated.email ? "invalid" : ""
+                        billingValidated.email ? "invalid" : ""
                       }`}
                       name="email"
                       id="email"
                       placeholder="johndeo@gmail.com"
-                      value={orderForm.email}
-                      onChange={hanldeChange}
+                      value={billignAddress.email}
+                      onChange={hanldeBillingChange}
                     />
-                    {validated.email ? (
+                    {billingValidated.email ? (
                       <div style={{ color: "red" }}>Email can not be empty</div>
                     ) : (
                       ""
@@ -457,15 +605,15 @@ const CheckoutBillingDetail = () => {
                           <input
                             type="text"
                             className={`form-control ${
-                              validated.ship_firstname ? "invalid" : ""
+                              shippingValidated.ship_firstname ? "invalid" : ""
                             }`}
                             id="firstname"
                             name="ship_firstname"
                             placeholder="John"
-                            value={orderForm.ship_firstname}
-                            onChange={hanldeChange}
+                            value={shippingAddress.ship_firstname}
+                            onChange={hanldeShippingChange}
                           />
-                          {validated.ship_firstname && address ? (
+                          {shippingValidated.ship_firstname && address ? (
                             <div style={{ color: "red" }}>
                               First Name can not be empty
                             </div>
@@ -474,7 +622,7 @@ const CheckoutBillingDetail = () => {
                           )}
                         </div>
                         <div
-                          className={`form-row fullname-children ${validated}`}
+                          className={`form-row fullname-children ${shippingValidated}`}
                         >
                           <label htmlFor="lastname" className="form-label">
                             {" "}
@@ -483,15 +631,15 @@ const CheckoutBillingDetail = () => {
                           <input
                             type="text"
                             className={`form-control ${
-                              validated.ship_lastname ? "invalid" : ""
+                              shippingValidated.ship_lastname ? "invalid" : ""
                             }`}
                             id="lastname"
                             name="ship_lastname"
                             placeholder="Doe"
-                            value={orderForm.ship_lastname}
-                            onChange={hanldeChange}
+                            value={shippingAddress.ship_lastname}
+                            onChange={hanldeShippingChange}
                           />
-                          {validated.ship_lastname && address ? (
+                          {shippingValidated.ship_lastname && address ? (
                             <div style={{ color: "red" }}>
                               Last Name can not be empty
                             </div>
@@ -501,23 +649,46 @@ const CheckoutBillingDetail = () => {
                         </div>
                       </div>
                       <div className="form-row">
-                        <label htmlFor="compnayname" className="form-label">
-                          Company name (optional)
+                        <label htmlFor="company_name" className="form-label">
+                          Company name
                         </label>
                         <input
                           type="text"
                           className={`form-control ${
-                            validated.ship_companyname ? "invalid" : ""
+                            shippingValidated.ship_company_name ? "invalid" : ""
                           }`}
-                          id="compnayname"
-                          name="ship_companyname"
+                          id="ship_company_name"
+                          name="ship_company_name"
                           placeholder="John"
-                          value={orderForm.ship_companyname}
-                          onChange={hanldeChange}
+                          value={shippingAddress.ship_company_name}
+                          onChange={hanldeShippingChange}
                         />
-                        {validated.ship_companyname && address ? (
+                        {shippingValidated.ship_company_name && address ? (
                           <div style={{ color: "red" }}>
                             Company Name can not be empty
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-row">
+                        <label htmlFor="ship_address" className="form-label">
+                          Address
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-control ${
+                            shippingValidated.ship_address ? "invalid" : ""
+                          }`}
+                          id="ship_address"
+                          name="ship_address"
+                          placeholder="fsd .."
+                          value={shippingAddress.ship_address}
+                          onChange={hanldeShippingChange}
+                        />
+                        {shippingValidated.company_name ? (
+                          <div style={{ color: "red" }}>
+                            Address Name can not be empty
                           </div>
                         ) : (
                           ""
@@ -531,10 +702,12 @@ const CheckoutBillingDetail = () => {
                           name="ship_countryregion"
                           id="countryregion"
                           className={`form-select ${
-                            validated.ship_countryregion ? "invalid" : ""
+                            shippingValidated.ship_countryregion
+                              ? "invalid"
+                              : ""
                           }`}
-                          value={orderForm.ship_countryregion}
-                          onChange={hanldeChange}
+                          value={shippingAddress.ship_countryregion}
+                          onChange={hanldeShippingChange}
                         >
                           <option value="AF">Afghanistan</option>
                           <option value="AX">Åland Islands</option>
@@ -551,7 +724,7 @@ const CheckoutBillingDetail = () => {
                           <option value="AW">Aruba</option>
                           <option value="AU">Australia</option>
                         </select>
-                        {validated.ship_countryregion && address ? (
+                        {shippingValidated.ship_countryregion && address ? (
                           <div style={{ color: "red" }}>
                             Country Name can not be empty
                           </div>
@@ -566,15 +739,15 @@ const CheckoutBillingDetail = () => {
                         <input
                           type="text"
                           className={`form-control ${
-                            validated.ship_towncity ? "invalid" : ""
+                            shippingValidated.ship_towncity ? "invalid" : ""
                           }`}
                           name="ship_towncity"
                           id="towncity"
                           placeholder="Town City"
-                          value={orderForm.ship_towncity}
-                          onChange={hanldeChange}
+                          value={shippingAddress.ship_towncity}
+                          onChange={hanldeShippingChange}
                         />
-                        {validated.ship_towncity && address ? (
+                        {shippingValidated.ship_towncity && address ? (
                           <div style={{ color: "red" }}>
                             Town/City Name can not be empty
                           </div>
@@ -590,10 +763,10 @@ const CheckoutBillingDetail = () => {
                           name="ship_statecountry"
                           id="statecountry"
                           className={`form-select ${
-                            validated.ship_statecountry ? "invalid" : ""
+                            shippingValidated.ship_statecountry ? "invalid" : ""
                           }`}
-                          value={orderForm.ship_statecountry}
-                          onChange={hanldeChange}
+                          value={shippingAddress.ship_statecountry}
+                          onChange={hanldeShippingChange}
                         >
                           <option value="AGN">Agusan del Norte</option>
                           <option value="AGS">Agusan del Sur</option>
@@ -604,7 +777,7 @@ const CheckoutBillingDetail = () => {
                           <option value="AUR">Aurora</option>
                           <option value="BAS">Basilan</option>
                         </select>
-                        {validated.ship_statecountry && address ? (
+                        {shippingValidated.ship_statecountry && address ? (
                           <div style={{ color: "red" }}>
                             State/Country can not be empty
                           </div>
@@ -619,17 +792,63 @@ const CheckoutBillingDetail = () => {
                         <input
                           type="text"
                           className={`form-control ${
-                            validated.ship_postcode ? "invalid" : ""
+                            shippingValidated.ship_postcode ? "invalid" : ""
                           }`}
                           name="ship_postcode"
                           id="postcode"
                           placeholder="Postcode / ZIP"
-                          value={orderForm.ship_postcode}
-                          onChange={hanldeChange}
+                          value={shippingAddress.ship_postcode}
+                          onChange={hanldeShippingChange}
                         />
-                        {validated.ship_postcode && address ? (
+                        {shippingValidated.ship_postcode && address ? (
                           <div style={{ color: "red" }}>
                             Post Code can not be empty
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-row">
+                        <label htmlFor="phone" className="form-label">
+                          Phone <span className="required">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-control ${
+                            shippingValidated.ship_phone ? "invalid" : ""
+                          }`}
+                          name="ship_phone"
+                          id="ship_phone"
+                          placeholder="923001234567"
+                          value={shippingAddress.ship_phone}
+                          onChange={hanldeShippingChange}
+                        />
+                        {shippingValidated.ship_phone ? (
+                          <div style={{ color: "red" }}>
+                            Phone can not be empty
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-row">
+                        <label htmlFor="email" className="form-label">
+                          Email address <span className="required">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          className={`form-control ${
+                            shippingValidated.ship_email ? "invalid" : ""
+                          }`}
+                          name="ship_email"
+                          id="ship_email"
+                          placeholder="johndeo@gmail.com"
+                          value={shippingAddress.ship_email}
+                          onChange={hanldeShippingChange}
+                        />
+                        {shippingValidated.ship_email ? (
+                          <div style={{ color: "red" }}>
+                            Email can not be empty
                           </div>
                         ) : (
                           ""
@@ -647,14 +866,14 @@ const CheckoutBillingDetail = () => {
                       className="form-control"
                       id="ordernotes"
                       name="ordernotes"
-                      value={orderForm.ordernotes}
-                      onChange={hanldeChange}
+                      value={shippingAddress.ordernotes}
+                      onChange={hanldeShippingChange}
                     />
-                    {validated.ordernotes ? (
+                    {/* {shippingValidated.ordernotes ? (
                       <div style={{ color: "red" }}>Notes can not be empty</div>
                     ) : (
                       ""
-                    )}
+                    )} */}
                   </div>
                 </aside>
               </div>
@@ -709,24 +928,24 @@ const CheckoutBillingDetail = () => {
                         </tbody>
                         <tfoot>
                           <tr className="foot-row">
-                            <td className="cart-subtotal-title"> Subtotal</td>
-                            <td className="subtotal-price">
+                            <th className="cart-subtotal-title"> Subtotal</th>
+                            <th className="subtotal-price">
                               <span className="amount">
                                 <bdi>{TotalPrice()}</bdi>
                               </span>
-                            </td>
+                            </th>
                           </tr>
                           <tr className="foot-row">
-                            <td className="shipping"> Shipping</td>
-                            <td className="free-shipping">Free shipping</td>
+                            <th className="shipping"> Shipping</th>
+                            <th className="free-shipping">Free shipping</th>
                           </tr>
                           <tr className="order-total foot-row">
-                            <td className="total"> Total</td>
-                            <td className="total-price">
+                            <th className="total"> Total</th>
+                            <th className="total-price">
                               <strong className="amount">
                                 <bdi>{TotalPrice()}</bdi>
                               </strong>
-                            </td>
+                            </th>
                           </tr>
                         </tfoot>
                       </>
@@ -753,6 +972,7 @@ const CheckoutBillingDetail = () => {
             </>
           )}
         </div>
+        <ToastContainer />
       </form>
     </>
   );

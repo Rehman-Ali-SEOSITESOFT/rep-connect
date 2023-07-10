@@ -3,9 +3,11 @@
 import { token } from "@/hooks/token";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import loader from "../../../../../assets/images/admin/product-loader.gif";
+
 import Image from "next/image";
 import UpdateOrder from "@/components/admin/orders/Update/UpdateOrder";
+import { ToastContainer, toast } from "react-toastify";
+import Spinner from "@/components/spinner/Spinner";
 
 const page = ({ params }) => {
   const { id } = params;
@@ -14,7 +16,6 @@ const page = ({ params }) => {
   const [isloading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(true);
   const [isErrorMessage, setIsErrorMessage] = useState(null);
-
   const [orderStatus, setOrderStatus] = useState(null);
   const singleOrderGet = () => {
     fetch(`${process.env.NEXT_PUBLIC_URL}api/order/${id}`, {
@@ -41,8 +42,43 @@ const page = ({ params }) => {
   }, []);
 
   const updateStatusForm = (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    console.log(orderStatus);
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/order/${id}`, {
+      method: "PUT",
+      headers: {
+        "x-auth-token": token(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        order_status: orderStatus,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false);
+        singleOrderGet();
+
+        if (data.success !== 0) {
+          toast.success("Successfully Update order", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          toast.error(data.error.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            theme: "colored",
+          });
+        }
+      });
   };
 
   return (
@@ -66,9 +102,7 @@ const page = ({ params }) => {
           </div>
         </div>
         {isloading ? (
-          <div className="">
-            <Image src={loader} width={50} height={50} alt="loader" />
-          </div>
+          <Spinner />
         ) : isError ? (
           <p>{isErrorMessage}</p>
         ) : (
@@ -76,8 +110,14 @@ const page = ({ params }) => {
             <div className="row">
               <div className="col">
                 <label htmlFor="form-label" className="fs-5  mb-2 fw-">
-                  {" "}
-                  Order Status
+                  Order Status :
+                  {updateOrder.order_status === "completed" ||
+                  updateOrder.order_status === "cancelled" ? (
+                    <span className="order-message">
+                      Order can't be changed beacuse it's already{" "}
+                      {updateOrder.order_status}
+                    </span>
+                  ) : null}
                 </label>
                 <form
                   onSubmit={updateStatusForm}
@@ -89,12 +129,33 @@ const page = ({ params }) => {
                     value={orderStatus}
                     onChange={(e) => setOrderStatus(e.target.value)}
                   >
-                    <option value="pending">pending</option>
-                    <option value="processing">processing</option>
-                    <option value="completed">completed</option>
-                    <option value="cancelled">cancelled</option>
+                    {updateOrder.order_status === "cancelled" ? (
+                      <option value="cancelled" disabled>
+                        cancelled
+                      </option>
+                    ) : updateOrder.order_status === "completed" ? (
+                      <option value="completed" disabled>
+                        completed
+                      </option>
+                    ) : (
+                      <>
+                        <option value="pending">pending</option>
+                        <option value="processing">processing</option>
+                        <option value="cancelled">cancelled</option>
+                        <option value="completed">completed</option>
+                      </>
+                    )}
                   </select>
-                  <button type="submit" className="update-order-status-btn">
+                  <button
+                    type="submit"
+                    className="update-order-status-btn"
+                    disabled={
+                      updateOrder.order_status === "completed" ||
+                      updateOrder.order_status === "cancelled"
+                        ? true
+                        : false
+                    }
+                  >
                     Update Order Status
                   </button>
                 </form>
@@ -106,6 +167,7 @@ const page = ({ params }) => {
           </>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

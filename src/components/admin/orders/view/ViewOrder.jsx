@@ -2,8 +2,8 @@ import React from "react";
 import "./vieworder.css";
 import Image from "next/image";
 import moment from "moment";
+import Link from "next/link";
 const ViewOrder = ({ data }) => {
-  console.log(data);
   const {
     first_name,
     last_name,
@@ -51,7 +51,8 @@ const ViewOrder = ({ data }) => {
                     <tr key={i}>
                       <td>
                         <div className="d-flex w-100 align-items-center">
-                          <div className="imgss-box position-relative d-inline-block me-3">
+                          <span className="d-inline pe-2">{i + 1}</span>
+                          <div className="imgss-box position-relative d-inline-block me-3 ">
                             <Image
                               src={e.image.url}
                               alt="ad"
@@ -59,9 +60,12 @@ const ViewOrder = ({ data }) => {
                               fill
                             />
                           </div>
-                          <div className="imgss-title d-inline-block">
+                          <Link
+                            href={`/admin/product/view-product/${e.product_id}`}
+                            className="imgss-title d-inline-block"
+                          >
                             <h2 className="title">{e.name} </h2>
-                          </div>
+                          </Link>
                         </div>
                       </td>
                       <td>{currenyConvert(e.price)}</td>

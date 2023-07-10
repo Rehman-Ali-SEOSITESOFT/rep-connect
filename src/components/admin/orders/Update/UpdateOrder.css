@@ -1,3 +1,10 @@
+.order-message {
+  font-weight: 500;
+  font-size: 14px;
+  color: red;
+  padding-left: 20px;
+  display: inline-block;
+}
 .status_change select {
   box-shadow: none;
   padding: 10px;
@@ -19,7 +26,7 @@
   text-transform: capitalize;
   border: none;
 }
-.update-order-status-btn:hover {
+.update-order-status-btn:not(:disabled):hover {
   background-color: rgb(130 87 225);
   color: #fff;
 }
@@ -107,6 +114,24 @@
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.462;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 0;
+  /* text-decoration: none;
+ */
+}
+
+.items-view-pro .imgss-title {
+  text-decoration: none;
+  text-underline-offset: 3px;
+  text-decoration-color: #333335;
+}
+.items-view-pro .imgss-title:hover {
+  text-decoration: underline;
+  text-decoration-color: #333335;
 }
 
 /*  USER DETAIL */
@@ -155,8 +180,8 @@
 }
 
 .ordr-detail .status {
-  display: inline-flex;
-  background: #f8dda7;
+  background: #c6c4c4;
+  color: #000000;
   color: #94660c;
   border-radius: 3px;
   padding: 3px 8px;
@@ -164,8 +189,8 @@
   text-transform: capitalize;
 }
 .ordr-detail .status.cancelled {
-  color: #777;
-  background: #e5e5e5;
+  color: #fff;
+  background: #ff8f00;
 }
 .ordr-detail .status.processing {
   background: #c6e1c6;
@@ -173,7 +198,7 @@
 }
 
 .ordr-detail .status.completed {
-  background-color: #00aa00;
+  background-color: #30f558;
   color: #022008;
 }
 
@@ -182,4 +207,12 @@
   background: #00000096;
   inset: 0;
   z-index: 12;
+}
+
+button.update-order-status-btn:disabled {
+  opacity: 0.7;
+}
+
+button.update-order-status-btn:disabled:hover {
+  opacity: 0.7;
 }

@@ -5,11 +5,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import loader from "../../../../../assets/images/admin/product-loader.gif";
 import Image from "next/image";
+import Spinner from "@/components/spinner/Spinner";
 
 const page = ({ params }) => {
   const { id } = params;
 
   const [viewOrder, setViewOrder] = useState(null);
+
   const [isloading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(true);
   const [isErrorMessage, setIsErrorMessage] = useState(null);
@@ -58,10 +60,11 @@ const page = ({ params }) => {
         </div>
         <div className="row position-relative">
           {isloading ? (
-            <div className="">
-              <Image src={loader} width={50} height={50} alt="loader" />
-            </div>
-          ) : isError ? (
+            <Spinner />
+          ) : // <div className="">
+          //   <Image src={loader} width={50} height={50} alt="loader" />
+          // </div>
+          isError ? (
             <p>{isErrorMessage}</p>
           ) : (
             <ViewOrder data={viewOrder} />

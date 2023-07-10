@@ -1,6 +1,6 @@
 .checkout--details {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 
 /* .checkout--details .billing-detail,
@@ -71,6 +71,8 @@
   /* max-width: calc(50% - 45px); */
   margin-left: auto;
   height: fit-content;
+  position: sticky;
+  top: 50px;
 }
 
 .your-order .table-wrapper th,
@@ -190,7 +192,6 @@
 
 .billing-detail .form-row .invalid {
   border: 1px solid red !important;
-
 }
 
 .error-details {
@@ -203,8 +204,8 @@
 }
 
 .error-details li {
-  list-style: none;
   padding: 1px 0px;
+  list-style: decimal;
 }
 
 .error-details .icon {
@@ -222,8 +223,12 @@
   text-decoration: underline;
 } */
 
-
 .main-row {
   margin: auto;
   width: 100%;
+}
+
+tfoot .foot-row th:nth-child(2) {
+  width: 50%;
+  text-align: right;
 }
