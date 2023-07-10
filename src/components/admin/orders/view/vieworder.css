@@ -89,6 +89,15 @@
   overflow: hidden;
   margin-bottom: 0;
 }
+.items-view-pro .imgss-title {
+  text-decoration: none;
+  text-underline-offset: 3px;
+  text-decoration-color: #333335;
+}
+.items-view-pro .imgss-title:hover {
+  text-decoration: underline;
+  text-decoration-color: #333335;
+}
 
 /*  USER DETAIL */
 .user-detail {

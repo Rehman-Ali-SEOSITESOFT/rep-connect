@@ -38,7 +38,6 @@ const page = ({ params }) => {
     singleOrderGet();
   }, []);
 
-  console.log(viewOrder);
   return (
     <div className="order-view pb-4">
       <div className="container-fluid">

@@ -2,6 +2,7 @@ import React from "react";
 import "./UpdateOrder.css";
 import Image from "next/image";
 import moment from "moment";
+import Link from "next/link";
 const UpdateOrder = ({ data }) => {
   const {
     first_name,
@@ -59,9 +60,13 @@ const UpdateOrder = ({ data }) => {
                               fill
                             />
                           </div>
-                          <div className="imgss-title d-inline-block">
+
+                          <Link
+                            href={`/admin/product/view-product/${e.product_id}`}
+                            className="imgss-title d-inline-block"
+                          >
                             <h2 className="title">{e.name} </h2>
-                          </div>
+                          </Link>
                         </div>
                       </td>
                       <td>{currenyConvert(e.price)}</td>
