@@ -15,6 +15,7 @@ const AddNew = ({ _hndleClsosee }) => {
   const [closePop, setClosePop] = useState(false);
   const [simpleImage, setSimpleImage] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const handleImageChange = (event) => {
     const uploadImage = Array.from(event.target.files);
     setSimpleImage((prevImages) => [...prevImages, ...uploadImage]);
@@ -25,8 +26,9 @@ const AddNew = ({ _hndleClsosee }) => {
   const _handlePopData = (e) => {
     e.preventDefault();
     setLoading(true);
-    if (selected.length === 0 && simpleImage.length <= 0) {
-      toast.error(`Please fill all fields`);
+    if (selected.length < 1 || simpleImage.length < 1) {
+      // toast.error(`Please fill all fields`);
+      setError(true);
       setLoading(false);
     } else {
       const userToken = JSON.parse(localStorage.getItem("token"));
@@ -50,6 +52,7 @@ const AddNew = ({ _hndleClsosee }) => {
           console.log(resp.data.success);
           setClosePop(_hndleClsosee);
           setLoading(false);
+          setError(false);
         })
         .catch((err) => {
           console.log(err);
@@ -83,6 +86,7 @@ const AddNew = ({ _hndleClsosee }) => {
                   onChange={handleImageChange}
                   accept="image/*"
                 />
+                {error && <p className="error_msg">Please fill both fields</p>}
               </div>
               <div className="images___">
                 {simpleImage?.map((e, idx) => {
@@ -106,6 +110,7 @@ const AddNew = ({ _hndleClsosee }) => {
                   name="inputs"
                   placeHolder="Enter Tag Name"
                 />
+                {error && <p className="error_msg">Please fill both fields</p>}
               </div>
               <div className="button_area text-end">
                 <button onClick={_handleCancePopUp}>Cancel</button>

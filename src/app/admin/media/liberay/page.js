@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import style from "./liberay.module.css";
-import Link from "next/link";
 import MediaLibraryTabs from "@/components/admin/mediaLibraryTabs/MediaLibraryTabs";
 import AddNew from "@/components/admin/addNew/AddNew";
 import { useSelector } from "react-redux";

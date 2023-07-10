@@ -28,7 +28,8 @@ export const tagsDataAllSlice = createSlice({
         state.error = false;
       })
       .addCase(tagsDataAll.fulfilled, (state, action) => {
-        state.data = action.payload.data.media;
+        state.data =
+          action.payload.data !== undefined ? action.payload.data.media : [];
         state.loading = false;
         state.error = false;
       })
