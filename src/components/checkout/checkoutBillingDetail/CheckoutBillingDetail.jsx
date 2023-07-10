@@ -8,11 +8,13 @@ import Loading from "@/components/cart/CartItems/Loading/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import { token } from "@/hooks/token";
 import { cartItem } from "@/redux/slices/cartItem";
+import Spinner from "@/components/spinner/Spinner";
 
 const CheckoutBillingDetail = () => {
   const router = useRouter();
   const [err, setErr] = useState([]);
   const [address, setAddress] = useState(false);
+  const [orderCompleteLoading, setOrderCompleteLoading] = useState(false);
   const state = useSelector((state) => state.cartItem);
   const [billingValidated, setBillingValidated] = useState({
     firstname: false,
@@ -82,7 +84,6 @@ const CheckoutBillingDetail = () => {
         return res.json();
       })
       .then((data) => {
-        toast("Order Placed Successfully");
         dispatch(cartItem());
         router.push("/order-received");
       });
@@ -108,7 +109,6 @@ const CheckoutBillingDetail = () => {
   };
   const hanldesubmitorder = (e) => {
     e.preventDefault();
-
     let error = [];
     // STEP 1 : ERROR IS FILED IS EMPTY THEN SHOW ERROR MESSAGE
     let objeError = { ...billingValidated };
@@ -193,6 +193,7 @@ const CheckoutBillingDetail = () => {
         hanldeOrdedConfrim({ shipping: 1, billing_address, shipping_address });
       }
     }
+    if (error.length >= 1) window.scrollTo(0, 150);
   };
 
   const handleCheckboxChange = (event) => {
@@ -209,16 +210,60 @@ const CheckoutBillingDetail = () => {
     }).format(totalprice);
   };
 
+  const orderPostAPI = (body) => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token(),
+      },
+      body: JSON.stringify(body),
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        setOrderCompleteLoading(false);
+        if (data.success === 1) {
+          toast.success("Order Placed", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          deletProduct();
+        } else {
+          toast.error("Something went Wrong Please try again 🔥", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
+  };
   const hanldeOrdedConfrim = (order) => {
+    // setOrderCompleteLoading(true);
+
+    /// CHECK SHIPPING ADDRESS IS EXISTED OR NOT
     let address;
     if (order.shipping === 1) {
       address = {
         billing_address: order.billing_address,
-        shipping_address: order.billing_address,
+        shipping_address: order.shipping_address,
       };
     } else {
       address = {
         billing_address: order.billing_address,
+        shipping_address: order.billing_address,
       };
     }
 
@@ -236,7 +281,7 @@ const CheckoutBillingDetail = () => {
         product_id: element.product_detail._id,
       });
     });
-
+    // CREATE ORDER OBJECT TO SENT THE ORDER
     let orders = {
       ...address,
       products: {
@@ -246,11 +291,13 @@ const CheckoutBillingDetail = () => {
       payment_method: "COD",
     };
 
-    console.log("Finnaly order completed", orders);
+    //   ORDER CREATED FETACH FUCTION
+    orderPostAPI(orders);
   };
 
   return (
     <>
+      {orderCompleteLoading && <Spinner />}
       <form onSubmit={hanldesubmitorder} className="checkout--details">
         <div className="row main-row">
           <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -880,24 +927,24 @@ const CheckoutBillingDetail = () => {
                         </tbody>
                         <tfoot>
                           <tr className="foot-row">
-                            <td className="cart-subtotal-title"> Subtotal</td>
-                            <td className="subtotal-price">
+                            <th className="cart-subtotal-title"> Subtotal</th>
+                            <th className="subtotal-price">
                               <span className="amount">
                                 <bdi>{TotalPrice()}</bdi>
                               </span>
-                            </td>
+                            </th>
                           </tr>
                           <tr className="foot-row">
-                            <td className="shipping"> Shipping</td>
-                            <td className="free-shipping">Free shipping</td>
+                            <th className="shipping"> Shipping</th>
+                            <th className="free-shipping">Free shipping</th>
                           </tr>
                           <tr className="order-total foot-row">
-                            <td className="total"> Total</td>
-                            <td className="total-price">
+                            <th className="total"> Total</th>
+                            <th className="total-price">
                               <strong className="amount">
                                 <bdi>{TotalPrice()}</bdi>
                               </strong>
-                            </td>
+                            </th>
                           </tr>
                         </tfoot>
                       </>
@@ -924,6 +971,7 @@ const CheckoutBillingDetail = () => {
             </>
           )}
         </div>
+        <ToastContainer />
       </form>
     </>
   );

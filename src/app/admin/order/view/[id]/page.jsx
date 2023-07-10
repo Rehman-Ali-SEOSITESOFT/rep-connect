@@ -10,6 +10,7 @@ const page = ({ params }) => {
   const { id } = params;
 
   const [viewOrder, setViewOrder] = useState(null);
+
   const [isloading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(true);
   const [isErrorMessage, setIsErrorMessage] = useState(null);
@@ -36,6 +37,7 @@ const page = ({ params }) => {
     singleOrderGet();
   }, []);
 
+  console.log(viewOrder);
   return (
     <div className="order-view pb-4">
       <div className="container-fluid">

@@ -50,6 +50,7 @@ const UpdateOrder = ({ data }) => {
                     <tr key={i}>
                       <td>
                         <div className="d-flex w-100 align-items-center">
+                          <span className="d-inline pe-2">{i + 1}</span>
                           <div className="imgss-box position-relative d-inline-block me-3">
                             <Image
                               src={e.image.url}
