@@ -21,7 +21,9 @@
   border: 1px solid #c3c4c7;
   padding: 10px 10px;
 }
-
+.liberay_wrapper {
+  padding: 1rem 0rem;
+}
 @media screen and (max-width: 768px) {
   .tab_pane {
     text-align: center !important;

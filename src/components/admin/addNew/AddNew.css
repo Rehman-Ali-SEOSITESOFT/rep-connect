@@ -53,6 +53,12 @@
 .image_row {
   margin-bottom: 10px;
 }
+.error_msg {
+  margin-top: 0px;
+  color: red;
+  font-size: 12px;
+  padding-top: 4px;
+}
 @media screen and (max-width: 1200px) {
   .inner_Wrapper {
     width: 500px;

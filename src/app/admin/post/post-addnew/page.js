@@ -5,7 +5,10 @@ import style from "./Addpost.module.css";
 import CkEditior from "@/components/admin/ckEditior/CkEditor";
 import axios from "axios";
 import SunEditor from "suneditor-react";
+import TagsPopUp from "@/components/admin/tagsPopUp/TagsPopUp";
+import Image from "next/image";
 const Page = () => {
+  const [tagPopUp, setTagPopUp] = useState(false);
   const [postData, setPostData] = useState({
     productTitle: "",
     category: "",
@@ -85,10 +88,17 @@ const Page = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-
+  const _handleUploadImages = () => {
+    setTagPopUp(!tagPopUp);
+  };
   return (
     <>
       <section>
+        {tagPopUp ? (
+          <TagsPopUp _handleUploadImages={_handleUploadImages} />
+        ) : (
+          ""
+        )}
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
@@ -162,11 +172,19 @@ const Page = () => {
                             </div>
                             <div className="col-xl-6 color-selection">
                               <label className="form-label">Image</label>
-                              <input
-                                type="file"
-                                className="form-control"
-                                onChange={handleImageChange}
-                              />
+                              <div className={style.uploadImg}>
+                                <button
+                                  onClick={_handleUploadImages}
+                                  className="form-control"
+                                >
+                                  <i className="fa-solid fa-upload"></i>
+                                </button>
+                              </div>
+                              {/* <input
+                          type="file"
+                          className="form-control"
+                          onChange={handleImageChange}
+                        /> */}
                             </div>
                             <div className="col-xl-12">
                               <label
@@ -203,11 +221,11 @@ const Page = () => {
                             <div className="col-xl-12">
                               <label className="form-label">Format</label>
 
-                              <div className="formatdataEditor">
+                              <div className={style.formatdataEditor}>
                                 <SunEditor
                                   onChange={setContent}
                                   setOptions={{
-                                    height: 300, // Set the desired height of the editor
+                                    height: 400, // Set the desired height of the editor
                                     buttonList: [
                                       ["undo", "redo"],
                                       ["font", "fontSize", "formatBlock"],

@@ -20,6 +20,9 @@ import axios from "axios";
 import Image from "next/image";
 import Spinner from "@/components/spinner/Spinner";
 import "./PostCategoryList.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -43,16 +46,12 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
 const PostCategoryList = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
 
   const defaultMaterialTheme = createTheme();
   const [entries, setEnteries] = useState([]);
-  const hanldeDeleted = (event, data) => {
-    console.log("Delete Handler", data);
-  };
-  const hanldeUpdated = (event, data) => {
-    console.log("Updated Handler", event, data);
-  };
+
   const columns = [
     {
       title: "SR",
@@ -85,8 +84,9 @@ const PostCategoryList = () => {
       // },
     },
   ];
-  useEffect(() => {
-    setLoading(true);
+
+  ///////////////////all catergory api starts/////////////////
+  const getCatergoryData = () => {
     axios
       .get("https://anxious-foal-shift.cyclic.app/api/post-category")
       .then((resp) => {
@@ -94,6 +94,51 @@ const PostCategoryList = () => {
         setLoading(false);
       })
       .catch((err) => console.log(err));
+  };
+  ///////////////////all catergory api ends/////////////////
+
+  ////////////////////////delete api start/////////////////////
+
+  const hanldeDeleted = (event, data) => {
+    console.log("Delete Handler", data);
+    axios
+      .delete(
+        `https://anxious-foal-shift.cyclic.app/api/post-category/${data._id}`
+      )
+      .then((resp) => {
+        toast.success("Categotry Deleted");
+        setTimeout(() => {
+          getCatergoryData();
+        }, 1000);
+      })
+      .catch((err) => console.log(err));
+  };
+  ////////////////////////delete api ends/////////////////////
+
+  /////////////////////handle update api starts/////////////////////
+  const hanldeUpdated = (event, data) => {
+    console.log("Updated Handler", event, data);
+    router.push(`/admin/post/post-categories/${data._id}`);
+    // axios
+    //   .get(
+    //     `https://anxious-foal-shift.cyclic.app/api/post-category/${data._id}`
+    //   )
+    //   .then((resp) => console.log(resp))
+    //   .catch((err) => console.log(err));
+  };
+
+  /////////////////////handle update api ends/////////////////////
+
+  ////////////////////handle view api starts ////////////////////
+  const _handleView = (event, data) => {
+    console.log(data, "data is here for category");
+  };
+
+  ////////////////////handle view api ends ////////////////////
+
+  useEffect(() => {
+    setLoading(true);
+    getCatergoryData();
   }, []);
   return (
     <>
@@ -111,12 +156,17 @@ const PostCategoryList = () => {
                 actions={[
                   {
                     icon: () => <DeleteIcon />,
-                    // tooltip: "Remove",
+                    tooltip: "Remove Category",
                     onClick: (event, data) => hanldeDeleted(event, data),
                   },
                   {
+                    icon: () => <VisibilityOutlinedIcon />,
+                    onClick: (event, data) => _handleView(event, data),
+                    tooltip: "View Category",
+                  },
+                  {
                     icon: () => <Edit />,
-                    // tooltip: "Change Status",
+                    tooltip: "Update Category",
                     onClick: (event, data) => hanldeUpdated(event, data),
                   },
                 ]}
@@ -142,6 +192,7 @@ const PostCategoryList = () => {
               />
             </ThemeProvider>
           </div>
+          <ToastContainer />
         </>
       )}
     </>

@@ -1,25 +1,32 @@
 "use client";
-import React, { useState } from "react";
-import style from "./AddCategoryList.module.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import Image from "next/image";
+import style from "../PostCategory.module.css";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import TagsPopUp from "@/components/admin/tagsPopUp/TagsPopUp";
-const page = () => {
+import Image from "next/image";
+const page = ({ params }) => {
   const [file, setFile] = useState(null);
+  const { id } = params;
   const [image, setImage] = useState(null);
   const [cat, setCat] = useState({
     catTitle: "",
   });
+  const getSingleCategoryData = () => {
+    axios
+      .get(`https://anxious-foal-shift.cyclic.app/api/post-category/${id}`)
+      .then((resp) => {
+        setCat(resp.data.data.category);
+        console.log(resp.data.data.category);
+      })
+      .catch((err) => console.log(err));
+  };
   const _handleChange = (e) => {
     setCat({
       ...cat,
       [e.target.name]: e.target.value,
     });
   };
-  const handleChange = (event) => {
+  const handleChange = (e) => {
     setImage(event.target.files[0]);
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -36,48 +43,17 @@ const page = () => {
     setFile("");
     setImage("");
   };
-
   const onSubmitCategotry = (e) => {
     e.preventDefault();
-    // if (cat.catTitle.length == 0 && image <= 0) {
-    //   toast.error(`invalid data`);
-    // } else {
-    //   const formData = new FormData();
-    //   formData.append("name", cat.catTitle);
-    //   formData.append("cover_image", image);
-    //   axios
-    //     .post(
-    //       "https://anxious-foal-shift.cyclic.app/api/post-category",
-    //       formData
-    //     )
-    //     .then((resp) => {
-    //       console.log(resp.data.success);
-    //       if (resp.data.success == 1) {
-    //         toast.success(resp.data.message);
-    //         setCat({
-    //           catTitle: "",
-    //         });
-    //         setImage("");
-    //         setFile("");
-    //       } else {
-    //         toast.error(resp.data.message);
-    //       }
-    //     })
-    //     .catch((err) => console.log(err));
-    // }
   };
-
-  const [open, setOpen] = useState(false);
-  const _handleTogglePage = () => {
-    setOpen(true);
-  };
-  const popUpClose = () => {
-    setOpen(false);
-  };
+  useEffect(() => {
+    getSingleCategoryData();
+  }, []);
+  console.log(cat, "cat");
+  console.log(file, "fikeee");
   return (
     <>
       <section className={style.addCategoryListWrapper}>
-        {open ? <TagsPopUp popUpClose={popUpClose} /> : ""}
         <div className="container-fluid">
           <div className={`row ${style.title_row} my-4`}>
             <div className="col-6">
@@ -110,7 +86,7 @@ const page = () => {
                       <input
                         className="form-control"
                         type="text"
-                        value={cat.catTitle}
+                        value={cat.name}
                         onChange={_handleChange}
                         name="catTitle"
                       />
@@ -127,29 +103,20 @@ const page = () => {
                       <div className={style.laaabeel}>
                         <label>Image</label>
                         <div className={style.drapFile}>
-                          <button
-                            onClick={_handleTogglePage}
-                            className={`form-control ${style.file_upload}`}
-                          >
-                            upload image
-                          </button>
-
-                          {/* <input
+                          <input
                             className={`form-control ${style.file_upload}`}
                             type="file"
                             onChange={handleChange}
-                          /> */}
-                          {/* {file && (
-                            <div
-                              className={style.background_image}
-                              style={{ backgroundImage: `url(${file})` }}
-                            >
+                          />
+                          {file && (
+                            <div className={style.background_image}>
+                              <Image src={file} alt="" width={60} height={60} />
                               <i
                                 className={`fa-solid fa-xmark ${style.cross_icon}`}
                                 onClick={_handleCancel}
                               ></i>
                             </div>
-                          )} */}
+                          )}
                         </div>
                       </div>
                     </div>
@@ -165,10 +132,7 @@ const page = () => {
                     className={`add_new_btn border-none ${style.submit_}`}
                     type="submit"
                   >
-                    <span>
-                      <i className="fa-solid fa-plus"></i>
-                    </span>
-                    Add Category
+                    Update Category
                   </button>
                 </div>
               </div>
@@ -176,7 +140,6 @@ const page = () => {
           </form>
         </div>
       </section>
-      <ToastContainer />
     </>
   );
 };

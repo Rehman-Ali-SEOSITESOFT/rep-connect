@@ -83,3 +83,11 @@
   color: #333333 !important;
   font-weight: 600 !important ;
 }
+.uploadImg button {
+  background: transparent;
+  width: 100% !important;
+  border: 1px solid #ced4da;
+}
+.formatdataEditor button {
+  width: 34px !important;
+}

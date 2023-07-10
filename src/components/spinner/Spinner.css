@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   padding-left: 170px;
+  z-index: 2222;
 }
 
 .spinner-container {

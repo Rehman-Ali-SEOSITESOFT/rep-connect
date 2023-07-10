@@ -16,8 +16,8 @@ const MediaLibContent = (props) => {
         src={image}
         alt=""
         className={`image_`}
-        width={138}
-        height={138}
+        width={120}
+        height={120}
         onClick={() => _handleGettingId(id)}
       />
     </div>
