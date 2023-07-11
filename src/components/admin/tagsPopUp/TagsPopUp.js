@@ -118,6 +118,7 @@ const TagsPopUp = ({
     getImageId(selectedImage);
     console.log(getImageee(getImage), "selected iamge");
   };
+  console.log(selectedImage, "<=============");
 
   return (
     <>
