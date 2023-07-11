@@ -12,7 +12,12 @@ import emptycart from "../../../assets/images/empty/empty.gif";
 import "./TagsPopUp.css";
 import Image from "next/image";
 import { tagsDataAll } from "@/redux/slices/tagsDataAll";
-const TagsPopUp = ({ popUpClose, _handleUploadImages }) => {
+const TagsPopUp = ({
+  popUpClose,
+  _handleUploadImages,
+  getImageId,
+  getImageee,
+}) => {
   const state = useSelector((state) => state.tags);
   const [addItem, setAddItem] = useState(false);
   const dispatch = useDispatch();
@@ -21,6 +26,7 @@ const TagsPopUp = ({ popUpClose, _handleUploadImages }) => {
   const [selectedImage, setSelectedImage] = useState([]);
   const tagsLoading = useSelector((state) => state.tagsData.loading);
   const [close, setClose] = useState(false);
+  const [getImage, setGetImage] = useState("");
 
   const _handleAddNew = () => {
     setAddItem(true);
@@ -91,7 +97,7 @@ const TagsPopUp = ({ popUpClose, _handleUploadImages }) => {
     dispatch(tagsDataAll(apiEndpoint));
   };
 
-  const _handleImageId = (id) => {
+  const _handleImageId = (id, img) => {
     const selectImage = id;
     if (selectedImage.filter((item) => item === id).length > 0) {
       let arr = [...selectedImage];
@@ -99,16 +105,20 @@ const TagsPopUp = ({ popUpClose, _handleUploadImages }) => {
     } else {
       setSelectedImage((prevImage) => [...prevImage, selectImage]);
     }
-    console.log(selectImage, "image id");
+    setGetImage(img);
+    console.log(img, "img is here");
   };
   const _handleClosePopUp = () => {
-    console.log("cancel button is clicked");
     setClose(popUpClose);
     setClose(_handleUploadImages);
   };
   const _handleSelect = () => {
-    console.log(selectedImage, "selected Images");
+    setClose(popUpClose);
+    setClose(_handleUploadImages);
+    getImageId(selectedImage);
+    console.log(getImageee(getImage), "selected iamge");
   };
+
   return (
     <>
       <section className="tags_popup_main_wrapper">
@@ -174,8 +184,9 @@ const TagsPopUp = ({ popUpClose, _handleUploadImages }) => {
                             <div className="col text-center" key={idx}>
                               <MediaLibContent
                                 image={e.image.url}
+                                img={e.image.url}
                                 key={idx}
-                                id={e.image.id}
+                                id={e._id}
                                 _handleGettingId={_handleImageId}
                                 selectedImage={selectedImage}
                               />

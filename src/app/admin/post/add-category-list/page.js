@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./AddCategoryList.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,9 +9,13 @@ import axios from "axios";
 import TagsPopUp from "@/components/admin/tagsPopUp/TagsPopUp";
 const page = () => {
   const [file, setFile] = useState(null);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
+  const [error, setError] = useState(false);
+  const [getUrlImage, setGetUrlImage] = useState("");
   const [cat, setCat] = useState({
     catTitle: "",
+    parentCategoryId: "",
+    description: "",
   });
   const _handleChange = (e) => {
     setCat({
@@ -36,36 +40,35 @@ const page = () => {
     setFile("");
     setImage("");
   };
+  const [parentTagName, setParentTagName] = useState([]);
+
+  /////////////////////post api starts here//////////////////
 
   const onSubmitCategotry = (e) => {
     e.preventDefault();
-    // if (cat.catTitle.length == 0 && image <= 0) {
-    //   toast.error(`invalid data`);
-    // } else {
-    //   const formData = new FormData();
-    //   formData.append("name", cat.catTitle);
-    //   formData.append("cover_image", image);
-    //   axios
-    //     .post(
-    //       "https://anxious-foal-shift.cyclic.app/api/post-category",
-    //       formData
-    //     )
-    //     .then((resp) => {
-    //       console.log(resp.data.success);
-    //       if (resp.data.success == 1) {
-    //         toast.success(resp.data.message);
-    //         setCat({
-    //           catTitle: "",
-    //         });
-    //         setImage("");
-    //         setFile("");
-    //       } else {
-    //         toast.error(resp.data.message);
-    //       }
-    //     })
-    //     .catch((err) => console.log(err));
-    // }
+    console.log(cat, "categggg");
+    console.log(image, "image parent Id");
+
+    const body = {
+      name: cat.catTitle,
+      description: cat.description,
+      parent_cat_id: cat.parentCategoryId,
+      cover_image: image[0],
+    };
+
+    if (cat.catTitle.length <= 0 || image.length <= 0) {
+      setError(true);
+    } else {
+      axios
+        .post("https://anxious-foal-shift.cyclic.app/api/post-category", body)
+        .then((resp) => {
+          console.log(resp);
+          setError(false);
+        })
+        .catch((err) => console.log(err));
+    }
   };
+  /////////////////////post api end here//////////////////
 
   const [open, setOpen] = useState(false);
   const _handleTogglePage = () => {
@@ -74,10 +77,40 @@ const page = () => {
   const popUpClose = () => {
     setOpen(false);
   };
+
+  const _handleparentId = (e) => {
+    console.log(e.target.value);
+    setCat({
+      ...cat,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  ////////////////get api for post category starts here//////////////
+
+  useEffect(() => {
+    axios
+      .get("https://anxious-foal-shift.cyclic.app/api/post-category/")
+      .then((resp) => {
+        console.log(resp.data.data.category);
+        setParentTagName(resp.data.data.category);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  ////////////////get api for post category ends here//////////////
+  console.log(getUrlImage, "url of image is here ");
   return (
     <>
       <section className={style.addCategoryListWrapper}>
-        {open ? <TagsPopUp popUpClose={popUpClose} /> : ""}
+        {open ? (
+          <TagsPopUp
+            popUpClose={popUpClose}
+            getImageId={setImage}
+            getImageee={setGetUrlImage}
+          />
+        ) : (
+          ""
+        )}
         <div className="container-fluid">
           <div className={`row ${style.title_row} my-4`}>
             <div className="col-6">
@@ -101,24 +134,55 @@ const page = () => {
             </div>
           </div>
           <form onSubmit={onSubmitCategotry}>
-            <div className="row">
-              <div className="col">
-                <div className={style.form_category}>
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <label>Name of Category</label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={cat.catTitle}
-                        onChange={_handleChange}
-                        name="catTitle"
-                      />
-                    </div>
+            {/* <div className="row">
+              <div className="col"> */}
+            <div className={style.form_category}>
+              <div className="row">
+                <div className="col-lg-6">
+                  <label>Name of Category</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={cat.catTitle}
+                    onChange={_handleChange}
+                    name="catTitle"
+                  />
+                  {error && cat.catTitle.length <= 1 ? (
+                    <p className={style.errormessage}>Name is required Field</p>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="col-lg-6">
+                  <label>Select Parent Category</label>
+                  <select
+                    className="form-select"
+                    onChange={_handleparentId}
+                    name="parentCategoryId"
+                  >
+                    {parentTagName?.map((e, idx) => {
+                      return (
+                        <option value={e._id} key={idx}>
+                          {e.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className="col-lg-12">
+                  <div className="my-3">
+                    <label>Description</label>
+                    <textarea
+                      className="form-control"
+                      value={cat.description}
+                      name="description"
+                      onChange={_handleChange}
+                    ></textarea>
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="row my-3">
               <div className="col">
                 <div className={style.form_category2}>
@@ -133,24 +197,26 @@ const page = () => {
                           >
                             upload image
                           </button>
-
-                          {/* <input
-                            className={`form-control ${style.file_upload}`}
-                            type="file"
-                            onChange={handleChange}
-                          /> */}
-                          {/* {file && (
-                            <div
-                              className={style.background_image}
-                              style={{ backgroundImage: `url(${file})` }}
-                            >
-                              <i
-                                className={`fa-solid fa-xmark ${style.cross_icon}`}
-                                onClick={_handleCancel}
-                              ></i>
-                            </div>
-                          )} */}
+                          {error && image.length <= 0 ? (
+                            <p className={style.errormessage}>
+                              Image is required
+                            </p>
+                          ) : (
+                            ""
+                          )}
                         </div>
+                        {getUrlImage.length > 0 ? (
+                          <div className={style.img_radius}>
+                            <Image
+                              src={getUrlImage}
+                              alt=""
+                              width={60}
+                              height={60}
+                            />
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </div>

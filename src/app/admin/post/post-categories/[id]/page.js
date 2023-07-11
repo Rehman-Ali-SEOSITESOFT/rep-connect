@@ -91,6 +91,7 @@ const page = ({ params }) => {
                         name="catTitle"
                       />
                     </div>
+                 
                   </div>
                 </div>
               </div>

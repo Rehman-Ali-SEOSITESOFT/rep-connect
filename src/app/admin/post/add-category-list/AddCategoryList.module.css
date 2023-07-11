@@ -71,3 +71,16 @@
 .submit_ {
   border: none;
 }
+.form_category select:focus {
+  box-shadow: none;
+  outline: 0;
+}
+.errormessage {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+.img_radius img {
+  border-radius: 50%;
+  margin-top: 15px;
+}

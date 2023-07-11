@@ -66,7 +66,7 @@ const PostCategoryList = () => {
       render: (item) => {
         return (
           <Image
-            src={item.cover_image.image_url}
+            src={item.cover_image.image.url}
             alt={item.name}
             height={60}
             width={60}
@@ -132,6 +132,7 @@ const PostCategoryList = () => {
   ////////////////////handle view api starts ////////////////////
   const _handleView = (event, data) => {
     console.log(data, "data is here for category");
+    router.push(`/admin/post/post-categories/post-view-detail/${data._id}`);
   };
 
   ////////////////////handle view api ends ////////////////////
