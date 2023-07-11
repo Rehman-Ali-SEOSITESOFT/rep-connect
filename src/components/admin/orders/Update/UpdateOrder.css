@@ -216,3 +216,21 @@ button.update-order-status-btn:disabled {
 button.update-order-status-btn:disabled:hover {
   opacity: 0.7;
 }
+
+.special-notes {
+  padding: 1.25rem;
+}
+
+.special-notes .title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-family: "poppins", sans-serif;
+}
+.special-notes .paraga {
+  color: #333335;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 0;
+}

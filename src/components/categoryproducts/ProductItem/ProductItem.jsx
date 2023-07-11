@@ -31,7 +31,7 @@ const ProductItem = ({ item }) => {
           >
             <Image
               // src={marsa}
-              src={item.cover_image.image_url}
+              src={item.cover_image.image.url}
               alt="product"
               className="img-fluid object-fit-cover"
               fill

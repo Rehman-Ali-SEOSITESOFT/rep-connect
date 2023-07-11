@@ -7,7 +7,7 @@ const ReactImageMagnify = dynamic(() => import("react-image-magnify"), {
 });
 
 const ImageGallary = ({ item }) => {
-  const [coverImage, setCoverImage] = useState(item.gallary[0].image_url);
+  const [coverImage, setCoverImage] = useState(item.gallary[0].image.url);
   const [index, setIndex] = useState(0);
 
   return (
@@ -42,11 +42,11 @@ const ImageGallary = ({ item }) => {
                   key={i}
                   onClick={() => {
                     setIndex(i);
-                    setCoverImage(item.image_url);
+                    setCoverImage(item.image.url);
                   }}
                 >
                   <Image
-                    src={item.image_url}
+                    src={item.image.url}
                     alt="item.name"
                     width={100}
                     height={100}
