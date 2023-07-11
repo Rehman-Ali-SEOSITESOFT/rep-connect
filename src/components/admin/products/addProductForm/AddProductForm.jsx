@@ -8,6 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 import { product } from "@/redux/slices/productSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import UploadIcon from "../../uploadIcons/UploadIcon";
+import bus from "../../../../assets/images/Courses/business-development.jpg";
+import TagsPopUp from "../../tagsPopUp/TagsPopUp";
 
 const AddProductForm = ({ data }) => {
   const router = useRouter();
@@ -25,6 +28,12 @@ const AddProductForm = ({ data }) => {
   const [productProfile, setProductProfile] = useState("");
   const [productGallary, sePproductGallary] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [sinleProfileUpoload, singleProfileUplaodPopUp] = useState(false);
+  const [getProfileImageId, setGetProfileImageId] = useState([]);
+  const [getProfileImageUrl, setGetProfileImageUrl] = useState("");
+
+  const [gallaryImagesUrl, setGallaryImagesUrl] = useState([]);
+  const [isSingle, setIsSingle] = useState(false);
 
   const hanldeChanged = (event) => {
     const name = event.target.name;
@@ -32,85 +41,90 @@ const AddProductForm = ({ data }) => {
     setAddProduct({ ...addProduct, [name]: value });
   };
   const hanldeSubmit = (e) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     e.preventDefault();
+    let postOrder = {
+      cover_image: getProfileImageId[0],
+      gallary: gallaryImagesUrl,
+    };
 
-    const formData = new FormData();
-    formData.append("name", addProduct.product_name);
-    formData.append("stock_quantity", addProduct.quantity);
-    formData.append("regular_price", addProduct.price);
-    formData.append("sale_price", addProduct.sale_price);
-    formData.append("short_disc", addProduct.short_description);
-    formData.append("disc", discription);
-    formData.append("product_profile", productProfile);
-    formData.append("category", categories[0]);
-    for (let i = 0; i < productGallary.length; i++) {
-      formData.append("gallary", productGallary[i]);
-    }
-    fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
-      method: "POST",
-      headers: {
-        // "Content-Type": "application/json",
-      },
-      body: formData,
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.success === 1) {
-          dispatch(product());
-          toast.success("Product add successfully", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-          setAddProduct({
-            product_name: "",
-            quantity: "",
-            price: "",
-            sale_price: "",
-            short_description: "",
-          });
-          setDiscription(null);
-          setCategories("");
-          setIsLoading(false);
-          setTimeout(() => {
-            router.push("/admin/product");
-          }, 1500);
-        } else {
-          setIsLoading(false);
-          toast.error(data.message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        }
+    console.log(postOrder);
+    // const formData = new FormData();
+    // formData.append("name", addProduct.product_name);
+    // formData.append("stock_quantity", addProduct.quantity);
+    // formData.append("regular_price", addProduct.price);
+    // formData.append("sale_price", addProduct.sale_price);
+    // formData.append("short_disc", addProduct.short_description);
+    // formData.append("disc", discription);
+    // formData.append("product_profile", productProfile);
+    // formData.append("category", categories[0]);
+    // for (let i = 0; i < productGallary.length; i++) {
+    //   formData.append("gallary", productGallary[i]);
+    // }
+    // fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
+    //   method: "POST",
+    //   headers: {
+    //     // "Content-Type": "application/json",
+    //   },
+    //   body: formData,
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     if (data.success === 1) {
+    //       dispatch(product());
+    //       toast.success("Product add successfully", {
+    //         position: "top-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //       });
+    //       setAddProduct({
+    //         product_name: "",
+    //         quantity: "",
+    //         price: "",
+    //         sale_price: "",
+    //         short_description: "",
+    //       });
+    //       setDiscription(null);
+    //       setCategories("");
+    //       setIsLoading(false);
+    //       setTimeout(() => {
+    //         router.push("/admin/product");
+    //       }, 1500);
+    //     } else {
+    //       setIsLoading(false);
+    //       toast.error(data.message, {
+    //         position: "top-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //       });
+    //     }
 
-        if (data.success === 0) {
-          setIsLoading(false);
-          toast.error(data.error.message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        }
-      });
+    //     if (data.success === 0) {
+    //       setIsLoading(false);
+    //       toast.error(data.error.message, {
+    //         position: "top-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //       });
+    //     }
+    //   });
   };
 
   // FILTER GETEGORY ID
@@ -143,12 +157,40 @@ const AddProductForm = ({ data }) => {
   // useEffect(() => {
   //   setIsLoading(false);
   // }, []);
+
+  const hanldeSingle = () => {
+    setIsSingle(true);
+    singleProfileUplaodPopUp(!sinleProfileUpoload);
+  };
+  const hanldeRemoveImage = () => {
+    console.log("remove image");
+  };
+  const hanldeCloseMediaPopup = () => {
+    singleProfileUplaodPopUp(false);
+  };
+
+  const hanldeGallary = () => {
+    setIsSingle(false);
+    // setGallaryImagesUrl(gallaryImagesUrl);
+    singleProfileUplaodPopUp(true);
+  };
+
+  console.log("gallaryImagesUrl", gallaryImagesUrl);
   return (
     <>
       {isLoading && (
         <div className="adding-produt-loader">
           <Image src={loader} alt="demo" className="adding-imag"></Image>
         </div>
+      )}
+      {sinleProfileUpoload && (
+        <TagsPopUp
+          popUpClose={hanldeCloseMediaPopup}
+          getImageId={setGetProfileImageId}
+          getImageee={setGetProfileImageUrl}
+          isSingle={isSingle}
+          getGllaryUrl={setGallaryImagesUrl}
+        />
       )}
 
       <form onSubmit={hanldeSubmit} className="add-product-form">
@@ -241,26 +283,52 @@ const AddProductForm = ({ data }) => {
             <label htmlFor="product_image" className="form-label">
               Product Image
             </label>
-            <input
-              type="file"
-              className="form-control"
-              id="product_image"
-              name="product_image"
-              onChange={hanldeChangedImages}
-            />
+
+            <div className="profile-pop" onClick={hanldeSingle}>
+              <UploadIcon />
+            </div>
+            {getProfileImageUrl ? (
+              <div className="profile-img mt-2">
+                <Image
+                  src={getProfileImageUrl}
+                  width={80}
+                  height={80}
+                  alt="img"
+                  className="img-fluid"
+                />
+                <div className="close-icon" onClick={hanldeRemoveImage}>
+                  <i className="fa-solid fa-xmark"></i>
+                </div>
+              </div>
+            ) : null}
           </div>
           <div className="form-col">
             <label htmlFor="product_gallary" className="form-label">
               Product Gallary
             </label>
-            <input
-              type="file"
-              className="form-control"
-              id="product_gallary"
-              name="product_gallary"
-              multiple
-              onChange={hanldeChangedImages}
-            />
+            <div className="profile-pop" onClick={hanldeGallary}>
+              <UploadIcon />
+            </div>
+            <div className="d-flex w-100 flex-wrap mt-2">
+              {/* {gallaryImagesUrl.length >= 1
+                ? gallaryImagesUrl.map((element) => {
+                    return (
+                      <div className="profile-img" key={element.id}>
+                        <Image
+                          src={element.url}
+                          className="img-fluid"
+                          alt="al"
+                          width={80}
+                          height={80}
+                        />
+                        <div className="close-icon">
+                          <i className="fa-solid fa-xmark"></i>
+                        </div>
+                      </div>
+                    );
+                  })
+                : null} */}
+            </div>
           </div>
         </div>
 

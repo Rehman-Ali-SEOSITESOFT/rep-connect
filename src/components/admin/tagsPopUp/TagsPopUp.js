@@ -17,6 +17,8 @@ const TagsPopUp = ({
   _handleUploadImages,
   getImageId,
   getImageee,
+  getGllaryUrl,
+  isSingle,
 }) => {
   const state = useSelector((state) => state.tags);
   const [addItem, setAddItem] = useState(false);
@@ -24,6 +26,7 @@ const TagsPopUp = ({
   const tagss = useSelector((state) => state.tags.data);
   const tagsData = useSelector((state) => state.tagsData);
   const [selectedImage, setSelectedImage] = useState([]);
+  const [selectedGallryImage, setSelectedGallryImage] = useState([]);
   const tagsLoading = useSelector((state) => state.tagsData.loading);
   const [close, setClose] = useState(false);
   const [getImage, setGetImage] = useState("");
@@ -78,6 +81,7 @@ const TagsPopUp = ({
   const _handletagsName = (id) => {
     setNewData(id);
     setSelectedImage([]);
+    setSelectedGallryImage([]);
   };
   const getAllDataTags = () => {
     const queryParam = newData;
@@ -101,12 +105,18 @@ const TagsPopUp = ({
     const selectImage = id;
     if (selectedImage.filter((item) => item === id).length > 0) {
       let arr = [...selectedImage];
+      let gallaryagg = [...selectedGallryImage];
       setSelectedImage(arr.filter((item) => item !== id));
+      setSelectedGallryImage(gallaryagg.filter((item) => item.id !== id));
     } else {
       setSelectedImage((prevImage) => [...prevImage, selectImage]);
+      let obj = {
+        id: id,
+        url: img,
+      };
+      setSelectedGallryImage((prevImage) => [...prevImage, obj]);
     }
     setGetImage(img);
-    console.log(img, "img is here");
   };
   const _handleClosePopUp = () => {
     setClose(popUpClose);
@@ -115,10 +125,16 @@ const TagsPopUp = ({
   const _handleSelect = () => {
     setClose(popUpClose);
     setClose(_handleUploadImages);
+    if (isSingle) {
+      getImageee(getImage);
+    } else {
+      getGllaryUrl(selectedGallryImage);
+    }
     getImageId(selectedImage);
-    console.log(getImageee(getImage), "selected iamge");
   };
   console.log(selectedImage, "<=============");
+
+  console.log("pop", selectedGallryImage);
 
   return (
     <>
