@@ -171,7 +171,7 @@ const AddProductForm = ({ data }) => {
 
   const hanldeGallary = () => {
     setIsSingle(false);
-    setGallaryImagesUrl(gallaryImagesUrl);
+    // setGallaryImagesUrl(gallaryImagesUrl);
     singleProfileUplaodPopUp(true);
   };
 

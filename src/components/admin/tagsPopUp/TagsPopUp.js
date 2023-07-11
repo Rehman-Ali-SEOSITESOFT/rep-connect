@@ -133,9 +133,8 @@ const TagsPopUp = ({
     getImageId(selectedImage);
   };
 
-  useEffect(() => {
-    getGllaryUrl((pre) => [...pre]);
-  }, []);
+  console.log("pop", selectedGallryImage);
+
   return (
     <>
       <section className="tags_popup_main_wrapper">
