@@ -140,7 +140,7 @@ const OrderCart = () => {
         <React.Fragment>
           <ThemeProvider theme={defaultMaterialTheme}>
             <MaterialTable
-              title="Product"
+              title="Orders"
               icons={tableIcons}
               columns={columns}
               data={entries}

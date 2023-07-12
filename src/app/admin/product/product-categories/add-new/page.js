@@ -1,13 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
-
-const ProductCategory = dynamic(
-  () => import("@/components/admin/product-categories/ProductCategory"),
-  { ssr: false }
-);
 
 const page = () => {
   return (
@@ -16,26 +10,26 @@ const page = () => {
         <div className={`row row-title-equal-spacing`}>
           <div className="col-6">
             <div className="left">
-              <h4 className="product-title">Product Categories list</h4>
+              <h4 className="product-title">Add new Category </h4>
             </div>
           </div>
           <div className="col-6 text-end">
             <div className="right">
               <Link
                 className="back-to-product"
-                href="/admin/product/product-categories/add-new"
+                href="/admin/product/product-categories"
               >
                 <span>
                   <i className="fa-solid fa-plus"></i>
                 </span>
-                Add to product category
+                back to product categories
               </Link>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col">
-            <ProductCategory />
+            <h2>add new</h2>
           </div>
         </div>
       </div>

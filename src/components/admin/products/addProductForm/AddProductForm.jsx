@@ -175,7 +175,7 @@ const AddProductForm = ({ data }) => {
     singleProfileUplaodPopUp(true);
   };
 
-  console.log("gallaryImagesUrl", gallaryImagesUrl);
+ 
   return (
     <>
       {isLoading && (
