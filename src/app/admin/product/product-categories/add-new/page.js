@@ -1,5 +1,6 @@
 "use client";
 
+import AddProductCategory from "@/components/admin/product-categories/AddProductCategory";
 import Link from "next/link";
 import React from "react";
 
@@ -29,7 +30,7 @@ const page = () => {
         </div>
         <div className="row">
           <div className="col">
-            <h2>add new</h2>
+            <AddProductCategory />
           </div>
         </div>
       </div>
