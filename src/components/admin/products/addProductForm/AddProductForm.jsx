@@ -41,7 +41,7 @@ const AddProductForm = ({ data }) => {
     formData.append("product_profile", productProfile);
     formData.append("category", categories[0]);
     for (let i = 0; i < productGallary.length; i++) {
-      formData.append("gallary", productGallary[i]);
+    formData.append("gallary", productGallary[i]);
     }
     fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
       method: "POST",
@@ -106,12 +106,15 @@ const AddProductForm = ({ data }) => {
     }
   };
 
+
+
+
   return (
     <form onSubmit={hanldeSubmit} className="add-product-form">
       <div className="pro-form-row name_pro">
         <div className="form-col">
           <label htmlFor="product_name" className="form-label">
-            Product name
+            Product Name
           </label>
           <input
             type="text"
@@ -127,7 +130,7 @@ const AddProductForm = ({ data }) => {
       <div className="pro-form-row">
         <div className="form-col">
           <label htmlFor="price" className="form-label">
-            price
+            Price
           </label>
           <input
             type="number"
@@ -141,7 +144,7 @@ const AddProductForm = ({ data }) => {
         </div>
         <div className="form-col">
           <label htmlFor="sale_price" className="form-label">
-            sale price
+            Sale Price
           </label>
           <input
             type="number"
@@ -157,7 +160,7 @@ const AddProductForm = ({ data }) => {
       <div className="pro-form-row-cate">
         <div className="form-col">
           <label htmlFor="product_categores" className="form-label">
-            product categories
+            Product Categories
           </label>
           <div className="product-categories">
             {/* <Multiselect showArrow options={item.data.name} isObject={false} /> */}
@@ -222,7 +225,7 @@ const AddProductForm = ({ data }) => {
         </div>
         <div className="form-col">
           <label htmlFor="quantity" className="form-label">
-            quantity
+           Stock Quantity
           </label>
           <input
             type="number"
@@ -262,14 +265,13 @@ const AddProductForm = ({ data }) => {
           />
         </div>
       </div>
-
       <div className="disc-form-row">
         <div className="form-col">
           <label
             htmlFor="short_description"
             className="form-label short_description"
           >
-            product short description
+            Product Short Description
           </label>
           <textarea
             className="form-control"
@@ -282,7 +284,7 @@ const AddProductForm = ({ data }) => {
         </div>
         <div className="form-col">
           <label htmlFor="product_description" className="form-label">
-            Product description
+            Product Description
           </label>
           {/* <textarea className="form-control" id="product_description" /> */}
           <div className="product-long-desction">
@@ -317,7 +319,7 @@ const AddProductForm = ({ data }) => {
           <span>
             <i className="fa-solid fa-plus"></i>
           </span>
-          add product
+          Add Product
         </button>
       </div>
       <ToastContainer />
