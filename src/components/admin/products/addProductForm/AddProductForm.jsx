@@ -175,6 +175,7 @@ const AddProductForm = ({ data }) => {
     singleProfileUplaodPopUp(true);
   };
 
+  console.log(gallaryImagesUrl, "gallaryImagesUrl========")
  
   return (
     <>
@@ -190,6 +191,8 @@ const AddProductForm = ({ data }) => {
           getImageee={setGetProfileImageUrl}
           isSingle={isSingle}
           getGllaryUrl={setGallaryImagesUrl}
+          multiImagesState={gallaryImagesUrl}
+
         />
       )}
 
