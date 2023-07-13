@@ -55,15 +55,32 @@ const Admin_sidebar = ({ opend }) => {
 
   const [dropdown1, setDropDown1] = useState(false);
   const [dropdown2, setDropDown2] = useState(false);
+  const [dropdown3, setDropDowm3] = useState(false);
+  const [dropdown4, setDropDowm4] = useState(false);
   const hanldeDropwDown1 = () => {
     setDropDown1(!dropdown1);
     setDropDown2(false);
+    setDropDowm3(false);
+    setDropDowm4(false);
   };
   const hanldeDropwDown2 = () => {
-    setDropDown2(!dropdown2);
     setDropDown1(false);
+    setDropDown2(!dropdown2);
+    setDropDowm3(false);
+    setDropDowm4(false);
   };
-
+  const handleDropDown3 = () => {
+    setDropDown1(false);
+    setDropDown2(false);
+    setDropDowm3(!dropdown3);
+    setDropDowm4(false);
+  };
+  const handleDropDown4 = () => {
+    setDropDown1(false);
+    setDropDown2(false);
+    setDropDowm3(false);
+    setDropDowm4(!dropdown4);
+  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -138,7 +155,7 @@ const Admin_sidebar = ({ opend }) => {
                   </li>
                   <li>
                     <Link
-                      href={`/admin/post/post-tags`}
+                      href={`/admin/post/tags`}
                       className={`${path === "post-tags" ? "active" : null}`}
                     >
                       tags
@@ -221,6 +238,73 @@ const Admin_sidebar = ({ opend }) => {
                       }`}
                     >
                       all Product
+                    </Link>
+                  </li>
+                </ol>
+              )}
+            </li>
+
+            <li className="list-menu">
+              <span
+                className={`title-name ${dropdown3 ? "active" : null}`}
+                onClick={handleDropDown3}
+              >
+                <span className="d-icon">
+                  <i className="fa-solid fa-camera"></i>
+                </span>
+                <span>Media</span>
+                {dropdown3 ? (
+                  <span className=" right-side-icon w-100 text-end">
+                    <i className="fa-solid fa-angle-up"></i>
+                  </span>
+                ) : (
+                  <span className=" right-side-icon w-100 text-end">
+                    <i className="fa-solid fa-angle-right"></i>
+                  </span>
+                )}
+              </span>
+              {dropdown3 && (
+                <ol className="more-list ">
+                  <li>
+                    <Link
+                      href={`/admin/media/liberay`}
+                      className={`${
+                        path === "product-addnew" ? "active" : null
+                      }`}
+                    >
+                      Liberay
+                    </Link>
+                  </li>
+                </ol>
+              )}
+            </li>
+            <li className="list-menu">
+              <span
+                className={`title-name ${dropdown4 ? "active" : null}`}
+                onClick={handleDropDown4}
+              >
+                <span className="d-icon">
+                  <i className="fa-solid fa-briefcase"></i>
+                </span>
+                <span>Order</span>
+                {dropdown4 ? (
+                  <span className=" right-side-icon w-100 text-end">
+                    <i className="fa-solid fa-angle-up"></i>
+                  </span>
+                ) : (
+                  <span className=" right-side-icon w-100 text-end">
+                    <i className="fa-solid fa-angle-right"></i>
+                  </span>
+                )}
+              </span>
+              {dropdown4 && (
+                <ol className="more-list ">
+                  <li>
+                    <Link
+                      href={`/admin/order`}
+                      className={`${path === "order" ? "active" : null}`}
+                    >
+                      Order
                     </Link>
                   </li>
                 </ol>

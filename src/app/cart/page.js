@@ -12,7 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartItem } from "@/redux/slices/cartItem";
 import Link from "next/link";
 import Loading from "@/components/cart/CartItems/Loading/Loading";
-const page = () => {
+import Spinner from "@/components/spinner/Spinner";
+const Page = () => {
   const state = useSelector((data) => data.cartItem);
 
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const page = () => {
             className={`row  justify-content-between ${style.cart_items__wrapper}`}
           >
             {state.loading ? (
-              <Loading />
+              <Spinner />
             ) : state.data?.length >= 1 ? (
               <>
                 <CartItems item={state.data} />
@@ -71,4 +72,4 @@ const page = () => {
   );
 };
 
-export default withAuth(page);
+export default withAuth(Page);

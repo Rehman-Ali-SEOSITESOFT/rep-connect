@@ -21,7 +21,7 @@ const CartDe = ({
       <tr className="cart--item--row">
         <td className="product-thumbnail">
           <Image
-            src={item.product_detail.cover_image.image_url}
+            src={item.product_detail.cover_image.image.url}
             alt="thumbnail"
             className="img-fluid"
             width={100}

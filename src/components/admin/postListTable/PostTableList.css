@@ -6,7 +6,8 @@
   font-size: 14px !important;
   display: -webkit-box;
   max-width: 100% !important;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  height: 110px;
 }

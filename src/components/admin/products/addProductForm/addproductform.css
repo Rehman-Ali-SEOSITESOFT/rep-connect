@@ -1,9 +1,28 @@
+.add-product {
+  position: relative;
+}
 form.add-product-form {
   background: white;
   padding: 1rem;
   border-radius: 5px;
 }
 
+.adding-produt-loader {
+  position: absolute;
+  background: #00000096;
+  inset: 0;
+  z-index: 12;
+}
+
+img.adding-imag {
+  color: transparent;
+  position: absolute;
+  margin: auto;
+  text-align: center;
+  inset: 0;
+  width: 80px;
+  height: 80px;
+}
 .add-product-form .pro-form-row-cate,
 .add-product-form .pro-form-row-files,
 .add-product-form .pro-form-row {
@@ -78,4 +97,33 @@ form.add-product-form {
 
 .form-add-product-btn {
   margin-top: 30px;
+}
+.pro-form-row-files .profile-img {
+  width: 80px;
+  margin: 10px 10px 0 0;
+  position: relative;
+}
+.pro-form-row-files .profile-img img {
+  border-radius: 5px;
+}
+
+.pro-form-row-files .profile-img .close-icon {
+  width: 30px;
+  height: 30px;
+  background: #ff5722;
+  color: white;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 31px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  display: none;
+}
+.pro-form-row-files .profile-img:hover .close-icon {
+  display: block;
+}
+.pro-form-row-files .profile-img:hover img {
+  opacity: 0.5;
 }

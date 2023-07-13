@@ -9,16 +9,11 @@ const initialState = {
 export const categoryFilter = createAsyncThunk(
   "categoryFilter",
   async (name, slug) => {
-    const resp = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}api/post/filter`,
-
-      {
-        name: name,
-        slug: slug,
-
-        method: "POST",
-      }
-    );
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_URL}api/post/filter`, {
+      name: name,
+      slug: slug,
+      method: "POST",
+    });
     const result = await resp.json();
     return result;
   }

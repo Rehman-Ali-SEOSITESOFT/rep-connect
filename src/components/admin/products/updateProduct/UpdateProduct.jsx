@@ -9,10 +9,9 @@ import { product } from "@/redux/slices/productSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-const UpdateProduct = ({ data }) => {
-  const state = useSelector((state) => state.singleproduct);
-  console.log(state);
+const UpdateProduct = ({ data, product }) => {
   const item = data;
+  // console.log(product);
   const [discription, setDiscription] = useState("");
   const [addProduct, setAddProduct] = useState({
     product_name: "",
@@ -23,7 +22,9 @@ const UpdateProduct = ({ data }) => {
   });
   const [categories, setCategories] = useState([]);
   const [productProfile, setProductProfile] = useState("");
+  const [profilImg, setPrfileImg] = useState("");
   const [productGallary, sePproductGallary] = useState([]);
+  const [gallaryImages, setGallaryImages] = useState([]);
 
   const hanldeChanged = (event) => {
     const name = event.target.name;
@@ -32,6 +33,14 @@ const UpdateProduct = ({ data }) => {
   };
   const hanldeSubmit = (e) => {
     e.preventDefault();
+    console.log("updateeeeeeeeeeeeeed");
+    console.log({
+      discription,
+      categories,
+      productProfile,
+      productGallary,
+      addProduct,
+    });
 
     // const formData = new FormData();
     // formData.append("name", addProduct.product_name);
@@ -85,26 +94,49 @@ const UpdateProduct = ({ data }) => {
 
   // FILTER GETEGORY ID
   const filterChategoryFuction = (arr) => {
+    console.log(arr);
     let newarr = [];
-    arr.filter((p_item) => newarr.push(p_item._id));
+    arr.filter((p_item) =>
+      newarr.push({
+        _id: p_item._id,
+        name: p_item.name,
+      })
+    );
     setCategories(newarr);
   };
 
   const hanldeChangedImages = (event) => {
     if (event.target.name === "product_image") {
       setProductProfile(event.target.files[0]);
+      // setPrfileImg(URL.createObjectURL(event.target.files[0]));
     } else {
       sePproductGallary(event.target.files);
     }
   };
+
   useEffect(() => {
-    if (state.loading) {
-      console.log("false", state.data);
-    } else {
-      console.log("else condtiion", state.data);
-    }
+    setAddProduct({
+      product_name: product.data.name,
+      quantity: product.data.stock_quantity,
+      price: product.data.regular_price,
+      sale_price: product.data.sale_price,
+      short_description: product.data.short_disc,
+    });
+    setPrfileImg(product.data.cover_image.image.url);
+    setGallaryImages(product.data.gallary);
+
+    setDiscription(product.data.disc);
+    setCategories([
+      {
+        _id: product.data.category._id,
+        name: product.data.category.name,
+      },
+    ]);
   }, []);
 
+  const hanldeDeleteImages = (name, id) => {
+    console.log(name, id);
+  };
   return (
     <form onSubmit={hanldeSubmit} className="add-product-form">
       <div className="pro-form-row name_pro">
@@ -168,6 +200,7 @@ const UpdateProduct = ({ data }) => {
             ) : (
               <Multiselect
                 showArrow
+                selectedValues={categories}
                 options={item.data}
                 displayValue={"name"}
                 onSelect={filterChategoryFuction}
@@ -178,7 +211,7 @@ const UpdateProduct = ({ data }) => {
         </div>
         <div className="form-col">
           <label htmlFor="quantity" className="form-label">
-            quantity
+            stock quantity
           </label>
           <input
             type="number"
@@ -196,6 +229,7 @@ const UpdateProduct = ({ data }) => {
           <label htmlFor="product_image" className="form-label">
             Product Image
           </label>
+
           <input
             type="file"
             className="form-control"
@@ -203,6 +237,19 @@ const UpdateProduct = ({ data }) => {
             name="product_image"
             onChange={hanldeChangedImages}
           />
+          <div className="imagess-preview">
+            <div className="d-inline-block img-box position-relative">
+              <div
+                className="deletepic"
+                onClick={() =>
+                  hanldeDeleteImages("profile", product.data.cover_image.id)
+                }
+              >
+                <i className="fa-solid fa-trash-can"></i>{" "}
+              </div>
+              <Image src={profilImg} alt="" width={150} height={150} />
+            </div>
+          </div>
         </div>
         <div className="form-col">
           <label htmlFor="product_gallary" className="form-label">
@@ -216,6 +263,29 @@ const UpdateProduct = ({ data }) => {
             multiple
             onChange={hanldeChangedImages}
           />
+          <div className="imagess-preview">
+            {gallaryImages.map((e, i) => {
+              return (
+                <div
+                  className="d-inline-block img-box position-relative"
+                  key={i}
+                >
+                  <div
+                    className="deletepic"
+                    onClick={() => hanldeDeleteImages("gallay", e.id)}
+                  >
+                    <i className="fa-solid fa-trash-can"></i>
+                  </div>
+                  <Image
+                    src={e.image.url}
+                    alt={e.id}
+                    width={150}
+                    height={150}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -244,6 +314,7 @@ const UpdateProduct = ({ data }) => {
           <div className="product-long-desction">
             <SunEditor
               onChange={setDiscription}
+              setContents={discription}
               setOptions={{
                 height: 300, // Set the desired height of the editor
                 buttonList: [

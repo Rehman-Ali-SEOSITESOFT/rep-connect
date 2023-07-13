@@ -6,13 +6,17 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
+import loader from "../../../../../assets/images/admin/product-loader.gif";
+import Image from "next/image";
+import Spinner from "@/components/spinner/Spinner";
 const page = ({ params }) => {
   const { id } = params;
   const disptch = useDispatch();
   useEffect(() => {
     disptch(product_api(id));
   }, []);
-  const state = useSelector((state) => state.productCategory);
+  const state = useSelector((state) => state);
+
   return (
     <section className="add-product">
       <div className="container-fluid">
@@ -35,7 +39,16 @@ const page = ({ params }) => {
         </div>
         <div className="row">
           <div className="col">
-            <UpdateProduct data={state} />;
+            {state.singleproduct.loading ? (
+              <Spinner />
+            ) : state.singleproduct.data.length !== undefined ? (
+              <h4>Invalid Id {id}</h4>
+            ) : (
+              <UpdateProduct
+                data={state.productCategory}
+                product={state.singleproduct}
+              />
+            )}
           </div>
         </div>
       </div>

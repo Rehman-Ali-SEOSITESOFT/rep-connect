@@ -56,7 +56,7 @@ const page = () => {
             <div className="col-6">
               <div className="text-end d-block">
                 <Link
-                  href="/admin/post/post-categories"
+                  href="/admin/post/post-tags"
                   className={`add_new_btn border-none ${style.tagSubmit}`}
                   type="submit"
                 >

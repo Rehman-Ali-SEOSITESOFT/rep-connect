@@ -13,6 +13,7 @@ import marsa from "../../assets/images/products/mrsa-test-service.jpg";
 import "./products.css";
 import { useDispatch, useSelector } from "react-redux";
 import { product } from "@/redux/slices/productSlice";
+import Spinner from "../spinner/Spinner";
 
 const Products = () => {
   // const [productItems, setProductItems] = useState([
@@ -74,17 +75,12 @@ const Products = () => {
       <div className="container-xxl">
         <div className="row">
           {state.loading ? (
-            <div className="col position-relative text-center">
-              <span className="loaderCustom"></span>
-            </div>
+            <Spinner />
           ) : (
             state.data.map((item, index) => {
               return <ProductItem item={item} key={index} />;
             })
           )}
-          {/* {productItems.map((item, index) => {
-            return <ProductItem item={item} key={index} />;
-          })} */}
         </div>
       </div>
     </div>
