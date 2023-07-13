@@ -1,27 +1,22 @@
 import React, { useState } from "react";
-import "./addproductcategory.css";
 import UploadIcon from "../../uploadIcons/UploadIcon";
-const AddProductCategory = () => {
+import "./viewProCate.css";
+import Image from "next/image";
+
+const ViewProCategory = () => {
+  const hanldeOpenPopup = () => {
+    console.log("open up open");
+  };
+  const hanldeUpdateCategory = () => {
+    console.log("updating");
+  };
   const [cateName, setCateName] = useState(null);
   const [parentCateName, setParentCateName] = useState(null);
   const [cateImage, setCateImage] = useState(null);
   const [cateImageId, setCateImageID] = useState(null);
-  const hanldeOpenPopup = () => {
-    console.log("hello");
-  };
-  const hanldeAddNewCategory = (e) => {
-    e.preventDefault();
-    const formDetail = {
-      name: cateName,
-      parentId: parentCateName,
-      image: cateImageId,
-    };
-    console.log(formDetail);
-  };
-
   return (
-    <form className="add-pro-cate" onSubmit={hanldeAddNewCategory}>
-      <div className="pro-cate-form-row">
+    <form className="add-pro-cate-view" onSubmit={hanldeUpdateCategory}>
+      <div className="pro-cate-form-row-view">
         <div className="form-col">
           <label htmlFor="CategoryName" className="form-label">
             Category Name
@@ -52,26 +47,18 @@ const AddProductCategory = () => {
           </select>
         </div>
       </div>
-      <div className="pro-cate-form-row">
+      <div className="pro-cate-form-row-update">
         <div className="form-col">
           <label htmlFor="sale_price" className="form-label">
             Category Image
           </label>
-          <div className="upload-iconss" onClick={hanldeOpenPopup}>
-            <UploadIcon />
+          <div className="upload-iconss">
+            <Image alt="" src="" />
           </div>
         </div>
-      </div>
-      <div className="w-100 mt-3">
-        <button type="submit" className="form-add-product-btn">
-          <span>
-            <i className="fa-solid fa-plus"></i>
-          </span>
-          add product
-        </button>
       </div>
     </form>
   );
 };
 
-export default AddProductCategory;
+export default ViewProCategory;

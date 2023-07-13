@@ -1,27 +1,21 @@
 import React, { useState } from "react";
-import "./addproductcategory.css";
 import UploadIcon from "../../uploadIcons/UploadIcon";
-const AddProductCategory = () => {
+import "./updateProCate.css";
+
+const UpdateProCategory = () => {
+  const hanldeOpenPopup = () => {
+    console.log("open up open");
+  };
+  const hanldeUpdateCategory = () => {
+    console.log("updating");
+  };
   const [cateName, setCateName] = useState(null);
   const [parentCateName, setParentCateName] = useState(null);
   const [cateImage, setCateImage] = useState(null);
   const [cateImageId, setCateImageID] = useState(null);
-  const hanldeOpenPopup = () => {
-    console.log("hello");
-  };
-  const hanldeAddNewCategory = (e) => {
-    e.preventDefault();
-    const formDetail = {
-      name: cateName,
-      parentId: parentCateName,
-      image: cateImageId,
-    };
-    console.log(formDetail);
-  };
-
   return (
-    <form className="add-pro-cate" onSubmit={hanldeAddNewCategory}>
-      <div className="pro-cate-form-row">
+    <form className="add-pro-cate-update" onSubmit={hanldeUpdateCategory}>
+      <div className="pro-cate-form-row-update">
         <div className="form-col">
           <label htmlFor="CategoryName" className="form-label">
             Category Name
@@ -52,7 +46,7 @@ const AddProductCategory = () => {
           </select>
         </div>
       </div>
-      <div className="pro-cate-form-row">
+      <div className="pro-cate-form-row-update">
         <div className="form-col">
           <label htmlFor="sale_price" className="form-label">
             Category Image
@@ -74,4 +68,4 @@ const AddProductCategory = () => {
   );
 };
 
-export default AddProductCategory;
+export default UpdateProCategory;
