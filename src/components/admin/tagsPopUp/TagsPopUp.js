@@ -19,7 +19,7 @@ const TagsPopUp = ({
   getImageee,
   getGllaryUrl,
   isSingle,
-  multiImagesState
+  multiImagesState,
 }) => {
   const state = useSelector((state) => state.tags);
   const [addItem, setAddItem] = useState(false);
@@ -129,14 +129,11 @@ const TagsPopUp = ({
     if (isSingle) {
       getImageee(getImage);
     } else {
-      let arr= [...multiImagesState, ...selectedGallryImage]
+      let arr = [...multiImagesState, ...selectedGallryImage];
       getGllaryUrl(arr);
     }
     getImageId(selectedImage);
   };
-  console.log(selectedImage, "<=============");
-
-  console.log("pop", multiImagesState);
 
   return (
     <>

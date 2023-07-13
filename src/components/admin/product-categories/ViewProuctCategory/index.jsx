@@ -1,63 +1,61 @@
 import React, { useState } from "react";
-import UploadIcon from "../../uploadIcons/UploadIcon";
+
 import "./viewProCate.css";
 import Image from "next/image";
+import moment from "moment";
 
-const ViewProCategory = () => {
-  const hanldeOpenPopup = () => {
-    console.log("open up open");
-  };
-  const hanldeUpdateCategory = () => {
-    console.log("updating");
-  };
-  const [cateName, setCateName] = useState(null);
-  const [parentCateName, setParentCateName] = useState(null);
-  const [cateImage, setCateImage] = useState(null);
-  const [cateImageId, setCateImageID] = useState(null);
+const ViewProCategory = ({ data }) => {
   return (
-    <form className="add-pro-cate-view" onSubmit={hanldeUpdateCategory}>
+    <div className="add-pro-cate-view">
       <div className="pro-cate-form-row-view">
         <div className="form-col">
           <label htmlFor="CategoryName" className="form-label">
-            Category Name
+            Name
           </label>
-          <input
-            type="text"
-            className="form-control"
-            id="CategoryName"
-            name="CategoryName"
-            placeholder="CategoryName"
-            value={cateName}
-            onChange={(e) => setCateName(e.target.value)}
-          />
+          <div className="disc">
+            <p>{data.name}</p>
+          </div>
         </div>
+
         <div className="form-col">
           <label htmlFor="parent" className="form-label">
-            Parent Category
+            Parent
           </label>
-          <select
-            name="parent"
-            className="form-select"
-            onChange={(e) => setParentCateName(e.target.value)}
-            defaultValue={null}
-            value={parentCateName}
-          >
-            <option selected> --select--</option>
-            <option value="parent"> Parent Name</option>
-          </select>
-        </div>
-      </div>
-      <div className="pro-cate-form-row-update">
-        <div className="form-col">
-          <label htmlFor="sale_price" className="form-label">
-            Category Image
-          </label>
-          <div className="upload-iconss">
-            <Image alt="" src="" />
+          <div className="disc">
+            <p>
+              {data.parent_cat_id === null
+                ? "No Parent"
+                : data.parent_cat_id.name}
+            </p>
           </div>
         </div>
       </div>
-    </form>
+      <div className="pro-cate-form-row-view">
+        <div className="form-col">
+          <label htmlFor="sale_price" className="form-label">
+            CreatedAt Date
+          </label>
+          <div className="disc">
+            <p> {moment(data.createdAt).format("LL")}</p>
+          </div>
+        </div>
+      </div>
+      <div className="pro-cate-form-row-view">
+        <div className="form-col">
+          <label htmlFor="sale_price" className="form-label">
+            Image
+          </label>
+          <div className="upload-iconss ">
+            <Image
+              alt={data.name}
+              src={data.image.image.url}
+              width={100}
+              height={100}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -19,26 +19,18 @@
   text-transform: capitalize;
   margin-bottom: 6px;
 }
-.pro-cate-form-row-view select,
-.pro-cate-form-row-view input {
+.pro-cate-form-row-view .disc p {
   color: #8c9097;
-  background-color: rgba(255, 255, 255, 1);
-  border-color: #ced4da99;
+  background-color: rgb(247 247 247);
   padding: 8px 1rem;
   font-size: 15px;
   margin: 10px 0 20px 0;
-  border-radius: 0.35rem;
+  border-radius: 0;
 }
-.pro-cate-form-row-view select:focus,
-.pro-cate-form-row-view input:focus {
-  color: #333333;
-  border-color: #1790d0;
-  box-shadow: none;
-}
-.pro-cate-form-row-view select::placeholder,
-.pro-cate-form-row-view input::placeholder {
-  color: #d3d3d3;
-}
+
 .pro-cate-form-row-view .upload-iconss {
   margin-top: 10px;
+}
+.pro-cate-form-row-view .upload-iconss img {
+  object-fit: cover;
 }

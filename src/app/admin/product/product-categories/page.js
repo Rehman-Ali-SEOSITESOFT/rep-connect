@@ -16,7 +16,7 @@ const page = () => {
         <div className={`row row-title-equal-spacing`}>
           <div className="col-6">
             <div className="left">
-              <h4 className="product-title">Product Categories list</h4>
+              <h4 className="product-title">Product Categories</h4>
             </div>
           </div>
           <div className="col-6 text-end">
@@ -28,7 +28,7 @@ const page = () => {
                 <span>
                   <i className="fa-solid fa-plus"></i>
                 </span>
-                Add to product category
+                Add new category
               </Link>
             </div>
           </div>

@@ -40,7 +40,7 @@ const ViewProduct = () => {
 
                     <p className="price">
                       <span className="ttt">Category :</span>{" "}
-                      <span className="q">{state.data.category?.name}</span>
+                      <span className="q">{state.data.category.name}</span>
                     </p>
                   </div>
                   <p className="short-discription">{state.data.short_disc}</p>

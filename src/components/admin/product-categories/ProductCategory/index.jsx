@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import MaterialTable from "material-table";
 
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -18,6 +18,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 import { ToastContainer, toast } from "react-toastify";
+import Image from "next/image";
+import moment from "moment";
+import { useRouter } from "next/navigation";
 
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
@@ -43,6 +46,7 @@ const tableIcons = {
 };
 
 const ProductCategory = () => {
+  const router = useRouter();
   const defaultMaterialTheme = createTheme();
   const columns = [
     {
@@ -54,11 +58,11 @@ const ProductCategory = () => {
     },
     {
       title: "Image",
-      field: "cover_image.image",
+      field: "image",
       render: (item) => {
         return (
           <Image
-            src={item.cover_image.image.url}
+            src={item.image.image.url}
             alt={item.name}
             height={60}
             width={60}
@@ -66,26 +70,8 @@ const ProductCategory = () => {
         );
       },
     },
-    { title: "Product", field: "name" },
-    {
-      title: "Category",
-      field: "category.name",
-    },
-    {
-      title: "Stock Quantity",
-      filed: "stock_quantity",
-      render: (item) => {
-        return item.stock_quantity;
-      },
-    },
-    {
-      title: "Price",
-      field: "regular_price",
-    },
-    {
-      title: "Sale Price",
-      field: "sale_price",
-    },
+    { title: "Name", field: "name" },
+
     {
       title: "Published",
       field: "createdAt",
@@ -100,7 +86,26 @@ const ProductCategory = () => {
   const [entries, setEnteries] = useState([]);
   const hanldeDeleted = () => {};
   const hanldeUpdated = () => {};
-  const hanldeViewd = () => {};
+  const hanldeViewd = (data, id) => {
+    router.push(`/admin/product/product-categories/view/${id}`);
+  };
+
+  const hanldeGetApiCategory = () => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product-category/`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success === 1) {
+          setIsLoading(false);
+        }
+        setEnteries(data.data.category);
+      });
+  };
+
+  useEffect(() => {
+    hanldeGetApiCategory();
+  }, []);
   return (
     <React.Fragment>
       <ThemeProvider theme={defaultMaterialTheme}>

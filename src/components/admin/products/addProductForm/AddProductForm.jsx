@@ -46,6 +46,11 @@ const AddProductForm = ({ data }) => {
     let postOrder = {
       cover_image: getProfileImageId[0],
       gallary: gallaryImagesUrl,
+      product_name: addProduct.product_name,
+      quantity: addProduct.quantity,
+      price: addProduct.price,
+      sale_price: addProduct.sale_price,
+      short_description: addProduct.short_description,
     };
 
     console.log(postOrder);
@@ -146,13 +151,13 @@ const AddProductForm = ({ data }) => {
   // setCategories(newarr);
   // };
 
-  const hanldeChangedImages = (event) => {
-    if (event.target.name === "product_image") {
-      setProductProfile(event.target.files[0]);
-    } else {
-      sePproductGallary(event.target.files);
-    }
-  };
+  // const hanldeChangedImages = (event) => {
+  //   if (event.target.name === "product_image") {
+  //     setProductProfile(event.target.files[0]);
+  //   } else {
+  //     sePproductGallary(event.target.files);
+  //   }
+  // };
 
   // useEffect(() => {
   //   setIsLoading(false);
@@ -175,8 +180,6 @@ const AddProductForm = ({ data }) => {
     singleProfileUplaodPopUp(true);
   };
 
-  console.log(gallaryImagesUrl, "gallaryImagesUrl========")
- 
   return (
     <>
       {isLoading && (
@@ -192,7 +195,6 @@ const AddProductForm = ({ data }) => {
           isSingle={isSingle}
           getGllaryUrl={setGallaryImagesUrl}
           multiImagesState={gallaryImagesUrl}
-
         />
       )}
 
@@ -313,7 +315,7 @@ const AddProductForm = ({ data }) => {
               <UploadIcon />
             </div>
             <div className="d-flex w-100 flex-wrap mt-2">
-              {/* {gallaryImagesUrl.length >= 1
+              {gallaryImagesUrl.length >= 1
                 ? gallaryImagesUrl.map((element) => {
                     return (
                       <div className="profile-img" key={element.id}>
@@ -330,7 +332,7 @@ const AddProductForm = ({ data }) => {
                       </div>
                     );
                   })
-                : null} */}
+                : null}
             </div>
           </div>
         </div>
