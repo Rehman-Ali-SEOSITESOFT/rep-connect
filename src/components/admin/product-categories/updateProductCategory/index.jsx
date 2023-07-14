@@ -58,10 +58,7 @@ const UpdateProCategory = () => {
       </div>
       <div className="w-100 mt-3">
         <button type="submit" className="form-add-product-btn">
-          <span>
-            <i className="fa-solid fa-plus"></i>
-          </span>
-          add product
+          Update
         </button>
       </div>
     </form>
