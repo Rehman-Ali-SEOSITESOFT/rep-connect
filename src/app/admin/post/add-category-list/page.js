@@ -11,6 +11,7 @@ const page = () => {
   const [file, setFile] = useState(null);
   const [image, setImage] = useState([]);
   const [error, setError] = useState(false);
+  const [multipleImage, setMultipleImage] = useState([]);
   const [getUrlImage, setGetUrlImage] = useState("");
   const [cat, setCat] = useState({
     catTitle: "",
@@ -98,7 +99,7 @@ const page = () => {
       .catch((err) => console.log(err));
   }, []);
   ////////////////get api for post category ends here//////////////
-  console.log(getUrlImage, "url of image is here ");
+
   return (
     <>
       <section className={style.addCategoryListWrapper}>
@@ -107,6 +108,8 @@ const page = () => {
             popUpClose={popUpClose}
             getImageId={setImage}
             getImageee={setGetUrlImage}
+            getGllaryUrl={setMultipleImage}
+            isSingle={true}
           />
         ) : (
           ""
@@ -160,6 +163,9 @@ const page = () => {
                     onChange={_handleparentId}
                     name="parentCategoryId"
                   >
+                    <option disabled selected>
+                      Please Select Category{" "}
+                    </option>
                     {parentTagName?.map((e, idx) => {
                       return (
                         <option value={e._id} key={idx}>

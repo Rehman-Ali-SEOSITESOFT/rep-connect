@@ -1,10 +1,12 @@
 import React, { useRef, forwardRef, useEffect } from "react";
 import MaterialTable from "material-table";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import Clear from "@material-ui/icons/Clear";
+
 import Edit from "@material-ui/icons/Edit";
 import FilterList from "@material-ui/icons/FilterList";
 import FirstPage from "@material-ui/icons/FirstPage";
@@ -20,6 +22,8 @@ import axios from "axios";
 import Image from "next/image";
 import Spinner from "@/components/spinner/Spinner";
 import "./PostTableList.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -43,14 +47,36 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 };
 const PostTableList = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const defaultMaterialTheme = createTheme();
   const [entries, setEnteries] = useState([]);
+  const _getAllData = () => {
+    axios
+      .get("https://anxious-foal-shift.cyclic.app/api/post")
+      .then((resp) => {
+        console.log(resp.data.data.post);
+        setEnteries(resp.data.data.post);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
   const hanldeDeleted = (event, data) => {
     console.log("Delete Handler", data);
+    axios
+      .delete(`https://anxious-foal-shift.cyclic.app/api/post/${data._id}`)
+      .then((resp) => {
+        toast.success(`Post Deleted`);
+        setTimeout(() => {
+          _getAllData();
+        }, 2000);
+        console.log(resp, "delete");
+      })
+      .catch((err) => console.log(err));
   };
   const hanldeUpdated = (event, data) => {
     console.log("Updated Handler", event, data);
+    router.push(`/admin/post/${data._id}`);
   };
   const columns = [
     {
@@ -66,7 +92,7 @@ const PostTableList = () => {
       render: (item) => {
         return (
           <Image
-            src={item.featured_image.image_url}
+            src={item.featured_image.image.url}
             alt={item.title}
             height={60}
             width={60}
@@ -79,33 +105,15 @@ const PostTableList = () => {
       title: "Description",
       field: "description",
     },
-    // {
-    //   title: "Quantity",
-    //   filed: "stock_quantity",
-    //   render: (item) => {
-    //     return item.stock_quantity;
-    //   },
-    // },
-    // {
-    //   title: "Price",
-    //   field: "regular_price",
-    // },
-    // {
-    //   title: "Sale Price",
-    //   field: "sale_price",
-    // },
   ];
+
+  const _handleView = (event, data) => {
+    console.log(data, "data is here for view purpose");
+  };
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get("https://anxious-foal-shift.cyclic.app/api/post")
-      .then((resp) => {
-        console.log(resp.data.data.post);
-        setEnteries(resp.data.data.post);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
+    _getAllData();
   }, []);
   return (
     <>
@@ -125,6 +133,10 @@ const PostTableList = () => {
                     icon: () => <DeleteIcon />,
                     // tooltip: "Remove",
                     onClick: (event, data) => hanldeDeleted(event, data),
+                  },
+                  {
+                    icon: () => <VisibilityOutlinedIcon />,
+                    onClick: (event, data) => _handleView(event, data),
                   },
                   {
                     icon: () => <Edit />,
@@ -154,6 +166,7 @@ const PostTableList = () => {
               />
             </ThemeProvider>
           </div>
+          <ToastContainer />
         </>
       )}
     </>

@@ -15,6 +15,7 @@ const page = ({ params }) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
   const [parentTagName, setParentTagName] = useState([]);
+  const [imageUrrl, setImageUrrl] = useState([]);
   const [getUrlImage, setGetUrlImage] = useState("");
   const [loading, setLoading] = useState(true);
   const _handleTogglePage = () => {
@@ -115,6 +116,8 @@ const page = ({ params }) => {
               popUpClose={popUpClose}
               getImageId={setImage}
               getImageee={setGetUrlImage}
+              getGllaryUrl={setImageUrrl}
+              isSingle={true}
             />
           ) : (
             ""
@@ -168,19 +171,23 @@ const page = ({ params }) => {
                     onChange={_handleparentId}
                     name="parent_cat_id"
                   >
-                    {parentTagName?.map((e, idx) => {
-                      return (
-                        <option
-                          value={e._id}
-                          key={idx}
-                          selected={
-                            e._id === cat?.parent_cat_id?._id ? true : false
-                          }
-                        >
-                          {e.name}
-                        </option>
-                      );
-                    })}
+                    {parentTagName.length > 0 ? (
+                      parentTagName.map((e, idx) => {
+                        return (
+                          <option
+                            value={e._id}
+                            key={idx}
+                            selected={
+                              e._id === cat?.parent_cat_id?._id ? true : false
+                            }
+                          >
+                            {e.name}
+                          </option>
+                        );
+                      })
+                    ) : (
+                      <option>Please Select Category</option>
+                    )}
                   </select>
                 </div>
                 <div className="col-lg-12">

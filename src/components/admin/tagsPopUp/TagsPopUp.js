@@ -132,8 +132,6 @@ const TagsPopUp = ({
     }
     getImageId(selectedImage);
   };
-  console.log(selectedImage, "<=============");
-
   console.log("pop", selectedGallryImage);
 
   return (
