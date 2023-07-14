@@ -84,7 +84,11 @@ const ProductCategory = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [entries, setEnteries] = useState([]);
-  const hanldeDeleted = () => {};
+  const hanldeDELETEapi = () => {};
+  const hanldeDeleted = (event, id) => {
+    // hanldeDELETEapi(id);
+    console.log(id);
+  };
   const hanldeUpdated = () => {};
   const hanldeViewd = (data, id) => {
     router.push(`/admin/product/product-categories/view/${id}`);
@@ -118,7 +122,7 @@ const ProductCategory = () => {
             {
               icon: () => <DeleteIcon />,
               // tooltip: "Remove",
-              onClick: (event, data) => hanldeDeleted(event, data),
+              onClick: (event, data) => hanldeDeleted(event, data._id),
             },
             {
               icon: () => <Edit />,
