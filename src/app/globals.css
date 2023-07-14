@@ -141,6 +141,15 @@ a.back-to-product:hover {
   color: #fff;
   border-color: 132, 90, 223;
 }
+
+/* ADMIN ERROR MESSAGE */
+.error-message {
+  background: white;
+  padding: 1rem;
+  font-size: 20px;
+  color: red;
+  font-weight: 500;
+}
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -189,4 +198,3 @@ a.back-to-product:hover {
     min-height: calc(100vh - 8rem);
   }
 }
-

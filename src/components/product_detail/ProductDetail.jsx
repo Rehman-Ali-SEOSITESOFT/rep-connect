@@ -67,6 +67,8 @@ const ProductDetail = (props) => {
     }).format(total);
   };
 
+
+
   return (
     <>
       {item.loading ? (
@@ -328,7 +330,7 @@ const ProductDetail = (props) => {
                                 <tbody>
                                   <tr>
                                     <th className="woocommerce---label">
-                                      <span>Weight </span>
+                                      <span>Weight</span>
                                     </th>
 
                                     <td className="woocommerce---value">
@@ -337,8 +339,7 @@ const ProductDetail = (props) => {
                                   </tr>
                                   <tr>
                                     <th className="woocommerce---label">
-                                      {" "}
-                                      <span>Weight </span>
+                                      <span>Weight</span>
                                     </th>
                                     <td className="woocommerce---value">
                                       <span>12.25 × 10.9 × 1.5 in</span>

@@ -218,14 +218,6 @@ const Admin_sidebar = ({ opend }) => {
                       category
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      href={`/admin/product/product-tags`}
-                      className={`${path === "product-tags" ? "active" : null}`}
-                    >
-                      tags
-                    </Link>
-                  </li>
 
                   <li>
                     <Link
