@@ -91,3 +91,24 @@
 .formatdataEditor button {
   width: 34px !important;
 }
+.not_getting_showm {
+  display: none;
+}
+.image_shown img {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 12px;
+}
+.mendatory {
+  color: red;
+}
+.iamge_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+}

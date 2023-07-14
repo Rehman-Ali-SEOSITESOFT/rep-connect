@@ -1,100 +1,108 @@
 "use client";
-import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
-import React, { useEffect, useState } from "react";
-import style from "./Addpost.module.css";
-import axios from "axios";
-import SunEditor from "suneditor-react";
 import TagsPopUp from "@/components/admin/tagsPopUp/TagsPopUp";
+import style from "../post-addnew/Addpost.module.css";
+import { useEffect, useState } from "react";
+import SunEditor from "suneditor-react";
+import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
+import Image from "next/image";
+import axios from "axios";
+import Spinner from "@/components/spinner/Spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image";
-const Page = () => {
+import Link from "next/link";
+const page = ({ params }) => {
+  const { id } = params;
   const [tagPopUp, setTagPopUp] = useState(false);
+  const [error, setError] = useState(false);
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState([]);
+  const [getUrlImage, setGetUrlImage] = useState("");
+  const [imageUrrl, setImageUrrl] = useState([]);
+  const [multipleImage, setMultipleImage] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [tag, setTag] = useState([]);
+  const [author, setAuthor] = useState([]);
+  const [subscribe, setSubscibe] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [postData, setPostData] = useState({
-    productTitle: "",
+    title: "",
     category: "",
-    tag: "",
-    author: "",
     format: "",
-    discription: "",
+    description: "",
     postRedirect: "",
     url: "",
-    type: "",
+    redirection_type: "",
+    featured_image: "",
+    tag: "",
+    author: "",
   });
-  const [category, setCategory] = useState([]);
-  const [image, setImage] = useState([]);
-  const [tag, setTag] = useState([]);
-  const [base64Image, setBase64Image] = useState("");
-  const [author, setAuthor] = useState([]);
-  const [content, setContent] = useState("");
-  const [imageUrrl, setImageUrrl] = useState([]);
-  const [getUrlImage, setGetUrlImage] = useState("");
-  const [error, setError] = useState(false);
   const handleChange = (e) => {
     setPostData({
       ...postData,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.value, "<=========== value");
+    console.log(e.target.value, "<=================");
   };
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
-    const reader = new FileReader();
-    reader.onload = () => {
-      setBase64Image(reader.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
+  const popUpClose = () => {
+    setOpen(false);
   };
-  const [subscribe, setSubscibe] = useState(false);
-  const handleChangeSubs = () => {
-    setSubscibe(!subscribe);
+  const _handleUploadImages = () => {
+    setTagPopUp(!tagPopUp);
   };
+
   const _handleFormSubmitting = (e) => {
     e.preventDefault();
     let posts = {
       post_redirect: postData.postRedirect,
       url: postData.url,
-      redirection_type: postData.type,
+      redirection_type: postData.redirection_type,
     };
-
     const data = {
-      title: postData.productTitle,
-      description: postData.discription,
-      format: content,
+      title: postData?.title,
       category: postData.category,
-      tag: postData.tag,
+      format: content,
+      description: postData.description,
       featured_image: image[0],
       post_redirection: posts,
+      tag: postData.tag,
     };
 
     if (
-      postData.productTitle.length == 0 ||
-      postData.discription.length === 0 ||
-      postData.category.length === 0 ||
+      postData.title.length < 1 ||
+      postData.description.length < 1 ||
+      postData.category.length < 1 ||
       image.length < 1
     ) {
       setError(true);
     } else {
       axios
-        .post(`https://anxious-foal-shift.cyclic.app/api/post`, data)
+        .put(`https://anxious-foal-shift.cyclic.app/api/post/${id}`, data)
         .then((resp) => {
+          toast.success(`Update Successfully`);
+          setError(false);
           console.log(resp);
-          toast.success(`Post Successfully`);
-          setPostData({
-            productTitle: "",
-            discription: "",
-            category: "",
-            type: "",
-            postRedirect: "",
-            url: "",
-          });
-          setGetUrlImage("");
-          setContent("");
         })
         .catch((err) => console.log(err));
     }
   };
+  const handleChangeSubs = () => {
+    setSubscibe(!subscribe);
+  };
+  const getSingleUpdatePost = () => {
+    axios
+      .get(`https://anxious-foal-shift.cyclic.app/api/post/${id}`)
+      .then((resp) => {
+        setLoading(false);
+        setPostData(resp.data.data.post);
+        setContent(resp.data.data.post.format);
+        setImage(resp.data.data.post);
+        console.log(resp.data.data.post);
+      })
+      .catch((err) => console.log(err));
+  };
   useEffect(() => {
+    setLoading(true);
+    getSingleUpdatePost();
     axios
       .get("https://anxious-foal-shift.cyclic.app/api/post-category")
       .then((resp) => {
@@ -114,35 +122,40 @@ const Page = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  const _handleUploadImages = () => {
-    setTagPopUp(!tagPopUp);
-  };
-
   return (
     <>
-      <section>
-        {tagPopUp ? (
-          <TagsPopUp
-            _handleUploadImages={_handleUploadImages}
-            getGllaryUrl={setImageUrrl}
-            isSingle={true}
-            getImageee={setGetUrlImage}
-            getImageId={setImage}
-          />
-        ) : (
-          ""
-        )}
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-12">
-              <AdminBreadCrums
-                mainTitle="Add Post"
-                linksTitle="Dashboard"
-                mainMiniTitle="Add Product"
-              />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <section>
+          {tagPopUp ? (
+            <TagsPopUp
+              _handleUploadImages={_handleUploadImages}
+              getGllaryUrl={setImageUrrl}
+              isSingle={true}
+              getImageee={setGetUrlImage}
+              getImageId={setImage}
+            />
+          ) : (
+            ""
+          )}
+          <div className="container-fluid">
+            <div className="row my-4">
+              <div className="col-lg-6">
+                <div className="left">
+                  <h4 className="product-title">Update Post</h4>
+                </div>
+              </div>
+              <div className="col-lg-6 text-end">
+                <Link
+                  href="/admin/post"
+                  className={`add_new_btn border-none ${style.submit_}`}
+                >
+                  Go back to Listing
+                </Link>
+              </div>
             </div>
-          </div>
-          <form onSubmit={_handleFormSubmitting}>
+
             <div className="row">
               <div className="col-lg-12">
                 <div className={`${style.product_wrapper}`}>
@@ -153,18 +166,18 @@ const Page = () => {
                           <div className="row gy-3">
                             <div className="col-xl-12">
                               <label className="form-label">
-                                Product Title{" "}
+                                Product Title
                                 <span className={style.mendatory}>*</span>
                               </label>
                               <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Title"
-                                value={postData.productTitle}
+                                value={postData.title}
                                 onChange={handleChange}
-                                name="productTitle"
+                                name="title"
                               />
-                              {error && postData.productTitle.length <= 1 ? (
+                              {error && postData.title.length <= 1 ? (
                                 <span className={style.errorMsg}>
                                   Please Enter Name
                                 </span>
@@ -174,7 +187,7 @@ const Page = () => {
                             </div>
                             <div className="col-xl-6">
                               <label className="form-label">
-                                Category{" "}
+                                Category
                                 <span className={style.mendatory}>*</span>
                               </label>
                               <select
@@ -185,7 +198,7 @@ const Page = () => {
                               >
                                 {category.map((e, idx) => {
                                   return (
-                                    <option value={e._id} key={idx}>
+                                    <option value={e._id} key={idx} selected>
                                       {e.name}
                                     </option>
                                   );
@@ -209,7 +222,7 @@ const Page = () => {
                               >
                                 {tag.map((e, idx) => {
                                   return (
-                                    <option value={e._id} key={idx}>
+                                    <option value={e._id} key={idx} selected>
                                       {e.name}
                                     </option>
                                   );
@@ -226,18 +239,14 @@ const Page = () => {
                               >
                                 {author.map((e, idx) => {
                                   return (
-                                    <option value={e._id} key={idx}>
+                                    <option value={e._id} key={idx} selected>
                                       {e.name}
                                     </option>
                                   );
                                 })}
                               </select>
                             </div>
-                            <div
-                              className={` ${
-                                getUrlImage ? "col-lg-5" : "col-lg-6"
-                              }`}
-                            >
+                            <div className={`col-lg-5`}>
                               <label className="form-label">
                                 Image <span className={style.mendatory}>*</span>
                               </label>
@@ -257,16 +266,14 @@ const Page = () => {
                                 ""
                               )}
                             </div>
-                            <div
-                              className={`${
-                                getUrlImage
-                                  ? "col-lg-1 d-flex align-items-center justify-content-center pt-3"
-                                  : ` ${style.not_getting_showm}`
-                              }`}
-                            >
+                            <div className={`col-lg-1   ${style.iamge_center}`}>
                               <div className={style.image_shown}>
                                 <Image
-                                  src={getUrlImage}
+                                  src={
+                                    getUrlImage
+                                      ? getUrlImage
+                                      : postData.featured_image?.image?.url
+                                  }
                                   alt=""
                                   width={60}
                                   height={60}
@@ -302,9 +309,9 @@ const Page = () => {
                                   <label>Redirection Type</label>
                                   <input
                                     className="form-control"
-                                    value={postData.type}
+                                    value={postData.redirection_type}
                                     onChange={handleChange}
-                                    name="type"
+                                    name="redirection_type"
                                   />
                                 </div>
                               </div>
@@ -317,8 +324,9 @@ const Page = () => {
                                 <SunEditor
                                   placeholder="Please Enter Data........"
                                   onChange={setContent}
+                                  setContents={content}
                                   setOptions={{
-                                    height: 400, // Set the desired height of the editor
+                                    height: 400,
                                     buttonList: [
                                       ["undo", "redo"],
                                       ["font", "fontSize", "formatBlock"],
@@ -352,17 +360,17 @@ const Page = () => {
                             </div>
                             <div className="col-xl-12">
                               <label className="form-label">
-                                Product Description{" "}
+                                Product Description
                                 <span className={style.mendatory}>*</span>
                               </label>
                               <textarea
                                 className="form-control"
-                                value={postData.discription}
+                                value={postData.description}
                                 onChange={handleChange}
                                 rows="4"
-                                name="discription"
+                                name="description"
                               ></textarea>
-                              {error && postData.discription.length <= 1 ? (
+                              {error && postData.description.length <= 1 ? (
                                 <span className={style.errorMsg}>
                                   Please Enter Description
                                 </span>
@@ -382,8 +390,11 @@ const Page = () => {
                               </label>
                             </div>
                             <div className="px-4 py-3 border-top border-block-start-dashed d-sm-flex justify-content-end">
-                              <button className={` m-1 ${style.addProduct}`}>
-                                Add Product<i className="fa-solid fa-plus"></i>
+                              <button
+                                className={` m-1 ${style.addProduct}`}
+                                onClick={_handleFormSubmitting}
+                              >
+                                Update Post
                               </button>
                             </div>
                           </div>
@@ -394,12 +405,11 @@ const Page = () => {
                 </div>
               </div>
             </div>
-          </form>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
       <ToastContainer />
     </>
   );
 };
-
-export default Page;
+export default page;
