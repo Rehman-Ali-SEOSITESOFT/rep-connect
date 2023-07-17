@@ -44,13 +44,15 @@ const AddProductForm = ({ data }) => {
     // setIsLoading(true);
     e.preventDefault();
     let postOrder = {
+      name: addProduct.product_name,
+      short_disc: addProduct.short_description,
+      disc: discription,
+      category: categories[0],
+      regular_price: addProduct.price,
+      sale_price: addProduct.sale_price,
+      stock_quantity: addProduct.quantity,
       cover_image: getProfileImageId[0],
       gallary: gallaryImagesUrl,
-      product_name: addProduct.product_name,
-      quantity: addProduct.quantity,
-      price: addProduct.price,
-      sale_price: addProduct.sale_price,
-      short_description: addProduct.short_description,
     };
 
     console.log(postOrder);
@@ -167,8 +169,11 @@ const AddProductForm = ({ data }) => {
     setIsSingle(true);
     singleProfileUplaodPopUp(!sinleProfileUpoload);
   };
-  const hanldeRemoveImage = () => {
-    console.log("remove image");
+  const hanldeRemoveImage = (imageid) => {
+    let newImages = gallaryImagesUrl.filter((e) => {
+      return e.id !== imageid;
+    });
+    setGallaryImagesUrl(newImages);
   };
   const hanldeCloseMediaPopup = () => {
     singleProfileUplaodPopUp(false);
@@ -177,6 +182,7 @@ const AddProductForm = ({ data }) => {
   const hanldeGallary = () => {
     setIsSingle(false);
     // setGallaryImagesUrl(gallaryImagesUrl);
+
     singleProfileUplaodPopUp(true);
   };
 
@@ -293,17 +299,16 @@ const AddProductForm = ({ data }) => {
               <UploadIcon />
             </div>
             {getProfileImageUrl ? (
-              <div className="profile-img mt-2">
+              <div className="profile-img mt-4">
                 <Image
                   src={getProfileImageUrl}
-                  width={80}
-                  height={80}
+                  fill
                   alt="img"
                   className="img-fluid"
                 />
-                <div className="close-icon" onClick={hanldeRemoveImage}>
+                {/* <div className="close-icon">
                   <i className="fa-solid fa-xmark"></i>
-                </div>
+                </div> */}
               </div>
             ) : null}
           </div>
@@ -318,13 +323,16 @@ const AddProductForm = ({ data }) => {
               {gallaryImagesUrl.length >= 1
                 ? gallaryImagesUrl.map((element) => {
                     return (
-                      <div className="profile-img" key={element.id}>
+                      <div
+                        className="profile-img"
+                        onClick={() => hanldeRemoveImage(element.id)}
+                        key={element.id}
+                      >
                         <Image
                           src={element.url}
                           className="img-fluid"
                           alt="al"
-                          width={80}
-                          height={80}
+                          fill
                         />
                         <div className="close-icon">
                           <i className="fa-solid fa-xmark"></i>

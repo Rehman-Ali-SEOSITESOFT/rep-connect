@@ -100,11 +100,17 @@ img.adding-imag {
 }
 .pro-form-row-files .profile-img {
   width: 80px;
+  height: 80px;
   margin: 10px 10px 0 0;
   position: relative;
+  border: 1px solid black;
+  border-radius: 5px;
+
 }
 .pro-form-row-files .profile-img img {
   border-radius: 5px;
+  padding: 5px;
+  object-fit: cover;
 }
 
 .pro-form-row-files .profile-img .close-icon {
