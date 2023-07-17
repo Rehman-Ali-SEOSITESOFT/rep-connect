@@ -122,9 +122,6 @@ const page = ({ params }) => {
                   className={`add_new_btn border-none ${style.tagSubmit}`}
                   type="submit"
                 >
-                  <span>
-                    <i className="fa-sharp fa-solid fa-sd-card"></i>
-                  </span>
                   Update Tag
                 </button>
               </div>

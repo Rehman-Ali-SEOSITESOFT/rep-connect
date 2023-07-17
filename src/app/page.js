@@ -5,7 +5,6 @@ import styles from "./page.module.css";
 import BreadCrum from "@/components/breadCrum/BreadCrum";
 import { useEffect, useState } from "react";
 import mdx from "../assets/images/singleproductsimages/mdxhomepagepost.jpg";
-import salepiece from "../assets/images/singleproductsimages/newSaleImage.png";
 import HomePagePosts from "@/components/homePagePosts/HomePagePosts";
 import micro from "../assets/images/singleproductsimages/microgenmicro.png";
 import newAccount from "../assets/images/singleproductsimages/newaccount.png";
@@ -103,6 +102,7 @@ const Home = () => {
       .then((resp) => {
         setPostData(resp.data.data.post);
         setLoading(false);
+        console.log(resp.data.data.post);
       })
       .catch((err) => console.log(err));
 
@@ -253,28 +253,7 @@ const Home = () => {
                         MicroGenDX Minute – Ep.5: Why is MicroGenDX Vital to the
                         Clearing of Chronic UTIs??
                       </h3>
-                      <div className="video_section">
-                        {/* <VideoPlayer
-                      url="../../public/video.mp4"
-                      isPlaying={isPlaying}
-                      volume={volume}
-                      onPlay={handlePlay}
-                      onPause={handlePause}
-                      onVolume={handleVolume}
-                      width="100%"
-                      height="170px"
-                      type="video/mp4"
-                    /> */}
-                        {/* <ReactPlayer
-                      className="react-player"
-                      url={url}
-                      // controls={true}
-                      config={config}
-                      width={width}
-                      height={height}
-                      type="video/youtube"
-                    /> */}
-                      </div>
+                      <div className="video_section"></div>
                     </div>
                     <div className={styles.question_section}>
                       <a href="#">

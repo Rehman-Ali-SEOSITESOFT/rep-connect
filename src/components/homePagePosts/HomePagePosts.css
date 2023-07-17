@@ -169,6 +169,7 @@
 }
 .post_wrapper_inner .item-category-blog {
   margin-bottom: 30px;
+  width: 100% !important;
 }
 .post_wrapper_inner .item-category-blog .image-side {
   position: relative;

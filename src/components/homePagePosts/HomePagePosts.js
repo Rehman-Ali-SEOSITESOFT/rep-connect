@@ -3,6 +3,8 @@ import Image from "next/image";
 import "./HomePagePosts.css";
 import Link from "next/link";
 const HomePagePosts = ({ item, index }) => {
+  console.log(item, "<========= item");
+  
   return (
     <>
       <div className="post_wrapper_inner">
@@ -10,7 +12,7 @@ const HomePagePosts = ({ item, index }) => {
           <div className="image-side ">
             <Link href={`/blog/${item.slug}`} className="img-side-link">
               <Image
-                src={item.featured_image?.image_url}
+                src={item.featured_image?.image.url}
                 alt="img1"
                 className="img-fluid"
                 fill

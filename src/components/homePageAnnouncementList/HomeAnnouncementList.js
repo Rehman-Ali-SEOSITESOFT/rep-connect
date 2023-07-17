@@ -1,8 +1,8 @@
-import React from "react"
-import Image from "next/image"
-import "./HomeAnnouncementList.css"
+import React from "react";
+import Image from "next/image";
+import "./HomeAnnouncementList.css";
 const HomeAnnouncementList = (props) => {
-  const { image, annTitle, date, Link } = props
+  const { image, annTitle, date, Link } = props;
   return (
     <>
       <li>
@@ -17,7 +17,7 @@ const HomeAnnouncementList = (props) => {
         </div>
       </li>
     </>
-  )
-}
+  );
+};
 
-export default HomeAnnouncementList
+export default HomeAnnouncementList;

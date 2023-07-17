@@ -10,6 +10,7 @@ const page = () => {
     tagName: "",
     tagDisp: "",
   });
+  const [error, setError] = useState(false);
   const _handleChange = (e) => {
     setTagData({
       ...tagData,
@@ -20,7 +21,7 @@ const page = () => {
   const _handleTagForm = (e) => {
     e.preventDefault();
     if (tagData.tagName.length == 0 && tagData.tagDisp.length == 0) {
-      toast.error(`Invalid Form Input`);
+      setError(true);
     } else {
       axios
         .post("https://anxious-foal-shift.cyclic.app/api/tag", {
@@ -30,6 +31,7 @@ const page = () => {
         .then((resp) => {
           console.log(resp.data);
           if (resp.data.success == 1) {
+            setError(false);
             toast.success(resp.data.message);
             setTagData(resp.data.data);
             setTagData({
@@ -56,7 +58,7 @@ const page = () => {
             <div className="col-6">
               <div className="text-end d-block">
                 <Link
-                  href="/admin/post/post-tags"
+                  href="/admin/post/tags"
                   className={`add_new_btn border-none ${style.tagSubmit}`}
                   type="submit"
                 >
@@ -79,6 +81,11 @@ const page = () => {
                     onChange={_handleChange}
                     name="tagName"
                   />
+                  {error && tagData.tagName.length <= 0 ? (
+                    <p className={style.errorMsg}>Please Enter Name</p>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
@@ -93,6 +100,11 @@ const page = () => {
                     name="tagDisp"
                     rows="4"
                   ></textarea>
+                  {error && tagData.tagDisp.length <= 0 ? (
+                    <p className={style.errorMsg}>Please Enter Description</p>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>

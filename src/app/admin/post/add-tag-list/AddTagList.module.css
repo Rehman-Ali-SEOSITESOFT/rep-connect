@@ -22,3 +22,9 @@
   font-weight: 400;
   padding-bottom: 12px;
 }
+.errorMsg {
+  color: red;
+  font-size: 12px;
+  padding-top: 5px;
+  margin-bottom: 0px;
+}

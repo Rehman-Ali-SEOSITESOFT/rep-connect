@@ -201,6 +201,24 @@
   color: #f05c5d;
   text-decoration: underline;
 }
+.second_row_blog table {
+  border: 1px solid #ced4da;
+  width: 100% !important;
+  padding: 4px 5px !important;
+}
+.second_row_blog table thead tr th div {
+  padding: 4px 5px;
+}
+.second_row_blog table tbody tr td div {
+  padding: 4px 5px;
+}
+.second_row_blog table tbody tr td {
+  border-top: 1px solid #ced4da;
+  padding: 5px;
+}
+.second_row_blog table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 @media screen and (max-width: 1200px) {
   .main_blog_wrappper .image_wrapper {
     margin-bottom: 40px;
