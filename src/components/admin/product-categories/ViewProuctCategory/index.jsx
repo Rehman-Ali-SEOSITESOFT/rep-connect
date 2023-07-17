@@ -5,6 +5,7 @@ import Image from "next/image";
 import moment from "moment";
 
 const ViewProCategory = ({ data }) => {
+  console.log(data);
   return (
     <div className="add-pro-cate-view">
       <div className="pro-cate-form-row-view">

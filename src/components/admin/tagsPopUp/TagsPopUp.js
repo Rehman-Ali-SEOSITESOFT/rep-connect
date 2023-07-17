@@ -93,6 +93,8 @@ const TagsPopUp = ({
     setLoading(false);
     dispatch(getTags());
     dispatch(tagsDataAll(apiEndpoint));
+    // let arr = [...selectedImage];
+    // setSelectedImage(arr.filter((item) => item !== id));
   }, [newData]);
   const _handleAllGetImages = () => {
     const apiEndpoint = `https://anxious-foal-shift.cyclic.app/api/media/all`;
@@ -100,6 +102,7 @@ const TagsPopUp = ({
   };
 
   const _handleImageId = (id, img) => {
+    console.log(id);
     const selectImage = id;
     if (selectedImage.filter((item) => item === id).length > 0) {
       let arr = [...selectedImage];

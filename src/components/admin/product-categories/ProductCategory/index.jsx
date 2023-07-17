@@ -84,8 +84,33 @@ const ProductCategory = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [entries, setEnteries] = useState([]);
-  const hanldeDeleted = () => {};
-  const hanldeUpdated = () => {};
+  const hanldeDELETEapi = (id) => {
+    setIsLoading(true);
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product-category/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.success === 1) {
+          setIsLoading(false);
+          toast.success("Category Delete Successfully");
+          hanldeGetApiCategory();
+        } else {
+          setIsLoading(false);
+          toast.error(data.error.message);
+        }
+      });
+  };
+  const hanldeDeleted = (event, id) => {
+    hanldeDELETEapi(id);
+    // console.log(id);
+  };
+  const hanldeUpdated = (event, id) => {
+    router.push(`/admin/product/product-categories/update/${id}`);
+  };
   const hanldeViewd = (data, id) => {
     router.push(`/admin/product/product-categories/view/${id}`);
   };
@@ -117,17 +142,14 @@ const ProductCategory = () => {
           actions={[
             {
               icon: () => <DeleteIcon />,
-              // tooltip: "Remove",
-              onClick: (event, data) => hanldeDeleted(event, data),
+              onClick: (event, data) => hanldeDeleted(event, data._id),
             },
             {
               icon: () => <Edit />,
-              // tooltip: "Change Status",
               onClick: (event, data) => hanldeUpdated(event, data._id),
             },
             {
               icon: () => <VisibilityOutlinedIcon />,
-              // tooltip: "Change Status",
               onClick: (event, data) => hanldeViewd(event, data._id),
             },
           ]}

@@ -21,9 +21,9 @@ const page = () => {
                 href="/admin/product/product-categories"
               >
                 <span>
-                  <i className="fa-solid fa-plus"></i>
+                  <i className="fa-solid fa-arrow-left-long"></i>
                 </span>
-                back to product categories
+                back to list
               </Link>
             </div>
           </div>
