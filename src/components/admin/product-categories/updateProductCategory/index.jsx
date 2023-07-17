@@ -3,6 +3,8 @@ import UploadIcon from "../../uploadIcons/UploadIcon";
 import "./updateProCate.css";
 import Spinner from "@/components/spinner/Spinner";
 import Image from "next/image";
+import TagsPopUp from "../../tagsPopUp/TagsPopUp";
+import { ToastContainer, toast } from "react-toastify";
 
 const UpdateProCategory = ({ data }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,12 +15,10 @@ const UpdateProCategory = ({ data }) => {
   const [cateImage, setCateImage] = useState(null);
   const [cateImageId, setCateImageID] = useState(null);
 
-  const hanldeUpdateCategory = (e) => {
-    e.preventDefault();
-    // setIsLoading(true)
-    console.log({ cateName, parentCateName, cateImage, cateImageId });
-    console.log("hello");
-  };
+  // TAGS POP UP
+  const [mediaPopUpOpened, setMediaPopUpOpened] = useState(false);
+
+  // UPDATE API FUNCTION
 
   const hanldeGETAllProductCategory = () => {
     fetch(`${process.env.NEXT_PUBLIC_URL}api/product-category`, {
@@ -36,21 +36,73 @@ const UpdateProCategory = ({ data }) => {
         }
       });
   };
+  const hanldePATCHapiFunction = (dat) => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product-category/${data._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dat),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setIsLoading(false);
+
+        if (data.success === 1) {
+          toast.success("Category Update", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          hanldeGETAllProductCategory();
+        } else {
+          toast.error("something wrong");
+        }
+      });
+  };
+
+  const hanldeUpdateCategory = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    let updateId = {
+      name: cateName,
+      image: cateImageId[0],
+      parent_cat_id: parentCateName,
+    };
+    hanldePATCHapiFunction(updateId);
+  };
 
   useEffect(() => {
     hanldeGETAllProductCategory();
     setCateName(data.name);
     setParentCateName(data.parent_cat_id ? data.parent_cat_id._id : null);
     setCateImage(data.image.image.url);
-    setCateImageID(data.image.image.id);
+    setCateImageID([data.image._id]);
   }, []);
 
   const hanldeOpenPopup = () => {
-    console.log("open up open");
+    setMediaPopUpOpened(!mediaPopUpOpened);
   };
   return (
     <>
       {isLoading && <Spinner />}
+      {mediaPopUpOpened && (
+        <TagsPopUp
+          popUpClose={hanldeOpenPopup}
+          getImageId={setCateImageID}
+          getImageee={setCateImage}
+          isSingle={true}
+          // getGllaryUrl={setGallaryImagesUrl}
+          multiImagesState={[]}
+        />
+      )}
       <form className="add-pro-cate-update" onSubmit={hanldeUpdateCategory}>
         <div className="pro-cate-form-row-update">
           <div className="form-col">
@@ -120,6 +172,7 @@ const UpdateProCategory = ({ data }) => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 };
