@@ -27,7 +27,7 @@ import { useRouter } from "next/navigation";
 import moment from "moment/moment";
 
 import { ToastContainer, toast } from "react-toastify";
-
+import "./productcart.css";
 const tableIcons = {
   Delete: forwardRef((props, ref) => <DeleteIcon {...props} ref={ref} />),
   DetailPanel: forwardRef((props, ref) => (
@@ -81,7 +81,13 @@ const ProductCart = () => {
         );
       },
     },
-    { title: "Product", field: "name" },
+    {
+      title: "Product",
+      field: "name",
+      render: (item) => {
+        return <span className="ad-pro-title">{item.name}</span>;
+      },
+    },
     {
       title: "Category",
       field: "category.name",

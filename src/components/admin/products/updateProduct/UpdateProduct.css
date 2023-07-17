@@ -84,12 +84,7 @@ form.add-product-form {
 .imagess-preview {
   margin-top: 10px;
 }
-.imagess-preview .img-box {
-  border: 1px solid #ced4da;
-  overflow: hidden;
-  padding: 5px;
-  margin-right: 5px;
-}
+
 .imagess-preview img {
   transition: all 0.5s ease-in-out;
 }
@@ -112,6 +107,12 @@ form.add-product-form {
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s ease-in-out;
+}
+.imagess-preview .img-box {
+  border: 1px solid #ced4da;
+  overflow: hidden;
+  padding: 5px;
+  margin-right: 5px;
 }
 
 .imagess-preview .img-box:hover .deletepic {
