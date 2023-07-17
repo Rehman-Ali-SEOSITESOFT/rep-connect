@@ -1,6 +1,7 @@
 "use client";
 import UpdateProCategory from "@/components/admin/product-categories/updateProductCategory";
 import Spinner from "@/components/spinner/Spinner";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const page = ({ params }) => {
@@ -28,13 +29,27 @@ const page = ({ params }) => {
   useEffect(() => {
     hanldeGetCategoryApi();
   }, []);
+
   return (
     <section className="product-categories">
       <div className="container-fluid">
         <div className={`row row-title-equal-spacing`}>
-          <div className="col-12">
+          <div className="col-6">
             <div className="left">
               <h4 className="product-title">Product Update</h4>
+            </div>
+          </div>
+          <div className="col-6 text-end">
+            <div className="right">
+              <Link
+                className="back-to-product"
+                href="/admin/product/product-categories"
+              >
+                <span>
+                  <i className="fa-solid fa-arrow-left-long"></i>
+                </span>
+                back to list
+              </Link>
             </div>
           </div>
         </div>
@@ -45,7 +60,7 @@ const page = ({ params }) => {
             ) : isError ? (
               <p className="error-message">{errorMessage}</p>
             ) : (
-              <UpdateProCategory />
+              <UpdateProCategory data={data} />
             )}
           </div>
         </div>

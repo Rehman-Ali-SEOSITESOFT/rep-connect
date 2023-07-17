@@ -191,7 +191,7 @@ const AddProductCategory = () => {
                 <Image
                   src={getImageUrl}
                   alt="loader"
-                  className="inline-block border p-3"
+                  className="inline-block border p-1"
                   width={150}
                   height={150}
                 />
