@@ -1,6 +1,5 @@
 import Spinner from "@/components/spinner/Spinner";
 import { getTags } from "@/redux/slices/tagLibrary";
-
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -8,7 +7,6 @@ import { useDispatch } from "react-redux";
 import NavTabs from "../addNew/navTabs/NavTabs";
 import MediaLibContent from "../mediaLibContent/MediaLibContent";
 import emptycart from "../../../assets/images/empty/empty.gif";
-
 import "./TagsPopUp.css";
 import Image from "next/image";
 import { tagsDataAll } from "@/redux/slices/tagsDataAll";
@@ -28,17 +26,18 @@ const TagsPopUp = ({
   const tagsData = useSelector((state) => state.tagsData);
   const [selectedImage, setSelectedImage] = useState([]);
   const [selectedGallryImage, setSelectedGallryImage] = useState([]);
+  const [singleImage, setSingleImage] = useState([]);
   const tagsLoading = useSelector((state) => state.tagsData.loading);
   const [close, setClose] = useState(false);
-  const [getImage, setGetImage] = useState("");
+  const [getImage, setGetImage] = useState([]);
 
-  const _handleAddNew = () => {
-    setAddItem(true);
-  };
+  // const _handleAddNew = () => {
+  //   setAddItem(true);
+  // };
 
-  const _hndleClsosee = () => {
-    setAddItem(false);
-  };
+  // const _hndleClsosee = () => {
+  //   setAddItem(false);
+  // };
 
   const [tabsNames, setTabsNames] = useState([]);
   let tabsNumer = tagsData.data.length;
@@ -60,11 +59,9 @@ const TagsPopUp = ({
   const _handleViewLesss = () => {
     if (loadMoree > 30) {
       setLoadMoree(loadMoree - 10);
-      console.log("console1");
     } else {
       setLoadMoree(loadMoree);
       setToggleBtn(false);
-      console.log("console2");
     }
   };
 
@@ -121,6 +118,23 @@ const TagsPopUp = ({
       setSelectedGallryImage((prevImage) => [...prevImage, obj]);
     }
     setGetImage(img);
+    // setSingleImage(id);
+  };
+  const handleSingleImage = (id, img) => {
+    const selectImage = id;
+
+    if (selectedImage.filter((item) => item === id).length === 1) {
+      setSelectedImage(selectedImage.filter((item) => item !== id));
+    } else {
+      setSelectedImage([selectImage]);
+      let obj = {
+        id: id,
+        url: img,
+      };
+      setSelectedGallryImage((prevImage) => [obj]);
+    }
+    // setSingleImage(id);
+    console.log(selectedImage, "single image");
   };
   const _handleClosePopUp = () => {
     setClose(popUpClose);
@@ -208,6 +222,9 @@ const TagsPopUp = ({
                                 id={e._id}
                                 _handleGettingId={_handleImageId}
                                 selectedImage={selectedImage}
+                                singleImage={singleImage}
+                                isSingle={isSingle}
+                                _handleSingle={handleSingleImage}
                               />
                             </div>
                           );

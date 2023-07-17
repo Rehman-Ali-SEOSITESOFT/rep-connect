@@ -153,7 +153,7 @@ const Page = () => {
                           <div className="row gy-3">
                             <div className="col-xl-12">
                               <label className="form-label">
-                                Product Title{" "}
+                                Product Title
                                 <span className={style.mendatory}>*</span>
                               </label>
                               <input

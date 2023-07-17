@@ -24,6 +24,7 @@ import Spinner from "@/components/spinner/Spinner";
 const page = ({ params }) => {
   let { id } = params;
   const withoutdash = id.split("-").join(" ");
+  const [data, setData] = useState("");
   const [formData, setFormData] = useState({
     commentDetail: "",
   });
@@ -112,16 +113,22 @@ const page = ({ params }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}api/post/${id}`)
+      .get(`https://anxious-foal-shift.cyclic.app/api/post/${id}`)
       .then((resp) => {
         setSinglePostData(resp.data.data.post);
         setLoading(false);
+        console.log(resp.data.data.post.format);
+        setData(resp.data.data.post.format);
       })
       .catch((err) => {
         setLoading(false);
         console.log(err);
       });
   }, []);
+  // var jsonData = data;
+  // var newJsonData = JSON.parse(jsonData);
+  console.log(data, "parsing data");
+
   return (
     <>
       <BreadCrum
@@ -152,7 +159,7 @@ const page = ({ params }) => {
                 <div className="col-lg-8">
                   <div className={styless.image_wrapper}>
                     <Image
-                      src={singlePostData.featured_image?.image_url}
+                      src={singlePostData.featured_image?.image.url}
                       alt="image"
                       className="img-fluid"
                       fill
@@ -163,8 +170,8 @@ const page = ({ params }) => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className={styless.second_row_blog}>
-                    <p> {id}</p>
-                    <p>{singlePostData.description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: data }}></div>
+                    {/* <p>{singlePostData.description}</p>
                     <p>
                       Candida auris is a great opportunity for us. When speaking
                       with potential organizations about our screening test
@@ -185,7 +192,7 @@ const page = ({ params }) => {
                       pre-screening, we can do C. auris as a PCR panel for $50.
                     </p>
                     <p>Thanks</p>
-                    <p>James Compagno</p>
+                    <p>James Compagno</p> */}
                   </div>
                 </div>
               </div>

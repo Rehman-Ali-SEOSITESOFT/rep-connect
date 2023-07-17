@@ -108,7 +108,7 @@ const PostTableList = () => {
   ];
 
   const _handleView = (event, data) => {
-    console.log(data, "data is here for view purpose");
+    router.push(`/admin/post/viewSinglePost/${data._id}`);
   };
 
   useEffect(() => {
@@ -131,16 +131,18 @@ const PostTableList = () => {
                 actions={[
                   {
                     icon: () => <DeleteIcon />,
-                    // tooltip: "Remove",
+                    tooltip: "Remove",
                     onClick: (event, data) => hanldeDeleted(event, data),
                   },
                   {
                     icon: () => <VisibilityOutlinedIcon />,
+                    tooltip: "View",
+
                     onClick: (event, data) => _handleView(event, data),
                   },
                   {
                     icon: () => <Edit />,
-                    // tooltip: "Change Status",
+                    tooltip: "Update ",
                     onClick: (event, data) => hanldeUpdated(event, data),
                   },
                 ]}

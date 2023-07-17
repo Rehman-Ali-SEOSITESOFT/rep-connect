@@ -350,9 +350,10 @@ const page = ({ params }) => {
                                         "horizontalRule",
                                         "list",
                                         "table",
+                                        "video",
                                       ],
-                                      ["link", "image", "video"],
-                                      ["fullScreen", "showBlocks", "codeView"],
+                                      ["link", "image"],
+                                      ["fullScreen", "showBlocks"],
                                     ],
                                   }}
                                 />

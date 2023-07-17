@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import { Style } from "@material-ui/icons";
 import style from "./AllPost.module.css";
 import { useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
@@ -14,15 +13,11 @@ const PostTableList = dynamic(
 );
 const Page = () => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(product());
-  // }, []);
-
   return (
     <>
-      <section className={Style.allPostWrapper}>
+      <section className={style.allPostWrapper}>
         <div className="container-fluid">
-          <div className={`row ${style.title_row} my-4`}>
+          <div className={`row ${style.title_row} `}>
             <div className="col-6">
               <div className="left">
                 <h4 className="product-title">Post List</h4>

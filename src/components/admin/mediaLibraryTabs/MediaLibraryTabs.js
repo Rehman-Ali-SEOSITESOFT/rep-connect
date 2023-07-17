@@ -377,7 +377,7 @@ const MediaLibraryTabs = () => {
                           <MediaLibContent
                             image={e.image.url}
                             key={idx}
-                            id={e.image.id}
+                            id={e._id}
                             _handleGettingId={_handleImageId}
                             selectedImage={selectedImage}
                           />
