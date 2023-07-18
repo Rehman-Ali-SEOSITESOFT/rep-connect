@@ -25,8 +25,7 @@ const AddProductForm = ({ data }) => {
     short_description: "",
   });
   const [categories, setCategories] = useState([]);
-  const [productProfile, setProductProfile] = useState("");
-  const [productGallary, sePproductGallary] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [sinleProfileUpoload, singleProfileUplaodPopUp] = useState(false);
   const [getProfileImageId, setGetProfileImageId] = useState([]);
@@ -40,6 +39,11 @@ const AddProductForm = ({ data }) => {
     const value = event.target.value;
     setAddProduct({ ...addProduct, [name]: value });
   };
+  console.log("single product upload", {
+    getProfileImageId,
+    getProfileImageUrl,
+    gallaryImagesUrl,
+  });
   const hanldeSubmit = (e) => {
     // setIsLoading(true);
     e.preventDefault();
@@ -55,7 +59,8 @@ const AddProductForm = ({ data }) => {
       gallary: gallaryImagesUrl,
     };
 
-    console.log(postOrder);
+    console.log("add product", getProfileImageUrl, gallaryImagesUrl);
+    // console.log(postOrder);
     // const formData = new FormData();
     // formData.append("name", addProduct.product_name);
     // formData.append("stock_quantity", addProduct.quantity);
@@ -301,12 +306,12 @@ const AddProductForm = ({ data }) => {
             <div className="imagess-preview">
               {getProfileImageUrl ? (
                 <div className="d-inline-block img-box position-relative">
-                  <Image
+                  {/* <Image
                     src={getProfileImageUrl}
                     alt={"name"}
                     width={80}
                     height={80}
-                  />
+                  /> */}
                 </div>
               ) : null}
             </div>
