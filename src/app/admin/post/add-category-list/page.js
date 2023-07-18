@@ -42,14 +42,14 @@ const page = () => {
     setImage("");
   };
   const [parentTagName, setParentTagName] = useState([]);
-
+  console.log(getUrlImage, "get image url");
   /////////////////////post api starts here//////////////////
 
   const onSubmitCategotry = (e) => {
     e.preventDefault();
     console.log(cat, "categggg");
     console.log(image, "image parent Id");
-
+    console.log(getUrlImage, "image url");
     const body = {
       name: cat.catTitle,
       description: cat.description,

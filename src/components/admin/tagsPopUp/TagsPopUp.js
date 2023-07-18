@@ -131,10 +131,12 @@ const TagsPopUp = ({
         id: id,
         url: img,
       };
-      setSelectedGallryImage((prevImage) => [obj]);
+      // setSelectedGallryImage((prevImage) => [obj]);
+      setSelectedGallryImage((prevImage) => [prevImage]);
     }
     // setSingleImage(id);
-    console.log(selectedImage, "single image");
+    console.log(img, "single image");
+    setGetImage(img);
   };
   const _handleClosePopUp = () => {
     setClose(popUpClose);
