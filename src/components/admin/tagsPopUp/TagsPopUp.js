@@ -18,6 +18,7 @@ const TagsPopUp = ({
   getGllaryUrl,
   isSingle,
   multiImagesState,
+  singleImageState,
 }) => {
   const state = useSelector((state) => state.tags);
   const [addItem, setAddItem] = useState(false);
@@ -102,7 +103,6 @@ const TagsPopUp = ({
   };
 
   const _handleImageId = (id, img) => {
-    console.log(id);
     const selectImage = id;
     if (selectedImage.filter((item) => item === id).length > 0) {
       let arr = [...selectedImage];
@@ -135,7 +135,6 @@ const TagsPopUp = ({
       setSelectedGallryImage((prevImage) => [prevImage]);
     }
     // setSingleImage(id);
-    console.log(img, "single image");
     setGetImage(img);
   };
   const _handleClosePopUp = () => {
@@ -147,13 +146,22 @@ const TagsPopUp = ({
     setClose(_handleUploadImages);
     if (isSingle) {
       getImageee(getImage);
+      getImageId(selectedImage);
     } else {
       let arr = [...multiImagesState, ...selectedGallryImage];
       getGllaryUrl(arr);
     }
-    getImageId(selectedImage);
   };
 
+  useEffect(() => {
+    if (isSingle) {
+      setSelectedImage(singleImageState);
+    } else {
+      let arr = [];
+      multiImagesState.forEach((e) => arr.push(e.id));
+      setSelectedImage(arr);
+    }
+  }, []);
   return (
     <>
       <section className="tags_popup_main_wrapper">

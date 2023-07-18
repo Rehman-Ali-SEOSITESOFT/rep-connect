@@ -39,11 +39,7 @@ const AddProductForm = ({ data }) => {
     const value = event.target.value;
     setAddProduct({ ...addProduct, [name]: value });
   };
-  console.log("single product upload", {
-    getProfileImageId,
-    getProfileImageUrl,
-    gallaryImagesUrl,
-  });
+
   const hanldeSubmit = (e) => {
     // setIsLoading(true);
     e.preventDefault();
@@ -59,7 +55,7 @@ const AddProductForm = ({ data }) => {
       gallary: gallaryImagesUrl,
     };
 
-    console.log("add product", getProfileImageUrl, gallaryImagesUrl);
+    console.log("add product", postOrder);
     // console.log(postOrder);
     // const formData = new FormData();
     // formData.append("name", addProduct.product_name);
@@ -186,8 +182,6 @@ const AddProductForm = ({ data }) => {
 
   const hanldeGallary = () => {
     setIsSingle(false);
-    // setGallaryImagesUrl(gallaryImagesUrl);
-
     singleProfileUplaodPopUp(true);
   };
 
@@ -205,7 +199,10 @@ const AddProductForm = ({ data }) => {
           getImageee={setGetProfileImageUrl}
           isSingle={isSingle}
           getGllaryUrl={setGallaryImagesUrl}
+
+          singleImageState={getProfileImageId}
           multiImagesState={gallaryImagesUrl}
+        
         />
       )}
 
@@ -306,12 +303,12 @@ const AddProductForm = ({ data }) => {
             <div className="imagess-preview">
               {getProfileImageUrl ? (
                 <div className="d-inline-block img-box position-relative">
-                  {/* <Image
+                  <Image
                     src={getProfileImageUrl}
                     alt={"name"}
                     width={80}
                     height={80}
-                  /> */}
+                  />
                 </div>
               ) : null}
             </div>
