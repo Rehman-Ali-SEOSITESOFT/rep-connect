@@ -38,16 +38,16 @@ const page = ({ params }) => {
       )}
 
       <section className={style.product_deail_page}>
-        <div className="container-xxl">
+        {/* <div className="container-xxl">
           <div className="row">
             <div className="col-12 p-0">
-              <div className={style.product_deail_wrapper}>
-                <ProductDetail item={state} />
-                {/* <AsideWidget /> */}
-              </div>
-            </div>
-          </div>
-        </div>
+              <div className={style.product_deail_wrapper}> */}
+        <ProductDetail item={state} />
+        {/* <AsideWidget /> */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
       </section>
     </>
   );

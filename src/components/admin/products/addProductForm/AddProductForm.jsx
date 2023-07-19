@@ -5,16 +5,15 @@ import Image from "next/image";
 import Multiselect from "multiselect-react-dropdown";
 import SunEditor from "suneditor-react";
 import { ToastContainer, toast } from "react-toastify";
-import { product } from "@/redux/slices/productSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import UploadIcon from "../../uploadIcons/UploadIcon";
-import bus from "../../../../assets/images/Courses/business-development.jpg";
+
 import TagsPopUp from "../../tagsPopUp/TagsPopUp";
 
 const AddProductForm = ({ data }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
+
   const item = data;
   const [discription, setDiscription] = useState("");
   const [addProduct, setAddProduct] = useState({
@@ -132,84 +131,9 @@ const AddProductForm = ({ data }) => {
         gallary: gallary,
       };
 
+      // POST FUNCTION
       hanldeAddProductAPI(postOrder);
-    } // console.log(postOrder);
-    // const formData = new FormData();
-    // formData.append("name", addProduct.product_name);
-    // formData.append("stock_quantity", addProduct.quantity);
-    // formData.append("regular_price", addProduct.price);
-    // formData.append("sale_price", addProduct.sale_price);
-    // formData.append("short_disc", addProduct.short_description);
-    // formData.append("disc", discription);
-    // formData.append("product_profile", productProfile);
-    // formData.append("category", categories[0]);
-    // for (let i = 0; i < productGallary.length; i++) {
-    //   formData.append("gallary", productGallary[i]);
-    // }
-    // fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
-    //   method: "POST",
-    //   headers: {
-    //     // "Content-Type": "application/json",
-    //   },
-    //   body: formData,
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.success === 1) {
-    //       dispatch(product());
-    //       toast.success("Product add successfully", {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //       });
-    //       setAddProduct({
-    //         product_name: "",
-    //         quantity: "",
-    //         price: "",
-    //         sale_price: "",
-    //         short_description: "",
-    //       });
-    //       setDiscription(null);
-    //       setCategories("");
-    //       setIsLoading(false);
-    //       setTimeout(() => {
-    //         router.push("/admin/product");
-    //       }, 1500);
-    //     } else {
-    //       setIsLoading(false);
-    //       toast.error(data.message, {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //       });
-    //     }
-
-    //     if (data.success === 0) {
-    //       setIsLoading(false);
-    //       toast.error(data.error.message, {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //       });
-    //     }
-    //   });
+    }
   };
 
   // FILTER GETEGORY ID
@@ -218,31 +142,6 @@ const AddProductForm = ({ data }) => {
     arr.filter((p_item) => newarr.push(p_item._id));
     setCategories(newarr);
   };
-
-  // const hanldeCategory = (arr, item) => {
-  // let newarr = [];
-  // arr.filter((p_item) => newarr.push(p_item._id));
-  // setCategories(newarr);
-  //   filterChategoryFuction(arr);
-  // };
-  // const hanldeRemove = (arr, item) => {
-  //   filterChategoryFuction(arr);
-  // let newarr = [];
-  // arr.filter((p_item) => newarr.push(p_item._id));
-  // setCategories(newarr);
-  // };
-
-  // const hanldeChangedImages = (event) => {
-  //   if (event.target.name === "product_image") {
-  //     setProductProfile(event.target.files[0]);
-  //   } else {
-  //     sePproductGallary(event.target.files);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   setIsLoading(false);
-  // }, []);
 
   const hanldeSingle = () => {
     setIsSingle(true);

@@ -16,13 +16,10 @@ import { TablePagination, Paper } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { useLayoutEffect } from "react";
-import img1 from "../../../../assets/images/podcasts/podcasr01.png";
-import img2 from "../../../../assets/images/podcasts/podcast02.png";
+
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { product } from "@/redux/slices/productSlice";
 import { useRouter } from "next/navigation";
 import moment from "moment/moment";
 
@@ -140,9 +137,6 @@ const ProductCart = () => {
             theme: "colored",
           });
           getAllProduct();
-          // dispatch(product());
-          // let arr = JSON.parse(JSON.stringify(state.data));
-          // setEnteries(arr);
         } else {
           toast.warn("Product not delete successfully", {
             position: "top-right",
