@@ -251,7 +251,7 @@ const MediaLibraryTabs = () => {
       console.log("console2");
     }
   };
-  console.log(loadMoree, "loadmore ");
+
   const getMediaTagData = () => {
     axios
       .get("https://anxious-foal-shift.cyclic.app/api/mediatag")

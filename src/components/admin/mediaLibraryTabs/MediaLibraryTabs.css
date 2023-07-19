@@ -4,6 +4,11 @@
   padding: 8px;
   cursor: pointer;
 }
+.tabs_sectons_wrapper .image_section {
+  width: 122px;
+  height: 146px;
+  border-radius: 8px;
+}
 .tabs_menu_ {
   flex-wrap: nowrap !important;
   overflow-x: scroll;

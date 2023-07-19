@@ -24,6 +24,8 @@ const page = ({ params }) => {
   const [author, setAuthor] = useState([]);
   const [subscribe, setSubscibe] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [getProfileImageId, setGetProfileImageId] = useState([]);
+  const [gallaryImagesUrl, setGallaryImagesUrl] = useState([]);
   const [postData, setPostData] = useState({
     title: "",
     category: "",
@@ -135,6 +137,8 @@ const page = ({ params }) => {
               isSingle={true}
               getImageee={setGetUrlImage}
               getImageId={setImage}
+              singleImageState={getProfileImageId}
+              multiImagesState={gallaryImagesUrl}
             />
           ) : (
             ""
