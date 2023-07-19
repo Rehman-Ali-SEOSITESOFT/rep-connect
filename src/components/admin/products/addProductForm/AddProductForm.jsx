@@ -33,6 +33,7 @@ const AddProductForm = ({ data }) => {
 
   const [gallaryImagesUrl, setGallaryImagesUrl] = useState([]);
   const [isSingle, setIsSingle] = useState(false);
+  const [selectdropdow, setselectdropdow] = useState(false);
 
   const hanldeChanged = (event) => {
     const name = event.target.name;
@@ -40,23 +41,99 @@ const AddProductForm = ({ data }) => {
     setAddProduct({ ...addProduct, [name]: value });
   };
 
-  const hanldeSubmit = (e) => {
-    // setIsLoading(true);
-    e.preventDefault();
-    let postOrder = {
-      name: addProduct.product_name,
-      short_disc: addProduct.short_description,
-      disc: discription,
-      category: categories[0],
-      regular_price: addProduct.price,
-      sale_price: addProduct.sale_price,
-      stock_quantity: addProduct.quantity,
-      cover_image: getProfileImageId[0],
-      gallary: gallaryImagesUrl,
-    };
+  const hanldeAddProductAPI = (body) => {
+    setIsLoading(true);
+    fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setIsLoading(false);
+        if (data.success === 1) {
+          toast.success("Product add successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          setAddProduct({
+            product_name: "",
+            quantity: "",
+            price: "",
+            sale_price: "",
+            short_description: "",
+          });
+          setGetProfileImageUrl("");
+          setGallaryImagesUrl([]);
+          setDiscription("");
+          setCategories([]);
 
-    console.log("add product", postOrder);
-    // console.log(postOrder);
+          setGetProfileImageId([]);
+
+          setTimeout(() => {
+            router.push("/admin/product");
+          }, 1500);
+        } else {
+          toast.error("Something Wrong", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
+  };
+  const hanldeSubmit = (e) => {
+    e.preventDefault();
+    if (
+      !addProduct.product_name ||
+      !addProduct.short_description ||
+      !discription ||
+      !categories[0] ||
+      !addProduct.price ||
+      !addProduct.quantity ||
+      !addProduct.sale_price ||
+      !getProfileImageId
+    ) {
+      toast.error("all filed are required 😛😛", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      let gallary = [];
+      gallaryImagesUrl.forEach((e) => gallary.push(e.id));
+      let postOrder = {
+        name: addProduct.product_name,
+        short_disc: addProduct.short_description,
+        disc: discription,
+        category: categories[0],
+        regular_price: addProduct.price,
+        sale_price: addProduct.sale_price,
+        stock_quantity: addProduct.quantity,
+        cover_image: getProfileImageId[0],
+        gallary: gallary,
+      };
+
+      hanldeAddProductAPI(postOrder);
+    } // console.log(postOrder);
     // const formData = new FormData();
     // formData.append("name", addProduct.product_name);
     // formData.append("stock_quantity", addProduct.quantity);
@@ -141,6 +218,7 @@ const AddProductForm = ({ data }) => {
     arr.filter((p_item) => newarr.push(p_item._id));
     setCategories(newarr);
   };
+
   // const hanldeCategory = (arr, item) => {
   // let newarr = [];
   // arr.filter((p_item) => newarr.push(p_item._id));
@@ -199,10 +277,8 @@ const AddProductForm = ({ data }) => {
           getImageee={setGetProfileImageUrl}
           isSingle={isSingle}
           getGllaryUrl={setGallaryImagesUrl}
-
           singleImageState={getProfileImageId}
           multiImagesState={gallaryImagesUrl}
-        
         />
       )}
 
@@ -326,10 +402,12 @@ const AddProductForm = ({ data }) => {
                     return (
                       <div
                         className="d-inline-block img-box position-relative"
-                        onClick={() => hanldeRemoveImage(element.id)}
                         key={element.id}
                       >
-                        <div className="deletepic">
+                        <div
+                          className="deletepic"
+                          onClick={() => hanldeRemoveImage(element.id)}
+                        >
                           <i className="fa-solid fa-trash-can"></i>
                         </div>
                         <Image
@@ -370,6 +448,7 @@ const AddProductForm = ({ data }) => {
             <div className="product-long-desction">
               <SunEditor
                 onChange={setDiscription}
+                setContents={discription}
                 setOptions={{
                   height: 300,
                   buttonList: [

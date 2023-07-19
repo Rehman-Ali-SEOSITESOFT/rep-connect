@@ -118,7 +118,7 @@ const TagsPopUp = ({
       setSelectedGallryImage((prevImage) => [...prevImage, obj]);
     }
     setGetImage(img);
-    // setSingleImage(id);
+    setSingleImage(id);
   };
   const handleSingleImage = (id, img) => {
     const selectImage = id;
@@ -141,6 +141,8 @@ const TagsPopUp = ({
     setClose(popUpClose);
     setClose(_handleUploadImages);
   };
+
+  // HANDLE SUBMIT SELECT IMAGES FUNCTION
   const _handleSelect = () => {
     setClose(popUpClose);
     setClose(_handleUploadImages);
@@ -149,13 +151,19 @@ const TagsPopUp = ({
       getImageId(selectedImage);
     } else {
       let arr = [...multiImagesState, ...selectedGallryImage];
+
       getGllaryUrl(arr);
+      // setSelectedImage(selectedGallryImage);
     }
   };
 
   useEffect(() => {
     if (isSingle) {
-      setSelectedImage(singleImageState);
+      if (!singleImageState) {
+        setSelectedImage([]);
+      } else {
+        setSelectedImage(singleImageState);
+      }
     } else {
       let arr = [];
       multiImagesState.forEach((e) => arr.push(e.id));

@@ -128,6 +128,7 @@ const ProductCart = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success === 1) {
+          setIsLoading(false);
           toast.success("Product delete Success fully", {
             position: "top-right",
             autoClose: 5000,
@@ -138,10 +139,10 @@ const ProductCart = () => {
             progress: undefined,
             theme: "colored",
           });
-
-          dispatch(product());
-          let arr = JSON.parse(JSON.stringify(state.data));
-          setEnteries(arr);
+          getAllProduct();
+          // dispatch(product());
+          // let arr = JSON.parse(JSON.stringify(state.data));
+          // setEnteries(arr);
         } else {
           toast.warn("Product not delete successfully", {
             position: "top-right",

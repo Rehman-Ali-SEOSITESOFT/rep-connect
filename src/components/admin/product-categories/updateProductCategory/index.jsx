@@ -99,8 +99,8 @@ const UpdateProCategory = ({ data }) => {
           getImageId={setCateImageID}
           getImageee={setCateImage}
           isSingle={true}
-          // getGllaryUrl={setGallaryImagesUrl}
           multiImagesState={[]}
+          singleImageState={cateImageId}
         />
       )}
       <form className="add-pro-cate-update" onSubmit={hanldeUpdateCategory}>

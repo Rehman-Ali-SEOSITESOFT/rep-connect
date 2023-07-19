@@ -130,7 +130,8 @@ const AddProductCategory = () => {
           getImageId={setgetImageId}
           getImageee={setgetImageUrl}
           getGllaryUrl={setGallaryImagesUrl}
-          multiImagesState={gallaryImagesUrl}
+          multiImagesState={[]}
+          singleImageState={getImageId}
         />
       )}
 
