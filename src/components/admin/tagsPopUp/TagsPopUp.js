@@ -135,7 +135,7 @@ const TagsPopUp = ({
       setSelectedGallryImage((prevImage) => [prevImage]);
     }
     // setSingleImage(id);
-    console.log(img, "single image");
+
     setGetImage(img);
   };
   const _handleClosePopUp = () => {
