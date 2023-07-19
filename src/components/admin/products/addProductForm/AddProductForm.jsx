@@ -25,8 +25,7 @@ const AddProductForm = ({ data }) => {
     short_description: "",
   });
   const [categories, setCategories] = useState([]);
-  const [productProfile, setProductProfile] = useState("");
-  const [productGallary, sePproductGallary] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [sinleProfileUpoload, singleProfileUplaodPopUp] = useState(false);
   const [getProfileImageId, setGetProfileImageId] = useState([]);
@@ -40,6 +39,7 @@ const AddProductForm = ({ data }) => {
     const value = event.target.value;
     setAddProduct({ ...addProduct, [name]: value });
   };
+
   const hanldeSubmit = (e) => {
     // setIsLoading(true);
     e.preventDefault();
@@ -55,7 +55,8 @@ const AddProductForm = ({ data }) => {
       gallary: gallaryImagesUrl,
     };
 
-    console.log(postOrder);
+    console.log("add product", postOrder);
+    // console.log(postOrder);
     // const formData = new FormData();
     // formData.append("name", addProduct.product_name);
     // formData.append("stock_quantity", addProduct.quantity);
@@ -181,8 +182,6 @@ const AddProductForm = ({ data }) => {
 
   const hanldeGallary = () => {
     setIsSingle(false);
-    // setGallaryImagesUrl(gallaryImagesUrl);
-
     singleProfileUplaodPopUp(true);
   };
 
@@ -200,7 +199,10 @@ const AddProductForm = ({ data }) => {
           getImageee={setGetProfileImageUrl}
           isSingle={isSingle}
           getGllaryUrl={setGallaryImagesUrl}
+
+          singleImageState={getProfileImageId}
           multiImagesState={gallaryImagesUrl}
+        
         />
       )}
 
@@ -298,19 +300,18 @@ const AddProductForm = ({ data }) => {
             <div className="profile-pop" onClick={hanldeSingle}>
               <UploadIcon />
             </div>
-            {getProfileImageUrl ? (
-              <div className="profile-img mt-4">
-                <Image
-                  src={getProfileImageUrl}
-                  fill
-                  alt="img"
-                  className="img-fluid"
-                />
-                {/* <div className="close-icon">
-                  <i className="fa-solid fa-xmark"></i>
-                </div> */}
-              </div>
-            ) : null}
+            <div className="imagess-preview">
+              {getProfileImageUrl ? (
+                <div className="d-inline-block img-box position-relative">
+                  <Image
+                    src={getProfileImageUrl}
+                    alt={"name"}
+                    width={80}
+                    height={80}
+                  />
+                </div>
+              ) : null}
+            </div>
           </div>
           <div className="form-col">
             <label htmlFor="product_gallary" className="form-label">
@@ -319,24 +320,24 @@ const AddProductForm = ({ data }) => {
             <div className="profile-pop" onClick={hanldeGallary}>
               <UploadIcon />
             </div>
-            <div className="d-flex w-100 flex-wrap mt-2">
+            <div className="d-flex w-100 flex-wrap mt-2 imagess-preview">
               {gallaryImagesUrl.length >= 1
                 ? gallaryImagesUrl.map((element) => {
                     return (
                       <div
-                        className="profile-img"
+                        className="d-inline-block img-box position-relative"
                         onClick={() => hanldeRemoveImage(element.id)}
                         key={element.id}
                       >
+                        <div className="deletepic">
+                          <i className="fa-solid fa-trash-can"></i>
+                        </div>
                         <Image
                           src={element.url}
-                          className="img-fluid"
-                          alt="al"
-                          fill
+                          alt={"name"}
+                          width={80}
+                          height={80}
                         />
-                        <div className="close-icon">
-                          <i className="fa-solid fa-xmark"></i>
-                        </div>
                       </div>
                     );
                   })

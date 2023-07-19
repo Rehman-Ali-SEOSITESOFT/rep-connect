@@ -247,7 +247,7 @@ const UpdateProduct = ({ data, product }) => {
               >
                 <i className="fa-solid fa-trash-can"></i>{" "}
               </div>
-              <Image src={profilImg} alt="" width={150} height={150} />
+              <Image src={profilImg} alt="" width={80} height={80} />
             </div>
           </div>
         </div>
@@ -276,12 +276,7 @@ const UpdateProduct = ({ data, product }) => {
                   >
                     <i className="fa-solid fa-trash-can"></i>
                   </div>
-                  <Image
-                    src={e.image.url}
-                    alt={e.id}
-                    width={150}
-                    height={150}
-                  />
+                  <Image src={e.image.url} alt={e.id} width={80} height={80} />
                 </div>
               );
             })}
