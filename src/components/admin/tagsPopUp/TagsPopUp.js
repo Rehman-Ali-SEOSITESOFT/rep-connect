@@ -167,10 +167,12 @@ const TagsPopUp = ({
       }
     } else {
       let arr = [];
+      console.log(multiImagesState);
       multiImagesState.forEach((e) => arr.push(e.id));
       setSelectedImage(arr);
     }
   }, []);
+
   return (
     <>
       <section className="tags_popup_main_wrapper">

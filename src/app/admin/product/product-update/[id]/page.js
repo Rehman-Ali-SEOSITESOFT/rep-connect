@@ -45,7 +45,7 @@ const page = ({ params }) => {
               <h4>Invalid Id {id}</h4>
             ) : (
               <UpdateProduct
-                data={state.productCategory}
+                allCategory={state.productCategory}
                 product={state.singleproduct}
               />
             )}

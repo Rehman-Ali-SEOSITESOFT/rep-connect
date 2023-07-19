@@ -29,10 +29,8 @@ const AddProductForm = ({ data }) => {
   const [sinleProfileUpoload, singleProfileUplaodPopUp] = useState(false);
   const [getProfileImageId, setGetProfileImageId] = useState([]);
   const [getProfileImageUrl, setGetProfileImageUrl] = useState("");
-
   const [gallaryImagesUrl, setGallaryImagesUrl] = useState([]);
   const [isSingle, setIsSingle] = useState(false);
-  const [selectdropdow, setselectdropdow] = useState(false);
 
   const hanldeChanged = (event) => {
     const name = event.target.name;
