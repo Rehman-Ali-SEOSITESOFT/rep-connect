@@ -5,16 +5,15 @@ import Image from "next/image";
 import Multiselect from "multiselect-react-dropdown";
 import SunEditor from "suneditor-react";
 import { ToastContainer, toast } from "react-toastify";
-import { product } from "@/redux/slices/productSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import UploadIcon from "../../uploadIcons/UploadIcon";
-import bus from "../../../../assets/images/Courses/business-development.jpg";
+
 import TagsPopUp from "../../tagsPopUp/TagsPopUp";
 
 const AddProductForm = ({ data }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
+
   const item = data;
   const [discription, setDiscription] = useState("");
   const [addProduct, setAddProduct] = useState({
@@ -30,7 +29,6 @@ const AddProductForm = ({ data }) => {
   const [sinleProfileUpoload, singleProfileUplaodPopUp] = useState(false);
   const [getProfileImageId, setGetProfileImageId] = useState([]);
   const [getProfileImageUrl, setGetProfileImageUrl] = useState("");
-
   const [gallaryImagesUrl, setGallaryImagesUrl] = useState([]);
   const [isSingle, setIsSingle] = useState(false);
 
@@ -40,99 +38,100 @@ const AddProductForm = ({ data }) => {
     setAddProduct({ ...addProduct, [name]: value });
   };
 
+  const hanldeAddProductAPI = (body) => {
+    setIsLoading(true);
+    fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setIsLoading(false);
+        if (data.success === 1) {
+          toast.success("Product add successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          setAddProduct({
+            product_name: "",
+            quantity: "",
+            price: "",
+            sale_price: "",
+            short_description: "",
+          });
+          setGetProfileImageUrl("");
+          setGallaryImagesUrl([]);
+          setDiscription("");
+          setCategories([]);
+
+          setGetProfileImageId([]);
+
+          setTimeout(() => {
+            router.push("/admin/product");
+          }, 1500);
+        } else {
+          toast.error("Something Wrong", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
+  };
   const hanldeSubmit = (e) => {
-    // setIsLoading(true);
     e.preventDefault();
-    let postOrder = {
-      name: addProduct.product_name,
-      short_disc: addProduct.short_description,
-      disc: discription,
-      category: categories[0],
-      regular_price: addProduct.price,
-      sale_price: addProduct.sale_price,
-      stock_quantity: addProduct.quantity,
-      cover_image: getProfileImageId[0],
-      gallary: gallaryImagesUrl,
-    };
+    if (
+      !addProduct.product_name ||
+      !addProduct.short_description ||
+      !discription ||
+      !categories[0] ||
+      !addProduct.price ||
+      !addProduct.quantity ||
+      !addProduct.sale_price ||
+      !getProfileImageId
+    ) {
+      toast.error("all filed are required 😛😛", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      let gallary = [];
+      gallaryImagesUrl.forEach((e) => gallary.push(e.id));
+      let postOrder = {
+        name: addProduct.product_name,
+        short_disc: addProduct.short_description,
+        disc: discription,
+        category: categories[0],
+        regular_price: addProduct.price,
+        sale_price: addProduct.sale_price,
+        stock_quantity: addProduct.quantity,
+        cover_image: getProfileImageId[0],
+        gallary: gallary,
+      };
 
-    console.log("add product", postOrder);
-    // console.log(postOrder);
-    // const formData = new FormData();
-    // formData.append("name", addProduct.product_name);
-    // formData.append("stock_quantity", addProduct.quantity);
-    // formData.append("regular_price", addProduct.price);
-    // formData.append("sale_price", addProduct.sale_price);
-    // formData.append("short_disc", addProduct.short_description);
-    // formData.append("disc", discription);
-    // formData.append("product_profile", productProfile);
-    // formData.append("category", categories[0]);
-    // for (let i = 0; i < productGallary.length; i++) {
-    //   formData.append("gallary", productGallary[i]);
-    // }
-    // fetch(process.env.NEXT_PUBLIC_URL + "api/product", {
-    //   method: "POST",
-    //   headers: {
-    //     // "Content-Type": "application/json",
-    //   },
-    //   body: formData,
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.success === 1) {
-    //       dispatch(product());
-    //       toast.success("Product add successfully", {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //       });
-    //       setAddProduct({
-    //         product_name: "",
-    //         quantity: "",
-    //         price: "",
-    //         sale_price: "",
-    //         short_description: "",
-    //       });
-    //       setDiscription(null);
-    //       setCategories("");
-    //       setIsLoading(false);
-    //       setTimeout(() => {
-    //         router.push("/admin/product");
-    //       }, 1500);
-    //     } else {
-    //       setIsLoading(false);
-    //       toast.error(data.message, {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //       });
-    //     }
-
-    //     if (data.success === 0) {
-    //       setIsLoading(false);
-    //       toast.error(data.error.message, {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //       });
-    //     }
-    //   });
+      // POST FUNCTION
+      hanldeAddProductAPI(postOrder);
+    }
   };
 
   // FILTER GETEGORY ID
@@ -141,30 +140,6 @@ const AddProductForm = ({ data }) => {
     arr.filter((p_item) => newarr.push(p_item._id));
     setCategories(newarr);
   };
-  // const hanldeCategory = (arr, item) => {
-  // let newarr = [];
-  // arr.filter((p_item) => newarr.push(p_item._id));
-  // setCategories(newarr);
-  //   filterChategoryFuction(arr);
-  // };
-  // const hanldeRemove = (arr, item) => {
-  //   filterChategoryFuction(arr);
-  // let newarr = [];
-  // arr.filter((p_item) => newarr.push(p_item._id));
-  // setCategories(newarr);
-  // };
-
-  // const hanldeChangedImages = (event) => {
-  //   if (event.target.name === "product_image") {
-  //     setProductProfile(event.target.files[0]);
-  //   } else {
-  //     sePproductGallary(event.target.files);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   setIsLoading(false);
-  // }, []);
 
   const hanldeSingle = () => {
     setIsSingle(true);
@@ -199,10 +174,8 @@ const AddProductForm = ({ data }) => {
           getImageee={setGetProfileImageUrl}
           isSingle={isSingle}
           getGllaryUrl={setGallaryImagesUrl}
-
           singleImageState={getProfileImageId}
           multiImagesState={gallaryImagesUrl}
-        
         />
       )}
 
@@ -326,10 +299,12 @@ const AddProductForm = ({ data }) => {
                     return (
                       <div
                         className="d-inline-block img-box position-relative"
-                        onClick={() => hanldeRemoveImage(element.id)}
                         key={element.id}
                       >
-                        <div className="deletepic">
+                        <div
+                          className="deletepic"
+                          onClick={() => hanldeRemoveImage(element.id)}
+                        >
                           <i className="fa-solid fa-trash-can"></i>
                         </div>
                         <Image
@@ -370,6 +345,7 @@ const AddProductForm = ({ data }) => {
             <div className="product-long-desction">
               <SunEditor
                 onChange={setDiscription}
+                setContents={discription}
                 setOptions={{
                   height: 300,
                   buttonList: [
