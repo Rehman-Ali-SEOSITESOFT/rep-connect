@@ -131,7 +131,7 @@ const Sidebar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/https://carolinefifemd.com/?src=mgdx"
+                      href="https://carolinefifemd.com/?src=mgdx"
                       target="blank"
                     >
                       <span>Caroline Fife’s BLOG</span>
