@@ -15,7 +15,7 @@ const page = () => {
             <div className="right">
               <Link className="back-to-product" href="/admin/product">
                 <span>
-                  <i class="fa-solid fa-arrow-left-long"></i>
+                  <i className="fa-solid fa-arrow-left-long"></i>
                 </span>
                 back to products
               </Link>
