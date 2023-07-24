@@ -30,6 +30,8 @@ const Page = () => {
   const [imageUrrl, setImageUrrl] = useState([]);
   const [getUrlImage, setGetUrlImage] = useState("");
   const [error, setError] = useState(false);
+  const [getProfileImageId, setGetProfileImageId] = useState([]);
+  const [gallaryImagesUrl, setGetGallaryImagesUrl] = useState([]);
   const handleChange = (e) => {
     setPostData({
       ...postData,
@@ -128,6 +130,8 @@ const Page = () => {
             isSingle={true}
             getImageee={setGetUrlImage}
             getImageId={setImage}
+            singleImageState={getProfileImageId}
+            multiImagesState={gallaryImagesUrl}
           />
         ) : (
           ""

@@ -130,7 +130,10 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link
+                      href="https://carolinefifemd.com/?src=mgdx"
+                      target="blank"
+                    >
                       <span>Caroline Fife’s BLOG</span>
                     </Link>
                   </li>
