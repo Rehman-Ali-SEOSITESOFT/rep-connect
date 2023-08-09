@@ -17,6 +17,8 @@ const CheckoutBillingDetail = () => {
   const [orderNotes, setOrderNotes] = useState(null);
   const [orderCompleteLoading, setOrderCompleteLoading] = useState(false);
   const state = useSelector((state) => state.cartItem);
+  const [counties, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
   const [billingValidated, setBillingValidated] = useState({
     firstname: false,
     lastname: false,
@@ -92,11 +94,20 @@ const CheckoutBillingDetail = () => {
 
   const hanldeBillingChange = (event) => {
     const { name, value } = event.target;
+
     setBillingAddress({ ...billignAddress, [name]: value });
     if (value.trim().length == 0) {
       setBillingValidated({ ...billingValidated, [name]: true });
     } else if (value.trim().length > 0) {
       setBillingValidated({ ...billingValidated, [name]: false });
+    }
+
+    if (name === "countryregion") {
+      counties.filter((el) => {
+        if (el.country === value) {
+          setStates(el.states);
+        }
+      });
     }
   };
   const hanldeShippingChange = (event) => {
@@ -213,47 +224,48 @@ const CheckoutBillingDetail = () => {
 
   // ORDER API DELETE FETCH FUNCTION
   const orderPostAPI = (body) => {
-    fetch(`${process.env.NEXT_PUBLIC_URL}api/order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": token(),
-      },
-      body: JSON.stringify(body),
-    })
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((data) => {
-        if (data.success === 1) {
-          toast.success("Order Placed", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-          setOrderCompleteLoading(false);
-          deletProduct();
-        } else {
-          toast.error("Something went Wrong Please try again 🔥", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        }
-      });
+    console.log(body);
+    // fetch(`${process.env.NEXT_PUBLIC_URL}api/order`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "x-auth-token": token(),
+    //   },
+    //   body: JSON.stringify(body),
+    // })
+    //   .then((resp) => {
+    //     return resp.json();
+    //   })
+    //   .then((data) => {
+    //     if (data.success === 1) {
+    //       toast.success("Order Placed", {
+    //         position: "top-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //       });
+    //       setOrderCompleteLoading(false);
+    //       deletProduct();
+    //     } else {
+    //       toast.error("Something went Wrong Please try again 🔥", {
+    //         position: "top-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //       });
+    //     }
+    //   });
   };
   const hanldeOrdedConfrim = (order) => {
-    setOrderCompleteLoading(true);
+    // setOrderCompleteLoading(true);
 
     /// CHECK SHIPPING ADDRESS IS EXISTED OR NOT
     let address;
@@ -294,6 +306,21 @@ const CheckoutBillingDetail = () => {
     //   ORDER CREATED FETACH FUCTION
     orderPostAPI(orders);
   };
+
+  const hanldeGETALLCountry = () => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/country`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === 1) {
+          setCountries(data.data.country);
+        }
+      });
+  };
+  useEffect(() => {
+    hanldeGETALLCountry();
+  }, []);
 
   return (
     <>
@@ -439,20 +466,16 @@ const CheckoutBillingDetail = () => {
                       value={billignAddress.countryregion}
                       onChange={hanldeBillingChange}
                     >
-                      <option value="AF">Afghanistan</option>
-                      <option value="AX">Åland Islands</option>
-                      <option value="AL">Albania</option>
-                      <option value="DZ">Algeria</option>
-                      <option value="AS">American Samoa</option>
-                      <option value="AD">Andorra</option>
-                      <option value="AO">Angola</option>
-                      <option value="AI">Anguilla</option>
-                      <option value="AQ">Antarctica</option>
-                      <option value="AG">Antigua and Barbuda</option>
-                      <option value="AR">Argentina</option>
-                      <option value="AM">Armenia</option>
-                      <option value="AW">Aruba</option>
-                      <option value="AU">Australia</option>
+                      <option value={null}>-- select county ---</option>
+                      {counties.length > 0
+                        ? counties.map((element, i) => {
+                            return (
+                              <option key={i} value={element.country}>
+                                {element.country}
+                              </option>
+                            );
+                          })
+                        : null}
                     </select>
                     {billingValidated.countryregion ? (
                       <div style={{ color: "red" }}>
@@ -498,14 +521,23 @@ const CheckoutBillingDetail = () => {
                       value={billignAddress.statecountry}
                       onChange={hanldeBillingChange}
                     >
-                      <option value="AGN">Agusan del Norte</option>
-                      <option value="AGS">Agusan del Sur</option>
-                      <option value="AKL">Aklan</option>
-                      <option value="ALB">Albay</option>
-                      <option value="ANT">Antique</option>
-                      <option value="APA">Apayao</option>
-                      <option value="AUR">Aurora</option>
-                      <option value="BAS">Basilan</option>
+                      {states.length > 0
+                        ? states.map((ele, i) => {
+                            return (
+                              <option key={i} value={ele}>
+                                {ele}
+                              </option>
+                            );
+                          })
+                        : ""}
+                      <option
+                        className="other"
+                        onClick={() => {
+                          console.log("other ");
+                        }}
+                      >
+                        other
+                      </option>
                     </select>
                     {billingValidated.statecountry ? (
                       <div style={{ color: "red" }}>
