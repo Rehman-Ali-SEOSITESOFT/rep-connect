@@ -1,11 +1,10 @@
-import Spinner from "@/components/spinner/Spinner";
 import React from "react";
 
 const Loading = () => {
   return (
-    <>
-      <Spinner />
-    </>
+    <div>
+      <p>request and kits</p>
+    </div>
   );
 };
 
