@@ -8,6 +8,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getTags } from "@/redux/slices/tagLibrary";
 import Spinner from "@/components/spinner/Spinner";
+import { tagsDataAll } from "@/redux/slices/tagsDataAll";
 const AddNew = ({ _hndleClsosee }) => {
   const dispatch = useDispatch();
   const [images, setImages] = useState([]);
@@ -25,6 +26,7 @@ const AddNew = ({ _hndleClsosee }) => {
   };
   const _handlePopData = (e) => {
     e.preventDefault();
+    const apiEndpoint = `https://anxious-foal-shift.cyclic.app/api/media/all`;
     setLoading(true);
     if (selected.length < 1 || simpleImage.length < 1) {
       // toast.error(`Please fill all fields`);
@@ -49,6 +51,7 @@ const AddNew = ({ _hndleClsosee }) => {
         })
         .then((resp) => {
           dispatch(getTags());
+          dispatch(tagsDataAll(apiEndpoint));
           console.log(resp.data.success);
           setClosePop(_hndleClsosee);
           setLoading(false);

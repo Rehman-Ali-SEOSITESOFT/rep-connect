@@ -65,9 +65,7 @@ const Sidebar = () => {
           onClick={handleDropDown}
           className="layout"
           style={DropDown ? { display: "block" } : { display: "none" }}
-        >
-          {" "}
-        </div>
+        ></div>
         <div>
           <div className="sidebar--top">
             <div className="top--section--top">

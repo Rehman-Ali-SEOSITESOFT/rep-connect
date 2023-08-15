@@ -9,6 +9,7 @@ const page = () => {
   const state = useSelector((state) => state.tags);
   const [addItem, setAddItem] = useState(false);
   const [tabNames, setTabsNames] = useState([]);
+
   const _handleAddNew = () => {
     console.log("handle new click is pressed");
     setAddItem(true);
