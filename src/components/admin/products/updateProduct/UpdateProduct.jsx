@@ -11,8 +11,10 @@ import { useSelector } from "react-redux";
 import UploadIcon from "../../uploadIcons/UploadIcon";
 import Spinner from "@/components/spinner/Spinner";
 import TagsPopUp from "../../tagsPopUp/TagsPopUp";
+import { useRouter } from "next/navigation";
 
 const UpdateProduct = ({ allCategory, product }) => {
+  const router = useRouter();
   const item = allCategory;
   // console.log(product);
   const [discription, setDiscription] = useState("");
@@ -24,11 +26,6 @@ const UpdateProduct = ({ allCategory, product }) => {
     short_description: "",
   });
   const [categories, setCategories] = useState([]);
-  // const [productProfile, setProductProfile] = useState("");
-  // const [profilImgId, setPrfileImgId] = useState([]);
-  // const [profilImgUrl, setPrfileImgUrl] = useState("");
-  // const [productGallary, sePproductGallary] = useState([]);
-  // const [gallaryImages, setGallaryImages] = useState([]);
 
   const hanldeChanged = (event) => {
     const name = event.target.name;
@@ -38,7 +35,6 @@ const UpdateProduct = ({ allCategory, product }) => {
 
   // FILTER GETEGORY ID
   const filterChategoryFuction = (arr) => {
-    console.log(arr);
     let newarr = [];
     arr.filter((p_item) =>
       newarr.push({
@@ -102,28 +98,48 @@ const UpdateProduct = ({ allCategory, product }) => {
       },
     ]);
   };
+
+  const updatePRDOCUTapi = (body) => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/product/${product.data._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setIsLoading(false);
+        if (data.success === 1) {
+          toast.success("Product Updated ");
+        } else {
+          toast.error("Something Wrong ");
+        }
+      });
+  };
   const hanldeSubmit = (e) => {
     e.preventDefault();
-
-    // gallaryImages.forEach((e) => gallary.push(e.id));
+    setIsLoading(true);
+    let gallary = [];
+    gallaryImagesUrl.forEach((e) => gallary.push(e.id));
     let postOrder = {
       name: addProduct.product_name,
       short_disc: addProduct.short_description,
       disc: discription,
-      category: categories[0],
+      category: categories[0]._id,
       regular_price: addProduct.price,
       sale_price: addProduct.sale_price,
       stock_quantity: addProduct.quantity,
-      cover_image: getProfileImageId,
-      gallary: gallaryImagesUrl,
+      cover_image: getProfileImageId[0],
+      gallary: gallary,
     };
-
-    console.log(postOrder);
+    updatePRDOCUTapi(postOrder);
   };
 
   useEffect(() => {
     hanldeGETsinlgeProduct();
   }, []);
+
   return (
     <>
       {isLoading && (
