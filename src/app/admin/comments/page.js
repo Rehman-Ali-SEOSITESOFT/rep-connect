@@ -1,8 +1,9 @@
 "use client";
 import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import style from "./Comments.module.css";
 import dynamic from "next/dynamic";
+
 const CommentsTable = dynamic(
   () => import("@/components/admin/commentsTable/CommentsTable"),
   {
@@ -20,6 +21,7 @@ const page = () => {
   };
   return (
     <>
+      {/* <Suspense fallback={<Loading />}> */}
       <div className={style.comments_wrapper}>
         <div className="container-fluid">
           <div className="row">
@@ -60,6 +62,7 @@ const page = () => {
           </div>
         </div>
       </div>
+      {/* </Suspense> */}
     </>
   );
 };

@@ -20,7 +20,9 @@ import Admin_Header from "@/layout/admin/header/Admin_Header";
 import Admin_sidebar from "@/layout/admin/sidebar/Admin_sidebar";
 import AdminChildren from "@/components/admin/AdminChildren";
 import "suneditor/dist/css/suneditor.min.css";
-import Loading from "./Loading";
+
+import { Suspense } from "react";
+
 export default function RootLayout({ children, loading }) {
   const path = usePathname();
 
@@ -82,7 +84,7 @@ export default function RootLayout({ children, loading }) {
                   }
                 >
                   <div className="d-flex flex-column conte-min-height">
-                    {loading && <Loading />}
+                    {/* {loading && <Loading />} */}
                     {children}
                   </div>
 
