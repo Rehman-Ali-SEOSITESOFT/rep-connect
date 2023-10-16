@@ -179,6 +179,7 @@ const AddProductForm = ({ data }) => {
         />
       )}
 
+    
       <form onSubmit={hanldeSubmit} className="add-product-form">
         <div className="pro-form-row name_pro">
           <div className="form-col">
@@ -320,7 +321,6 @@ const AddProductForm = ({ data }) => {
             </div>
           </div>
         </div>
-
         <div className="disc-form-row">
           <div className="form-col">
             <label
