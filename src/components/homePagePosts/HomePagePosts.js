@@ -4,7 +4,7 @@ import "./HomePagePosts.css";
 import Link from "next/link";
 const HomePagePosts = ({ item, index }) => {
   console.log(item, "<========= item");
-  
+
   return (
     <>
       <div className="post_wrapper_inner">

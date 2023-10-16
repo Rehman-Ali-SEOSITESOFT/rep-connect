@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import style from "./dashboard.module.css";
 import AdminBreadCrums from "@/components/admin/adminBreadcrums/AdminBreadCrums";
 import RecentTransection from "@/components/admin/recentTransection/RecentTransection";
@@ -15,6 +15,7 @@ import DashBoardBilling from "@/components/admin/dashBoardBilling/DashBoardBilli
 import SalesValue from "@/components/admin/salesValue/SalesValue";
 import ProfitableCat from "@/components/admin/profitableCat/ProfitableCat";
 import dynamic from "next/dynamic";
+// import Loading from "./loading/Loading";
 
 const DashBoardTable = dynamic(
   () => import("@/components/admin/dashBoardTable/DashBoardTable"),
@@ -135,6 +136,7 @@ const Page = () => {
   // const dispatch = useDispatch();
 
   return (
+    // <Suspense fallback={<Loading />}>
     <div className={style.dashboard_wrapper}>
       <div className="container-fluid">
         <div className="row">
@@ -455,6 +457,7 @@ const Page = () => {
         {/* fourth row ends here */}
       </div>
     </div>
+    // </Suspense>
   );
 };
 

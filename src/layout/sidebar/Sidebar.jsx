@@ -65,9 +65,7 @@ const Sidebar = () => {
           onClick={handleDropDown}
           className="layout"
           style={DropDown ? { display: "block" } : { display: "none" }}
-        >
-          {" "}
-        </div>
+        ></div>
         <div>
           <div className="sidebar--top">
             <div className="top--section--top">
@@ -155,19 +153,28 @@ const Sidebar = () => {
                   </li>
 
                   <li>
-                    <Link href="/">
+                    <Link
+                      href="https://employees.microgendx.com/profile/login/?redirect_to=https://employees.microgendx.com/download/company-org-chart/"
+                      target="blank"
+                    >
                       <span>Company Org Chart</span>
                     </Link>
                   </li>
 
                   <li>
-                    <Link href="/">
+                    <Link
+                      href="https://employees.microgendx.com/profile/login/"
+                      target="blank"
+                    >
                       <span>Company Directory</span>
                     </Link>
                   </li>
 
                   <li>
-                    <Link href="/employee-connect">
+                    <Link
+                      href="https://employees.microgendx.com/profile/login/?redirect_to=https://employees.microgendx.com/"
+                      target="blank"
+                    >
                       <span>EmployeeConnect</span>
                     </Link>
                   </li>

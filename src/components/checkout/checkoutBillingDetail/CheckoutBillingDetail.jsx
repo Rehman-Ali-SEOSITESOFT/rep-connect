@@ -17,6 +17,11 @@ const CheckoutBillingDetail = () => {
   const [orderNotes, setOrderNotes] = useState(null);
   const [orderCompleteLoading, setOrderCompleteLoading] = useState(false);
   const state = useSelector((state) => state.cartItem);
+  const [counties, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [otherBillingState, setOrtherBillingState] = useState(true);
+  const [otherShippinedState, setOtherShippiedState] = useState(true);
+
   const [billingValidated, setBillingValidated] = useState({
     firstname: false,
     lastname: false,
@@ -71,6 +76,7 @@ const CheckoutBillingDetail = () => {
     // ship_ordernotes: "",
     ship_address: "",
   });
+  const [ship_states, ship_setStates] = useState([]);
   const dispatch = useDispatch();
 
   const deletProduct = () => {
@@ -92,20 +98,183 @@ const CheckoutBillingDetail = () => {
 
   const hanldeBillingChange = (event) => {
     const { name, value } = event.target;
-    setBillingAddress({ ...billignAddress, [name]: value });
-    if (value.trim().length == 0) {
+
+    // setBillingAddress({ ...billignAddress, [name]: value });
+    if (value.trim().length === 0) {
       setBillingValidated({ ...billingValidated, [name]: true });
     } else if (value.trim().length > 0) {
       setBillingValidated({ ...billingValidated, [name]: false });
     }
+
+    if (name === "countryregion") {
+      if (value !== "selectcounty") {
+        counties.filter((el) => {
+          if (el.country === value) {
+            setStates(el.states);
+            if (el.states.length > 0) {
+              setOrtherBillingState(false);
+            } else {
+              setOrtherBillingState(true);
+            }
+          }
+
+          // if (el) {
+          //   setOrtherBillingState(false);
+          // } else {
+          //   setOrtherBillingState(true);
+          // }
+        });
+      }
+      if (value === "selectcounty") {
+        setBillingValidated({ ...billingValidated, statecountry: true });
+        setStates([]);
+      }
+      let obj = {
+        ...billignAddress,
+        statecountry: "",
+      };
+
+      setBillingAddress({ ...obj, [name]: value });
+
+      // if (name === "statecountry") {
+      //   setOrtherBillingState(true);
+      // } else {
+      //   if (value === "other") {
+      //     setOrtherBillingState(true);
+      //   }
+
+      // }
+      // } else if (name === "statecountry") {
+      //   if (value === "other") {
+      //     setOrtherBillingState(true);
+      //   }
+    } else {
+      //   else if (name === "statecountry") {
+      //   // if (value === "other") {
+      //   //   setOrtherBillingState(false);
+      //   // } else {
+      //   //   setOrtherBillingState(true);
+      //   // }
+      //   // setBillingAddress({ ...billignAddress, [name]: value });
+      // }
+
+      if (name === "statecountry") {
+        if (value === "other") {
+          setOrtherBillingState(true);
+          // setOrtherBillingStateDisabled(true);
+        } else {
+          setOrtherBillingState(false);
+          // setOrtherBillingStateDisabled(false);
+        }
+        // } else {
+        //   // setOrtherBillingState(false);
+        // }
+
+        //  else {
+        //   setOrtherBillingState(false);
+        // }
+        // if (el.states.length > 0) {
+        // } else {
+        //   setOrtherBillingState(true);
+        // }
+      }
+      setBillingAddress({ ...billignAddress, [name]: value });
+    }
+    // setBillingAddress({ ...billignAddress, [name]: value });
+    // if (name === "countryregion") {
+    //   if ("selectcounty" === value) {
+    //     setBillingValidated({ ...billingValidated, [name]: true });
+    //     setStates([]);
+    //     setBillingAddress({ ...billignAddress, [name]: value });
+    //   }
+    //   setBillingAddress({ ...billignAddress, statecountry: "" });
+
+    //   counties.filter((el) => {
+    //     if (el.country === value) {
+    //       setStates(el.states);
+    //     }
+    //   });
+    // }
+
+    // if (name === "statecountry") {
+    //   if ("selectstate" === value) {
+    //     setBillingValidated({ ...billingValidated, [name]: true });
+    //     // setStates([]);
+    //     setBillingAddress({ ...billignAddress, [name]: value });
+    //   }
+    // }
+    // if (name === "statecountry") {
+    //   setBillingValidated({ ...billingValidated, [name]: true });
+    //   // setStates([]);
+    //   setBillingAddress({ ...billignAddress, [name]: value });
+    // }
+  };
+  const hanldeBillingChangeInput = (e) => {
+    const { name, value } = e.target;
+    setBillingAddress({ ...billignAddress, [name]: value });
+  };
+  const hanldeShippedChangeInput = (e) => {
+    const { name, value } = e.target;
+    setShippingAddress({ ...shippingAddress, [name]: value });
   };
   const hanldeShippingChange = (event) => {
     const { name, value } = event.target;
-    setShippingAddress({ ...shippingAddress, [name]: value });
+    // setShippingAddress({ ...shippingAddress, [name]: value });
     if (value.trim().length == 0) {
       setShippingValidated({ ...shippingValidated, [name]: true });
     } else if (value.trim().length > 0) {
       setShippingValidated({ ...shippingValidated, [name]: false });
+    }
+
+    if (name === "ship_countryregion") {
+      if (value !== "ship_county") {
+        counties.filter((el) => {
+          if (el.country === value) {
+            ship_setStates(el.states);
+            if (el.states.length > 0) {
+              setOtherShippiedState(false);
+            } else {
+              setOtherShippiedState(true);
+            }
+          }
+        });
+        // counties.filter((el) => {
+        //   if (el.country === value) {
+        //     setStates(el.states);
+        //     if (el.states.length > 0) {
+        //       setOrtherBillingState(false);
+        //     } else {
+        //       setOrtherBillingState(true);
+        //     }
+        //   })        // if (value === "other") {
+        //   setOrtherBillingState(true);
+        //   // setOrtherBillingStateDisabled(true);
+        // } else {
+        //   setOrtherBillingState(false);
+        //   // setOrtherBillingStateDisabled(false);
+        // }
+      }
+      if (value === "ship_state") {
+        setShippingValidated({ ...shippingValidated, ship_statecountry: true });
+        ship_setStates([]);
+      }
+      let obj = {
+        ...shippingAddress,
+        ship_statecountry: "",
+      };
+
+      setShippingAddress({ ...obj, [name]: value });
+    } else {
+      if (name === "ship_statecountry") {
+        if (value === "other") {
+          setOtherShippiedState(true);
+          // setOrtherBillingStateDisabled(true);
+        } else {
+          setOtherShippiedState(false);
+          // setOrtherBillingStateDisabled(false);
+        }
+      }
+      setShippingAddress({ ...shippingAddress, [name]: value });
     }
   };
   const hanldesubmitorder = (e) => {
@@ -113,6 +282,7 @@ const CheckoutBillingDetail = () => {
     let error = [];
     // STEP 1 : ERROR IS FILED IS EMPTY THEN SHOW ERROR MESSAGE
     let objeError = { ...billingValidated };
+
     for (const key in billignAddress) {
       if (!billignAddress[key]) {
         objeError[key] = true;
@@ -121,6 +291,24 @@ const CheckoutBillingDetail = () => {
       setErr(error);
       setBillingValidated(objeError);
     }
+
+    // if (billignAddress.countryregion === "selectcounty") {
+    //   error.push(billignAddress.countryregion);
+    //   setBillingValidated({ ...objeError, countryregion: true });
+    //   setErr(error);
+    // } else if (billignAddress.statecountry === "selectstate") {
+    //   error.push(billignAddress.statecountry);
+    //   setBillingValidated({ ...objeError, statecountry: true });
+    //   setErr(error);
+    // } else {
+
+    // }
+
+    // if (!billingValidated.countryregion) {
+    //   setBillingValidated({ ...objeError, countryregion: true });
+    // } else if (!billingValidated.statecountry) {
+    //   setBillingValidated({ ...objeError, statecountry: true });
+    // }
 
     //// STEP 2 : IS SHIIPING ADDRESS IS TRUE THEN SHOW SHIPPING ADDRESS ERROR
     if (address) {
@@ -174,7 +362,13 @@ const CheckoutBillingDetail = () => {
         billignAddress.email &&
         billignAddress.address
       ) {
-        hanldeOrdedConfrim({ shipping: 0, billing_address });
+        if (!billingValidated.countryregion || !billingValidated.statecountry) {
+          hanldeOrdedConfrim({ shipping: 0, billing_address });
+          console.log(
+            billingValidated.countryregion,
+            billingValidated.statecountry
+          );
+        }
       }
     } else {
       // STEP4 : IF SHIIPING ADDRES HAS THEN SEND BILLING AND SHIPPING BOTH ADDRESS
@@ -195,6 +389,8 @@ const CheckoutBillingDetail = () => {
       }
     }
     if (error.length >= 1) window.scrollTo(0, 150);
+
+    //////
   };
 
   const handleCheckboxChange = (event) => {
@@ -254,8 +450,7 @@ const CheckoutBillingDetail = () => {
   };
   const hanldeOrdedConfrim = (order) => {
     setOrderCompleteLoading(true);
-
-    /// CHECK SHIPPING ADDRESS IS EXISTED OR NOT
+    // / CHECK SHIPPING ADDRESS IS EXISTED OR NOT
     let address;
     if (order.shipping === 1) {
       address = {
@@ -268,7 +463,6 @@ const CheckoutBillingDetail = () => {
         shipping_address: order.billing_address,
       };
     }
-
     let prod = [];
     state.data.forEach((element) => {
       prod.push({
@@ -290,10 +484,26 @@ const CheckoutBillingDetail = () => {
       payment_method: "COD",
       order_notes: orderNotes,
     };
-
-    //   ORDER CREATED FETACH FUCTION
+    // console.log(address);
+    // ORDER CREATED FETACH FUCTION
     orderPostAPI(orders);
   };
+
+  const hanldeGETALLCountry = () => {
+    fetch(`${process.env.NEXT_PUBLIC_URL}api/country`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === 1) {
+          setCountries(data.data.country);
+          // ship_setStates(data.data.country);
+        }
+      });
+  };
+  useEffect(() => {
+    hanldeGETALLCountry();
+  }, []);
 
   return (
     <>
@@ -418,7 +628,7 @@ const CheckoutBillingDetail = () => {
                       value={billignAddress.address}
                       onChange={hanldeBillingChange}
                     />
-                    {billingValidated.company_name ? (
+                    {billingValidated.address ? (
                       <div style={{ color: "red" }}>
                         Address Name can not be empty
                       </div>
@@ -436,23 +646,21 @@ const CheckoutBillingDetail = () => {
                       className={`form-select ${
                         billingValidated.countryregion ? "invalid" : ""
                       }`}
-                      value={billignAddress.countryregion}
+                      // value={billignAddress.countryregion}
                       onChange={hanldeBillingChange}
                     >
-                      <option value="AF">Afghanistan</option>
-                      <option value="AX">Åland Islands</option>
-                      <option value="AL">Albania</option>
-                      <option value="DZ">Algeria</option>
-                      <option value="AS">American Samoa</option>
-                      <option value="AD">Andorra</option>
-                      <option value="AO">Angola</option>
-                      <option value="AI">Anguilla</option>
-                      <option value="AQ">Antarctica</option>
-                      <option value="AG">Antigua and Barbuda</option>
-                      <option value="AR">Argentina</option>
-                      <option value="AM">Armenia</option>
-                      <option value="AW">Aruba</option>
-                      <option value="AU">Australia</option>
+                      <option value={"selectcounty"} disabled selected={true}>
+                        -- select county ---
+                      </option>
+                      {counties.length > 0
+                        ? counties.map((element, i) => {
+                            return (
+                              <option key={i} value={element.country}>
+                                {element.country}
+                              </option>
+                            );
+                          })
+                        : null}
                     </select>
                     {billingValidated.countryregion ? (
                       <div style={{ color: "red" }}>
@@ -489,24 +697,52 @@ const CheckoutBillingDetail = () => {
                     <label htmlFor="statecountry">
                       State / Country <span className="required">*</span>
                     </label>
-                    <select
-                      name="statecountry"
-                      id="statecountry"
-                      className={`form-select ${
-                        billingValidated.statecountry ? "invalid" : ""
-                      }`}
-                      value={billignAddress.statecountry}
-                      onChange={hanldeBillingChange}
-                    >
-                      <option value="AGN">Agusan del Norte</option>
-                      <option value="AGS">Agusan del Sur</option>
-                      <option value="AKL">Aklan</option>
-                      <option value="ALB">Albay</option>
-                      <option value="ANT">Antique</option>
-                      <option value="APA">Apayao</option>
-                      <option value="AUR">Aurora</option>
-                      <option value="BAS">Basilan</option>
-                    </select>
+                    {states.length > 0 ? (
+                      <select
+                        name="statecountry"
+                        id="statecountry"
+                        className={`form-select ${
+                          billingValidated.statecountry ? "invalid" : ""
+                        }`}
+                        // value={billignAddress.statecountry}
+                        onChange={hanldeBillingChange}
+                      >
+                        <option value="selectstate" selected disabled>
+                          --select state--
+                        </option>
+
+                        {states.map((ele, i) => {
+                          return (
+                            <option key={i} value={ele}>
+                              {ele}
+                            </option>
+                          );
+                        })}
+                        <option value={"other"}>other</option>
+                      </select>
+                    ) : null}
+
+                    {otherBillingState ? (
+                      <input
+                        className={`form-control ${
+                          billingValidated.statecountry ? "invalid" : ""
+                        }`}
+                        name="statecountry"
+                        value={billignAddress.statecountry}
+                        // disabled={otherBillingStateDisabled ? false : true}
+                        onChange={hanldeBillingChangeInput}
+                      />
+                    ) : null}
+                    {/* {otherBillingState && states.length < 0 ? (
+                      <input
+                        className={`form-control ${
+                          billingValidated.statecountry ? "invalid" : ""
+                        }`}
+                        name="statecountry"
+                        value={billignAddress.statecountry}
+                        onChange={hanldeBillingChange}
+                      />
+                    ) : null} */}
                     {billingValidated.statecountry ? (
                       <div style={{ color: "red" }}>
                         State/Country can not be empty
@@ -697,6 +933,33 @@ const CheckoutBillingDetail = () => {
                         <label htmlFor="countryregion" className="form-label">
                           Country / Region <span className="required">*</span>
                         </label>
+
+                        {/* <select
+                          name="countryregion"
+                          id="countryregion"
+                          className={`form-select ${
+                            billingValidated.countryregion ? "invalid" : ""
+                          }`}
+                          // value={billignAddress.countryregion}
+                          onChange={hanldeBillingChange}
+                        >
+                          <option
+                            value={"selectcounty"}
+                            disabled
+                            selected={true}
+                          >
+                            -- select county ---
+                          </option>
+                          {counties.length > 0
+                            ? counties.map((element, i) => {
+                                return (
+                                  <option key={i} value={element.country}>
+                                    {element.country}
+                                  </option>
+                                );
+                              })
+                            : null}
+                        </select> */}
                         <select
                           name="ship_countryregion"
                           id="countryregion"
@@ -705,23 +968,25 @@ const CheckoutBillingDetail = () => {
                               ? "invalid"
                               : ""
                           }`}
-                          value={shippingAddress.ship_countryregion}
+                          // value={shippingAddress.ship_countryregion}
                           onChange={hanldeShippingChange}
                         >
-                          <option value="AF">Afghanistan</option>
-                          <option value="AX">Åland Islands</option>
-                          <option value="AL">Albania</option>
-                          <option value="DZ">Algeria</option>
-                          <option value="AS">American Samoa</option>
-                          <option value="AD">Andorra</option>
-                          <option value="AO">Angola</option>
-                          <option value="AI">Anguilla</option>
-                          <option value="AQ">Antarctica</option>
-                          <option value="AG">Antigua and Barbuda</option>
-                          <option value="AR">Argentina</option>
-                          <option value="AM">Armenia</option>
-                          <option value="AW">Aruba</option>
-                          <option value="AU">Australia</option>
+                          <option
+                            value={"ship_county"}
+                            disabled
+                            selected={true}
+                          >
+                            -- select county ---
+                          </option>
+                          {counties.length > 0
+                            ? counties.map((element, i) => {
+                                return (
+                                  <option key={i} value={element.country}>
+                                    {element.country}
+                                  </option>
+                                );
+                              })
+                            : null}
                         </select>
                         {shippingValidated.ship_countryregion && address ? (
                           <div style={{ color: "red" }}>
@@ -758,7 +1023,7 @@ const CheckoutBillingDetail = () => {
                         <label htmlFor="statecountry">
                           State / Country <span className="required">*</span>
                         </label>
-                        <select
+                        {/* <select
                           name="ship_statecountry"
                           id="statecountry"
                           className={`form-select ${
@@ -775,7 +1040,46 @@ const CheckoutBillingDetail = () => {
                           <option value="APA">Apayao</option>
                           <option value="AUR">Aurora</option>
                           <option value="BAS">Basilan</option>
-                        </select>
+                        </select> */}
+                        {ship_states.length > 0 ? (
+                          <select
+                            name="ship_statecountry"
+                            id="statecountry"
+                            className={`form-select ${
+                              shippingValidated.ship_statecountry
+                                ? "invalid"
+                                : ""
+                            }`}
+                            // value={shippingAddress.ship_statecountry}
+                            onChange={hanldeShippingChange}
+                          >
+                            <option value="ship_state" selected disabled>
+                              --select state--
+                            </option>
+
+                            {ship_states.map((ele, i) => {
+                              return (
+                                <option key={i} value={ele}>
+                                  {ele}
+                                </option>
+                              );
+                            })}
+                            <option value={"other"}>other</option>
+                          </select>
+                        ) : null}
+                        {otherShippinedState ? (
+                          <input
+                            className={`form-control ${
+                              shippingValidated.ship_statecountry
+                                ? "invalid"
+                                : ""
+                            }`}
+                            name="ship_statecountry"
+                            value={shippingAddress.ship_statecountry}
+                            onChange={hanldeShippedChangeInput}
+                          />
+                        ) : null}
+
                         {shippingValidated.ship_statecountry && address ? (
                           <div style={{ color: "red" }}>
                             State/Country can not be empty

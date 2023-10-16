@@ -11,7 +11,7 @@ import Spinner from "@/components/spinner/Spinner";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getTags } from "@/redux/slices/tagLibrary";
-import { tagsDataAll } from "@/redux/slices/tagsDataAll";
+import { tagsDataAll, tagsDataAllSlice } from "@/redux/slices/tagsDataAll";
 import { usePathname } from "next/navigation";
 import emptycart from "../../../assets/images/empty/empty.gif";
 import Image from "next/image";
@@ -285,6 +285,7 @@ const MediaLibraryTabs = () => {
     dispatch(tagsDataAll(apiEndpoint));
   };
   const _handleDeleteButton = () => {
+    const apiEndpoint = `https://anxious-foal-shift.cyclic.app/api/media/all`;
     const body = {
       media: selectedImage,
     };
@@ -294,7 +295,8 @@ const MediaLibraryTabs = () => {
         body
       )
       .then((resp) => {
-        getAllDataTags();
+        dispatch(tagsDataAll(apiEndpoint));
+        // getAllDataTags();
       })
       .catch((err) => console.log(err));
   };
@@ -308,13 +310,13 @@ const MediaLibraryTabs = () => {
       // setSelectedImage([]);
     }
   };
+  console.log(tagsData, "tags datA");
   return (
     <>
       <div className="tabs_sectons_wrapper">
         <ul className="nav nav-pills tabs_menu_" id="pills-tab" role="tablist">
           <li className="nav-item" role="presentation">
             <button
-              // className={` ${id === id ? "nav-link" : "active"}`}
               className="nav-link"
               id="pills-home-tab"
               data-bs-toggle="pill"

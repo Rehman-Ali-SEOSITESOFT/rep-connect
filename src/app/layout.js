@@ -21,7 +21,9 @@ import Admin_sidebar from "@/layout/admin/sidebar/Admin_sidebar";
 import AdminChildren from "@/components/admin/AdminChildren";
 import "suneditor/dist/css/suneditor.min.css";
 
-export default function RootLayout({ children }) {
+import { Suspense } from "react";
+
+export default function RootLayout({ children, loading }) {
   const path = usePathname();
 
   return (
@@ -82,6 +84,7 @@ export default function RootLayout({ children }) {
                   }
                 >
                   <div className="d-flex flex-column conte-min-height">
+                    {/* {loading && <Loading />} */}
                     {children}
                   </div>
 
